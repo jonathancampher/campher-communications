@@ -1,3 +1,4 @@
+
 import { useState, useEffect } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { MessageSquare, Heart, Share, ArrowLeft } from 'lucide-react';
@@ -6,12 +7,14 @@ import { Card } from '@/components/ui/card';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import { useToast } from '@/hooks/use-toast';
+import { useIsMobile } from '@/hooks/use-mobile';
 
 const BlogPost = () => {
   const { id } = useParams();
   const { toast } = useToast();
   const [likes, setLikes] = useState(0);
   const [hasLiked, setHasLiked] = useState(false);
+  const isMobile = useIsMobile();
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -87,7 +90,7 @@ const BlogPost = () => {
     return (
       <div className="min-h-screen">
         <Navbar />
-        <div className="container-custom py-20">
+        <div className="container-custom py-10 md:py-20">
           <h1 className="text-2xl">Innlegget ble ikke funnet</h1>
           <Link to="/#blog" className="text-campher-blue hover:underline">
             Tilbake til blogg
@@ -127,32 +130,32 @@ const BlogPost = () => {
   return (
     <div className="min-h-screen">
       <Navbar />
-      <div className="container-custom py-20">
+      <div className="container-custom py-6 md:py-20">
         <Link 
           to="/#blog" 
-          className="text-campher-blue hover:underline mb-6 inline-flex items-center gap-2 bg-blue-50 px-4 py-2 rounded-md transition-colors hover:bg-blue-100"
+          className="text-campher-blue hover:underline mb-4 md:mb-6 inline-flex items-center gap-2 bg-blue-50 px-3 py-2 md:px-4 md:py-2 rounded-md transition-colors hover:bg-blue-100"
         >
           <ArrowLeft size={16} />
           Tilbake til blogg
         </Link>
         
-        <Card className="p-6 md:p-8">
-          <h1 className="text-3xl font-bold mb-4">{post.title}</h1>
-          <div className="flex gap-4 text-sm text-gray-600 mb-6">
+        <Card className="p-4 md:p-8">
+          <h1 className="text-2xl md:text-3xl font-bold mb-3 md:mb-4">{post.title}</h1>
+          <div className="flex gap-3 md:gap-4 text-xs md:text-sm text-gray-600 mb-4 md:mb-6">
             <span>{post.publishDate}</span>
             <span>{post.readTime}</span>
           </div>
           
-          <div className="prose max-w-none mb-8">
+          <div className="prose max-w-none mb-6 md:mb-8 text-sm md:text-base">
             {post.content.split('\n').map((paragraph, index) => (
-              <p key={index} className="mb-4">{paragraph.trim()}</p>
+              <p key={index} className="mb-3 md:mb-4">{paragraph.trim()}</p>
             ))}
           </div>
 
-          <div className="flex gap-4 items-center border-t pt-6">
+          <div className="flex gap-3 md:gap-4 items-center border-t pt-4 md:pt-6">
             <Button 
               variant="outline" 
-              size="sm" 
+              size={isMobile ? "sm" : "default"}
               onClick={handleLike}
               className={`gap-2 ${hasLiked ? 'text-red-500' : ''}`}
             >
@@ -162,7 +165,7 @@ const BlogPost = () => {
             
             <Button 
               variant="outline" 
-              size="sm"
+              size={isMobile ? "sm" : "default"}
               onClick={handleShare}
               className="gap-2"
             >

@@ -1,6 +1,8 @@
+
 import { ArrowUpRight, Heart, MessageSquare } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
+import { useIsMobile } from '@/hooks/use-mobile';
 
 /**
  * Blog-komponent
@@ -9,6 +11,8 @@ import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle }
  * og andre relevante temaer for bedrifter som ønsker å etablere digital tilstedeværelse.
  */
 const Blog = () => {
+  const isMobile = useIsMobile();
+  
   const blogPosts = [
     {
       id: 1,
@@ -70,31 +74,38 @@ const Blog = () => {
       className="block transition-transform hover:-translate-y-1"
       onClick={scrollToTop}
     >
-      <Card className="h-full overflow-hidden shadow-lg hover:shadow-xl transition-shadow">
-        {isFeatured && (
+      <Card className="h-full overflow-hidden shadow-md hover:shadow-lg transition-shadow">
+        {isFeatured && !isMobile && (
           <div className="relative h-64 overflow-hidden bg-blue-50 flex items-center justify-center">
             <div className="p-6 text-center">
               <h3 className="text-2xl font-medium text-campher-blue">{post.title}</h3>
             </div>
           </div>
         )}
-        <CardHeader>
-          <CardTitle>{post.title}</CardTitle>
-          <CardDescription>Publisert {post.publishDate} | {post.readTime} lesetid</CardDescription>
+        {isFeatured && isMobile && (
+          <div className="relative h-32 overflow-hidden bg-blue-50 flex items-center justify-center">
+            <div className="p-4 text-center">
+              <h3 className="text-xl font-medium text-campher-blue">{post.title}</h3>
+            </div>
+          </div>
+        )}
+        <CardHeader className={isMobile ? "p-3" : "p-6"}>
+          <CardTitle className={isMobile ? "text-lg" : "text-2xl"}>{post.title}</CardTitle>
+          <CardDescription className="text-xs md:text-sm">Publisert {post.publishDate} | {post.readTime} lesetid</CardDescription>
         </CardHeader>
-        <CardContent>
-          <p className="text-gray-600">{post.excerpt}</p>
+        <CardContent className={isMobile ? "p-3 pt-0" : "p-6 pt-0"}>
+          <p className="text-gray-600 text-sm md:text-base line-clamp-3">{post.excerpt}</p>
         </CardContent>
-        <CardFooter className="flex justify-between items-center">
-          <div className="flex gap-4 text-gray-500 text-sm">
+        <CardFooter className={`flex justify-between items-center ${isMobile ? "p-3 pt-0" : "p-6 pt-0"}`}>
+          <div className="flex gap-2 md:gap-4 text-gray-500 text-xs md:text-sm">
             <span className="flex items-center gap-1">
-              <Heart className="w-4 h-4" />
+              <Heart className="w-3 h-3 md:w-4 md:h-4" />
               0
             </span>
           </div>
-          <span className="text-campher-blue hover:underline inline-flex items-center">
+          <span className="text-campher-blue hover:underline inline-flex items-center text-xs md:text-sm">
             Les mer
-            <ArrowUpRight size={16} className="ml-1" />
+            <ArrowUpRight size={isMobile ? 14 : 16} className="ml-1" />
           </span>
         </CardFooter>
       </Card>
@@ -107,73 +118,104 @@ const Blog = () => {
   return (
     <section id="blog" className="section-padding">
       <div className="container-custom">
-        <div className="text-center max-w-xl mx-auto mb-16">
-          <span className="inline-block px-3 py-1 text-xs font-medium bg-blue-100 text-campher-blue rounded-full mb-4">
+        <div className="text-center max-w-xl mx-auto mb-8 md:mb-16">
+          <span className="inline-block px-3 py-1 text-xs font-medium bg-blue-100 text-campher-blue rounded-full mb-3 md:mb-4">
             Blogg
           </span>
-          <h2 className="heading-lg mb-4">Nyttige artikler</h2>
-          <p className="text-campher-gray">
+          <h2 className="text-2xl md:text-4xl font-medium mb-3 md:mb-4">Nyttige artikler</h2>
+          <p className="text-campher-gray text-sm md:text-base">
             Les våre artikler om digitalisering, nettsider og markedsføring for å holde deg oppdatert på trender og beste praksiser.
           </p>
         </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
-          {featuredPost && (
-            <div className="lg:col-span-8">
+        {isMobile ? (
+          <div className="space-y-4">
+            {/* Mobile Blog Layout */}
+            {featuredPost && (
               <BlogPostCard post={featuredPost} isFeatured={true} />
-            </div>
-          )}
-          
-          <div className="lg:col-span-4 space-y-6">
-            <Card className="shadow-sm">
-              <CardHeader>
-                <CardTitle>Bygg din fremtid på nett</CardTitle>
-              </CardHeader>
-              <CardContent>
-                <p className="text-campher-gray mb-4">
-                  Skreddersydde løsninger for små bedrifter som vil vokse i 2025.
-                </p>
-                <ul className="space-y-2">
-                  <li className="flex items-center gap-2">
-                    <span className="w-2 h-2 rounded-full bg-campher-blue"></span>
-                    <span>Nettsider</span>
-                  </li>
-                  <li className="flex items-center gap-2">
-                    <span className="w-2 h-2 rounded-full bg-campher-blue"></span>
-                    <span>Google-synlighet</span>
-                  </li>
-                  <li className="flex items-center gap-2">
-                    <span className="w-2 h-2 rounded-full bg-campher-blue"></span>
-                    <span>Support</span>
-                  </li>
-                </ul>
-              </CardContent>
-              <CardFooter>
-                <a 
-                  href="#contact" 
-                  className="w-full inline-flex items-center justify-center bg-campher-blue hover:bg-blue-600 text-white px-4 py-2 rounded-md font-medium transition-colors"
-                >
-                  Start i dag
-                </a>
-              </CardFooter>
-            </Card>
+            )}
             
-            <div className="bg-blue-50 p-5 rounded-xl">
+            <div className="bg-blue-50 p-4 rounded-xl">
               <h3 className="text-lg font-medium mb-3">Siste innlegg</h3>
-              <div className="space-y-4">
+              <div className="space-y-3">
                 {regularPosts.slice(0, 3).map((post) => (
-                  <Link key={post.id} to={`/blog/${post.id}`} className="block group">
+                  <Link key={post.id} to={`/blog/${post.id}`} onClick={scrollToTop} className="block group">
                     <div>
-                      <h4 className="font-medium group-hover:text-campher-blue transition-colors">{post.title}</h4>
-                      <p className="text-sm text-campher-gray">{post.excerpt.substring(0, 80)}...</p>
-                      <p className="text-xs text-gray-500 mt-1">{post.publishDate} | {post.readTime} lesetid</p>
+                      <h4 className="font-medium text-sm group-hover:text-campher-blue transition-colors">{post.title}</h4>
+                      <p className="text-xs text-campher-gray line-clamp-2">{post.excerpt}</p>
+                      <p className="text-xs text-gray-500 mt-1">{post.publishDate} | {post.readTime}</p>
                     </div>
                   </Link>
                 ))}
               </div>
             </div>
+            
+            <div className="grid grid-cols-1 gap-4">
+              {regularPosts.slice(0, 4).map((post) => (
+                <BlogPostCard key={post.id} post={post} />
+              ))}
+            </div>
           </div>
-        </div>
+        ) : (
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
+            {/* Desktop Blog Layout */}
+            {featuredPost && (
+              <div className="lg:col-span-8">
+                <BlogPostCard post={featuredPost} isFeatured={true} />
+              </div>
+            )}
+            
+            <div className="lg:col-span-4 space-y-6">
+              <Card className="shadow-sm">
+                <CardHeader>
+                  <CardTitle>Bygg din fremtid på nett</CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <p className="text-campher-gray mb-4">
+                    Skreddersydde løsninger for små bedrifter som vil vokse i 2025.
+                  </p>
+                  <ul className="space-y-2">
+                    <li className="flex items-center gap-2">
+                      <span className="w-2 h-2 rounded-full bg-campher-blue"></span>
+                      <span>Nettsider</span>
+                    </li>
+                    <li className="flex items-center gap-2">
+                      <span className="w-2 h-2 rounded-full bg-campher-blue"></span>
+                      <span>Google-synlighet</span>
+                    </li>
+                    <li className="flex items-center gap-2">
+                      <span className="w-2 h-2 rounded-full bg-campher-blue"></span>
+                      <span>Support</span>
+                    </li>
+                  </ul>
+                </CardContent>
+                <CardFooter>
+                  <a 
+                    href="#contact" 
+                    className="w-full inline-flex items-center justify-center bg-campher-blue hover:bg-blue-600 text-white px-4 py-2 rounded-md font-medium transition-colors"
+                  >
+                    Start i dag
+                  </a>
+                </CardFooter>
+              </Card>
+              
+              <div className="bg-blue-50 p-5 rounded-xl">
+                <h3 className="text-lg font-medium mb-3">Siste innlegg</h3>
+                <div className="space-y-4">
+                  {regularPosts.slice(0, 3).map((post) => (
+                    <Link key={post.id} to={`/blog/${post.id}`} onClick={scrollToTop} className="block group">
+                      <div>
+                        <h4 className="font-medium group-hover:text-campher-blue transition-colors">{post.title}</h4>
+                        <p className="text-sm text-campher-gray">{post.excerpt.substring(0, 80)}...</p>
+                        <p className="text-xs text-gray-500 mt-1">{post.publishDate} | {post.readTime} lesetid</p>
+                      </div>
+                    </Link>
+                  ))}
+                </div>
+              </div>
+            </div>
+          </div>
+        )}
       </div>
     </section>
   );
