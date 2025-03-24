@@ -1,8 +1,9 @@
 
 import { Code, PaintBucket, ShoppingCart, Smartphone, Zap } from 'lucide-react';
+import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 
 const Services = () => {
-  const services = [
+  const mainServices = [
     {
       icon: <Code size={24} />,
       title: 'Webutvikling',
@@ -30,6 +31,41 @@ const Services = () => {
     },
   ];
 
+  const productPackages = [
+    {
+      title: "Digital Startpakke",
+      description: "En komplett løsning for å få bedriften din på nett",
+      features: [
+        "Moderne, responsiv nettside med kontaktskjema og brukervennlig design",
+        "Eget domene (f.eks. deresnavn.no) som styrker merkevaren din",
+        "Profesjonell e-postadresse (f.eks. kontakt@camphercommunications.no)",
+        "Google My Business-oppsett for lokal synlighet og kundeanmeldelser",
+        "Grunnleggende SEO for å bli funnet i søkemotorer",
+        "3 måneders support for å sikre at alt fungerer som det skal"
+      ]
+    },
+    {
+      title: "Vedlikehold og support",
+      description: "Løpende hjelp for å holde nettsiden din oppdatert og effektiv",
+      features: [
+        "Oppdateringer av innhold, bilder og design etter behov",
+        "Teknisk support for å løse problemer raskt",
+        "Overvåking av nettsidens ytelse og sikkerhet",
+        "Tilpasninger for å møte nye mål eller markedsendringer"
+      ]
+    },
+    {
+      title: "Ekstra tjenester",
+      description: "Tilpassede løsninger for å ta din digitale tilstedeværelse videre",
+      features: [
+        "Avansert SEO for høyere rangering i Google",
+        "Integrasjoner som booking-systemer eller nettbutikk",
+        "Opplæring i hvordan du selv kan oppdatere nettsiden",
+        "Rådgivning om digital markedsføring og AI-verktøy"
+      ]
+    }
+  ];
+
   return (
     <section id="services" className="section-padding bg-secondary">
       <div className="container-custom">
@@ -45,7 +81,7 @@ const Services = () => {
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {services.map((service, index) => (
+          {mainServices.map((service, index) => (
             <div 
               key={index} 
               className="bg-white p-6 rounded-xl shadow-sm card-hover opacity-0 animate-fade-in-up"
@@ -58,6 +94,38 @@ const Services = () => {
               <p className="text-campher-gray">{service.description}</p>
             </div>
           ))}
+        </div>
+        
+        <div className="mt-16">
+          <h3 className="heading-md text-center mb-12">Våre produktpakker</h3>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            {productPackages.map((pkg, index) => (
+              <Card key={index} className="shadow-sm opacity-0 animate-fade-in-up" style={{ animationDelay: `${0.1 + index * 0.1}s` }}>
+                <CardHeader>
+                  <CardTitle>{pkg.title}</CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <p className="text-campher-gray mb-4">{pkg.description}</p>
+                  <ul className="space-y-2">
+                    {pkg.features.map((feature, fIndex) => (
+                      <li key={fIndex} className="flex items-start gap-2">
+                        <span className="text-campher-blue font-medium">•</span>
+                        <span className="text-sm">{feature}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </CardContent>
+                <CardFooter>
+                  <a
+                    href="#contact"
+                    className="w-full inline-flex items-center justify-center bg-campher-blue hover:bg-blue-600 text-white px-4 py-2 rounded-md font-medium transition-colors"
+                  >
+                    Ta kontakt
+                  </a>
+                </CardFooter>
+              </Card>
+            ))}
+          </div>
         </div>
         
         <div className="mt-16 text-center">

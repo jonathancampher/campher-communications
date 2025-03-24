@@ -3,12 +3,12 @@ import { CheckCircle } from 'lucide-react';
 
 const About = () => {
   const values = [
-    'Client-focused approach',
-    'Technical excellence',
-    'Innovative solutions',
-    'Transparent communication',
-    'Attention to detail',
-    'Meeting deadlines'
+    'Kundefokusert tilnærming',
+    'Teknisk dyktighet',
+    'Innovative løsninger',
+    'Transparent kommunikasjon',
+    'Fokus på detaljer',
+    'Overholdelse av tidsfrister'
   ];
 
   return (
@@ -20,19 +20,19 @@ const About = () => {
               <div className="grid grid-cols-2 gap-4">
                 <div className="bg-blue-50 p-4 rounded-lg opacity-0 animate-fade-in stagger-1">
                   <div className="text-3xl font-semibold text-campher-blue">5+</div>
-                  <div className="text-sm text-campher-gray">Years of Experience</div>
+                  <div className="text-sm text-campher-gray">År med erfaring</div>
                 </div>
                 <div className="bg-blue-50 p-4 rounded-lg opacity-0 animate-fade-in stagger-2">
                   <div className="text-3xl font-semibold text-campher-blue">50+</div>
-                  <div className="text-sm text-campher-gray">Completed Projects</div>
+                  <div className="text-sm text-campher-gray">Fullførte prosjekter</div>
                 </div>
                 <div className="bg-blue-50 p-4 rounded-lg opacity-0 animate-fade-in stagger-3">
                   <div className="text-3xl font-semibold text-campher-blue">30+</div>
-                  <div className="text-sm text-campher-gray">Happy Clients</div>
+                  <div className="text-sm text-campher-gray">Fornøyde kunder</div>
                 </div>
                 <div className="bg-blue-50 p-4 rounded-lg opacity-0 animate-fade-in stagger-4">
                   <div className="text-3xl font-semibold text-campher-blue">100%</div>
-                  <div className="text-sm text-campher-gray">Client Satisfaction</div>
+                  <div className="text-sm text-campher-gray">Kundetilfredshet</div>
                 </div>
               </div>
               
@@ -44,9 +44,9 @@ const About = () => {
                     </div>
                     <div>
                       <p className="text-campher-gray italic text-sm">
-                        "Campher Communications transformed our online presence. Their team delivered a website that exceeded our expectations and truly represents our brand."
+                        "Campher Communications transformerte vår nettilstedeværelse. Teamet deres leverte en nettside som overgikk våre forventninger og virkelig representerer vårt merke."
                       </p>
-                      <p className="text-campher-dark font-medium text-sm mt-2">- Client Name, Company</p>
+                      <p className="text-campher-dark font-medium text-sm mt-2">- Kundenavn, Bedrift</p>
                     </div>
                   </div>
                 </div>
@@ -56,19 +56,33 @@ const About = () => {
           
           <div className="order-1 lg:order-2">
             <span className="inline-block px-3 py-1 text-xs font-medium bg-blue-100 text-campher-blue rounded-full mb-4 opacity-0 animate-fade-in">
-              About Us
+              Om meg
             </span>
             <h2 className="heading-lg mb-4 opacity-0 animate-fade-in stagger-1">
-              We create digital solutions that drive business growth
+              Jeg hjelper bedrifter å vokse digitalt
             </h2>
-            <p className="text-campher-gray mb-6 opacity-0 animate-fade-in stagger-2">
-              Founded with a vision to help businesses thrive in the digital world, Campher Communications is a team of passionate web developers, designers, and digital strategists dedicated to creating exceptional online experiences.
-            </p>
+            <div className="flex items-center gap-4 mb-6 opacity-0 animate-fade-in stagger-2">
+              <img 
+                src="/lovable-uploads/b7bb1f5a-cbd7-4885-9a85-2750d69cc2e7.png" 
+                alt="Jonathan Campher" 
+                className="w-20 h-20 rounded-full border-2 border-campher-blue object-cover"
+              />
+              <div>
+                <h3 className="text-xl font-medium">Jonathan Campher</h3>
+                <p className="text-campher-gray text-sm">Grunnlegger og Webutvikler</p>
+              </div>
+            </div>
             <p className="text-campher-gray mb-6 opacity-0 animate-fade-in stagger-3">
-              We believe that a great website is more than just attractive design – it's a powerful business tool that should deliver tangible results. Our approach combines creative design with technical expertise to build solutions that look amazing and perform even better.
+              Jeg heter Jonathan Campher, er 27 år gammel og driver Campher Communications. Med en bakgrunn i anvendt datateknologi har jeg en solid forståelse av hvordan teknologi kan løse reelle problemer – spesielt for små bedrifter.
+            </p>
+            <p className="text-campher-gray mb-6 opacity-0 animate-fade-in stagger-4">
+              Gjennom årene har jeg reist mye og sett hvor stort behovet for en digital tilstedeværelse er i dagens samfunn. Overalt møter jeg nyoppstartede bedrifter som sliter med å nå kundene sine. Derfor brenner jeg for å tilby moderne, økonomiske løsninger som hjelper dem å vokse.
+            </p>
+            <p className="text-campher-gray mb-6 opacity-0 animate-fade-in stagger-5">
+              Jeg har en sterk interesse for teknologi og kunstig intelligens, og jeg holder meg oppdatert på det nyeste innen webdesign og digitale trender. Målet mitt er å gi deg en nettside som ikke bare ser bra ut, men som faktisk gir resultater – uten å tømme lommeboka di.
             </p>
             
-            <div className="grid grid-cols-2 gap-3 mb-8 opacity-0 animate-fade-in stagger-4">
+            <div className="grid grid-cols-2 gap-3 mb-8 opacity-0 animate-fade-in stagger-6">
               {values.map((value, index) => (
                 <div key={index} className="flex items-center gap-2">
                   <CheckCircle size={16} className="text-campher-blue" />
@@ -77,11 +91,15 @@ const About = () => {
               ))}
             </div>
             
+            <p className="text-lg font-medium mb-6 opacity-0 animate-fade-in stagger-7">
+              La oss bygge noe bra sammen!
+            </p>
+            
             <a 
               href="#contact" 
-              className="inline-flex items-center justify-center bg-campher-blue hover:bg-blue-600 text-white px-6 py-3 rounded-md font-medium transition-colors opacity-0 animate-fade-in stagger-5"
+              className="inline-flex items-center justify-center bg-campher-blue hover:bg-blue-600 text-white px-6 py-3 rounded-md font-medium transition-colors opacity-0 animate-fade-in stagger-8"
             >
-              Work With Us
+              Jobb med meg
             </a>
           </div>
         </div>
