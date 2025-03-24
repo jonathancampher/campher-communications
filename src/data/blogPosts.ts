@@ -6,6 +6,7 @@ export interface BlogPost {
   publishDate: string;
   readTime: string;
   keywords: string;
+  excerpt?: string; // Add excerpt field, make it optional
 }
 
 export const blogPosts: BlogPost[] = [

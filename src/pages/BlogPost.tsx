@@ -1,4 +1,3 @@
-
 import { useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import Navbar from '@/components/Navbar';
@@ -39,7 +38,9 @@ const BlogPost = () => {
         metaDescription.setAttribute('name', 'description');
         document.head.appendChild(metaDescription);
       }
-      metaDescription.setAttribute('content', post.excerpt);
+      // Use the first 160 characters of content if no excerpt is provided
+      const description = post.excerpt || post.content.slice(0, 160) + '...';
+      metaDescription.setAttribute('content', description);
     }
   }, [post]);
 
