@@ -2,6 +2,7 @@
 import { useState } from 'react';
 import { Mail, MapPin, Phone, Send } from 'lucide-react';
 import { useToast } from '@/hooks/use-toast';
+import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
 
 const Contact = () => {
   const { toast } = useToast();
@@ -22,15 +23,15 @@ const Contact = () => {
     e.preventDefault();
     setIsSubmitting(true);
     
-    // Simulate form submission
+    // Simuler innsending av skjema
     setTimeout(() => {
       setIsSubmitting(false);
       toast({
-        title: "Message Sent",
-        description: "Thank you for your message. We'll get back to you soon!",
+        title: "Melding sendt",
+        description: "Takk for din henvendelse. Vi vil ta kontakt med deg snart!",
       });
       
-      // Reset form
+      // Tilbakestill skjema
       setFormData({
         name: '',
         email: '',
@@ -43,21 +44,21 @@ const Contact = () => {
   const contactInfo = [
     {
       icon: <Mail size={20} />,
-      title: 'Email Us',
+      title: 'Send e-post',
       info: 'info@campher.com',
       link: 'mailto:info@campher.com',
     },
     {
       icon: <Phone size={20} />,
-      title: 'Call Us',
-      info: '+1 (123) 456-7890',
-      link: 'tel:+11234567890',
+      title: 'Ring oss',
+      info: '+47 47 90 71 17',
+      link: 'tel:+4747907117',
     },
     {
       icon: <MapPin size={20} />,
-      title: 'Visit Us',
-      info: '123 Web Street, Digital City',
-      link: '#',
+      title: 'Besøk oss',
+      info: 'Parkveien 9B, 3400 Lier',
+      link: '#map',
     },
   ];
 
@@ -66,16 +67,16 @@ const Contact = () => {
       <div className="container-custom">
         <div className="text-center max-w-xl mx-auto mb-16">
           <span className="inline-block px-3 py-1 text-xs font-medium bg-blue-100 text-campher-blue rounded-full mb-4">
-            Get In Touch
+            Ta kontakt
           </span>
-          <h2 className="heading-lg mb-4">Contact Us</h2>
+          <h2 className="heading-lg mb-4">Kontakt oss</h2>
           <p className="text-campher-gray">
-            Have a project in mind or want to know more about our services? We'd love to hear from you. 
-            Reach out to us and let's start a conversation.
+            Har du et prosjekt i tankene eller ønsker du å vite mer om våre tjenester? Vi vil gjerne høre fra deg. 
+            Ta kontakt med oss og la oss starte en samtale.
           </p>
         </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-5 gap-8 lg:gap-12">
+        <div className="grid grid-cols-1 lg:grid-cols-5 gap-8 lg:gap-12 mb-16">
           <div className="lg:col-span-2 space-y-6">
             {contactInfo.map((item, index) => (
               <div 
@@ -96,28 +97,27 @@ const Contact = () => {
             ))}
             
             <div className="bg-white p-6 rounded-xl shadow-sm opacity-0 animate-fade-in" style={{ animationDelay: '0.4s' }}>
-              <h3 className="text-lg font-medium mb-4">Follow Us</h3>
-              <div className="flex gap-3">
-                {['Twitter', 'LinkedIn', 'Instagram', 'Facebook'].map((platform, index) => (
-                  <a
-                    key={index}
-                    href="#"
-                    className="w-10 h-10 rounded-full bg-gray-100 hover:bg-campher-blue hover:text-white flex items-center justify-center transition-colors"
-                  >
-                    {platform.charAt(0)}
-                  </a>
-                ))}
+              <h3 className="text-lg font-medium mb-4">Vårt team</h3>
+              <div className="flex gap-4 items-center">
+                <Avatar className="h-16 w-16 border-2 border-campher-blue">
+                  <AvatarImage src="/lovable-uploads/b7bb1f5a-cbd7-4885-9a85-2750d69cc2e7.png" alt="Team member" />
+                  <AvatarFallback>CC</AvatarFallback>
+                </Avatar>
+                <div>
+                  <h4 className="font-medium">Jon Campher</h4>
+                  <p className="text-campher-gray text-sm">Daglig Leder</p>
+                </div>
               </div>
             </div>
           </div>
           
           <div className="lg:col-span-3 bg-white p-8 rounded-xl shadow-sm opacity-0 animate-fade-in" style={{ animationDelay: '0.5s' }}>
-            <h3 className="text-xl font-medium mb-6">Send Us A Message</h3>
+            <h3 className="text-xl font-medium mb-6">Send oss en melding</h3>
             <form onSubmit={handleSubmit} className="space-y-5">
               <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
                 <div>
                   <label htmlFor="name" className="block text-sm font-medium text-campher-gray mb-1">
-                    Your Name
+                    Ditt navn
                   </label>
                   <input
                     id="name"
@@ -127,12 +127,12 @@ const Contact = () => {
                     value={formData.name}
                     onChange={handleChange}
                     className="w-full px-4 py-2 bg-gray-50 border border-gray-200 rounded-md focus:outline-none focus:ring-2 focus:ring-campher-blue focus:border-transparent transition"
-                    placeholder="John Doe"
+                    placeholder="Ole Nordmann"
                   />
                 </div>
                 <div>
                   <label htmlFor="email" className="block text-sm font-medium text-campher-gray mb-1">
-                    Your Email
+                    Din e-post
                   </label>
                   <input
                     id="email"
@@ -142,13 +142,13 @@ const Contact = () => {
                     value={formData.email}
                     onChange={handleChange}
                     className="w-full px-4 py-2 bg-gray-50 border border-gray-200 rounded-md focus:outline-none focus:ring-2 focus:ring-campher-blue focus:border-transparent transition"
-                    placeholder="john@example.com"
+                    placeholder="ole@eksempel.no"
                   />
                 </div>
               </div>
               <div>
                 <label htmlFor="subject" className="block text-sm font-medium text-campher-gray mb-1">
-                  Subject
+                  Emne
                 </label>
                 <input
                   id="subject"
@@ -158,12 +158,12 @@ const Contact = () => {
                   value={formData.subject}
                   onChange={handleChange}
                   className="w-full px-4 py-2 bg-gray-50 border border-gray-200 rounded-md focus:outline-none focus:ring-2 focus:ring-campher-blue focus:border-transparent transition"
-                  placeholder="Project Inquiry"
+                  placeholder="Prosjektforespørsel"
                 />
               </div>
               <div>
                 <label htmlFor="message" className="block text-sm font-medium text-campher-gray mb-1">
-                  Message
+                  Melding
                 </label>
                 <textarea
                   id="message"
@@ -173,7 +173,7 @@ const Contact = () => {
                   value={formData.message}
                   onChange={handleChange}
                   className="w-full px-4 py-2 bg-gray-50 border border-gray-200 rounded-md focus:outline-none focus:ring-2 focus:ring-campher-blue focus:border-transparent transition resize-none"
-                  placeholder="Tell us about your project..."
+                  placeholder="Fortell oss om ditt prosjekt..."
                 />
               </div>
               <button
@@ -187,16 +187,33 @@ const Contact = () => {
                       <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
                       <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
                     </svg>
-                    Sending...
+                    Sender...
                   </span>
                 ) : (
                   <span className="flex items-center">
-                    Send Message
+                    Send melding
                     <Send size={16} className="ml-2" />
                   </span>
                 )}
               </button>
             </form>
+          </div>
+        </div>
+
+        <div id="map" className="w-full rounded-xl overflow-hidden shadow-lg animate-fade-in">
+          <h3 className="text-xl font-medium mb-4">Finn oss her</h3>
+          <div className="aspect-video">
+            <iframe 
+              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2035.2077150140435!2d10.489216877112375!3d59.329485874614384!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x4646b34cb9ebf1e1%3A0xd7baba40d83270f8!2sCampher%20Communications!5e0!3m2!1sno!2sza!4v1742820270559!5m2!1sno!2sza" 
+              width="100%" 
+              height="450" 
+              style={{ border: 0 }} 
+              allowFullScreen 
+              loading="lazy" 
+              referrerPolicy="no-referrer-when-downgrade"
+              title="Campher Communications location"
+              className="rounded-xl"
+            />
           </div>
         </div>
       </div>

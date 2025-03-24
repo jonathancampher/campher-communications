@@ -1,5 +1,6 @@
 
 import { ArrowUp } from 'lucide-react';
+import Logo from './Logo';
 
 const Footer = () => {
   const scrollToTop = () => {
@@ -11,29 +12,29 @@ const Footer = () => {
 
   const footerLinks = [
     {
-      title: 'Company',
+      title: 'Selskap',
       links: [
-        { name: 'About Us', url: '#about' },
-        { name: 'Services', url: '#services' },
-        { name: 'Projects', url: '#portfolio' },
-        { name: 'Contact', url: '#contact' },
+        { name: 'Om oss', url: '#about' },
+        { name: 'Tjenester', url: '#services' },
+        { name: 'Prosjekter', url: '#portfolio' },
+        { name: 'Kontakt', url: '#contact' },
       ]
     },
     {
-      title: 'Services',
+      title: 'Tjenester',
       links: [
-        { name: 'Web Development', url: '#services' },
+        { name: 'Webutvikling', url: '#services' },
         { name: 'UI/UX Design', url: '#services' },
-        { name: 'E-Commerce', url: '#services' },
-        { name: 'Performance Optimization', url: '#services' },
+        { name: 'E-handel', url: '#services' },
+        { name: 'Ytelsesoptimalisering', url: '#services' },
       ]
     },
     {
-      title: 'Legal',
+      title: 'Juridisk',
       links: [
-        { name: 'Privacy Policy', url: '#' },
-        { name: 'Terms of Service', url: '#' },
-        { name: 'Cookie Policy', url: '#' },
+        { name: 'Personvernerklæring', url: '#' },
+        { name: 'Vilkår for bruk', url: '#' },
+        { name: 'Informasjonskapsler', url: '#' },
       ]
     }
   ];
@@ -43,13 +44,11 @@ const Footer = () => {
       <div className="container-custom">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-8 pb-12 border-b border-white/10">
           <div className="lg:col-span-2">
-            <div className="mb-4">
-              <span className="text-xl font-display font-semibold tracking-tight">
-                <span className="text-campher-blue">Campher</span> Communications
-              </span>
+            <div className="mb-4 bg-white inline-block p-2 rounded">
+              <Logo />
             </div>
             <p className="text-gray-400 mb-6 max-w-md">
-              We build digital experiences that help businesses connect with their customers and achieve their goals.
+              Vi bygger digitale opplevelser som hjelper bedrifter med å koble seg til sine kunder og oppnå sine mål.
             </p>
             <div className="flex gap-3">
               {['T', 'L', 'I', 'F'].map((icon, index) => (
@@ -85,7 +84,7 @@ const Footer = () => {
         
         <div className="pt-8 flex flex-col md:flex-row justify-between items-center">
           <p className="text-gray-400 text-sm mb-4 md:mb-0">
-            © {new Date().getFullYear()} Campher Communications. All rights reserved.
+            © {new Date().getFullYear()} Campher Communications. Alle rettigheter reservert.
           </p>
           <button 
             onClick={scrollToTop}

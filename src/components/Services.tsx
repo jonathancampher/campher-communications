@@ -5,28 +5,28 @@ const Services = () => {
   const services = [
     {
       icon: <Code size={24} />,
-      title: 'Web Development',
-      description: 'We build modern, responsive websites using the latest technologies for optimal performance.',
+      title: 'Webutvikling',
+      description: 'Vi bygger moderne, responsive nettsider med den nyeste teknologien for optimal ytelse.',
     },
     {
       icon: <PaintBucket size={24} />,
       title: 'UI/UX Design',
-      description: 'Creating intuitive user interfaces and seamless user experiences that delight customers.',
+      description: 'Skaper intuitive brukergrensesnitt og sømløse brukeropplevelser som begeistrer kunder.',
     },
     {
       icon: <ShoppingCart size={24} />,
-      title: 'E-Commerce Solutions',
-      description: 'Custom online stores that drive sales and provide exceptional shopping experiences.',
+      title: 'E-handelsløsninger',
+      description: 'Skreddersydde nettbutikker som øker salg og gir eksepsjonelle handleopplevelser.',
     },
     {
       icon: <Smartphone size={24} />,
-      title: 'Mobile-First Development',
-      description: 'Websites optimized for mobile devices to reach customers wherever they are.',
+      title: 'Mobiloptimalisert utvikling',
+      description: 'Nettsteder optimalisert for mobile enheter for å nå kunder uansett hvor de er.',
     },
     {
       icon: <Zap size={24} />,
-      title: 'Performance Optimization',
-      description: 'Speed up your website for better user experience and improved search rankings.',
+      title: 'Ytelsesoptimalisering',
+      description: 'Få din nettside raskere for bedre brukeropplevelse og forbedret søkemotorrangering.',
     },
   ];
 
@@ -35,12 +35,12 @@ const Services = () => {
       <div className="container-custom">
         <div className="text-center max-w-xl mx-auto mb-16">
           <span className="inline-block px-3 py-1 text-xs font-medium bg-blue-100 text-campher-blue rounded-full mb-4">
-            What We Offer
+            Hva vi tilbyr
           </span>
-          <h2 className="heading-lg mb-4">Our Services</h2>
+          <h2 className="heading-lg mb-4">Våre tjenester</h2>
           <p className="text-campher-gray">
-            We deliver comprehensive web development services tailored to your business needs. 
-            From concept to launch, we handle every aspect of the digital experience.
+            Vi leverer omfattende webutviklingstjenester skreddersydd for dine forretningsbehov. 
+            Fra konsept til lansering håndterer vi alle aspekter av den digitale opplevelsen.
           </p>
         </div>
 
@@ -65,7 +65,7 @@ const Services = () => {
             href="#contact" 
             className="inline-flex items-center justify-center bg-campher-blue hover:bg-blue-600 text-white px-6 py-3 rounded-md font-medium transition-colors"
           >
-            Discuss Your Project
+            Diskuter ditt prosjekt
           </a>
         </div>
       </div>

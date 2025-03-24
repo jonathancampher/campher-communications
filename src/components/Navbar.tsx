@@ -2,6 +2,7 @@
 import { useState, useEffect } from 'react';
 import { Menu, X } from 'lucide-react';
 import { cn } from '@/lib/utils';
+import Logo from './Logo';
 
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -21,11 +22,11 @@ const Navbar = () => {
   }, []);
 
   const navLinks = [
-    { name: 'Home', href: '#home' },
-    { name: 'Services', href: '#services' },
-    { name: 'Projects', href: '#portfolio' },
-    { name: 'About', href: '#about' },
-    { name: 'Contact', href: '#contact' }
+    { name: 'Hjem', href: '#home' },
+    { name: 'Tjenester', href: '#services' },
+    { name: 'Prosjekter', href: '#portfolio' },
+    { name: 'Om oss', href: '#about' },
+    { name: 'Kontakt', href: '#contact' }
   ];
 
   return (
@@ -37,9 +38,7 @@ const Navbar = () => {
     >
       <div className="container-custom flex justify-between items-center">
         <a href="#home" className="flex items-center">
-          <span className="text-xl font-display font-semibold tracking-tight">
-            <span className="text-campher-blue">Campher</span> Communications
-          </span>
+          <Logo />
         </a>
 
         {/* Desktop Navigation */}
@@ -57,7 +56,7 @@ const Navbar = () => {
             href="#contact" 
             className="bg-campher-blue hover:bg-blue-600 text-white px-4 py-2 rounded-md text-sm font-medium transition-colors"
           >
-            Get in Touch
+            Ta kontakt
           </a>
         </div>
 
@@ -90,7 +89,7 @@ const Navbar = () => {
               className="bg-campher-blue hover:bg-blue-600 text-white px-4 py-2 rounded-md text-base font-medium transition-colors inline-block w-full text-center"
               onClick={() => setIsMenuOpen(false)}
             >
-              Get in Touch
+              Ta kontakt
             </a>
           </div>
         </div>
