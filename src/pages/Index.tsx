@@ -1,4 +1,5 @@
 
+import { useEffect } from 'react';
 import Navbar from '@/components/Navbar';
 import Hero from '@/components/Hero';
 import Services from '@/components/Services';
@@ -12,12 +13,59 @@ import Footer from '@/components/Footer';
  * Index-komponent
  * 
  * Hovedside som samler alle komponentene i riktig rekkefølge.
- * Setter også dokumentets tittel og språk til norsk.
+ * Setter dokumentets tittel, språk og meta-beskrivelse for SEO-optimalisering.
+ * Inkluderer strukturerte data for bedre søkemotorvisning.
  */
 const Index = () => {
-  // Sett dokumentets tittel og språk
-  document.title = "Campher Communications | Webutvikling og digitale løsninger";
-  document.documentElement.lang = "no";
+  useEffect(() => {
+    // Sett dokumentets tittel, språk og meta-beskrivelse
+    document.title = "Campher Communications | Webutvikling og digitale løsninger";
+    document.documentElement.lang = "no";
+    
+    // Oppdater meta-beskrivelse for SEO
+    let metaDescription = document.querySelector('meta[name="description"]');
+    if (!metaDescription) {
+      metaDescription = document.createElement('meta');
+      metaDescription.setAttribute('name', 'description');
+      document.head.appendChild(metaDescription);
+    }
+    metaDescription.setAttribute('content', 
+      'Campher Communications leverer skreddersydde nettsider, SEO-optimalisering og digital markedsføring for bedrifter som vil lykkes på nett. Org. nr. 932498413.');
+    
+    // Legg til strukturerte data for bedre SEO
+    const script = document.createElement('script');
+    script.type = 'application/ld+json';
+    script.text = JSON.stringify({
+      '@context': 'https://schema.org',
+      '@type': 'Organization',
+      'name': 'Campher Communications',
+      'url': 'https://camphercommunications.no',
+      'logo': 'https://camphercommunications.no/logo.png',
+      'description': 'Webutvikling og digitale løsninger for bedrifter.',
+      'address': {
+        '@type': 'PostalAddress',
+        'addressCountry': 'NO'
+      },
+      'contactPoint': {
+        '@type': 'ContactPoint',
+        'telephone': '+47-00-00-00-00',
+        'contactType': 'customer service'
+      },
+      'sameAs': [
+        'https://www.facebook.com/camphercommunications',
+        'https://www.linkedin.com/company/camphercommunications'
+      ],
+      'vatID': '932498413'
+    });
+    
+    // Fjern eventuell tidligere versjon av strukturerte data
+    const existingScript = document.querySelector('script[type="application/ld+json"]');
+    if (existingScript) {
+      existingScript.remove();
+    }
+    
+    document.head.appendChild(script);
+  }, []);
   
   return (
     <div className="min-h-screen">

@@ -5,56 +5,65 @@ import { ArrowRight } from 'lucide-react';
  * Hero-komponent
  * 
  * Denne komponenten viser hovedbanneret på forsiden av nettsiden.
- * Inkluderer hovedtittel, kort beskrivelse, CTA-knapper og en visuell fremstilling.
+ * Inkluderer hovedtittel, kort beskrivelse, CTA-knapp og en forbedret visuell fremstilling
+ * av "Bygg din fremtid på nett" seksjonen med bedre layout.
  */
 const Hero = () => {
   return (
     <section id="home" className="pt-32 pb-16 md:pt-40 md:pb-24 overflow-hidden">
       <div className="container-custom">
-        <div className="flex flex-col lg:flex-row items-center justify-between gap-12">
-          <div className="w-full lg:w-1/2 space-y-6">
-            <span className="inline-block px-3 py-1 text-xs font-medium bg-blue-100 text-campher-blue rounded-full opacity-0 animate-fade-in stagger-1">
+        <div className="flex flex-col items-center justify-between gap-12">
+          <div className="w-full space-y-6 text-center">
+            <span className="inline-block px-3 py-1 text-xs font-medium bg-blue-100 text-campher-blue rounded-full">
               Webutviklingseksperter
             </span>
-            <h1 className="heading-xl opacity-0 animate-fade-in stagger-2">
+            <h1 className="heading-xl">
               Vi bygger <span className="text-gradient">digitale opplevelser</span> som transformerer bedrifter
             </h1>
-            <p className="text-lg text-campher-gray max-w-xl opacity-0 animate-fade-in stagger-3">
+            <p className="text-lg text-campher-gray max-w-2xl mx-auto">
               Campher Communications spesialiserer seg på å skape innovative webløsninger som hjelper bedrifter å skille seg ut og lykkes i det digitale landskapet.
             </p>
-            <div className="flex flex-col sm:flex-row gap-4 pt-4 opacity-0 animate-fade-in stagger-4">
+            <div className="flex justify-center pt-4">
               <a 
-                href="#services" 
-                className="inline-flex items-center justify-center bg-campher-blue hover:bg-blue-600 text-white px-6 py-3 rounded-md font-medium transition-colors"
+                href="#contact" 
+                className="inline-flex items-center justify-center bg-campher-blue hover:bg-blue-600 text-white px-8 py-4 rounded-md font-medium transition-colors text-lg"
               >
-                Våre tjenester
-                <ArrowRight size={16} className="ml-2" />
+                Få din nettside
+                <ArrowRight size={20} className="ml-2" />
               </a>
             </div>
           </div>
-          <div className="w-full lg:w-1/2 opacity-0 animate-fade-in stagger-5">
-            <div className="relative">
+          
+          {/* Forbedret "Bygg din fremtid" seksjon med bedre layout */}
+          <div className="w-full">
+            <div className="relative mx-auto max-w-4xl">
               <div className="absolute -top-12 -left-12 w-64 h-64 bg-blue-100 rounded-full filter blur-3xl opacity-30"></div>
               <div className="absolute -bottom-12 -right-12 w-64 h-64 bg-indigo-100 rounded-full filter blur-3xl opacity-30"></div>
-              <div className="relative bg-white shadow-xl rounded-xl p-4 border border-gray-100 overflow-hidden">
-                <div className="h-64 md:h-80 relative rounded-lg overflow-hidden">
-                  <div className="absolute inset-0 bg-gradient-to-br from-campher-blue/10 to-blue-500/10 backdrop-blur-sm"></div>
-                  <div className="absolute inset-0 flex flex-col items-center justify-center p-6 text-center">
-                    <h3 className="text-xl md:text-2xl font-medium text-campher-dark mb-2">Bygg din fremtid på nett</h3>
-                    <p className="text-campher-gray text-sm md:text-base max-w-md">Skreddersydde løsninger for små bedrifter som vil vokse i 2025</p>
+              
+              <div className="relative bg-white shadow-2xl rounded-xl p-8 border border-gray-100 overflow-hidden">
+                <h2 className="text-3xl font-bold text-center text-campher-dark mb-8">Bygg din fremtid på nett</h2>
+                
+                <div className="grid grid-cols-3 gap-8 mb-8">
+                  <div className="bg-blue-50 p-6 rounded-xl text-center">
+                    <h3 className="text-xl font-medium text-campher-blue mb-3">Nettsider</h3>
+                    <p className="text-campher-gray">Responsive og brukervennlige nettsider som konverterer besøkende til kunder</p>
+                  </div>
+                  
+                  <div className="bg-blue-50 p-6 rounded-xl text-center">
+                    <h3 className="text-xl font-medium text-campher-blue mb-3">Google-synlighet</h3>
+                    <p className="text-campher-gray">SEO-optimalisering for å sikre at kundene dine finner deg på nett</p>
+                  </div>
+                  
+                  <div className="bg-blue-50 p-6 rounded-xl text-center">
+                    <h3 className="text-xl font-medium text-campher-blue mb-3">Support</h3>
+                    <p className="text-campher-gray">Kontinuerlig teknisk støtte og vedlikehold av din nettside</p>
                   </div>
                 </div>
-                <div className="flex items-center justify-between mt-4 p-2">
-                  <div className="flex -space-x-2">
-                    {['Nettsider', 'Google-synlighet', 'Support'].map((item, index) => (
-                      <div key={index} className="px-3 py-1 rounded-full bg-blue-50 text-campher-blue text-xs border border-blue-100 ml-2 first:ml-0">
-                        {item}
-                      </div>
-                    ))}
-                  </div>
+                
+                <div className="text-center">
                   <a 
                     href="#contact" 
-                    className="bg-campher-blue text-white text-xs px-3 py-1 rounded-full hover:bg-blue-600 transition-colors"
+                    className="inline-flex items-center justify-center bg-campher-blue hover:bg-blue-600 text-white px-8 py-4 rounded-md font-medium transition-colors"
                   >
                     Start i dag
                   </a>
@@ -64,14 +73,16 @@ const Hero = () => {
           </div>
         </div>
         
-        <div className="mt-24 md:mt-32 opacity-0 animate-fade-in stagger-6">
-          <div className="flex flex-wrap items-center justify-center md:justify-between gap-8 md:gap-12">
-            <p className="text-sm font-medium text-campher-gray w-full md:w-auto text-center md:text-left">Stolte av å jobbe med:</p>
-            {['Bedriftsnavn AS', 'Norsk Industri AS', 'Digital Vekst AS'].map((company, index) => (
-              <div key={index} className="text-lg font-display font-medium text-gray-400">
-                {company}
-              </div>
-            ))}
+        <div className="mt-24">
+          <div className="flex flex-col items-center justify-center gap-8">
+            <p className="text-lg font-medium text-campher-gray text-center">Stolte av å jobbe med:</p>
+            <div className="grid grid-cols-3 gap-16">
+              {['Bedriftsnavn AS', 'Norsk Industri AS', 'Digital Vekst AS'].map((company, index) => (
+                <div key={index} className="text-xl font-display font-medium text-gray-700 text-center">
+                  {company}
+                </div>
+              ))}
+            </div>
           </div>
         </div>
       </div>

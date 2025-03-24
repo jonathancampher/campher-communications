@@ -11,21 +11,43 @@ import BlogMobileDrawer from '@/components/blog/BlogMobileDrawer';
 import { blogPosts } from '@/data/blogPosts';
 import { navigateToBlogSection } from '@/utils/navigation';
 
+/**
+ * BlogPost-komponent
+ * 
+ * Denne komponenten viser et enkelt blogginnlegg.
+ * Setter sidetittel og meta-tagger for SEO-optimalisering.
+ * Håndterer visning av innlegg, navigering tilbake til bloggdelen,
+ * og inneholder funksjonalitet for å like innlegget.
+ */
 const BlogPost = () => {
   const { id } = useParams();
   const isMobile = useIsMobile();
   
+  const post = blogPosts.find(post => post.id === Number(id));
+  
   useEffect(() => {
     window.scrollTo(0, 0);
-  }, []);
-
-  const post = blogPosts.find(post => post.id === Number(id));
+    
+    // SEO-optimalisering: Sett dokumenttittel og meta-beskrivelse
+    if (post) {
+      document.title = `${post.title} | Campher Communications`;
+      
+      // Oppdater meta-beskrivelse
+      let metaDescription = document.querySelector('meta[name="description"]');
+      if (!metaDescription) {
+        metaDescription = document.createElement('meta');
+        metaDescription.setAttribute('name', 'description');
+        document.head.appendChild(metaDescription);
+      }
+      metaDescription.setAttribute('content', post.excerpt);
+    }
+  }, [post]);
 
   if (!post) {
     return (
       <div className="min-h-screen">
         <Navbar />
-        <div className="container-custom py-10 md:py-20">
+        <div className="container-custom pt-24 pb-6 md:pt-28 md:pb-20">
           <h1 className="text-2xl">Innlegget ble ikke funnet</h1>
           <BlogBackNavigation navigateToBlogSection={navigateToBlogSection} />
         </div>

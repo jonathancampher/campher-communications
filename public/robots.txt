@@ -5,6 +5,9 @@
 User-agent: *
 Allow: /
 
+# Disallow duplicate content
+Disallow: /404
+
 # Sitemap
 Sitemap: https://camphercommunications.no/sitemap.xml
 
@@ -24,3 +27,5 @@ Allow: /
 User-agent: facebookexternalhit
 Allow: /
 
+# Organisasjonsnummer: 932498413
+# For mer informasjon, kontakt oss på post@camphercommunications.no

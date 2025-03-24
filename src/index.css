@@ -5,6 +5,13 @@
 @tailwind components;
 @tailwind utilities;
 
+/**
+ * Hovedstyling for Campher Communications nettsted
+ * 
+ * Dette stilarket definerer grunnleggende stiler, farger og komponenter
+ * som brukes gjennom hele nettstedet. Optimalisert for ytelse og SEO.
+ */
+
 @layer base {
   :root {
     --background: 210 33% 99%;
@@ -50,6 +57,18 @@
   h1, h2, h3, h4, h5, h6 {
     @apply font-display font-medium tracking-tight;
   }
+  
+  /* Forbedret tilgjengelighet for fokus-elementer */
+  :focus {
+    @apply outline-2 outline-offset-2 outline-blue-500;
+  }
+  
+  /* Bedre ytelse for scroll */
+  @media screen and (prefers-reduced-motion: no-preference) {
+    html {
+      scroll-behavior: smooth;
+    }
+  }
 }
 
 @layer components {
@@ -86,13 +105,40 @@
   }
 }
 
-/* Staggered animation delays */
-.stagger-1 { animation-delay: 0.1s; }
-.stagger-2 { animation-delay: 0.2s; }
-.stagger-3 { animation-delay: 0.3s; }
-.stagger-4 { animation-delay: 0.4s; }
-.stagger-5 { animation-delay: 0.5s; }
-.stagger-6 { animation-delay: 0.6s; }
+/* Optimaliser bilder og animasjoner for bedre ytelse */
+img, svg {
+  height: auto;
+  max-width: 100%;
+}
+
+/* Tilpasset for bedre skjermleser-støtte */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border-width: 0;
+}
+
+/* SEO-optimalisert for print-media */
+@media print {
+  nav, footer, button {
+    display: none;
+  }
+  
+  body {
+    font-size: 12pt;
+    line-height: 1.5;
+  }
+  
+  a::after {
+    content: " (" attr(href) ")";
+  }
+}
 
 /* Smooth scrolling */
 html {
