@@ -3,7 +3,10 @@
  * ContactMap-komponent
  * 
  * Viser et Google Maps-kart med bedriftens lokasjon.
- * Bruker iframe for å integrere Google Maps.
+ * Bruker iframe for å integrere Google Maps med optimaliserte attributter for bedre ytelse og SEO.
+ * Inneholder også en overskrift for å forbedre tilgjengelighet og UX.
+ * 
+ * @returns {JSX.Element} - Rendrer Google Maps iframe med bedriftens lokasjon
  */
 const ContactMap = () => {
   return (
@@ -18,8 +21,9 @@ const ContactMap = () => {
           allowFullScreen 
           loading="lazy" 
           referrerPolicy="no-referrer-when-downgrade"
-          title="Campher Communications location"
+          title="Campher Communications lokasjon"
           className="rounded-xl"
+          aria-label="Kart som viser Campher Communications sin beliggenhet"
         />
       </div>
     </div>

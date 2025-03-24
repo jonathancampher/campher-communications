@@ -1,6 +1,12 @@
 
 import { CheckCircle } from 'lucide-react';
 
+/**
+ * About-komponent
+ * 
+ * Presenterer informasjon om selskapet, inkludert erfaringstall, verdier og personlig informasjon.
+ * Inkluderer også kundeanmeldelser og kontaktknapp.
+ */
 const About = () => {
   const values = [
     'Kundefokusert tilnærming',
@@ -19,15 +25,15 @@ const About = () => {
             <div className="bg-white p-6 rounded-xl shadow-sm">
               <div className="grid grid-cols-2 gap-4">
                 <div className="bg-blue-50 p-4 rounded-lg opacity-0 animate-fade-in stagger-1">
-                  <div className="text-3xl font-semibold text-campher-blue">5+</div>
+                  <div className="text-3xl font-semibold text-campher-blue">1+</div>
                   <div className="text-sm text-campher-gray">År med erfaring</div>
                 </div>
                 <div className="bg-blue-50 p-4 rounded-lg opacity-0 animate-fade-in stagger-2">
-                  <div className="text-3xl font-semibold text-campher-blue">50+</div>
+                  <div className="text-3xl font-semibold text-campher-blue">3+</div>
                   <div className="text-sm text-campher-gray">Fullførte prosjekter</div>
                 </div>
                 <div className="bg-blue-50 p-4 rounded-lg opacity-0 animate-fade-in stagger-3">
-                  <div className="text-3xl font-semibold text-campher-blue">30+</div>
+                  <div className="text-3xl font-semibold text-campher-blue">3+</div>
                   <div className="text-sm text-campher-gray">Fornøyde kunder</div>
                 </div>
                 <div className="bg-blue-50 p-4 rounded-lg opacity-0 animate-fade-in stagger-4">

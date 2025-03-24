@@ -1,14 +1,26 @@
-User-agent: Googlebot
-Allow: /
 
-User-agent: Bingbot
-Allow: /
-
-User-agent: Twitterbot
-Allow: /
-
-User-agent: facebookexternalhit
-Allow: /
+# Robots.txt for Campher Communications
+# Optimalisert for søkemotorer
 
 User-agent: *
 Allow: /
+
+# Sitemap
+Sitemap: https://camphercommunications.no/sitemap.xml
+
+# Bing
+User-agent: Bingbot
+Allow: /
+
+# Google
+User-agent: Googlebot
+Allow: /
+User-agent: Googlebot-Image
+Allow: /
+
+# Sosiale medier
+User-agent: Twitterbot
+Allow: /
+User-agent: facebookexternalhit
+Allow: /
+

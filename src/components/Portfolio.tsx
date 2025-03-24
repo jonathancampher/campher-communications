@@ -2,44 +2,43 @@
 import { useState } from 'react';
 import { ArrowUpRight } from 'lucide-react';
 
+/**
+ * Portfolio-komponent
+ * 
+ * Viser fram firmaets prosjekter med fokus på webutvikling.
+ * Inkluderer filtreringsmuligheter og prosjektdetaljer.
+ */
 const Portfolio = () => {
   const [activeCategory, setActiveCategory] = useState('all');
   
   const categories = [
-    { id: 'all', name: 'All Projects' },
-    { id: 'web', name: 'Web Development' },
-    { id: 'ecommerce', name: 'E-Commerce' },
-    { id: 'branding', name: 'Branding' },
+    { id: 'all', name: 'Alle prosjekter' },
+    { id: 'web', name: 'Webutvikling' },
+    { id: 'responsive', name: 'Responsive design' },
+    { id: 'seo', name: 'SEO-optimalisering' },
   ];
   
   const projects = [
     {
       id: 1,
-      title: 'E-Commerce Platform',
-      category: ['web', 'ecommerce'],
-      image: 'https://placehold.co/600x400/f5f7fa/0069e0?text=E-Commerce+Project',
-      description: 'A modern e-commerce solution with advanced product filtering and secure checkout.',
+      title: 'Moderne Nettbutikk',
+      category: ['web', 'responsive'],
+      image: 'https://placehold.co/600x400/f5f7fa/0069e0?text=Nettbutikk',
+      description: 'Responsiv nettbutikkløsning med avansert produktfiltrering og sikker utsjekk.',
     },
     {
       id: 2,
-      title: 'Corporate Website',
-      category: ['web', 'branding'],
-      image: 'https://placehold.co/600x400/f5f7fa/0069e0?text=Corporate+Website',
-      description: 'A professional website for a financial services company with interactive elements.',
+      title: 'Bedriftshjemmeside',
+      category: ['web', 'seo'],
+      image: 'https://placehold.co/600x400/f5f7fa/0069e0?text=Bedriftsside',
+      description: 'Profesjonell nettside for et finansselskap med interaktive elementer og søkemotoroptimalisering.',
     },
     {
       id: 3,
-      title: 'Mobile App Interface',
-      category: ['web'],
-      image: 'https://placehold.co/600x400/f5f7fa/0069e0?text=Mobile+App+UI',
-      description: 'User interface design for a fitness tracking mobile application.',
-    },
-    {
-      id: 4,
-      title: 'Brand Identity',
-      category: ['branding'],
-      image: 'https://placehold.co/600x400/f5f7fa/0069e0?text=Brand+Identity',
-      description: 'Complete brand identity design including logo, colors, and marketing materials.',
+      title: 'Personlig Portfolio',
+      category: ['web', 'responsive'],
+      image: 'https://placehold.co/600x400/f5f7fa/0069e0?text=Portfolio',
+      description: 'Portfolio-nettside med fokus på mobilvisning og brukervennlighet.',
     },
   ];
   
@@ -52,11 +51,11 @@ const Portfolio = () => {
       <div className="container-custom">
         <div className="text-center max-w-xl mx-auto mb-12">
           <span className="inline-block px-3 py-1 text-xs font-medium bg-blue-100 text-campher-blue rounded-full mb-4">
-            Our Work
+            Våre prosjekter
           </span>
-          <h2 className="heading-lg mb-4">Featured Projects</h2>
+          <h2 className="heading-lg mb-4">Utvalgte prosjekter</h2>
           <p className="text-campher-gray">
-            Take a look at some of our recent work. Each project represents our commitment to quality and attention to detail.
+            Ta en titt på noen av våre siste prosjekter. Hver nettside representerer vårt engasjement for kvalitet og oppmerksomhet på detaljer.
           </p>
         </div>
         
@@ -113,7 +112,7 @@ const Portfolio = () => {
             href="#" 
             className="inline-flex items-center justify-center border border-gray-200 hover:border-campher-blue text-campher-dark hover:text-campher-blue px-6 py-3 rounded-md font-medium transition-all"
           >
-            View All Projects
+            Se alle prosjekter
             <ArrowUpRight size={16} className="ml-2" />
           </a>
         </div>

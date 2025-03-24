@@ -1,7 +1,14 @@
 
 import { ArrowUp } from 'lucide-react';
+import { Link } from 'react-router-dom';
 import Logo from './Logo';
 
+/**
+ * Footer-komponent
+ * 
+ * Bunntekst med firmalogo, navigasjonslenker og copyright-informasjon.
+ * Inneholder også en scroll-to-top-knapp.
+ */
 const Footer = () => {
   const scrollToTop = () => {
     window.scrollTo({
@@ -32,9 +39,9 @@ const Footer = () => {
     {
       title: 'Juridisk',
       links: [
-        { name: 'Personvernerklæring', url: '#' },
-        { name: 'Vilkår for bruk', url: '#' },
-        { name: 'Informasjonskapsler', url: '#' },
+        { name: 'Personvernerklæring', url: '/personvern' },
+        { name: 'Vilkår for bruk', url: '/vilkar' },
+        { name: 'Informasjonskapsler', url: '/cookies' },
       ]
     }
   ];
@@ -44,7 +51,7 @@ const Footer = () => {
       <div className="container-custom">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-8 pb-12 border-b border-white/10">
           <div className="lg:col-span-2">
-            <div className="mb-4 bg-white inline-block p-2 rounded">
+            <div className="mb-4 inline-block">
               <Logo />
             </div>
             <p className="text-gray-400 mb-6 max-w-md">
@@ -69,12 +76,21 @@ const Footer = () => {
               <ul className="space-y-3">
                 {section.links.map((link, linkIndex) => (
                   <li key={linkIndex}>
-                    <a 
-                      href={link.url} 
-                      className="text-gray-400 hover:text-white hover:underline transition-colors"
-                    >
-                      {link.name}
-                    </a>
+                    {link.url.startsWith('/') ? (
+                      <Link 
+                        to={link.url} 
+                        className="text-gray-400 hover:text-white hover:underline transition-colors"
+                      >
+                        {link.name}
+                      </Link>
+                    ) : (
+                      <a 
+                        href={link.url} 
+                        className="text-gray-400 hover:text-white hover:underline transition-colors"
+                      >
+                        {link.name}
+                      </a>
+                    )}
                   </li>
                 ))}
               </ul>
