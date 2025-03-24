@@ -2,7 +2,14 @@
 import { Code, PaintBucket, ShoppingCart, Smartphone, Zap } from 'lucide-react';
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 
+/**
+ * Services-komponent
+ * 
+ * Denne komponenten viser tjenestene og produktpakkene som tilbys.
+ * Inkluderer hovedtjenester og detaljerte produktpakker for ulike behov.
+ */
 const Services = () => {
+  // Hovedtjenester med ikoner og beskrivelser
   const mainServices = [
     {
       icon: <Code size={24} />,
@@ -31,6 +38,7 @@ const Services = () => {
     },
   ];
 
+  // Detaljerte produktpakker
   const productPackages = [
     {
       title: "Digital Startpakke",

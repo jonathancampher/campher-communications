@@ -1,6 +1,12 @@
 
 import { ArrowRight } from 'lucide-react';
 
+/**
+ * Hero-komponent
+ * 
+ * Denne komponenten viser hovedbanneret på forsiden av nettsiden.
+ * Inkluderer hovedtittel, kort beskrivelse, CTA-knapper og en visuell fremstilling.
+ */
 const Hero = () => {
   return (
     <section id="home" className="pt-32 pb-16 md:pt-40 md:pb-24 overflow-hidden">

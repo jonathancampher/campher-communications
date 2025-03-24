@@ -8,6 +8,12 @@ import Blog from '@/components/Blog';
 import Contact from '@/components/Contact';
 import Footer from '@/components/Footer';
 
+/**
+ * Index-komponent
+ * 
+ * Hovedside som samler alle komponentene i riktig rekkefølge.
+ * Setter også dokumentets tittel og språk til norsk.
+ */
 const Index = () => {
   // Sett dokumentets tittel og språk
   document.title = "Campher Communications | Webutvikling og digitale løsninger";

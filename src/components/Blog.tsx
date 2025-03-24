@@ -2,6 +2,12 @@
 import { ArrowUpRight } from 'lucide-react';
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 
+/**
+ * Blog-komponent
+ * 
+ * Denne komponenten inneholder bloggseksjonen med artikler om viktigheten av nettsider
+ * og andre relevante temaer for bedrifter som ønsker å etablere digital tilstedeværelse.
+ */
 const Blog = () => {
   return (
     <section id="blog" className="section-padding">
