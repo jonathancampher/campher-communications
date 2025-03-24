@@ -6,7 +6,7 @@ interface BlogHeaderProps {
 
 const BlogHeader = ({ title, description }: BlogHeaderProps) => {
   return (
-    <div className="text-center max-w-xl mx-auto mb-8 md:mb-16">
+    <div className="text-center max-w-xl mx-auto mb-8 md:mb-16 pt-16">
       <span className="inline-block px-3 py-1 text-xs font-medium bg-blue-100 text-campher-blue rounded-full mb-3 md:mb-4">
         Blogg
       </span>

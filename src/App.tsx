@@ -1,3 +1,4 @@
+
 import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
@@ -9,6 +10,7 @@ import Vilkar from "./pages/Vilkar";
 import Cookies from "./pages/Cookies";
 import NotFound from "./pages/NotFound";
 import BlogPost from "./pages/BlogPost";
+import ProjectPage from "./pages/ProjectPage";
 
 const queryClient = new QueryClient();
 
@@ -24,6 +26,7 @@ const App = () => (
           <Route path="/vilkar" element={<Vilkar />} />
           <Route path="/cookies" element={<Cookies />} />
           <Route path="/blog/:id" element={<BlogPost />} />
+          <Route path="/project/:id" element={<ProjectPage />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </BrowserRouter>

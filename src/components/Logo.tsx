@@ -12,7 +12,7 @@ const Logo = () => {
     <img 
       src="/lovable-uploads/c5502322-5b49-4268-b427-a3e72c87d19b.png" 
       alt="Campher Communications Logo" 
-      className="h-14 w-auto" 
+      className="h-16 w-auto" 
     />
   );
 };

@@ -30,12 +30,6 @@ const Hero = () => {
                 Våre tjenester
                 <ArrowRight size={16} className="ml-2" />
               </a>
-              <a 
-                href="#portfolio" 
-                className="inline-flex items-center justify-center bg-white hover:bg-gray-100 text-campher-dark border border-gray-200 px-6 py-3 rounded-md font-medium transition-colors"
-              >
-                Se våre arbeider
-              </a>
             </div>
           </div>
           <div className="w-full lg:w-1/2 opacity-0 animate-fade-in stagger-5">
@@ -73,7 +67,7 @@ const Hero = () => {
         <div className="mt-24 md:mt-32 opacity-0 animate-fade-in stagger-6">
           <div className="flex flex-wrap items-center justify-center md:justify-between gap-8 md:gap-12">
             <p className="text-sm font-medium text-campher-gray w-full md:w-auto text-center md:text-left">Stolte av å jobbe med:</p>
-            {['Bedrift 1', 'Bedrift 2', 'Bedrift 3', 'Bedrift 4'].map((company, index) => (
+            {['Bedriftsnavn AS', 'Norsk Industri AS', 'Digital Vekst AS'].map((company, index) => (
               <div key={index} className="text-lg font-display font-medium text-gray-400">
                 {company}
               </div>

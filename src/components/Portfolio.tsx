@@ -1,6 +1,7 @@
 
 import { useState } from 'react';
 import { ArrowUpRight } from 'lucide-react';
+import { Link } from 'react-router-dom';
 
 /**
  * Portfolio-komponent
@@ -13,32 +14,34 @@ const Portfolio = () => {
   
   const categories = [
     { id: 'all', name: 'Alle prosjekter' },
-    { id: 'web', name: 'Webutvikling' },
+    { id: 'web', name: 'Nettsider' },
     { id: 'responsive', name: 'Responsive design' },
-    { id: 'seo', name: 'SEO-optimalisering' },
   ];
   
   const projects = [
     {
       id: 1,
-      title: 'Moderne Nettbutikk',
+      title: 'Bedriftsside 1',
       category: ['web', 'responsive'],
-      image: 'https://placehold.co/600x400/f5f7fa/0069e0?text=Nettbutikk',
-      description: 'Responsiv nettbutikkløsning med avansert produktfiltrering og sikker utsjekk.',
+      image: 'https://placehold.co/600x400/f5f7fa/0069e0?text=Bedrift1',
+      description: 'Responsiv bedriftshjemmeside med moderne design og brukervennlighet.',
+      link: '/project/1'
     },
     {
       id: 2,
-      title: 'Bedriftshjemmeside',
-      category: ['web', 'seo'],
-      image: 'https://placehold.co/600x400/f5f7fa/0069e0?text=Bedriftsside',
-      description: 'Profesjonell nettside for et finansselskap med interaktive elementer og søkemotoroptimalisering.',
+      title: 'Bedriftsside 2',
+      category: ['web'],
+      image: 'https://placehold.co/600x400/f5f7fa/0069e0?text=Bedrift2',
+      description: 'Profesjonell nettside for et tjenesteselskap med fokus på konvertering.',
+      link: '/project/2'
     },
     {
       id: 3,
-      title: 'Personlig Portfolio',
+      title: 'Bedriftsside 3',
       category: ['web', 'responsive'],
-      image: 'https://placehold.co/600x400/f5f7fa/0069e0?text=Portfolio',
-      description: 'Portfolio-nettside med fokus på mobilvisning og brukervennlighet.',
+      image: 'https://placehold.co/600x400/f5f7fa/0069e0?text=Bedrift3',
+      description: 'Nettside for håndverksbedrift med kontaktskjema og prosjektgalleri.',
+      link: '/project/3'
     },
   ];
   
@@ -75,11 +78,12 @@ const Portfolio = () => {
           ))}
         </div>
         
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           {filteredProjects.map((project, index) => (
-            <div 
+            <Link 
               key={project.id} 
-              className="group bg-white rounded-xl overflow-hidden shadow-sm opacity-0 animate-fade-in-up"
+              to={project.link}
+              className="group bg-white rounded-xl overflow-hidden shadow-sm opacity-0 animate-fade-in-up hover-scale"
               style={{ animationDelay: `${0.1 + index * 0.1}s` }}
             >
               <div className="relative h-64 overflow-hidden">
@@ -99,22 +103,12 @@ const Portfolio = () => {
                 <h3 className="text-lg font-medium group-hover:text-campher-blue transition-colors">
                   {project.title}
                 </h3>
-                <button className="w-10 h-10 rounded-full bg-gray-100 flex items-center justify-center group-hover:bg-campher-blue/10 group-hover:text-campher-blue transition-colors">
+                <span className="w-10 h-10 rounded-full bg-gray-100 flex items-center justify-center group-hover:bg-campher-blue/10 group-hover:text-campher-blue transition-colors">
                   <ArrowUpRight size={18} />
-                </button>
+                </span>
               </div>
-            </div>
+            </Link>
           ))}
-        </div>
-        
-        <div className="mt-12 text-center">
-          <a 
-            href="#" 
-            className="inline-flex items-center justify-center border border-gray-200 hover:border-campher-blue text-campher-dark hover:text-campher-blue px-6 py-3 rounded-md font-medium transition-all"
-          >
-            Se alle prosjekter
-            <ArrowUpRight size={16} className="ml-2" />
-          </a>
         </div>
       </div>
     </section>

@@ -57,6 +57,9 @@ const Footer = () => {
             <p className="text-gray-400 mb-6 max-w-md">
               Vi bygger digitale opplevelser som hjelper bedrifter med å koble seg til sine kunder og oppnå sine mål.
             </p>
+            <p className="text-gray-400 mb-6">
+              Org.nr: 932498413
+            </p>
             <div className="flex gap-3">
               {['T', 'L', 'I', 'F'].map((icon, index) => (
                 <a
