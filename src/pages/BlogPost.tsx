@@ -37,7 +37,7 @@ const BlogPost = () => {
   return (
     <div className="min-h-screen">
       <Navbar />
-      <div className="container-custom py-6 md:py-20">
+      <div className="container-custom pt-24 pb-6 md:pt-28 md:pb-20">
         <BlogBackNavigation navigateToBlogSection={navigateToBlogSection} />
         
         {isMobile && <BlogMobileDrawer navigateToBlogSection={navigateToBlogSection} />}

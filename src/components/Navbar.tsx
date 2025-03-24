@@ -49,8 +49,8 @@ const Navbar = () => {
       className={cn(
         'fixed top-0 left-0 right-0 z-50 transition-all duration-300',
         isScrolled 
-          ? 'py-2 shadow-md bg-campher-dark/95 backdrop-blur-md' 
-          : 'py-3 bg-campher-dark'
+          ? 'py-1 shadow-md bg-campher-dark/95 backdrop-blur-md' 
+          : 'py-2 bg-campher-dark'
       )}
     >
       <div className="container-custom flex justify-between items-center">
