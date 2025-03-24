@@ -45,19 +45,19 @@ const Contact = () => {
     {
       icon: <Mail size={20} />,
       title: 'Send e-post',
-      info: 'info@campher.com',
-      link: 'mailto:info@campher.com',
+      info: 'kontakt@camphercommunications.no',
+      link: 'mailto:kontakt@camphercommunications.no',
     },
     {
       icon: <Phone size={20} />,
       title: 'Ring oss',
-      info: '+47 47 90 71 17',
-      link: 'tel:+4747907117',
+      info: '+47 94053198',
+      link: 'tel:+4794053198',
     },
     {
       icon: <MapPin size={20} />,
       title: 'Besøk oss',
-      info: 'Parkveien 9B, 3400 Lier',
+      info: 'Åsgårdstrandveien 384, 3179 Åsgårdstrand',
       link: '#map',
     },
   ];
@@ -100,12 +100,12 @@ const Contact = () => {
               <h3 className="text-lg font-medium mb-4">Vårt team</h3>
               <div className="flex gap-4 items-center">
                 <Avatar className="h-16 w-16 border-2 border-campher-blue">
-                  <AvatarImage src="/lovable-uploads/b7bb1f5a-cbd7-4885-9a85-2750d69cc2e7.png" alt="Team member" />
-                  <AvatarFallback>CC</AvatarFallback>
+                  <AvatarImage src="/lovable-uploads/b7bb1f5a-cbd7-4885-9a85-2750d69cc2e7.png" alt="Jonathan Campher" />
+                  <AvatarFallback>JC</AvatarFallback>
                 </Avatar>
                 <div>
-                  <h4 className="font-medium">Jon Campher</h4>
-                  <p className="text-campher-gray text-sm">Daglig Leder</p>
+                  <h4 className="font-medium">Jonathan Campher</h4>
+                  <p className="text-campher-gray text-sm">Grunnlegger & Webutvikler</p>
                 </div>
               </div>
             </div>
