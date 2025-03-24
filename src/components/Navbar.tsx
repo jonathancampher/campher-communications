@@ -3,6 +3,7 @@ import { useState, useEffect } from 'react';
 import { Menu, X } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import Logo from './Logo';
+import { Link, useLocation } from 'react-router-dom';
 
 /**
  * Navbar-komponent
@@ -13,6 +14,7 @@ import Logo from './Logo';
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
+  const location = useLocation();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -29,12 +31,17 @@ const Navbar = () => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
+  // Close mobile menu when location changes
+  useEffect(() => {
+    setIsMenuOpen(false);
+  }, [location]);
+
   const navLinks = [
-    { name: 'Hjem', href: '#home' },
-    { name: 'Tjenester', href: '#services' },
-    { name: 'Prosjekter', href: '#portfolio' },
-    { name: 'Om oss', href: '#about' },
-    { name: 'Kontakt', href: '#contact' }
+    { name: 'Hjem', href: '/#home', isPage: false },
+    { name: 'Tjenester', href: '/#services', isPage: false },
+    { name: 'Prosjekter', href: '/#portfolio', isPage: false },
+    { name: 'Om oss', href: '/#about', isPage: false },
+    { name: 'Kontakt', href: '/#contact', isPage: false }
   ];
 
   return (
@@ -47,9 +54,15 @@ const Navbar = () => {
       )}
     >
       <div className="container-custom flex justify-between items-center">
-        <a href="#home" className="flex items-center py-2">
-          <Logo />
-        </a>
+        {location.pathname === '/' ? (
+          <a href="#home" className="flex items-center py-2">
+            <Logo />
+          </a>
+        ) : (
+          <Link to="/" className="flex items-center py-2">
+            <Logo />
+          </Link>
+        )}
 
         {/* Desktop Navigation */}
         <div className="hidden md:flex items-center space-x-8">

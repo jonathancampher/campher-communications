@@ -1,7 +1,17 @@
 
-import React from 'react';
+import React, { useEffect } from 'react';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
+import { 
+  Breadcrumb, 
+  BreadcrumbList, 
+  BreadcrumbItem, 
+  BreadcrumbLink,
+  BreadcrumbSeparator,
+  BreadcrumbPage
+} from '@/components/ui/breadcrumb';
+import { ChevronRight, Home } from 'lucide-react';
+import { Link } from 'react-router-dom';
 
 /**
  * Cookies-komponent
@@ -14,12 +24,34 @@ const Cookies = () => {
   document.title = "Informasjonskapsler | Campher Communications";
   document.documentElement.lang = "no";
   
+  // Scroll to top when component mounts
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+  
   return (
     <div className="min-h-screen flex flex-col">
       <Navbar />
       
       <main className="flex-grow pt-28 pb-16">
         <div className="container-custom">
+          {/* Breadcrumbs navigation */}
+          <Breadcrumb className="mb-6">
+            <BreadcrumbList>
+              <BreadcrumbItem>
+                <BreadcrumbLink asChild>
+                  <Link to="/"><Home size={16} /></Link>
+                </BreadcrumbLink>
+              </BreadcrumbItem>
+              <BreadcrumbSeparator>
+                <ChevronRight size={16} />
+              </BreadcrumbSeparator>
+              <BreadcrumbItem>
+                <BreadcrumbPage>Informasjonskapsler</BreadcrumbPage>
+              </BreadcrumbItem>
+            </BreadcrumbList>
+          </Breadcrumb>
+          
           <h1 className="heading-lg mb-8 text-center">Informasjonskapsler (Cookies)</h1>
           
           <div className="max-w-3xl mx-auto bg-white p-6 md:p-8 rounded-xl shadow-sm">
@@ -89,6 +121,15 @@ const Cookies = () => {
                 Adresse: Åsgårdstrandveien 384, 3179 Åsgårdstrand, Norge
               </p>
             </section>
+            
+            <div className="mt-8 flex justify-center">
+              <Link 
+                to="/" 
+                className="bg-campher-blue hover:bg-blue-600 text-white px-6 py-2 rounded-md text-sm font-medium transition-colors"
+              >
+                Tilbake til forsiden
+              </Link>
+            </div>
           </div>
         </div>
       </main>
