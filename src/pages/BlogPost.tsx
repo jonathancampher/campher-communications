@@ -1,6 +1,6 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useParams, Link } from 'react-router-dom';
-import { MessageSquare, Heart, Share } from 'lucide-react';
+import { MessageSquare, Heart, Share, ArrowLeft } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
 import Navbar from '@/components/Navbar';
@@ -12,6 +12,10 @@ const BlogPost = () => {
   const { toast } = useToast();
   const [likes, setLikes] = useState(0);
   const [hasLiked, setHasLiked] = useState(false);
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
 
   const blogPosts = [
     {
@@ -124,8 +128,12 @@ const BlogPost = () => {
     <div className="min-h-screen">
       <Navbar />
       <div className="container-custom py-20">
-        <Link to="/#blog" className="text-campher-blue hover:underline mb-6 inline-block">
-          ← Tilbake til blogg
+        <Link 
+          to="/#blog" 
+          className="text-campher-blue hover:underline mb-6 inline-flex items-center gap-2 bg-blue-50 px-4 py-2 rounded-md transition-colors hover:bg-blue-100"
+        >
+          <ArrowLeft size={16} />
+          Tilbake til blogg
         </Link>
         
         <Card className="p-6 md:p-8">

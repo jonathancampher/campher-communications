@@ -57,8 +57,19 @@ const Blog = () => {
     }
   ];
 
+  const scrollToTop = () => {
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth'
+    });
+  };
+
   const BlogPostCard = ({ post, isFeatured = false }) => (
-    <Link to={`/blog/${post.id}`} className="block transition-transform hover:-translate-y-1">
+    <Link 
+      to={`/blog/${post.id}`} 
+      className="block transition-transform hover:-translate-y-1"
+      onClick={scrollToTop}
+    >
       <Card className="h-full overflow-hidden shadow-lg hover:shadow-xl transition-shadow">
         {isFeatured && (
           <div className="relative h-64 overflow-hidden bg-blue-50 flex items-center justify-center">
