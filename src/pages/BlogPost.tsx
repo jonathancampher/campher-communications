@@ -1,4 +1,3 @@
-
 import { useState, useEffect } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { MessageSquare, Heart, Share, ArrowLeft } from 'lucide-react';
@@ -20,6 +19,15 @@ const BlogPost = () => {
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
+
+  const navigateToBlogSection = () => {
+    setTimeout(() => {
+      const blogSection = document.getElementById('blog');
+      if (blogSection) {
+        blogSection.scrollIntoView({ behavior: 'smooth' });
+      }
+    }, 100);
+  };
 
   const blogPosts = [
     {
@@ -132,16 +140,15 @@ const BlogPost = () => {
     <div className="min-h-screen">
       <Navbar />
       <div className="container-custom py-6 md:py-20">
-        {/* Back button - more prominent on mobile */}
         <Link 
           to="/#blog" 
           className="text-campher-blue hover:underline mb-4 md:mb-6 inline-flex items-center gap-2 bg-blue-50 px-3 py-2 md:px-4 md:py-2 rounded-md transition-colors hover:bg-blue-100 w-full md:w-auto justify-center md:justify-start"
+          onClick={navigateToBlogSection}
         >
           <ArrowLeft size={isMobile ? 20 : 16} />
           <span className="font-medium">Tilbake til blogg</span>
         </Link>
         
-        {/* Fixed mobile navigation drawer for easy access */}
         {isMobile && (
           <div className="fixed bottom-4 right-4 z-40">
             <Drawer>
@@ -160,6 +167,7 @@ const BlogPost = () => {
                   <Link 
                     to="/#blog" 
                     className="flex items-center gap-2 p-3 bg-blue-50 text-campher-blue rounded-md w-full"
+                    onClick={navigateToBlogSection}
                   >
                     <ArrowLeft size={18} />
                     <span className="font-medium">Tilbake til blogg</span>
