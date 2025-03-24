@@ -1,4 +1,3 @@
-
 import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
@@ -9,13 +8,8 @@ import Personvern from "./pages/Personvern";
 import Vilkar from "./pages/Vilkar";
 import Cookies from "./pages/Cookies";
 import NotFound from "./pages/NotFound";
+import BlogPost from "./pages/BlogPost";
 
-/**
- * App-komponent
- * 
- * Hovedkomponent som setter opp rutere, providers og den overordnede
- * applikasjonsstrukturen. Håndterer også ruting til ulike sider.
- */
 const queryClient = new QueryClient();
 
 const App = () => (
@@ -29,6 +23,7 @@ const App = () => (
           <Route path="/personvern" element={<Personvern />} />
           <Route path="/vilkar" element={<Vilkar />} />
           <Route path="/cookies" element={<Cookies />} />
+          <Route path="/blog/:id" element={<BlogPost />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </BrowserRouter>

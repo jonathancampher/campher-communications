@@ -1,5 +1,5 @@
-
-import { ArrowUpRight } from 'lucide-react';
+import { ArrowUpRight, Heart, MessageSquare } from 'lucide-react';
+import { Link } from 'react-router-dom';
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 
 /**
@@ -57,6 +57,39 @@ const Blog = () => {
     }
   ];
 
+  const BlogPostCard = ({ post, isFeatured = false }) => (
+    <Link to={`/blog/${post.id}`} className="block transition-transform hover:-translate-y-1">
+      <Card className="h-full overflow-hidden shadow-lg hover:shadow-xl transition-shadow">
+        {isFeatured && (
+          <div className="relative h-64 overflow-hidden bg-blue-50 flex items-center justify-center">
+            <div className="p-6 text-center">
+              <h3 className="text-2xl font-medium text-campher-blue">{post.title}</h3>
+            </div>
+          </div>
+        )}
+        <CardHeader>
+          <CardTitle>{post.title}</CardTitle>
+          <CardDescription>Publisert {post.publishDate} | {post.readTime} lesetid</CardDescription>
+        </CardHeader>
+        <CardContent>
+          <p className="text-gray-600">{post.excerpt}</p>
+        </CardContent>
+        <CardFooter className="flex justify-between items-center">
+          <div className="flex gap-4 text-gray-500 text-sm">
+            <span className="flex items-center gap-1">
+              <Heart className="w-4 h-4" />
+              0
+            </span>
+          </div>
+          <span className="text-campher-blue hover:underline inline-flex items-center">
+            Les mer
+            <ArrowUpRight size={16} className="ml-1" />
+          </span>
+        </CardFooter>
+      </Card>
+    </Link>
+  );
+
   const featuredPost = blogPosts.find(post => post.featured);
   const regularPosts = blogPosts.filter(post => !post.featured);
 
@@ -76,59 +109,7 @@ const Blog = () => {
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
           {featuredPost && (
             <div className="lg:col-span-8">
-              <Card className="overflow-hidden shadow-lg">
-                <div className="relative h-64 overflow-hidden bg-blue-50 flex items-center justify-center">
-                  <div className="p-6 text-center">
-                    <h3 className="text-2xl font-medium text-campher-blue">{featuredPost.title}</h3>
-                  </div>
-                </div>
-                <CardHeader>
-                  <CardTitle>{featuredPost.title}</CardTitle>
-                  <CardDescription>Publisert {featuredPost.publishDate} | {featuredPost.readTime} lesetid</CardDescription>
-                </CardHeader>
-                <CardContent>
-                  <p className="mb-4">I 2025 er en nettside hjertet i din digitale tilstedeværelse. Her er hvorfor:</p>
-                  
-                  <ul className="space-y-2 mb-4">
-                    <li className="flex items-start gap-2">
-                      <span className="text-campher-blue font-medium">•</span>
-                      <p>98 % av nordmenn søker på nett før de velger en tjeneste (SSB, 2023).</p>
-                    </li>
-                    <li className="flex items-start gap-2">
-                      <span className="text-campher-blue font-medium">•</span>
-                      <p>Uten nettside mister du kunder til konkurrenter som er synlige.</p>
-                    </li>
-                    <li className="flex items-start gap-2">
-                      <span className="text-campher-blue font-medium">•</span>
-                      <p>En nettside bygger troverdighet og gir deg kontroll over merkevaren din.</p>
-                    </li>
-                    <li className="flex items-start gap-2">
-                      <span className="text-campher-blue font-medium">•</span>
-                      <p>Google og lokal SEO krever en plattform for å rangere høyt.</p>
-                    </li>
-                    <li className="flex items-start gap-2">
-                      <span className="text-campher-blue font-medium">•</span>
-                      <p>Små bedrifter med nettside kan se en kundeøkning på 20–50 %.</p>
-                    </li>
-                    <li className="flex items-start gap-2">
-                      <span className="text-campher-blue font-medium">•</span>
-                      <p>En nettside kan gi en inntektsvekst på 10–30 % årlig, avhengig av bransje.</p>
-                    </li>
-                  </ul>
-                  
-                  <p>For eksempel kan en håndverker øke fra 500 000 NOK til 550 000–650 000 NOK i året med bare 5–10 ekstra kunder fra nettet.</p>
-                  <p className="mt-4 font-medium">Ikke vent – kom på nett i dag og utnytt potensialet for vekst!</p>
-                </CardContent>
-                <CardFooter>
-                  <a 
-                    href="#services" 
-                    className="inline-flex items-center text-campher-blue hover:underline font-medium"
-                  >
-                    Se våre tjenester
-                    <ArrowUpRight size={16} className="ml-1" />
-                  </a>
-                </CardFooter>
-              </Card>
+              <BlogPostCard post={featuredPost} isFeatured={true} />
             </div>
           )}
           
@@ -170,11 +151,13 @@ const Blog = () => {
               <h3 className="text-lg font-medium mb-3">Siste innlegg</h3>
               <div className="space-y-4">
                 {regularPosts.slice(0, 3).map((post) => (
-                  <div key={post.id}>
-                    <h4 className="font-medium">{post.title}</h4>
-                    <p className="text-sm text-campher-gray">{post.excerpt.substring(0, 80)}...</p>
-                    <p className="text-xs text-gray-500 mt-1">{post.publishDate} | {post.readTime} lesetid</p>
-                  </div>
+                  <Link key={post.id} to={`/blog/${post.id}`} className="block group">
+                    <div>
+                      <h4 className="font-medium group-hover:text-campher-blue transition-colors">{post.title}</h4>
+                      <p className="text-sm text-campher-gray">{post.excerpt.substring(0, 80)}...</p>
+                      <p className="text-xs text-gray-500 mt-1">{post.publishDate} | {post.readTime} lesetid</p>
+                    </div>
+                  </Link>
                 ))}
               </div>
             </div>
