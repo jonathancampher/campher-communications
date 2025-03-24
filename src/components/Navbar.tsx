@@ -24,6 +24,8 @@ const Navbar = () => {
     };
 
     window.addEventListener('scroll', handleScroll);
+    // Trigger the scroll handler once on mount to set the initial state
+    handleScroll();
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
@@ -41,7 +43,7 @@ const Navbar = () => {
         'fixed top-0 left-0 right-0 z-50 transition-all duration-300',
         isScrolled 
           ? 'py-3 shadow-md bg-campher-dark/95 backdrop-blur-md' 
-          : 'py-5 bg-campher-dark/98'
+          : 'py-5 bg-campher-dark'
       )}
     >
       <div className="container-custom flex justify-between items-center">
