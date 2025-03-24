@@ -51,7 +51,7 @@ const Footer = () => {
       <div className="container-custom">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-8 pb-12 border-b border-white/10">
           <div className="lg:col-span-2">
-            <div className="mb-4 inline-block">
+            <div className="mb-6 inline-block">
               <Logo />
             </div>
             <p className="text-gray-400 mb-6 max-w-md">

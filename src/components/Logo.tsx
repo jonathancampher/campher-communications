@@ -10,9 +10,9 @@ import React from 'react';
 const Logo = () => {
   return (
     <img 
-      src="/lovable-uploads/58221f53-7fd5-4a4f-b3b4-b55ae6169f64.png" 
+      src="/lovable-uploads/c5502322-5b49-4268-b427-a3e72c87d19b.png" 
       alt="Campher Communications Logo" 
-      className="h-10 w-auto" 
+      className="h-14 w-auto" 
     />
   );
 };
