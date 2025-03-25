@@ -126,11 +126,15 @@ const Navbar = () => {
         {isMobile && (
           <div 
             className={cn(
-              "fixed inset-0 top-0 left-0 right-0 bg-campher-dark z-40 transition-transform duration-300",
-              menuOpen 
-                ? "translate-y-0" 
-                : "translate-y-[-100%]"
+              "fixed inset-0 bg-campher-dark z-40 transition-all duration-300",
+              menuOpen ? "opacity-100 visible" : "opacity-0 invisible"
             )}
+            style={{ 
+              top: "0",
+              left: "0", 
+              right: "0", 
+              bottom: "0"
+            }}
           >
             <div className="pt-20 px-4 pb-6 max-w-sm mx-auto">
               <div className="flex flex-col space-y-3">
@@ -162,7 +166,7 @@ const Navbar = () => {
                       )}
                     >
                       {link.name}
-                    </Link>
+                    </a>
                   )
                 ))}
               </div>
