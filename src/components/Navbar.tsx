@@ -3,13 +3,13 @@ import { useState, useEffect } from 'react';
 import { cn } from '@/lib/utils';
 import Logo from './Logo';
 import { Link, useLocation } from 'react-router-dom';
-import { Book } from 'lucide-react';
 
 /**
  * Navbar-komponent
  * 
  * Hovednavigasjon for nettstedet med fokus på enkelhet.
- * Endrer utseende ved scrolling og har knapper for nettside og blogg for enklere navigasjon.
+ * Endrer utseende ved scrolling og inneholder navigasjonslenker til hovedseksjonene.
+ * Responsiv design med optimalisert navigasjon for alle enheter.
  */
 const Navbar = () => {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -29,6 +29,14 @@ const Navbar = () => {
     handleScroll();
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
+
+  const navLinks = [
+    { name: 'Tjenester', href: '#services' },
+    { name: 'Prosjekter', href: '#portfolio' },
+    { name: 'Blogg', href: '#blog' },
+    { name: 'Om Oss', href: '#about' },
+    { name: 'Kontakt', href: '#contact', primary: true }
+  ];
 
   return (
     <nav 
@@ -50,34 +58,37 @@ const Navbar = () => {
           </Link>
         )}
 
-        {/* Navigation med nettside-knapp og blogg-knapp */}
-        <div className="flex items-center space-x-4">
-          {/* Blogg-knapp */}
-          {location.pathname === '/' ? (
-            <a 
-              href="#blog" 
-              className="flex items-center text-white px-6 py-3 rounded-md text-sm font-medium transition-colors hover:text-campher-blue"
-            >
-              <Book className="mr-2 h-4 w-4" />
-              Blogg
-            </a>
-          ) : (
-            <Link 
-              to="/#blog" 
-              className="flex items-center text-white px-6 py-3 rounded-md text-sm font-medium transition-colors hover:text-campher-blue"
-            >
-              <Book className="mr-2 h-4 w-4" />
-              Blogg
-            </Link>
-          )}
-
-          {/* Nettside-knapp */}
-          <a 
-            href="#contact" 
-            className="bg-campher-blue hover:bg-blue-600 text-white px-6 py-3 rounded-md text-sm font-medium transition-colors"
-          >
-            Nettside
-          </a>
+        {/* Navigasjonslenker */}
+        <div className="flex items-center space-x-2">
+          {navLinks.map((link, index) => (
+            location.pathname === '/' ? (
+              <a
+                key={index}
+                href={link.href}
+                className={cn(
+                  "px-4 py-2 rounded-md text-sm font-medium transition-colors",
+                  link.primary
+                    ? "bg-campher-blue hover:bg-blue-600 text-white"
+                    : "text-white hover:text-campher-blue"
+                )}
+              >
+                {link.name}
+              </a>
+            ) : (
+              <Link
+                key={index}
+                to={`/${link.href}`}
+                className={cn(
+                  "px-4 py-2 rounded-md text-sm font-medium transition-colors",
+                  link.primary
+                    ? "bg-campher-blue hover:bg-blue-600 text-white"
+                    : "text-white hover:text-campher-blue"
+                )}
+              >
+                {link.name}
+              </Link>
+            )
+          ))}
         </div>
       </div>
     </nav>

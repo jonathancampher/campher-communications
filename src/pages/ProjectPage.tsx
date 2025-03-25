@@ -19,13 +19,13 @@ interface Project {
 const projectData: Project[] = [
   {
     id: 1,
-    title: 'Bedriftsside 1',
-    image: 'https://placehold.co/1200x600/f5f7fa/0069e0?text=Bedrift1+Nettside',
-    description: 'Responsiv bedriftshjemmeside med moderne design og brukervennlighet.',
-    challenge: 'Bedriften trengte en moderne nettside som kunne vise fram deres tjenester på en profesjonell måte, samtidig som den skulle være lett å navigere for potensielle kunder.',
-    solution: 'Vi utviklet en responsiv nettside med fokus på brukervennlighet og konvertering. Siden er optimalisert for alle enheter og har et klart og tydelig hierarki som leder besøkende til kontaktskjemaet.',
-    results: 'Etter lanseringen av den nye nettsiden, har bedriften sett en økning på 45% i antall henvendelser via nettsiden, og gjennomsnittlig tid på siden har økt med 30%.',
-    technologies: ['React', 'Tailwind CSS', 'Responsive Design', 'SEO']
+    title: 'Myhre Montasje',
+    image: '/lovable-uploads/8750f463-d4c9-4943-b5cf-10a8f335b9e6.png',
+    description: 'Responsiv hjemmeside for Myhre Montasje med fokus på SEO-optimalisering og brukervennlighet.',
+    challenge: 'Myhre Montasje hadde ingen nettside og trengte en profesjonell digital tilstedeværelse for å vise frem sine tjenester, bygge tillit hos potensielle kunder og generere nye henvendelser.',
+    solution: 'Vi utviklet en komplett nettside fra bunnen av med fokus på SEO-optimalisering, rask lastetid og responsive design. Nettsiden presenterer bedriftens tjenester på en tydelig måte med profesjonelle bilder som viser kvaliteten i arbeidet deres. Vi implementerte også kontaktskjema og tydelige handlingsknapper for å gjøre det enkelt for besøkende å ta kontakt.',
+    results: 'Siden lanseringen har Myhre Montasje fått en betydelig økning i antall henvendelser, og nettsiden rangerer nå høyt på relevante søkeord som "montasjetjenester Vestfold" og "håndverker Telemark". Google Page Speed Insights gir nettsiden en høy score på både mobil og desktop, noe som bidrar til både bedre brukeropplevelse og bedre rangering i søkemotorer.',
+    technologies: ['Responsivt design', 'SEO-optimalisering', 'Rask lastetid', 'Kontaktskjema', 'Bildegalleri', 'Google My Business integrasjon']
   },
   {
     id: 2,

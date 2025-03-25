@@ -1,30 +1,22 @@
 
-import { useState } from 'react';
 import { ArrowUpRight } from 'lucide-react';
 import { Link } from 'react-router-dom';
 
 /**
  * Portfolio-komponent
  * 
- * Viser fram firmaets prosjekter med fokus på webutvikling.
- * Inkluderer filtreringsmuligheter og prosjektdetaljer.
+ * Viser fram firmaets prosjekter med fokus på gjennomførte nettsideprosjekter.
+ * Inneholder prosjektdetaljer og lenker til prosjektsider for mer informasjon.
+ * Optimalisert for søkemotorer med semantisk korrekte elementer og god ytelse.
  */
 const Portfolio = () => {
-  const [activeCategory, setActiveCategory] = useState('all');
-  
-  const categories = [
-    { id: 'all', name: 'Alle prosjekter' },
-    { id: 'web', name: 'Nettsider' },
-    { id: 'responsive', name: 'Responsive design' },
-  ];
-  
   const projects = [
     {
       id: 1,
-      title: 'Bedriftsside 1',
+      title: 'Myhre Montasje',
       category: ['web', 'responsive'],
-      image: 'https://placehold.co/600x400/f5f7fa/0069e0?text=Bedrift1',
-      description: 'Responsiv bedriftshjemmeside med moderne design og brukervennlighet.',
+      image: '/lovable-uploads/8750f463-d4c9-4943-b5cf-10a8f335b9e6.png',
+      description: 'Responsiv hjemmeside med fokus på SEO-optimalisering og brukervennlighet for håndverksbedrift.',
       link: '/project/1'
     },
     {
@@ -44,10 +36,6 @@ const Portfolio = () => {
       link: '/project/3'
     },
   ];
-  
-  const filteredProjects = activeCategory === 'all' 
-    ? projects 
-    : projects.filter(project => project.category.includes(activeCategory));
 
   return (
     <section id="portfolio" className="section-padding">
@@ -62,24 +50,8 @@ const Portfolio = () => {
           </p>
         </div>
         
-        <div className="flex flex-wrap justify-center gap-3 mb-12">
-          {categories.map((category) => (
-            <button
-              key={category.id}
-              className={`px-4 py-2 rounded-full text-sm font-medium transition-colors ${
-                activeCategory === category.id
-                  ? 'bg-campher-blue text-white'
-                  : 'bg-gray-100 text-campher-gray hover:bg-gray-200'
-              }`}
-              onClick={() => setActiveCategory(category.id)}
-            >
-              {category.name}
-            </button>
-          ))}
-        </div>
-        
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-          {filteredProjects.map((project, index) => (
+          {projects.map((project, index) => (
             <Link 
               key={project.id} 
               to={project.link}
