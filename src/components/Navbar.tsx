@@ -147,6 +147,9 @@ const Navbar = () => {
                           ? "bg-campher-blue hover:bg-blue-600 text-white shadow-md"
                           : "bg-white/5 text-white hover:bg-white/10 border border-white/10"
                       )}
+                      onClick={() => {
+                        // Close sheet automatically already provided by SheetClose
+                      }}
                     >
                       {link.name}
                     </Link>
