@@ -79,7 +79,7 @@ const Navbar = () => {
         {isMobile && (
           <button 
             onClick={toggleMenu}
-            className="p-2 text-white z-20 bg-white/10 hover:bg-white/20 border border-white/10 rounded-md shadow-md"
+            className="p-2 text-white z-20 bg-campher-dark hover:bg-campher-dark/80 border border-white/10 rounded-md shadow-md"
             aria-label={menuOpen ? "Lukk meny" : "Åpne meny"}
           >
             {menuOpen ? <X size={24} /> : <Menu size={24} />}
@@ -123,7 +123,7 @@ const Navbar = () => {
 
         {/* Mobile Navigation Menu - Full screen overlay for better UX */}
         {isMobile && menuOpen && (
-          <div className="fixed inset-0 top-0 left-0 right-0 bottom-0 bg-campher-dark/98 backdrop-blur-md z-10 pt-20 px-4 overflow-auto">
+          <div className="fixed inset-0 top-0 left-0 right-0 bottom-0 bg-campher-dark backdrop-blur-md z-10 pt-20 px-4 overflow-auto">
             <div className="flex flex-col space-y-3 max-w-sm mx-auto">
               {navLinks.map((link, index) => (
                 location.pathname === '/' ? (
@@ -135,7 +135,7 @@ const Navbar = () => {
                       "px-4 py-4 rounded-md text-center text-base font-medium transition-colors",
                       link.primary
                         ? "bg-campher-blue hover:bg-blue-600 text-white shadow-md"
-                        : "bg-white/10 text-white hover:bg-white/20 border border-white/5"
+                        : "bg-campher-dark/80 text-white hover:bg-campher-dark/60 border border-white/10"
                     )}
                   >
                     {link.name}
@@ -149,7 +149,7 @@ const Navbar = () => {
                       "px-4 py-4 rounded-md text-center text-base font-medium transition-colors",
                       link.primary
                         ? "bg-campher-blue hover:bg-blue-600 text-white shadow-md"
-                        : "bg-white/10 text-white hover:bg-white/20 border border-white/5"
+                        : "bg-campher-dark/80 text-white hover:bg-campher-dark/60 border border-white/10"
                     )}
                   >
                     {link.name}
