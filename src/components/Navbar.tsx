@@ -56,7 +56,7 @@ const Navbar = () => {
     { name: 'Kontakt', href: '#contact', primary: true }
   ];
 
-  const navbarClass = "fixed top-0 left-0 right-0 z-[60] transition-all duration-300 bg-campher-dark";
+  const navbarClass = "fixed top-0 left-0 right-0 z-[100] transition-all duration-300 bg-campher-dark";
   
   return (
     <nav 
@@ -69,11 +69,11 @@ const Navbar = () => {
     >
       <div className="container-custom flex justify-between items-center relative">
         {location.pathname === '/' ? (
-          <a href="#home" className="flex items-center py-2 z-[70]">
+          <a href="#home" className="flex items-center py-2 z-[101]">
             <Logo />
           </a>
         ) : (
-          <Link to="/" className="flex items-center py-2 z-[70]">
+          <Link to="/" className="flex items-center py-2 z-[101]">
             <Logo />
           </Link>
         )}
@@ -82,7 +82,7 @@ const Navbar = () => {
         {isMobile && (
           <button 
             onClick={toggleMenu}
-            className="p-2 text-white z-[70] bg-campher-dark hover:bg-campher-dark/80 border border-white/10 rounded-md shadow-md"
+            className="p-2 text-white z-[101] bg-campher-dark hover:bg-campher-dark/80 border border-white/10 rounded-md shadow-md"
             aria-label={menuOpen ? "Lukk meny" : "Åpne meny"}
           >
             {menuOpen ? <X size={24} /> : <Menu size={24} />}
@@ -128,10 +128,10 @@ const Navbar = () => {
         {isMobile && (
           <div 
             className={cn(
-              "fixed inset-0 bg-campher-dark z-[65] transition-opacity duration-300 overflow-auto", 
+              "fixed inset-0 bg-campher-dark z-[99] transition-transform duration-300",
               menuOpen 
-                ? "opacity-100 pointer-events-auto" 
-                : "opacity-0 pointer-events-none"
+                ? "translate-y-0" 
+                : "translate-y-[-100%]"
             )}
           >
             <div className="pt-20 px-4 pb-6 max-w-sm mx-auto">
