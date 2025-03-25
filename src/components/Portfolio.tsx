@@ -16,7 +16,7 @@ const Portfolio = () => {
       id: 1,
       title: 'Myhre Montasje',
       category: ['web', 'responsive'],
-      image: 'https://placehold.co/600x400/f5f7fa/0069e0?text=Myhre+Montasje',
+      image: '/lovable-uploads/photo-1486312338219-ce68d2c6f44d.png',
       description: 'Responsiv hjemmeside med fokus på SEO-optimalisering og brukervennlighet for håndverksbedrift.',
       link: '/project/1'
     },
@@ -61,14 +61,11 @@ const Portfolio = () => {
             >
               <div className="relative h-48 md:h-64 overflow-hidden">
                 {project.id === 1 ? (
-                  <div 
-                    className="w-full h-full bg-cover bg-center transition-transform duration-500 group-hover:scale-105"
-                    style={{ 
-                      backgroundImage: `url('/lovable-uploads/photo-1486312338219-ce68d2c6f44d.png')`,
-                      backgroundPosition: 'center',
-                      backgroundSize: 'cover'
-                    }}
-                    aria-label={project.title}
+                  <img 
+                    src={project.image}
+                    alt={project.title}
+                    className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                    loading={index === 0 ? "eager" : "lazy"}
                   />
                 ) : (
                   <img

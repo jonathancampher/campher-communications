@@ -21,7 +21,7 @@ const projectData: Project[] = [
   {
     id: 1,
     title: 'Myhre Montasje',
-    image: 'https://placehold.co/1200x600/f5f7fa/0069e0?text=Myhre+Montasje',
+    image: '/lovable-uploads/photo-1486312338219-ce68d2c6f44d.png',
     description: 'Responsiv hjemmeside for Myhre Montasje med fokus på SEO-optimalisering og brukervennlighet.',
     challenge: 'Myhre Montasje hadde ingen nettside og trengte en profesjonell digital tilstedeværelse for å vise frem sine tjenester, bygge tillit hos potensielle kunder og generere nye henvendelser.',
     solution: 'Vi utviklet en komplett nettside fra bunnen av med fokus på SEO-optimalisering, rask lastetid og responsive design. Nettsiden presenterer bedriftens tjenester på en tydelig måte med profesjonelle bilder som viser kvaliteten i arbeidet deres. Vi implementerte også kontaktskjema og tydelige handlingsknapper for å gjøre det enkelt for besøkende å ta kontakt.',
@@ -91,24 +91,12 @@ const ProjectPage = () => {
             <h1 className="text-2xl md:text-3xl lg:text-4xl font-medium mb-4 md:mb-6">{project.title}</h1>
             
             <div className="rounded-xl overflow-hidden mb-6 md:mb-10">
-              {project.id === 1 ? (
-                <div 
-                  className="w-full h-64 md:h-96 bg-cover bg-center"
-                  style={{ 
-                    backgroundImage: `url('/lovable-uploads/photo-1486312338219-ce68d2c6f44d.png')`,
-                    backgroundPosition: 'center',
-                    backgroundSize: 'cover'
-                  }}
-                  aria-label={project.title}
-                />
-              ) : (
-                <img 
-                  src={project.image} 
-                  alt={project.title} 
-                  className="w-full h-auto object-cover"
-                  loading="eager"
-                />
-              )}
+              <img 
+                src={project.image} 
+                alt={project.title} 
+                className="w-full h-64 md:h-96 object-cover"
+                loading="eager"
+              />
             </div>
             
             <div className="bg-blue-50 p-4 md:p-6 rounded-xl mb-6 md:mb-10">
