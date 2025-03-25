@@ -79,7 +79,7 @@ const Navbar = () => {
         {isMobile && (
           <button 
             onClick={toggleMenu}
-            className="p-2 text-white z-20"
+            className="p-2 text-white z-20 bg-campher-blue rounded-md shadow-md"
             aria-label={menuOpen ? "Lukk meny" : "Åpne meny"}
           >
             {menuOpen ? <X size={24} /> : <Menu size={24} />}
@@ -134,8 +134,8 @@ const Navbar = () => {
                     className={cn(
                       "px-4 py-4 rounded-md text-center text-base font-medium transition-colors",
                       link.primary
-                        ? "bg-campher-blue hover:bg-blue-600 text-white"
-                        : "bg-white/5 text-white hover:bg-white/10"
+                        ? "bg-campher-blue hover:bg-blue-600 text-white shadow-md"
+                        : "bg-white/10 text-white hover:bg-white/20 border border-white/5"
                     )}
                   >
                     {link.name}
@@ -148,8 +148,8 @@ const Navbar = () => {
                     className={cn(
                       "px-4 py-4 rounded-md text-center text-base font-medium transition-colors",
                       link.primary
-                        ? "bg-campher-blue hover:bg-blue-600 text-white"
-                        : "bg-white/5 text-white hover:bg-white/10"
+                        ? "bg-campher-blue hover:bg-blue-600 text-white shadow-md"
+                        : "bg-white/10 text-white hover:bg-white/20 border border-white/5"
                     )}
                   >
                     {link.name}

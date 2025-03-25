@@ -27,7 +27,7 @@
   to = "/index.html"
   status = 200
 
-# Set up form submissions
+# Set up form submissions - enable Netlify forms
 [build.processing]
   skip_processing = false
 [build.processing.html]
@@ -36,3 +36,29 @@
 # Optimize images
 [build.processing.images]
   compress = true
+
+# Enable HTTP/2 for faster delivery
+[[plugins]]
+  package = "@netlify/plugin-lighthouse"
+
+# Enable brotli compression for smaller files
+[build.processing.css]
+  bundle = true
+  minify = true
+
+[build.processing.js]
+  bundle = true
+  minify = true
+
+[build.processing.html]
+  pretty_urls = true
+
+# Enable security headers
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Frame-Options = "DENY"
+    X-XSS-Protection = "1; mode=block"
+    X-Content-Type-Options = "nosniff"
+    Referrer-Policy = "strict-origin-when-cross-origin"
+    Permissions-Policy = "camera=(), microphone=(), geolocation=()"
