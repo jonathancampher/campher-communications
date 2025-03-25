@@ -1,4 +1,3 @@
-
 import { Link } from 'react-router-dom';
 import { useIsMobile } from '@/hooks/use-mobile';
 
@@ -60,21 +59,12 @@ const Portfolio = () => {
               style={{ animationDelay: `${0.1 + index * 0.1}s` }}
             >
               <div className="relative h-48 md:h-64 overflow-hidden">
-                {project.id === 1 ? (
-                  <img 
-                    src={project.image}
-                    alt={project.title}
-                    className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
-                    loading={index === 0 ? "eager" : "lazy"}
-                  />
-                ) : (
-                  <img
-                    src={project.image}
-                    alt={project.title}
-                    className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
-                    loading={index === 0 ? "eager" : "lazy"}
-                  />
-                )}
+                <img 
+                  src={project.image}
+                  alt={project.title}
+                  className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                  loading={index === 0 ? "eager" : "lazy"}
+                />
               </div>
               <div className="p-4 md:p-6">
                 <h3 className="text-lg font-medium group-hover:text-campher-blue transition-colors">
