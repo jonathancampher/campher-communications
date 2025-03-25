@@ -5,6 +5,7 @@ import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import { ArrowLeft } from 'lucide-react';
 import { useIsMobile } from '@/hooks/use-mobile';
+import { AspectRatio } from '@/components/ui/aspect-ratio';
 
 interface Project {
   id: number;
@@ -67,7 +68,7 @@ const ProjectPage = () => {
         <Navbar />
         <div className="container-custom py-20">
           <h1 className="text-2xl">Prosjektet ble ikke funnet</h1>
-          <Link to="/#portfolio" className="text-campher-blue hover:underline inline-flex items-center mt-4">
+          <Link to="/#portfolio" className="text-campher-blue hover:underline inline-flex items-center mt-4 text-lg py-2 px-4 min-h-12 min-w-40" aria-label="Tilbake til prosjekter">
             <ArrowLeft size={16} className="mr-2" />
             Tilbake til prosjekter
           </Link>
@@ -82,7 +83,7 @@ const ProjectPage = () => {
       <Navbar />
       <main className={`pt-20 ${isMobile ? 'pb-8' : 'pt-24'}`}>
         <div className="container-custom py-5 md:py-10">
-          <Link to="/#portfolio" className="text-campher-blue hover:underline inline-flex items-center mb-4 md:mb-6">
+          <Link to="/#portfolio" className="text-campher-blue hover:underline inline-flex items-center mb-4 md:mb-6 text-lg py-2 px-4 min-h-12 min-w-40" aria-label="Tilbake til prosjekter">
             <ArrowLeft size={16} className="mr-2" />
             Tilbake til prosjekter
           </Link>
@@ -91,33 +92,37 @@ const ProjectPage = () => {
             <h1 className="text-2xl md:text-3xl lg:text-4xl font-medium mb-4 md:mb-6">{project.title}</h1>
             
             <div className="rounded-xl overflow-hidden mb-6 md:mb-10">
-              <img 
-                src={project.image} 
-                alt={project.title} 
-                className="w-full h-64 md:h-96 object-cover object-top"
-                loading="eager"
-              />
+              <AspectRatio ratio={16/9} className="bg-gray-100">
+                <img 
+                  src={project.image} 
+                  alt={project.title} 
+                  className="w-full h-full object-cover object-top"
+                  loading="eager"
+                  width="1200"
+                  height="600"
+                />
+              </AspectRatio>
             </div>
             
             <div className="bg-blue-50 p-4 md:p-6 rounded-xl mb-6 md:mb-10">
               <h2 className="text-lg md:text-xl font-medium mb-2 md:mb-3">Prosjektoversikt</h2>
-              <p className="text-campher-gray text-sm md:text-base">{project.description}</p>
+              <p className="text-gray-700 text-sm md:text-base">{project.description}</p>
             </div>
             
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8 mb-6 md:mb-10">
               <div>
                 <h2 className="text-lg md:text-xl font-medium mb-2 md:mb-3">Utfordringen</h2>
-                <p className="text-campher-gray text-sm md:text-base">{project.challenge}</p>
+                <p className="text-gray-700 text-sm md:text-base">{project.challenge}</p>
               </div>
               <div>
                 <h2 className="text-lg md:text-xl font-medium mb-2 md:mb-3">Vår løsning</h2>
-                <p className="text-campher-gray text-sm md:text-base">{project.solution}</p>
+                <p className="text-gray-700 text-sm md:text-base">{project.solution}</p>
               </div>
             </div>
             
             <div className="mb-6 md:mb-10">
               <h2 className="text-lg md:text-xl font-medium mb-2 md:mb-3">Resultater</h2>
-              <p className="text-campher-gray text-sm md:text-base">{project.results}</p>
+              <p className="text-gray-700 text-sm md:text-base">{project.results}</p>
             </div>
             
             <div className="mb-6 md:mb-10">
@@ -133,10 +138,11 @@ const ProjectPage = () => {
             
             <div className="text-center bg-gray-50 p-4 md:p-8 rounded-xl">
               <h2 className="text-lg md:text-xl font-medium mb-2 md:mb-3">Vil du ha en lignende løsning?</h2>
-              <p className="text-campher-gray mb-3 md:mb-4 text-sm md:text-base">Ta kontakt med oss for en uforpliktende prat om ditt prosjekt.</p>
+              <p className="text-gray-700 mb-3 md:mb-4 text-sm md:text-base">Ta kontakt med oss for en uforpliktende prat om ditt prosjekt.</p>
               <a 
                 href="/#contact" 
-                className="inline-flex items-center justify-center bg-campher-blue hover:bg-blue-600 text-white px-4 py-2 md:px-6 md:py-3 rounded-md font-medium transition-colors text-sm md:text-base"
+                className="inline-flex items-center justify-center bg-campher-blue hover:bg-blue-600 text-white px-4 py-2 md:px-6 md:py-3 rounded-md font-medium transition-colors text-sm md:text-base min-h-10 min-w-32"
+                aria-label="Kontakt oss om ditt prosjekt"
               >
                 Kontakt oss
               </a>

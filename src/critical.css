@@ -1,0 +1,65 @@
+
+/* Critical CSS for first render - only include what's needed for above-the-fold content */
+:root{
+  --background: 210 33% 99%;
+  --foreground: 214 32% 8%;
+  --primary: 214 100% 44%;
+  --primary-foreground: 0 0% 100%;
+}
+
+body {
+  margin: 0;
+  font-family: 'Inter', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background-color: hsl(var(--background));
+  color: hsl(var(--foreground));
+}
+
+.heading-xl {
+  font-size: 2.25rem;
+  line-height: 1.2;
+  font-weight: 500;
+  letter-spacing: -0.025em;
+}
+
+@media (min-width: 768px) {
+  .heading-xl {
+    font-size: 3rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .heading-xl {
+    font-size: 3.75rem;
+  }
+}
+
+.text-gradient {
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+  background-image: linear-gradient(to right, #0069e0, #3B82F6);
+}
+
+.container-custom {
+  width: 100%;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 1rem;
+  padding-right: 1rem;
+}
+
+@media (min-width: 640px) {
+  .container-custom {
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .container-custom {
+    padding-left: 2rem;
+    padding-right: 2rem;
+  }
+}

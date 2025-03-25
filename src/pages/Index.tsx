@@ -32,39 +32,7 @@ const Index = () => {
     metaDescription.setAttribute('content', 
       'Campher Communications leverer skreddersydde nettsider, SEO-optimalisering og digital markedsføring for bedrifter som vil lykkes på nett. Org. nr. 932498413.');
     
-    // Legg til strukturerte data for bedre SEO
-    const script = document.createElement('script');
-    script.type = 'application/ld+json';
-    script.text = JSON.stringify({
-      '@context': 'https://schema.org',
-      '@type': 'Organization',
-      'name': 'Campher Communications',
-      'url': 'https://camphercommunications.no',
-      'logo': 'https://camphercommunications.no/logo.png',
-      'description': 'Webutvikling og digitale løsninger for bedrifter.',
-      'address': {
-        '@type': 'PostalAddress',
-        'addressCountry': 'NO'
-      },
-      'contactPoint': {
-        '@type': 'ContactPoint',
-        'telephone': '+47-00-00-00-00',
-        'contactType': 'customer service'
-      },
-      'sameAs': [
-        'https://www.facebook.com/camphercommunications',
-        'https://www.linkedin.com/company/camphercommunications'
-      ],
-      'vatID': '932498413'
-    });
-    
-    // Fjern eventuell tidligere versjon av strukturerte data
-    const existingScript = document.querySelector('script[type="application/ld+json"]');
-    if (existingScript) {
-      existingScript.remove();
-    }
-    
-    document.head.appendChild(script);
+    // Legg til strukturerte data for bedre SEO - flyttet til index.html for raskere lading
   }, []);
   
   return (

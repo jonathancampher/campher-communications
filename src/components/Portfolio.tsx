@@ -1,6 +1,7 @@
 
 import { Link } from 'react-router-dom';
 import { useIsMobile } from '@/hooks/use-mobile';
+import { AspectRatio } from '@/components/ui/aspect-ratio';
 
 /**
  * Portfolio-komponent
@@ -46,7 +47,7 @@ const Portfolio = () => {
             Våre prosjekter
           </span>
           <h2 className="heading-lg mb-4">Utvalgte prosjekter</h2>
-          <p className="text-campher-gray">
+          <p className="text-gray-700">
             Ta en titt på noen av våre siste prosjekter. Hver nettside representerer vårt engasjement for kvalitet og oppmerksomhet på detaljer.
           </p>
         </div>
@@ -56,22 +57,27 @@ const Portfolio = () => {
             <Link 
               key={project.id} 
               to={project.link}
-              className="group bg-white rounded-xl overflow-hidden shadow-sm hover-scale"
+              className="group bg-white rounded-xl overflow-hidden shadow-sm hover-scale min-h-[300px] min-w-[280px]"
               style={{ animationDelay: `${0.1 + index * 0.1}s` }}
+              aria-label={`Se prosjekt: ${project.title}`}
             >
               <div className="relative h-48 md:h-64 overflow-hidden">
-                <img 
-                  src={project.image}
-                  alt={project.title}
-                  className="w-full h-full object-cover object-top transition-transform duration-500 group-hover:scale-105"
-                  loading={index === 0 ? "eager" : "lazy"}
-                />
+                <AspectRatio ratio={4/3} className="bg-gray-100">
+                  <img 
+                    src={project.image}
+                    alt={project.title}
+                    className="w-full h-full object-cover object-top transition-transform duration-500 group-hover:scale-105"
+                    loading={index === 0 ? "eager" : "lazy"}
+                    width="600"
+                    height="400"
+                  />
+                </AspectRatio>
               </div>
               <div className="p-4 md:p-6">
                 <h3 className="text-lg font-medium group-hover:text-campher-blue transition-colors">
                   {project.title}
                 </h3>
-                <p className="mt-2 text-sm text-campher-gray line-clamp-2">
+                <p className="mt-2 text-sm text-gray-700 line-clamp-2">
                   {project.description}
                 </p>
               </div>
