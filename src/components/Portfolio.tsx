@@ -1,3 +1,4 @@
+
 import { Link } from 'react-router-dom';
 import { useIsMobile } from '@/hooks/use-mobile';
 
@@ -15,7 +16,7 @@ const Portfolio = () => {
       id: 1,
       title: 'Myhre Montasje',
       category: ['web', 'responsive'],
-      image: 'public/lovable-uploads/prosjekt1.webp',
+      image: '/lovable-uploads/prosjekt1.webp',
       description: 'Responsiv hjemmeside med fokus på SEO-optimalisering og brukervennlighet for håndverksbedrift.',
       link: '/project/1'
     },
