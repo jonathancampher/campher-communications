@@ -10,6 +10,7 @@ import { useIsMobile } from '@/hooks/use-mobile';
  * Optimalisert for søkemotorer med semantisk korrekte elementer og god ytelse.
  */
 const Portfolio = () => {
+  const isMobile = useIsMobile();
   const projects = [
     {
       id: 1,
@@ -50,7 +51,7 @@ const Portfolio = () => {
           </p>
         </div>
         
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 md:gap-8">
           {projects.map((project, index) => (
             <Link 
               key={project.id} 
@@ -58,23 +59,21 @@ const Portfolio = () => {
               className="group bg-white rounded-xl overflow-hidden shadow-sm hover-scale"
               style={{ animationDelay: `${0.1 + index * 0.1}s` }}
             >
-              <div className="relative h-64 overflow-hidden">
+              <div className="relative h-48 md:h-64 overflow-hidden">
                 <img
                   src={project.image}
                   alt={project.title}
                   className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                  loading="lazy"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end">
-                  <div className="p-6">
-                    <h3 className="text-white text-xl font-medium mb-2">{project.title}</h3>
-                    <p className="text-white/80 text-sm">{project.description}</p>
-                  </div>
-                </div>
               </div>
-              <div className="p-6">
+              <div className="p-4 md:p-6">
                 <h3 className="text-lg font-medium group-hover:text-campher-blue transition-colors">
                   {project.title}
                 </h3>
+                <p className="mt-2 text-sm text-campher-gray line-clamp-2">
+                  {project.description}
+                </p>
               </div>
             </Link>
           ))}

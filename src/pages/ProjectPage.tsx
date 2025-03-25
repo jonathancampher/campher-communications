@@ -4,6 +4,7 @@ import { useParams, Link } from 'react-router-dom';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import { ArrowLeft } from 'lucide-react';
+import { useIsMobile } from '@/hooks/use-mobile';
 
 interface Project {
   id: number;
@@ -52,6 +53,7 @@ const projectData: Project[] = [
 const ProjectPage = () => {
   const { id } = useParams();
   const projectId = Number(id);
+  const isMobile = useIsMobile();
   
   const project = projectData.find(p => p.id === projectId);
   
@@ -78,62 +80,63 @@ const ProjectPage = () => {
   return (
     <div className="min-h-screen">
       <Navbar />
-      <main className="pt-24">
-        <div className="container-custom py-10">
-          <Link to="/#portfolio" className="text-campher-blue hover:underline inline-flex items-center mb-6">
+      <main className={`pt-20 ${isMobile ? 'pb-8' : 'pt-24'}`}>
+        <div className="container-custom py-5 md:py-10">
+          <Link to="/#portfolio" className="text-campher-blue hover:underline inline-flex items-center mb-4 md:mb-6">
             <ArrowLeft size={16} className="mr-2" />
             Tilbake til prosjekter
           </Link>
           
           <div className="max-w-4xl mx-auto">
-            <h1 className="text-3xl md:text-4xl font-medium mb-6">{project.title}</h1>
+            <h1 className="text-2xl md:text-3xl lg:text-4xl font-medium mb-4 md:mb-6">{project.title}</h1>
             
-            <div className="rounded-xl overflow-hidden mb-10">
+            <div className="rounded-xl overflow-hidden mb-6 md:mb-10">
               <img 
                 src={project.image} 
                 alt={project.title} 
                 className="w-full h-auto"
+                loading="eager"
               />
             </div>
             
-            <div className="bg-blue-50 p-6 rounded-xl mb-10">
-              <h2 className="text-xl font-medium mb-3">Prosjektoversikt</h2>
-              <p className="text-campher-gray">{project.description}</p>
+            <div className="bg-blue-50 p-4 md:p-6 rounded-xl mb-6 md:mb-10">
+              <h2 className="text-lg md:text-xl font-medium mb-2 md:mb-3">Prosjektoversikt</h2>
+              <p className="text-campher-gray text-sm md:text-base">{project.description}</p>
             </div>
             
-            <div className="grid md:grid-cols-2 gap-8 mb-10">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8 mb-6 md:mb-10">
               <div>
-                <h2 className="text-xl font-medium mb-3">Utfordringen</h2>
-                <p className="text-campher-gray">{project.challenge}</p>
+                <h2 className="text-lg md:text-xl font-medium mb-2 md:mb-3">Utfordringen</h2>
+                <p className="text-campher-gray text-sm md:text-base">{project.challenge}</p>
               </div>
               <div>
-                <h2 className="text-xl font-medium mb-3">Vår løsning</h2>
-                <p className="text-campher-gray">{project.solution}</p>
+                <h2 className="text-lg md:text-xl font-medium mb-2 md:mb-3">Vår løsning</h2>
+                <p className="text-campher-gray text-sm md:text-base">{project.solution}</p>
               </div>
             </div>
             
-            <div className="mb-10">
-              <h2 className="text-xl font-medium mb-3">Resultater</h2>
-              <p className="text-campher-gray">{project.results}</p>
+            <div className="mb-6 md:mb-10">
+              <h2 className="text-lg md:text-xl font-medium mb-2 md:mb-3">Resultater</h2>
+              <p className="text-campher-gray text-sm md:text-base">{project.results}</p>
             </div>
             
-            <div className="mb-10">
-              <h2 className="text-xl font-medium mb-3">Teknologier</h2>
+            <div className="mb-6 md:mb-10">
+              <h2 className="text-lg md:text-xl font-medium mb-2 md:mb-3">Teknologier</h2>
               <div className="flex flex-wrap gap-2">
                 {project.technologies.map((tech, index) => (
-                  <span key={index} className="px-3 py-1 bg-blue-50 text-campher-blue rounded-full text-sm">
+                  <span key={index} className="px-3 py-1 bg-blue-50 text-campher-blue rounded-full text-xs md:text-sm">
                     {tech}
                   </span>
                 ))}
               </div>
             </div>
             
-            <div className="text-center bg-gray-50 p-8 rounded-xl">
-              <h2 className="text-xl font-medium mb-3">Vil du ha en lignende løsning?</h2>
-              <p className="text-campher-gray mb-4">Ta kontakt med oss for en uforpliktende prat om ditt prosjekt.</p>
+            <div className="text-center bg-gray-50 p-4 md:p-8 rounded-xl">
+              <h2 className="text-lg md:text-xl font-medium mb-2 md:mb-3">Vil du ha en lignende løsning?</h2>
+              <p className="text-campher-gray mb-3 md:mb-4 text-sm md:text-base">Ta kontakt med oss for en uforpliktende prat om ditt prosjekt.</p>
               <a 
                 href="/#contact" 
-                className="inline-flex items-center justify-center bg-campher-blue hover:bg-blue-600 text-white px-6 py-3 rounded-md font-medium transition-colors"
+                className="inline-flex items-center justify-center bg-campher-blue hover:bg-blue-600 text-white px-4 py-2 md:px-6 md:py-3 rounded-md font-medium transition-colors text-sm md:text-base"
               >
                 Kontakt oss
               </a>

@@ -34,6 +34,11 @@ const Navbar = () => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
+  // Close menu when changing routes
+  useEffect(() => {
+    setMenuOpen(false);
+  }, [location.pathname]);
+
   const toggleMenu = () => {
     setMenuOpen(!menuOpen);
   };
@@ -61,11 +66,11 @@ const Navbar = () => {
     >
       <div className="container-custom flex justify-between items-center">
         {location.pathname === '/' ? (
-          <a href="#home" className="flex items-center py-2">
+          <a href="#home" className="flex items-center py-2 z-10">
             <Logo />
           </a>
         ) : (
-          <Link to="/" className="flex items-center py-2">
+          <Link to="/" className="flex items-center py-2 z-10">
             <Logo />
           </Link>
         )}
@@ -74,7 +79,7 @@ const Navbar = () => {
         {isMobile && (
           <button 
             onClick={toggleMenu}
-            className="p-2 text-white"
+            className="p-2 text-white z-20"
             aria-label={menuOpen ? "Lukk meny" : "Åpne meny"}
           >
             {menuOpen ? <X size={24} /> : <Menu size={24} />}
@@ -116,10 +121,10 @@ const Navbar = () => {
           </div>
         )}
 
-        {/* Mobile Navigation Menu */}
+        {/* Mobile Navigation Menu - Full screen overlay for better UX */}
         {isMobile && menuOpen && (
-          <div className="absolute top-full left-0 right-0 bg-campher-dark/95 backdrop-blur-md shadow-lg py-4 px-4 transition-all">
-            <div className="flex flex-col space-y-2">
+          <div className="fixed inset-0 top-0 left-0 right-0 bottom-0 bg-campher-dark/98 backdrop-blur-md z-10 pt-20 px-4 overflow-auto">
+            <div className="flex flex-col space-y-3 max-w-sm mx-auto">
               {navLinks.map((link, index) => (
                 location.pathname === '/' ? (
                   <a
@@ -127,10 +132,10 @@ const Navbar = () => {
                     href={link.href}
                     onClick={closeMenu}
                     className={cn(
-                      "px-4 py-3 rounded-md text-sm font-medium transition-colors",
+                      "px-4 py-4 rounded-md text-center text-base font-medium transition-colors",
                       link.primary
                         ? "bg-campher-blue hover:bg-blue-600 text-white"
-                        : "text-white hover:text-campher-blue"
+                        : "bg-white/5 text-white hover:bg-white/10"
                     )}
                   >
                     {link.name}
@@ -141,10 +146,10 @@ const Navbar = () => {
                     to={`/${link.href}`}
                     onClick={closeMenu}
                     className={cn(
-                      "px-4 py-3 rounded-md text-sm font-medium transition-colors",
+                      "px-4 py-4 rounded-md text-center text-base font-medium transition-colors",
                       link.primary
                         ? "bg-campher-blue hover:bg-blue-600 text-white"
-                        : "text-white hover:text-campher-blue"
+                        : "bg-white/5 text-white hover:bg-white/10"
                     )}
                   >
                     {link.name}
