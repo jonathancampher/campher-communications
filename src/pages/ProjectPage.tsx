@@ -31,22 +31,22 @@ const projectData: Project[] = [
   {
     id: 2,
     title: 'Bedriftsside 2',
-    image: 'https://placehold.co/1200x600/f5f7fa/0069e0?text=Bedrift2+Nettside',
-    description: 'Profesjonell nettside for et tjenesteselskap med fokus på konvertering.',
-    challenge: 'Tjenesteselskapet opplevde lav konverteringsrate på sin gamle nettside og trengte en redesign som kunne øke antall henvendelser.',
-    solution: 'Vi redesignet nettsiden med fokus på brukeropplevelse og konverteringsoptimalisering. Vi implementerte tydelige handlingsknapper og forenklet navigasjonen for å lede besøkende til de viktigste sidene.',
-    results: 'Den nye nettsiden resulterte i en økning på 60% i konverteringsrate og en reduksjon i avvisningsfrekvensen på 25%. Kunden rapporterer også om flere kvalifiserte leads.',
-    technologies: ['HTML/CSS', 'JavaScript', 'WordPress', 'Google Analytics']
+    image: 'https://placehold.co/1200x600/f5f7fa/0069e0?text=Prosjekt+På+Vei',
+    description: 'Prosjekt på vei – vi jobber med en spennende ny nettside for en kunde innen tjenestesektoren.',
+    challenge: 'Prosjektet er under utvikling. Vi ser frem til å dele mer informasjon når prosjektet er ferdigstilt.',
+    solution: 'Vårt team arbeider for tiden med å utvikle en skreddersydd løsning basert på kundens spesifikke behov og målsettinger.',
+    results: 'Resultater vil bli delt når prosjektet er ferdigstilt og lansert.',
+    technologies: ['Under utvikling']
   },
   {
     id: 3,
     title: 'Bedriftsside 3',
-    image: 'https://placehold.co/1200x600/f5f7fa/0069e0?text=Bedrift3+Nettside',
-    description: 'Nettside for håndverksbedrift med kontaktskjema og prosjektgalleri.',
-    challenge: 'Håndverksbedriften trengte en måte å vise frem tidligere prosjekter på, samtidig som de ville gjøre det enkelt for potensielle kunder å ta kontakt.',
-    solution: 'Vi utviklet en nettside med et interaktivt prosjektgalleri som viser frem bedriftens tidligere arbeider. I tillegg implementerte vi et brukervennlig kontaktskjema som gjør det enkelt for besøkende å be om tilbud.',
-    results: 'Siden lanseringen har bedriften mottatt 40% flere henvendelser via nettsiden, og de har kunnet redusere markedsføringsbudsjettet sitt siden nettsiden genererer nok henvendelser organisk.',
-    technologies: ['React', 'Tailwind CSS', 'Responsive Design', 'Bildegalleri']
+    image: 'https://placehold.co/1200x600/f5f7fa/0069e0?text=Prosjekt+På+Vei',
+    description: 'Prosjekt på vei – en ny moderne nettside for en håndverksbedrift er under utvikling.',
+    challenge: 'Prosjektet er under utvikling. Vi ser frem til å dele mer informasjon når prosjektet er ferdigstilt.',
+    solution: 'Vårt team arbeider for tiden med å utvikle en skreddersydd løsning basert på kundens spesifikke behov og målsettinger.',
+    results: 'Resultater vil bli delt når prosjektet er ferdigstilt og lansert.',
+    technologies: ['Under utvikling']
   }
 ];
 

@@ -24,16 +24,16 @@ const Portfolio = () => {
       id: 2,
       title: 'Bedriftsside 2',
       category: ['web'],
-      image: 'https://placehold.co/600x400/f5f7fa/0069e0?text=Bedrift2',
-      description: 'Profesjonell nettside for et tjenesteselskap med fokus på konvertering.',
+      image: 'https://placehold.co/600x400/f5f7fa/0069e0?text=Prosjekt+På+Vei',
+      description: 'Prosjekt på vei – vi jobber med en spennende ny nettside for en kunde innen tjenestesektoren.',
       link: '/project/2'
     },
     {
       id: 3,
       title: 'Bedriftsside 3',
       category: ['web', 'responsive'],
-      image: 'https://placehold.co/600x400/f5f7fa/0069e0?text=Bedrift3',
-      description: 'Nettside for håndverksbedrift med kontaktskjema og prosjektgalleri.',
+      image: 'https://placehold.co/600x400/f5f7fa/0069e0?text=Prosjekt+På+Vei',
+      description: 'Prosjekt på vei – en ny moderne nettside for en håndverksbedrift er under utvikling.',
       link: '/project/3'
     },
   ];
