@@ -28,4 +28,4 @@ User-agent: facebookexternalhit
 Allow: /
 
 # Organisasjonsnummer: 932498413
-# For mer informasjon, kontakt oss på post@camphercommunications.no
+# For mer informasjon, kontakt oss på kontakt@camphercommunications.no
