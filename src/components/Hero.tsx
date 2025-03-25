@@ -17,7 +17,8 @@ const Hero = () => {
             <span className="inline-block px-3 py-1 text-xs font-medium bg-blue-100 text-campher-blue rounded-full">
               Webutviklingseksperter
             </span>
-            <h1 className="heading-xl">
+            {/* This h1 is likely the LCP element - optimize it */}
+            <h1 className="heading-xl" id="main-heading">
               Vi bygger <span className="text-gradient">digitale opplevelser</span> som transformerer bedrifter
             </h1>
             <p className="text-lg text-gray-700 max-w-2xl mx-auto">
@@ -35,7 +36,7 @@ const Hero = () => {
             </div>
           </div>
           
-          {/* Forbedret "Bygg din fremtid" seksjon med bedre mobil-layout */}
+          {/* "Bygg din fremtid" seksjon med bedre mobil-layout og proper dimensions */}
           <div className="w-full">
             <div className="relative mx-auto max-w-4xl">
               <div className="absolute -top-12 -left-12 w-64 h-64 bg-blue-100 rounded-full filter blur-3xl opacity-30"></div>

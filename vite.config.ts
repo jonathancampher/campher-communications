@@ -9,6 +9,10 @@ export default defineConfig(({ mode }) => ({
   server: {
     host: "::",
     port: 8080,
+    // Optimize server response time
+    hmr: {
+      overlay: false
+    }
   },
   build: {
     sourcemap: true,
@@ -17,11 +21,29 @@ export default defineConfig(({ mode }) => ({
         manualChunks: {
           react: ['react', 'react-dom'],
           ui: ['@radix-ui/react-accordion', '@radix-ui/react-aspect-ratio'],
-          utilities: ['zod', 'react-hook-form', '@hookform/resolvers']
-        }
+          utilities: ['zod', 'react-hook-form', '@hookform/resolvers'],
+          // Add more chunks for better code splitting
+          router: ['react-router-dom'],
+          icons: ['lucide-react'],
+          query: ['@tanstack/react-query']
+        },
+        // Optimize asset naming for better caching
+        entryFileNames: 'assets/[name].[hash].js',
+        chunkFileNames: 'assets/[name].[hash].js',
+        assetFileNames: 'assets/[name].[hash].[ext]'
       }
     },
     cssCodeSplit: true,
+    // Add minification options
+    minify: 'terser',
+    terserOptions: {
+      compress: {
+        drop_console: true,
+        drop_debugger: true
+      }
+    },
+    // Improve chunk loading strategy
+    assetsInlineLimit: 4096, // 4kb
   },
   plugins: [
     react(),
@@ -33,4 +55,21 @@ export default defineConfig(({ mode }) => ({
       "@": path.resolve(__dirname, "./src"),
     },
   },
+  // Add optimizeDeps for faster development
+  optimizeDeps: {
+    include: [
+      'react',
+      'react-dom',
+      'react-router-dom',
+      '@tanstack/react-query',
+      'lucide-react'
+    ]
+  },
+  // Improve CSS handling
+  css: {
+    devSourcemap: true,
+    preprocessorOptions: {
+      // Add any preprocessor options here if needed
+    }
+  }
 }));

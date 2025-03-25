@@ -5,6 +5,22 @@
   --foreground: 214 32% 8%;
   --primary: 214 100% 44%;
   --primary-foreground: 0 0% 100%;
+  --card: 0 0% 100%;
+  --card-foreground: 214 32% 8%;
+  --popover: 0 0% 100%;
+  --popover-foreground: 214 32% 8%;
+  --secondary: 210 17% 95%;
+  --secondary-foreground: 214 32% 8%;
+  --muted: 210 17% 95%;
+  --muted-foreground: 214 10% 45%;
+  --accent: 210 17% 95%;
+  --accent-foreground: 214 32% 8%;
+  --destructive: 0 84% 60%;
+  --destructive-foreground: 0 0% 100%;
+  --border: 214 32% 90%;
+  --input: 214 32% 90%;
+  --ring: 214 100% 44%;
+  --radius: 0.5rem;
 }
 
 body {
@@ -62,4 +78,40 @@ body {
     padding-left: 2rem;
     padding-right: 2rem;
   }
+}
+
+/* Add critical navbar styling */
+nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 50;
+  transition: all 0.3s ease;
+  background-color: #111827;
+  padding: 0.5rem 0;
+}
+
+nav a, nav button {
+  color: white;
+}
+
+/* Add critical hero section styling */
+#home {
+  padding-top: 8rem;
+  padding-bottom: 4rem;
+}
+
+@media (min-width: 768px) {
+  #home {
+    padding-top: 10rem;
+    padding-bottom: 6rem;
+  }
+}
+
+/* Optimize image loading */
+img {
+  max-width: 100%;
+  display: block;
+  height: auto;
 }
