@@ -4,49 +4,23 @@ import { cn } from '@/lib/utils';
 import Logo from './Logo';
 import { Link, useLocation } from 'react-router-dom';
 import { Menu, X } from 'lucide-react';
-import { useIsMobile } from '@/hooks/use-mobile';
+import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet';
+import { Button } from '@/components/ui/button';
 
 const Navbar = () => {
   const [isScrolled, setIsScrolled] = useState(false);
-  const [menuOpen, setMenuOpen] = useState(false);
   const location = useLocation();
-  const isMobile = useIsMobile();
 
+  // Handle scroll effect for navbar
   useEffect(() => {
     const handleScroll = () => {
-      if (window.scrollY > 20) {
-        setIsScrolled(true);
-      } else {
-        setIsScrolled(false);
-      }
+      setIsScrolled(window.scrollY > 20);
     };
 
     window.addEventListener('scroll', handleScroll);
     handleScroll(); // Initial check
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
-
-  // Control body scroll when menu is open
-  useEffect(() => {
-    if (menuOpen) {
-      document.body.style.overflow = 'hidden';
-    } else {
-      document.body.style.overflow = '';
-    }
-    
-    return () => {
-      document.body.style.overflow = ''; // Cleanup on unmount
-    };
-  }, [menuOpen]);
-
-  // Close menu on location change
-  useEffect(() => {
-    setMenuOpen(false);
-  }, [location.pathname]);
-
-  const toggleMenu = () => {
-    setMenuOpen(!menuOpen);
-  };
 
   const navLinks = [
     { name: 'Tjenester', href: '#services' },
@@ -66,6 +40,7 @@ const Navbar = () => {
       )}
     >
       <div className="container-custom flex justify-between items-center">
+        {/* Logo - links to home or root */}
         {location.pathname === '/' ? (
           <a href="#home" className="flex items-center py-2">
             <Logo />
@@ -76,103 +51,88 @@ const Navbar = () => {
           </Link>
         )}
 
-        {/* Mobile Menu Toggle */}
-        {isMobile && (
-          <button 
-            onClick={toggleMenu}
-            className="p-2 text-white bg-campher-dark hover:bg-campher-dark/80 border border-white/10 rounded-md shadow-md"
-            aria-label={menuOpen ? "Lukk meny" : "Åpne meny"}
-          >
-            {menuOpen ? <X size={24} /> : <Menu size={24} />}
-          </button>
-        )}
-
         {/* Desktop Navigation */}
-        {!isMobile && (
-          <div className="flex items-center space-x-2">
-            {navLinks.map((link, index) => (
-              location.pathname === '/' ? (
-                <a
-                  key={index}
-                  href={link.href}
-                  className={cn(
-                    "px-4 py-2 rounded-md text-sm font-medium transition-colors",
-                    link.primary
-                      ? "bg-campher-blue hover:bg-blue-600 text-white"
-                      : "text-white hover:bg-white/10"
-                  )}
-                >
-                  {link.name}
-                </a>
-              ) : (
-                <Link
-                  key={index}
-                  to={`/${link.href}`}
-                  className={cn(
-                    "px-4 py-2 rounded-md text-sm font-medium transition-colors",
-                    link.primary
-                      ? "bg-campher-blue hover:bg-blue-600 text-white"
-                      : "text-white hover:bg-white/10"
-                  )}
-                >
-                  {link.name}
-                </Link>
-              )
-            ))}
-          </div>
-        )}
+        <div className="hidden md:flex items-center space-x-2">
+          {navLinks.map((link, index) => (
+            location.pathname === '/' ? (
+              <a
+                key={index}
+                href={link.href}
+                className={cn(
+                  "px-4 py-2 rounded-md text-sm font-medium transition-colors",
+                  link.primary
+                    ? "bg-campher-blue hover:bg-blue-600 text-white"
+                    : "text-white hover:bg-white/10"
+                )}
+              >
+                {link.name}
+              </a>
+            ) : (
+              <Link
+                key={index}
+                to={`/${link.href}`}
+                className={cn(
+                  "px-4 py-2 rounded-md text-sm font-medium transition-colors",
+                  link.primary
+                    ? "bg-campher-blue hover:bg-blue-600 text-white"
+                    : "text-white hover:bg-white/10"
+                )}
+              >
+                {link.name}
+              </Link>
+            )
+          ))}
+        </div>
 
-        {/* Mobile Navigation Menu */}
-        {isMobile && (
-          <div 
-            className={cn(
-              "fixed inset-0 bg-campher-dark z-40 transition-all duration-300",
-              menuOpen ? "opacity-100 visible" : "opacity-0 invisible"
-            )}
-            style={{ 
-              top: "0",
-              left: "0", 
-              right: "0", 
-              bottom: "0"
-            }}
-          >
-            <div className="pt-20 px-4 pb-6 max-w-sm mx-auto">
-              <div className="flex flex-col space-y-3">
-                {navLinks.map((link, index) => (
-                  location.pathname === '/' ? (
-                    <a
-                      key={index}
-                      href={link.href}
-                      onClick={() => setMenuOpen(false)}
-                      className={cn(
-                        "px-4 py-4 rounded-md text-center text-base font-medium transition-colors",
-                        link.primary
-                          ? "bg-campher-blue hover:bg-blue-600 text-white shadow-md"
-                          : "bg-white/5 text-white hover:bg-white/10 border border-white/10"
-                      )}
-                    >
-                      {link.name}
-                    </a>
-                  ) : (
-                    <Link
-                      key={index}
-                      to={`/${link.href}`}
-                      onClick={() => setMenuOpen(false)}
-                      className={cn(
-                        "px-4 py-4 rounded-md text-center text-base font-medium transition-colors",
-                        link.primary
-                          ? "bg-campher-blue hover:bg-blue-600 text-white shadow-md"
-                          : "bg-white/5 text-white hover:bg-white/10 border border-white/10"
-                      )}
-                    >
-                      {link.name}
-                    </Link>
-                  )
-                ))}
+        {/* Mobile Navigation Sheet */}
+        <Sheet>
+          <SheetTrigger asChild className="md:hidden">
+            <Button 
+              variant="ghost" 
+              size="icon"
+              className="p-2 text-white hover:bg-white/10 border border-white/10 rounded-md"
+            >
+              <Menu className="h-5 w-5" />
+              <span className="sr-only">Åpne meny</span>
+            </Button>
+          </SheetTrigger>
+          <SheetContent side="right" className="bg-campher-dark border-campher-dark w-[250px] p-0">
+            <div className="flex flex-col space-y-3 p-6 h-full">
+              <div className="flex justify-end mb-4">
+                <X className="h-5 w-5 text-white" />
               </div>
+              {navLinks.map((link, index) => (
+                location.pathname === '/' ? (
+                  <a
+                    key={index}
+                    href={link.href}
+                    className={cn(
+                      "px-4 py-4 rounded-md text-center text-base font-medium transition-colors",
+                      link.primary
+                        ? "bg-campher-blue hover:bg-blue-600 text-white shadow-md"
+                        : "bg-white/5 text-white hover:bg-white/10 border border-white/10"
+                    )}
+                  >
+                    {link.name}
+                  </a>
+                ) : (
+                  <Link
+                    key={index}
+                    to={`/${link.href}`}
+                    className={cn(
+                      "px-4 py-4 rounded-md text-center text-base font-medium transition-colors",
+                      link.primary
+                        ? "bg-campher-blue hover:bg-blue-600 text-white shadow-md"
+                        : "bg-white/5 text-white hover:bg-white/10 border border-white/10"
+                    )}
+                  >
+                    {link.name}
+                  </Link>
+                )
+              ))}
             </div>
-          </div>
-        )}
+          </SheetContent>
+        </Sheet>
       </div>
     </nav>
   );
