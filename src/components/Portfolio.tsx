@@ -16,7 +16,7 @@ const Portfolio = () => {
       id: 1,
       title: 'Myhre Montasje',
       category: ['web', 'responsive'],
-      image: '/lovable-uploads/8750f463-d4c9-4943-b5cf-10a8f335b9e6.png',
+      image: '/lovable-uploads/e481f5cc-f944-4e8d-b29f-882a5aaa5a0a.png',
       description: 'Responsiv hjemmeside med fokus på SEO-optimalisering og brukervennlighet for håndverksbedrift.',
       link: '/project/1'
     },
@@ -60,26 +60,16 @@ const Portfolio = () => {
               style={{ animationDelay: `${0.1 + index * 0.1}s` }}
             >
               <div className="relative h-48 md:h-64 overflow-hidden">
-                {project.id === 1 ? (
-                  // Improved handling for Myhre Montasje image
-                  <img 
-                    src="/lovable-uploads/8750f463-d4c9-4943-b5cf-10a8f335b9e6.png" 
-                    alt="Myhre Montasje" 
-                    className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
-                    loading="eager"
-                    onError={(e) => {
-                      console.error('Image failed to load:', e);
-                      e.currentTarget.src = 'https://placehold.co/600x400/f5f7fa/0069e0?text=Myhre+Montasje';
-                    }}
-                  />
-                ) : (
-                  <img
-                    src={project.image}
-                    alt={project.title}
-                    className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
-                    loading="lazy"
-                  />
-                )}
+                <img
+                  src={project.image}
+                  alt={project.title}
+                  className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                  loading={index === 0 ? "eager" : "lazy"}
+                  onError={(e) => {
+                    console.error(`Image failed to load: ${project.image}`, e);
+                    e.currentTarget.src = `https://placehold.co/600x400/f5f7fa/0069e0?text=${project.title.replace(' ', '+')}`;
+                  }}
+                />
               </div>
               <div className="p-4 md:p-6">
                 <h3 className="text-lg font-medium group-hover:text-campher-blue transition-colors">

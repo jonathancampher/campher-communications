@@ -21,7 +21,7 @@ const projectData: Project[] = [
   {
     id: 1,
     title: 'Myhre Montasje',
-    image: '/lovable-uploads/8750f463-d4c9-4943-b5cf-10a8f335b9e6.png',
+    image: '/lovable-uploads/e481f5cc-f944-4e8d-b29f-882a5aaa5a0a.png',
     description: 'Responsiv hjemmeside for Myhre Montasje med fokus på SEO-optimalisering og brukervennlighet.',
     challenge: 'Myhre Montasje hadde ingen nettside og trengte en profesjonell digital tilstedeværelse for å vise frem sine tjenester, bygge tillit hos potensielle kunder og generere nye henvendelser.',
     solution: 'Vi utviklet en komplett nettside fra bunnen av med fokus på SEO-optimalisering, rask lastetid og responsive design. Nettsiden presenterer bedriftens tjenester på en tydelig måte med profesjonelle bilder som viser kvaliteten i arbeidet deres. Vi implementerte også kontaktskjema og tydelige handlingsknapper for å gjøre det enkelt for besøkende å ta kontakt.',
@@ -91,26 +91,16 @@ const ProjectPage = () => {
             <h1 className="text-2xl md:text-3xl lg:text-4xl font-medium mb-4 md:mb-6">{project.title}</h1>
             
             <div className="rounded-xl overflow-hidden mb-6 md:mb-10">
-              {project.id === 1 ? (
-                // Improved handling for Myhre Montasje image
-                <img 
-                  src="/lovable-uploads/8750f463-d4c9-4943-b5cf-10a8f335b9e6.png" 
-                  alt="Myhre Montasje"
-                  className="w-full h-auto object-cover"
-                  loading="eager" 
-                  onError={(e) => {
-                    console.error('Image failed to load:', e);
-                    e.currentTarget.src = 'https://placehold.co/1200x600/f5f7fa/0069e0?text=Myhre+Montasje';
-                  }}
-                />
-              ) : (
-                <img 
-                  src={project.image} 
-                  alt={project.title} 
-                  className="w-full h-auto"
-                  loading="eager"
-                />
-              )}
+              <img 
+                src={project.image} 
+                alt={project.title} 
+                className="w-full h-auto object-cover"
+                loading="eager"
+                onError={(e) => {
+                  console.error(`Image failed to load: ${project.image}`, e);
+                  e.currentTarget.src = `https://placehold.co/1200x600/f5f7fa/0069e0?text=${project.title.replace(' ', '+')}`;
+                }}
+              />
             </div>
             
             <div className="bg-blue-50 p-4 md:p-6 rounded-xl mb-6 md:mb-10">
