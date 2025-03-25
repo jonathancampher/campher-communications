@@ -22,18 +22,24 @@ const Navbar = () => {
     };
 
     window.addEventListener('scroll', handleScroll);
-    handleScroll();
+    handleScroll(); // Initial check
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
+  // Control body scroll when menu is open
   useEffect(() => {
     if (menuOpen) {
       document.body.style.overflow = 'hidden';
     } else {
-      document.body.style.overflow = 'unset';
+      document.body.style.overflow = '';
     }
+    
+    return () => {
+      document.body.style.overflow = ''; // Cleanup on unmount
+    };
   }, [menuOpen]);
 
+  // Close menu on location change
   useEffect(() => {
     setMenuOpen(false);
   }, [location.pathname]);
@@ -72,7 +78,7 @@ const Navbar = () => {
           </Link>
         )}
 
-        {/* Mobile Menu Toggle */}
+        {/* Mobile Menu Toggle - Always visible and clickable */}
         {isMobile && (
           <button 
             onClick={toggleMenu}
@@ -118,41 +124,50 @@ const Navbar = () => {
           </div>
         )}
 
-        {/* Mobile Navigation Menu */}
-        {isMobile && menuOpen && (
-          <div className="fixed inset-0 top-0 left-0 right-0 bottom-0 bg-campher-dark z-[65] pt-20 px-4 overflow-auto">
-            <div className="flex flex-col space-y-3 max-w-sm mx-auto">
-              {navLinks.map((link, index) => (
-                location.pathname === '/' ? (
-                  <a
-                    key={index}
-                    href={link.href}
-                    onClick={() => setMenuOpen(false)}
-                    className={cn(
-                      "px-4 py-4 rounded-md text-center text-base font-medium transition-colors",
-                      link.primary
-                        ? "bg-campher-blue hover:bg-blue-600 text-white shadow-md"
-                        : "bg-white/5 text-white hover:bg-white/10 border border-white/10"
-                    )}
-                  >
-                    {link.name}
-                  </a>
-                ) : (
-                  <Link
-                    key={index}
-                    to={`/${link.href}`}
-                    onClick={() => setMenuOpen(false)}
-                    className={cn(
-                      "px-4 py-4 rounded-md text-center text-base font-medium transition-colors",
-                      link.primary
-                        ? "bg-campher-blue hover:bg-blue-600 text-white shadow-md"
-                        : "bg-white/5 text-white hover:bg-white/10 border border-white/10"
-                    )}
-                  >
-                    {link.name}
-                  </Link>
-                )
-              ))}
+        {/* Mobile Navigation Menu - Fixed position with higher z-index */}
+        {isMobile && (
+          <div 
+            className={cn(
+              "fixed inset-0 bg-campher-dark z-[65] transition-opacity duration-300 overflow-auto", 
+              menuOpen 
+                ? "opacity-100 pointer-events-auto" 
+                : "opacity-0 pointer-events-none"
+            )}
+          >
+            <div className="pt-20 px-4 pb-6 max-w-sm mx-auto">
+              <div className="flex flex-col space-y-3">
+                {navLinks.map((link, index) => (
+                  location.pathname === '/' ? (
+                    <a
+                      key={index}
+                      href={link.href}
+                      onClick={() => setMenuOpen(false)}
+                      className={cn(
+                        "px-4 py-4 rounded-md text-center text-base font-medium transition-colors",
+                        link.primary
+                          ? "bg-campher-blue hover:bg-blue-600 text-white shadow-md"
+                          : "bg-white/5 text-white hover:bg-white/10 border border-white/10"
+                      )}
+                    >
+                      {link.name}
+                    </a>
+                  ) : (
+                    <Link
+                      key={index}
+                      to={`/${link.href}`}
+                      onClick={() => setMenuOpen(false)}
+                      className={cn(
+                        "px-4 py-4 rounded-md text-center text-base font-medium transition-colors",
+                        link.primary
+                          ? "bg-campher-blue hover:bg-blue-600 text-white shadow-md"
+                          : "bg-white/5 text-white hover:bg-white/10 border border-white/10"
+                      )}
+                    >
+                      {link.name}
+                    </Link>
+                  )
+                ))}
+              </div>
             </div>
           </div>
         )}

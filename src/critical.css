@@ -96,6 +96,24 @@ nav a, nav button {
   color: white;
 }
 
+/* Ensure mobile menu is properly styled on initial load */
+.mobile-menu-open {
+  overflow: hidden;
+}
+
+nav button {
+  appearance: none;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  background-color: #0e141b;
+  border-radius: 0.375rem;
+  padding: 0.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  z-index: 70;
+}
+
 /* Add critical hero section styling */
 #home {
   padding-top: 8rem;
