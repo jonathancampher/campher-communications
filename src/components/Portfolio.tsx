@@ -63,7 +63,7 @@ const Portfolio = () => {
                 <img 
                   src={project.image}
                   alt={project.title}
-                  className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                  className="w-full h-full object-cover object-top transition-transform duration-500 group-hover:scale-105"
                   loading={index === 0 ? "eager" : "lazy"}
                 />
               </div>
