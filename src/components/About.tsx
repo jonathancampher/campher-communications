@@ -52,7 +52,7 @@ const About = () => {
                       <p className="text-campher-gray italic text-sm">
                         "Campher Communications transformerte vår nettilstedeværelse. Teamet deres leverte en nettside som overgikk våre forventninger og virkelig representerer vårt merke."
                       </p>
-                      <p className="text-campher-dark font-medium text-sm mt-2">- Kundenavn, Bedrift</p>
+                      <p className="text-campher-dark font-medium text-sm mt-2">- Marcu, Prestige C</p>
                     </div>
                   </div>
                 </div>
