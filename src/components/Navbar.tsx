@@ -3,12 +3,13 @@ import { useState, useEffect } from 'react';
 import { cn } from '@/lib/utils';
 import Logo from './Logo';
 import { Link, useLocation } from 'react-router-dom';
+import { Book } from 'lucide-react';
 
 /**
  * Navbar-komponent
  * 
  * Hovednavigasjon for nettstedet med fokus på enkelhet.
- * Endrer utseende ved scrolling og har kun nettside-knapp for enklere navigasjon.
+ * Endrer utseende ved scrolling og har knapper for nettside og blogg for enklere navigasjon.
  */
 const Navbar = () => {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -49,8 +50,28 @@ const Navbar = () => {
           </Link>
         )}
 
-        {/* Navigation med kun nettside-knapp */}
-        <div className="flex items-center">
+        {/* Navigation med nettside-knapp og blogg-knapp */}
+        <div className="flex items-center space-x-4">
+          {/* Blogg-knapp */}
+          {location.pathname === '/' ? (
+            <a 
+              href="#blog" 
+              className="flex items-center text-white px-6 py-3 rounded-md text-sm font-medium transition-colors hover:text-campher-blue"
+            >
+              <Book className="mr-2 h-4 w-4" />
+              Blogg
+            </a>
+          ) : (
+            <Link 
+              to="/#blog" 
+              className="flex items-center text-white px-6 py-3 rounded-md text-sm font-medium transition-colors hover:text-campher-blue"
+            >
+              <Book className="mr-2 h-4 w-4" />
+              Blogg
+            </Link>
+          )}
+
+          {/* Nettside-knapp */}
           <a 
             href="#contact" 
             className="bg-campher-blue hover:bg-blue-600 text-white px-6 py-3 rounded-md text-sm font-medium transition-colors"

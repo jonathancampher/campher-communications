@@ -1,5 +1,5 @@
 
-import { ArrowUp } from 'lucide-react';
+import { ArrowUp, Facebook, Twitter, Linkedin, Instagram } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import Logo from './Logo';
 
@@ -7,7 +7,13 @@ import Logo from './Logo';
  * Footer-komponent
  * 
  * Bunntekst med firmalogo, navigasjonslenker og copyright-informasjon.
- * Inneholder også en scroll-to-top-knapp.
+ * Inneholder også sosiale medier-lenker og en scroll-to-top-knapp.
+ * 
+ * Sosiale medier-ikonene representerer:
+ * T - Twitter
+ * L - LinkedIn
+ * I - Instagram
+ * F - Facebook
  */
 const Footer = () => {
   const scrollToTop = () => {
@@ -61,15 +67,35 @@ const Footer = () => {
               Org.nr: 932498413
             </p>
             <div className="flex gap-3">
-              {['T', 'L', 'I', 'F'].map((icon, index) => (
-                <a
-                  key={index}
-                  href="#"
-                  className="w-10 h-10 rounded-full bg-white/5 hover:bg-campher-blue flex items-center justify-center transition-colors"
-                >
-                  {icon}
-                </a>
-              ))}
+              {/* Sosiale medier-ikoner med riktige Lucide-ikoner */}
+              <a
+                href="#"
+                aria-label="Facebook"
+                className="w-10 h-10 rounded-full bg-white/5 hover:bg-campher-blue flex items-center justify-center transition-colors"
+              >
+                <Facebook size={18} />
+              </a>
+              <a
+                href="#"
+                aria-label="Twitter"
+                className="w-10 h-10 rounded-full bg-white/5 hover:bg-campher-blue flex items-center justify-center transition-colors"
+              >
+                <Twitter size={18} />
+              </a>
+              <a
+                href="#"
+                aria-label="LinkedIn"
+                className="w-10 h-10 rounded-full bg-white/5 hover:bg-campher-blue flex items-center justify-center transition-colors"
+              >
+                <Linkedin size={18} />
+              </a>
+              <a
+                href="#"
+                aria-label="Instagram"
+                className="w-10 h-10 rounded-full bg-white/5 hover:bg-campher-blue flex items-center justify-center transition-colors"
+              >
+                <Instagram size={18} />
+              </a>
             </div>
           </div>
           
