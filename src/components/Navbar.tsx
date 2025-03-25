@@ -6,13 +6,6 @@ import { Link, useLocation } from 'react-router-dom';
 import { Menu, X } from 'lucide-react';
 import { useIsMobile } from '@/hooks/use-mobile';
 
-/**
- * Navbar-komponent
- * 
- * Hovednavigasjon for nettstedet med fokus på enkelhet.
- * Endrer utseende ved scrolling og inneholder navigasjonslenker til hovedseksjonene.
- * Responsiv design med optimalisert navigasjon for alle enheter.
- */
 const Navbar = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
@@ -29,22 +22,24 @@ const Navbar = () => {
     };
 
     window.addEventListener('scroll', handleScroll);
-    // Trigger the scroll handler once on mount to set the initial state
     handleScroll();
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  // Close menu when changing routes
+  useEffect(() => {
+    if (menuOpen) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = 'unset';
+    }
+  }, [menuOpen]);
+
   useEffect(() => {
     setMenuOpen(false);
   }, [location.pathname]);
 
   const toggleMenu = () => {
     setMenuOpen(!menuOpen);
-  };
-
-  const closeMenu = () => {
-    setMenuOpen(false);
   };
 
   const navLinks = [
@@ -55,25 +50,24 @@ const Navbar = () => {
     { name: 'Kontakt', href: '#contact', primary: true }
   ];
 
-  // Common navbar class for both scrolled and non-scrolled states
-  const navbarClass = "fixed top-0 left-0 right-0 z-50 transition-all duration-300 bg-campher-dark";
+  const navbarClass = "fixed top-0 left-0 right-0 z-[60] transition-all duration-300 bg-campher-dark";
   
   return (
     <nav 
       className={cn(
         navbarClass,
         isScrolled 
-          ? 'py-1 shadow-md backdrop-blur-md bg-campher-dark/95' 
+          ? 'py-1 shadow-md bg-campher-dark/95 backdrop-blur-md' 
           : 'py-2'
       )}
     >
-      <div className="container-custom flex justify-between items-center">
+      <div className="container-custom flex justify-between items-center relative">
         {location.pathname === '/' ? (
-          <a href="#home" className="flex items-center py-2 z-10">
+          <a href="#home" className="flex items-center py-2 z-[70]">
             <Logo />
           </a>
         ) : (
-          <Link to="/" className="flex items-center py-2 z-10">
+          <Link to="/" className="flex items-center py-2 z-[70]">
             <Logo />
           </Link>
         )}
@@ -82,7 +76,7 @@ const Navbar = () => {
         {isMobile && (
           <button 
             onClick={toggleMenu}
-            className="p-2 text-white z-20 bg-campher-dark hover:bg-campher-dark/80 border border-white/10 rounded-md shadow-md"
+            className="p-2 text-white z-[70] bg-campher-dark hover:bg-campher-dark/80 border border-white/10 rounded-md shadow-md"
             aria-label={menuOpen ? "Lukk meny" : "Åpne meny"}
           >
             {menuOpen ? <X size={24} /> : <Menu size={24} />}
@@ -124,21 +118,21 @@ const Navbar = () => {
           </div>
         )}
 
-        {/* Mobile Navigation Menu - Full screen overlay for better UX */}
+        {/* Mobile Navigation Menu */}
         {isMobile && menuOpen && (
-          <div className="fixed inset-0 top-0 left-0 right-0 bottom-0 bg-campher-dark z-10 pt-20 px-4 overflow-auto">
+          <div className="fixed inset-0 top-0 left-0 right-0 bottom-0 bg-campher-dark z-[65] pt-20 px-4 overflow-auto">
             <div className="flex flex-col space-y-3 max-w-sm mx-auto">
               {navLinks.map((link, index) => (
                 location.pathname === '/' ? (
                   <a
                     key={index}
                     href={link.href}
-                    onClick={closeMenu}
+                    onClick={() => setMenuOpen(false)}
                     className={cn(
                       "px-4 py-4 rounded-md text-center text-base font-medium transition-colors",
                       link.primary
                         ? "bg-campher-blue hover:bg-blue-600 text-white shadow-md"
-                        : "bg-campher-dark/80 text-white hover:bg-campher-dark/60 border border-white/10"
+                        : "bg-white/5 text-white hover:bg-white/10 border border-white/10"
                     )}
                   >
                     {link.name}
@@ -147,12 +141,12 @@ const Navbar = () => {
                   <Link
                     key={index}
                     to={`/${link.href}`}
-                    onClick={closeMenu}
+                    onClick={() => setMenuOpen(false)}
                     className={cn(
                       "px-4 py-4 rounded-md text-center text-base font-medium transition-colors",
                       link.primary
                         ? "bg-campher-blue hover:bg-blue-600 text-white shadow-md"
-                        : "bg-campher-dark/80 text-white hover:bg-campher-dark/60 border border-white/10"
+                        : "bg-white/5 text-white hover:bg-white/10 border border-white/10"
                     )}
                   >
                     {link.name}
