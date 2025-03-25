@@ -166,7 +166,7 @@ const Navbar = () => {
                       )}
                     >
                       {link.name}
-                    </a>
+                    </Link>
                   )
                 ))}
               </div>
