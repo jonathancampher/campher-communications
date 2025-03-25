@@ -1,4 +1,5 @@
 
+# Build settings
 [build]
   publish = "dist"
   command = "npm run build"
@@ -8,6 +9,11 @@
   for = "/*"
   [headers.values]
     Cache-Control = "public, max-age=31536000, immutable"
+    X-Frame-Options = "DENY"
+    X-XSS-Protection = "1; mode=block"
+    X-Content-Type-Options = "nosniff"
+    Referrer-Policy = "strict-origin-when-cross-origin"
+    Permissions-Policy = "camera=(), microphone=(), geolocation=()"
 
 # Set cache headers for HTML files
 [[headers]]
@@ -27,9 +33,10 @@
   to = "/index.html"
   status = 200
 
-# Set up form submissions - enable Netlify forms
+# Enable form submissions
 [build.processing]
   skip_processing = false
+
 [build.processing.html]
   pretty_urls = true
 
@@ -37,11 +44,7 @@
 [build.processing.images]
   compress = true
 
-# Enable HTTP/2 for faster delivery
-[[plugins]]
-  package = "@netlify/plugin-lighthouse"
-
-# Enable brotli compression for smaller files
+# Bundle and minify assets
 [build.processing.css]
   bundle = true
   minify = true
@@ -50,19 +53,10 @@
   bundle = true
   minify = true
 
-[build.processing.html]
-  pretty_urls = true
+# Enable Lighthouse plugin
+[[plugins]]
+  package = "@netlify/plugin-lighthouse"
 
-# Enable security headers
-[[headers]]
-  for = "/*"
-  [headers.values]
-    X-Frame-Options = "DENY"
-    X-XSS-Protection = "1; mode=block"
-    X-Content-Type-Options = "nosniff"
-    Referrer-Policy = "strict-origin-when-cross-origin"
-    Permissions-Policy = "camera=(), microphone=(), geolocation=()"
-
-# Custom domain configuration to fix DNS verification
+# Custom domain configuration
 [context.production]
   domain = "camphercommunications.no"
