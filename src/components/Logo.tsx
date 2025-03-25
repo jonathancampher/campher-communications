@@ -16,7 +16,7 @@ const Logo = () => {
       width="64"
       height="64"
       loading="eager"
-      fetchpriority="high"
+      fetchPriority="high"
       decoding="async"
     />
   );

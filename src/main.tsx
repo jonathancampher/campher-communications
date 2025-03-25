@@ -23,3 +23,12 @@ preloadLinks.forEach(link => {
   linkEl.as = link.as;
   document.head.appendChild(linkEl);
 });
+
+// Register service worker for production
+if (import.meta.env.PROD && 'serviceWorker' in navigator) {
+  window.addEventListener('load', () => {
+    navigator.serviceWorker.register('/sw.js').catch(error => {
+      console.error('SW registration failed:', error);
+    });
+  });
+}

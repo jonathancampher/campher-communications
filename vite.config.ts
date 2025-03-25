@@ -34,14 +34,8 @@ export default defineConfig(({ mode }) => ({
       }
     },
     cssCodeSplit: true,
-    // Add minification options
-    minify: 'terser',
-    terserOptions: {
-      compress: {
-        drop_console: true,
-        drop_debugger: true
-      }
-    },
+    // Add minification options but using esbuild by default
+    minify: mode === 'production' ? 'esbuild' : false,
     // Improve chunk loading strategy
     assetsInlineLimit: 4096, // 4kb
   },

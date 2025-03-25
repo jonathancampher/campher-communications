@@ -44,16 +44,26 @@ const ContactForm = () => {
     setIsSubmitting(true);
     
     try {
-      // Netlify will automatically detect and process this form
-      // as long as the form has the netlify attribute
-      await fetch("/", {
-        method: "POST",
-        headers: { "Content-Type": "application/x-www-form-urlencoded" },
-        body: new URLSearchParams({
-          "form-name": "contact",
-          ...data
-        }).toString(),
-      });
+      // Netlify Forms submission for production
+      if (window.location.hostname !== 'localhost') {
+        const formData = new FormData();
+        Object.entries(data).forEach(([key, value]) => {
+          formData.append(key, value);
+        });
+        
+        // Add form-name field which is required by Netlify
+        formData.append('form-name', 'contact');
+        
+        await fetch('/', {
+          method: 'POST',
+          body: formData,
+        });
+      } else {
+        // Development environment mock - just log
+        console.log('Form submission data:', data);
+        // Wait to simulate network request
+        await new Promise(resolve => setTimeout(resolve, 1000));
+      }
       
       toast({
         title: "Melding sendt",
@@ -63,6 +73,7 @@ const ContactForm = () => {
       // Reset form
       form.reset();
     } catch (error) {
+      console.error("Form submission error:", error);
       toast({
         title: "Noe gikk galt",
         description: "Vi kunne ikke sende meldingen din. Vennligst prøv igjen senere.",
@@ -92,8 +103,14 @@ const ContactForm = () => {
           name="contact"
           method="POST"
           data-netlify="true"
+          netlify-honeypot="bot-field"
         >
           <input type="hidden" name="form-name" value="contact" />
+          <div hidden>
+            <label>
+              Don't fill this out if you're human: <input name="bot-field" />
+            </label>
+          </div>
           
           <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
             <FormField
