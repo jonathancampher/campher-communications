@@ -34,36 +34,36 @@ const Hero = () => {
             </div>
           </div>
           
-          {/* Forbedret "Bygg din fremtid" seksjon med bedre layout */}
+          {/* Forbedret "Bygg din fremtid" seksjon med bedre mobil-layout */}
           <div className="w-full">
             <div className="relative mx-auto max-w-4xl">
               <div className="absolute -top-12 -left-12 w-64 h-64 bg-blue-100 rounded-full filter blur-3xl opacity-30"></div>
               <div className="absolute -bottom-12 -right-12 w-64 h-64 bg-indigo-100 rounded-full filter blur-3xl opacity-30"></div>
               
-              <div className="relative bg-white shadow-2xl rounded-xl p-8 border border-gray-100 overflow-hidden">
-                <h2 className="text-3xl font-bold text-center text-campher-dark mb-8">Bygg din fremtid på nett</h2>
+              <div className="relative bg-white shadow-2xl rounded-xl p-6 md:p-8 border border-gray-100 overflow-hidden">
+                <h2 className="text-2xl md:text-3xl font-bold text-center text-campher-dark mb-6 md:mb-8">Bygg din fremtid på nett</h2>
                 
-                <div className="grid grid-cols-3 gap-8 mb-8">
-                  <div className="bg-blue-50 p-6 rounded-xl text-center">
-                    <h3 className="text-xl font-medium text-campher-blue mb-3">Nettsider</h3>
-                    <p className="text-campher-gray">Responsive og brukervennlige nettsider som konverterer besøkende til kunder</p>
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-8 mb-6 md:mb-8">
+                  <div className="bg-blue-50 p-4 md:p-6 rounded-xl text-center">
+                    <h3 className="text-lg md:text-xl font-medium text-campher-blue mb-2 md:mb-3">Nettsider</h3>
+                    <p className="text-sm md:text-base text-campher-gray">Responsive og brukervennlige nettsider som konverterer besøkende til kunder</p>
                   </div>
                   
-                  <div className="bg-blue-50 p-6 rounded-xl text-center">
-                    <h3 className="text-xl font-medium text-campher-blue mb-3">Google-synlighet</h3>
-                    <p className="text-campher-gray">SEO-optimalisering for å sikre at kundene dine finner deg på nett</p>
+                  <div className="bg-blue-50 p-4 md:p-6 rounded-xl text-center">
+                    <h3 className="text-lg md:text-xl font-medium text-campher-blue mb-2 md:mb-3">Google-synlighet</h3>
+                    <p className="text-sm md:text-base text-campher-gray">SEO-optimalisering for å sikre at kundene dine finner deg på nett</p>
                   </div>
                   
-                  <div className="bg-blue-50 p-6 rounded-xl text-center">
-                    <h3 className="text-xl font-medium text-campher-blue mb-3">Support</h3>
-                    <p className="text-campher-gray">Kontinuerlig teknisk støtte og vedlikehold av din nettside</p>
+                  <div className="bg-blue-50 p-4 md:p-6 rounded-xl text-center">
+                    <h3 className="text-lg md:text-xl font-medium text-campher-blue mb-2 md:mb-3">Support</h3>
+                    <p className="text-sm md:text-base text-campher-gray">Kontinuerlig teknisk støtte og vedlikehold av din nettside</p>
                   </div>
                 </div>
                 
                 <div className="text-center">
                   <a 
                     href="#contact" 
-                    className="inline-flex items-center justify-center bg-campher-blue hover:bg-blue-600 text-white px-8 py-4 rounded-md font-medium transition-colors"
+                    className="inline-flex items-center justify-center bg-campher-blue hover:bg-blue-600 text-white px-6 py-3 md:px-8 md:py-4 rounded-md font-medium transition-colors text-sm md:text-base"
                   >
                     Start i dag
                   </a>
@@ -73,12 +73,12 @@ const Hero = () => {
           </div>
         </div>
         
-        <div className="mt-24">
-          <div className="flex flex-col items-center justify-center gap-8">
-            <p className="text-lg font-medium text-campher-gray text-center">Stolte av å jobbe med:</p>
-            <div className="grid grid-cols-3 gap-16">
+        <div className="mt-16 md:mt-24">
+          <div className="flex flex-col items-center justify-center gap-6 md:gap-8">
+            <p className="text-base md:text-lg font-medium text-campher-gray text-center">Stolte av å jobbe med:</p>
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-16">
               {['Bedriftsnavn AS', 'Norsk Industri AS', 'Digital Vekst AS'].map((company, index) => (
-                <div key={index} className="text-xl font-display font-medium text-gray-700 text-center">
+                <div key={index} className="text-lg md:text-xl font-display font-medium text-gray-700 text-center">
                   {company}
                 </div>
               ))}

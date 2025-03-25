@@ -91,12 +91,25 @@ const ProjectPage = () => {
             <h1 className="text-2xl md:text-3xl lg:text-4xl font-medium mb-4 md:mb-6">{project.title}</h1>
             
             <div className="rounded-xl overflow-hidden mb-6 md:mb-10">
-              <img 
-                src={project.image} 
-                alt={project.title} 
-                className="w-full h-auto"
-                loading="eager"
-              />
+              {project.id === 1 ? (
+                // Special handling for Myhre Montasje project
+                <div 
+                  className="w-full h-64 md:h-80 lg:h-96 bg-cover bg-center"
+                  style={{ 
+                    backgroundImage: `url(${project.image})`,
+                    backgroundSize: 'cover',
+                    backgroundPosition: 'center'
+                  }}
+                  aria-label={project.title}
+                ></div>
+              ) : (
+                <img 
+                  src={project.image} 
+                  alt={project.title} 
+                  className="w-full h-auto"
+                  loading="eager"
+                />
+              )}
             </div>
             
             <div className="bg-blue-50 p-4 md:p-6 rounded-xl mb-6 md:mb-10">

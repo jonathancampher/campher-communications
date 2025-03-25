@@ -41,7 +41,7 @@ const Portfolio = () => {
   return (
     <section id="portfolio" className="section-padding">
       <div className="container-custom">
-        <div className="text-center max-w-xl mx-auto mb-12">
+        <div className="text-center max-w-xl mx-auto mb-8 md:mb-12">
           <span className="inline-block px-3 py-1 text-xs font-medium bg-blue-100 text-campher-blue rounded-full mb-4">
             Våre prosjekter
           </span>
@@ -60,12 +60,25 @@ const Portfolio = () => {
               style={{ animationDelay: `${0.1 + index * 0.1}s` }}
             >
               <div className="relative h-48 md:h-64 overflow-hidden">
-                <img
-                  src={project.image}
-                  alt={project.title}
-                  className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
-                  loading="lazy"
-                />
+                {project.id === 1 ? (
+                  // Special handling for the first project (Myhre Montasje) to ensure image displays
+                  <div 
+                    className="w-full h-full bg-cover bg-center"
+                    style={{ 
+                      backgroundImage: `url(${project.image})`,
+                      backgroundSize: 'cover',
+                      backgroundPosition: 'center'
+                    }}
+                    aria-label={project.title}
+                  ></div>
+                ) : (
+                  <img
+                    src={project.image}
+                    alt={project.title}
+                    className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                    loading="lazy"
+                  />
+                )}
               </div>
               <div className="p-4 md:p-6">
                 <h3 className="text-lg font-medium group-hover:text-campher-blue transition-colors">
