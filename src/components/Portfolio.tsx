@@ -16,7 +16,7 @@ const Portfolio = () => {
       id: 1,
       title: 'Myhre Montasje',
       category: ['web', 'responsive'],
-      image: '/lovable-uploads/e481f5cc-f944-4e8d-b29f-882a5aaa5a0a.png',
+      image: 'https://placehold.co/600x400/f5f7fa/0069e0?text=Myhre+Montasje',
       description: 'Responsiv hjemmeside med fokus på SEO-optimalisering og brukervennlighet for håndverksbedrift.',
       link: '/project/1'
     },
@@ -60,16 +60,24 @@ const Portfolio = () => {
               style={{ animationDelay: `${0.1 + index * 0.1}s` }}
             >
               <div className="relative h-48 md:h-64 overflow-hidden">
-                <img
-                  src={project.image}
-                  alt={project.title}
-                  className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
-                  loading={index === 0 ? "eager" : "lazy"}
-                  onError={(e) => {
-                    console.error(`Image failed to load: ${project.image}`, e);
-                    e.currentTarget.src = `https://placehold.co/600x400/f5f7fa/0069e0?text=${project.title.replace(' ', '+')}`;
-                  }}
-                />
+                {project.id === 1 ? (
+                  <div 
+                    className="w-full h-full bg-cover bg-center transition-transform duration-500 group-hover:scale-105"
+                    style={{ 
+                      backgroundImage: `url('/lovable-uploads/photo-1486312338219-ce68d2c6f44d.png')`,
+                      backgroundPosition: 'center',
+                      backgroundSize: 'cover'
+                    }}
+                    aria-label={project.title}
+                  />
+                ) : (
+                  <img
+                    src={project.image}
+                    alt={project.title}
+                    className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                    loading={index === 0 ? "eager" : "lazy"}
+                  />
+                )}
               </div>
               <div className="p-4 md:p-6">
                 <h3 className="text-lg font-medium group-hover:text-campher-blue transition-colors">
