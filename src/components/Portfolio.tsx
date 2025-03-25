@@ -15,7 +15,7 @@ const Portfolio = () => {
       id: 1,
       title: 'Myhre Montasje',
       category: ['web', 'responsive'],
-      image: '/lovable-uploads/95053904-56d5-415d-a0b7-24ada072c7e4.png',
+      image: 'public/lovable-uploads/prosjekt1.webp',
       description: 'Responsiv hjemmeside med fokus på SEO-optimalisering og brukervennlighet for håndverksbedrift.',
       link: '/project/1'
     },
