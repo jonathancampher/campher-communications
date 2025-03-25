@@ -55,34 +55,32 @@ const Navbar = () => {
     { name: 'Om Oss', href: '#about' },
     { name: 'Kontakt', href: '#contact', primary: true }
   ];
-
-  const navbarClass = "fixed top-0 left-0 right-0 z-[100] transition-all duration-300 bg-campher-dark";
   
   return (
     <nav 
       className={cn(
-        navbarClass,
+        "fixed top-0 left-0 right-0 z-50 transition-all duration-300",
         isScrolled 
           ? 'py-1 shadow-md bg-campher-dark/95 backdrop-blur-md' 
-          : 'py-2'
+          : 'py-2 bg-campher-dark'
       )}
     >
-      <div className="container-custom flex justify-between items-center relative">
+      <div className="container-custom flex justify-between items-center">
         {location.pathname === '/' ? (
-          <a href="#home" className="flex items-center py-2 z-[101]">
+          <a href="#home" className="flex items-center py-2">
             <Logo />
           </a>
         ) : (
-          <Link to="/" className="flex items-center py-2 z-[101]">
+          <Link to="/" className="flex items-center py-2">
             <Logo />
           </Link>
         )}
 
-        {/* Mobile Menu Toggle - Always visible and clickable */}
+        {/* Mobile Menu Toggle */}
         {isMobile && (
           <button 
             onClick={toggleMenu}
-            className="p-2 text-white z-[101] bg-campher-dark hover:bg-campher-dark/80 border border-white/10 rounded-md shadow-md"
+            className="p-2 text-white bg-campher-dark hover:bg-campher-dark/80 border border-white/10 rounded-md shadow-md"
             aria-label={menuOpen ? "Lukk meny" : "Åpne meny"}
           >
             {menuOpen ? <X size={24} /> : <Menu size={24} />}
@@ -124,11 +122,11 @@ const Navbar = () => {
           </div>
         )}
 
-        {/* Mobile Navigation Menu - Fixed position with higher z-index */}
+        {/* Mobile Navigation Menu */}
         {isMobile && (
           <div 
             className={cn(
-              "fixed inset-0 bg-campher-dark z-[99] transition-transform duration-300",
+              "fixed inset-0 top-0 left-0 right-0 bg-campher-dark z-40 transition-transform duration-300",
               menuOpen 
                 ? "translate-y-0" 
                 : "translate-y-[-100%]"
