@@ -92,16 +92,17 @@ const ProjectPage = () => {
             
             <div className="rounded-xl overflow-hidden mb-6 md:mb-10">
               {project.id === 1 ? (
-                // Special handling for Myhre Montasje project
-                <div 
-                  className="w-full h-64 md:h-80 lg:h-96 bg-cover bg-center"
-                  style={{ 
-                    backgroundImage: `url(${project.image})`,
-                    backgroundSize: 'cover',
-                    backgroundPosition: 'center'
+                // Improved handling for Myhre Montasje image
+                <img 
+                  src="/lovable-uploads/8750f463-d4c9-4943-b5cf-10a8f335b9e6.png" 
+                  alt="Myhre Montasje"
+                  className="w-full h-auto object-cover"
+                  loading="eager" 
+                  onError={(e) => {
+                    console.error('Image failed to load:', e);
+                    e.currentTarget.src = 'https://placehold.co/1200x600/f5f7fa/0069e0?text=Myhre+Montasje';
                   }}
-                  aria-label={project.title}
-                ></div>
+                />
               ) : (
                 <img 
                   src={project.image} 

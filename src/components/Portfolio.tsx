@@ -61,16 +61,17 @@ const Portfolio = () => {
             >
               <div className="relative h-48 md:h-64 overflow-hidden">
                 {project.id === 1 ? (
-                  // Special handling for the first project (Myhre Montasje) to ensure image displays
-                  <div 
-                    className="w-full h-full bg-cover bg-center"
-                    style={{ 
-                      backgroundImage: `url(${project.image})`,
-                      backgroundSize: 'cover',
-                      backgroundPosition: 'center'
+                  // Improved handling for Myhre Montasje image
+                  <img 
+                    src="/lovable-uploads/8750f463-d4c9-4943-b5cf-10a8f335b9e6.png" 
+                    alt="Myhre Montasje" 
+                    className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                    loading="eager"
+                    onError={(e) => {
+                      console.error('Image failed to load:', e);
+                      e.currentTarget.src = 'https://placehold.co/600x400/f5f7fa/0069e0?text=Myhre+Montasje';
                     }}
-                    aria-label={project.title}
-                  ></div>
+                  />
                 ) : (
                   <img
                     src={project.image}
