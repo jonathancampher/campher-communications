@@ -4,8 +4,9 @@ import { cn } from '@/lib/utils';
 import Logo from './Logo';
 import { Link, useLocation } from 'react-router-dom';
 import { Menu, X } from 'lucide-react';
-import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet';
+import { Sheet, SheetContent, SheetTrigger, SheetClose } from '@/components/ui/sheet';
 import { Button } from '@/components/ui/button';
+import { navigateToBlogSection } from '@/utils/navigation';
 
 const Navbar = () => {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -29,6 +30,22 @@ const Navbar = () => {
     { name: 'Om Oss', href: '#about' },
     { name: 'Kontakt', href: '#contact', primary: true }
   ];
+
+  // Function to handle section navigation
+  const handleSectionNavigation = (href: string) => {
+    if (location.pathname !== '/') {
+      // Navigate to home page first, then to section
+      window.location.href = `/${href}`;
+    } else {
+      // If already on home page, just scroll to section
+      const sectionElement = document.querySelector(href);
+      if (sectionElement) {
+        sectionElement.scrollIntoView({ behavior: 'smooth' });
+      } else if (href === '#blog') {
+        navigateToBlogSection();
+      }
+    }
+  };
   
   return (
     <nav 
@@ -99,36 +116,42 @@ const Navbar = () => {
           <SheetContent side="right" className="bg-campher-dark border-campher-dark w-[250px] p-0">
             <div className="flex flex-col space-y-3 p-6 h-full">
               <div className="flex justify-end mb-4">
-                <X className="h-5 w-5 text-white" />
+                <SheetClose className="text-white hover:bg-white/10 p-1 rounded-md">
+                  <X className="h-5 w-5" />
+                </SheetClose>
               </div>
               {navLinks.map((link, index) => (
-                location.pathname === '/' ? (
-                  <a
-                    key={index}
-                    href={link.href}
-                    className={cn(
-                      "px-4 py-4 rounded-md text-center text-base font-medium transition-colors",
-                      link.primary
-                        ? "bg-campher-blue hover:bg-blue-600 text-white shadow-md"
-                        : "bg-white/5 text-white hover:bg-white/10 border border-white/10"
-                    )}
-                  >
-                    {link.name}
-                  </a>
-                ) : (
-                  <Link
-                    key={index}
-                    to={`/${link.href}`}
-                    className={cn(
-                      "px-4 py-4 rounded-md text-center text-base font-medium transition-colors",
-                      link.primary
-                        ? "bg-campher-blue hover:bg-blue-600 text-white shadow-md"
-                        : "bg-white/5 text-white hover:bg-white/10 border border-white/10"
-                    )}
-                  >
-                    {link.name}
-                  </Link>
-                )
+                <SheetClose key={index} asChild>
+                  {location.pathname === '/' ? (
+                    <a
+                      href={link.href}
+                      className={cn(
+                        "px-4 py-4 rounded-md text-center text-base font-medium transition-colors",
+                        link.primary
+                          ? "bg-campher-blue hover:bg-blue-600 text-white shadow-md"
+                          : "bg-white/5 text-white hover:bg-white/10 border border-white/10"
+                      )}
+                      onClick={(e) => {
+                        e.preventDefault();
+                        handleSectionNavigation(link.href);
+                      }}
+                    >
+                      {link.name}
+                    </a>
+                  ) : (
+                    <Link
+                      to={`/${link.href}`}
+                      className={cn(
+                        "px-4 py-4 rounded-md text-center text-base font-medium transition-colors",
+                        link.primary
+                          ? "bg-campher-blue hover:bg-blue-600 text-white shadow-md"
+                          : "bg-white/5 text-white hover:bg-white/10 border border-white/10"
+                      )}
+                    >
+                      {link.name}
+                    </Link>
+                  )}
+                </SheetClose>
               ))}
             </div>
           </SheetContent>
