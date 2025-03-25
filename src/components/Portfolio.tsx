@@ -1,5 +1,6 @@
 
 import { Link } from 'react-router-dom';
+import { useIsMobile } from '@/hooks/use-mobile';
 
 /**
  * Portfolio-komponent
@@ -54,7 +55,7 @@ const Portfolio = () => {
             <Link 
               key={project.id} 
               to={project.link}
-              className="group bg-white rounded-xl overflow-hidden shadow-sm opacity-0 animate-fade-in-up hover-scale"
+              className="group bg-white rounded-xl overflow-hidden shadow-sm hover-scale"
               style={{ animationDelay: `${0.1 + index * 0.1}s` }}
             >
               <div className="relative h-64 overflow-hidden">

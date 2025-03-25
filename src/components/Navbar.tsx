@@ -3,6 +3,8 @@ import { useState, useEffect } from 'react';
 import { cn } from '@/lib/utils';
 import Logo from './Logo';
 import { Link, useLocation } from 'react-router-dom';
+import { Menu, X } from 'lucide-react';
+import { useIsMobile } from '@/hooks/use-mobile';
 
 /**
  * Navbar-komponent
@@ -13,7 +15,9 @@ import { Link, useLocation } from 'react-router-dom';
  */
 const Navbar = () => {
   const [isScrolled, setIsScrolled] = useState(false);
+  const [menuOpen, setMenuOpen] = useState(false);
   const location = useLocation();
+  const isMobile = useIsMobile();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -29,6 +33,14 @@ const Navbar = () => {
     handleScroll();
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
+
+  const toggleMenu = () => {
+    setMenuOpen(!menuOpen);
+  };
+
+  const closeMenu = () => {
+    setMenuOpen(false);
+  };
 
   const navLinks = [
     { name: 'Tjenester', href: '#services' },
@@ -58,38 +70,90 @@ const Navbar = () => {
           </Link>
         )}
 
-        {/* Navigasjonslenker */}
-        <div className="flex items-center space-x-2">
-          {navLinks.map((link, index) => (
-            location.pathname === '/' ? (
-              <a
-                key={index}
-                href={link.href}
-                className={cn(
-                  "px-4 py-2 rounded-md text-sm font-medium transition-colors",
-                  link.primary
-                    ? "bg-campher-blue hover:bg-blue-600 text-white"
-                    : "text-white hover:text-campher-blue"
-                )}
-              >
-                {link.name}
-              </a>
-            ) : (
-              <Link
-                key={index}
-                to={`/${link.href}`}
-                className={cn(
-                  "px-4 py-2 rounded-md text-sm font-medium transition-colors",
-                  link.primary
-                    ? "bg-campher-blue hover:bg-blue-600 text-white"
-                    : "text-white hover:text-campher-blue"
-                )}
-              >
-                {link.name}
-              </Link>
-            )
-          ))}
-        </div>
+        {/* Mobile Menu Toggle */}
+        {isMobile && (
+          <button 
+            onClick={toggleMenu}
+            className="p-2 text-white"
+            aria-label={menuOpen ? "Lukk meny" : "Åpne meny"}
+          >
+            {menuOpen ? <X size={24} /> : <Menu size={24} />}
+          </button>
+        )}
+
+        {/* Desktop Navigation */}
+        {!isMobile && (
+          <div className="flex items-center space-x-2">
+            {navLinks.map((link, index) => (
+              location.pathname === '/' ? (
+                <a
+                  key={index}
+                  href={link.href}
+                  className={cn(
+                    "px-4 py-2 rounded-md text-sm font-medium transition-colors",
+                    link.primary
+                      ? "bg-campher-blue hover:bg-blue-600 text-white"
+                      : "text-white hover:text-campher-blue"
+                  )}
+                >
+                  {link.name}
+                </a>
+              ) : (
+                <Link
+                  key={index}
+                  to={`/${link.href}`}
+                  className={cn(
+                    "px-4 py-2 rounded-md text-sm font-medium transition-colors",
+                    link.primary
+                      ? "bg-campher-blue hover:bg-blue-600 text-white"
+                      : "text-white hover:text-campher-blue"
+                  )}
+                >
+                  {link.name}
+                </Link>
+              )
+            ))}
+          </div>
+        )}
+
+        {/* Mobile Navigation Menu */}
+        {isMobile && menuOpen && (
+          <div className="absolute top-full left-0 right-0 bg-campher-dark/95 backdrop-blur-md shadow-lg py-4 px-4 transition-all">
+            <div className="flex flex-col space-y-2">
+              {navLinks.map((link, index) => (
+                location.pathname === '/' ? (
+                  <a
+                    key={index}
+                    href={link.href}
+                    onClick={closeMenu}
+                    className={cn(
+                      "px-4 py-3 rounded-md text-sm font-medium transition-colors",
+                      link.primary
+                        ? "bg-campher-blue hover:bg-blue-600 text-white"
+                        : "text-white hover:text-campher-blue"
+                    )}
+                  >
+                    {link.name}
+                  </a>
+                ) : (
+                  <Link
+                    key={index}
+                    to={`/${link.href}`}
+                    onClick={closeMenu}
+                    className={cn(
+                      "px-4 py-3 rounded-md text-sm font-medium transition-colors",
+                      link.primary
+                        ? "bg-campher-blue hover:bg-blue-600 text-white"
+                        : "text-white hover:text-campher-blue"
+                    )}
+                  >
+                    {link.name}
+                  </Link>
+                )
+              ))}
+            </div>
+          </div>
+        )}
       </div>
     </nav>
   );
