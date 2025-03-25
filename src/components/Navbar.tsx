@@ -55,13 +55,16 @@ const Navbar = () => {
     { name: 'Kontakt', href: '#contact', primary: true }
   ];
 
+  // Common navbar class for both scrolled and non-scrolled states
+  const navbarClass = "fixed top-0 left-0 right-0 z-50 transition-all duration-300 bg-campher-dark";
+  
   return (
     <nav 
       className={cn(
-        'fixed top-0 left-0 right-0 z-50 transition-all duration-300',
+        navbarClass,
         isScrolled 
-          ? 'py-1 shadow-md bg-campher-dark/95 backdrop-blur-md' 
-          : 'py-2 bg-campher-dark'
+          ? 'py-1 shadow-md backdrop-blur-md bg-campher-dark/95' 
+          : 'py-2'
       )}
     >
       <div className="container-custom flex justify-between items-center">
@@ -123,7 +126,7 @@ const Navbar = () => {
 
         {/* Mobile Navigation Menu - Full screen overlay for better UX */}
         {isMobile && menuOpen && (
-          <div className="fixed inset-0 top-0 left-0 right-0 bottom-0 bg-campher-dark backdrop-blur-md z-10 pt-20 px-4 overflow-auto">
+          <div className="fixed inset-0 top-0 left-0 right-0 bottom-0 bg-campher-dark z-10 pt-20 px-4 overflow-auto">
             <div className="flex flex-col space-y-3 max-w-sm mx-auto">
               {navLinks.map((link, index) => (
                 location.pathname === '/' ? (
