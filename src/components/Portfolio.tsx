@@ -1,5 +1,4 @@
 
-import { ArrowUpRight } from 'lucide-react';
 import { Link } from 'react-router-dom';
 
 /**
@@ -71,13 +70,10 @@ const Portfolio = () => {
                   </div>
                 </div>
               </div>
-              <div className="p-6 flex justify-between items-center">
+              <div className="p-6">
                 <h3 className="text-lg font-medium group-hover:text-campher-blue transition-colors">
                   {project.title}
                 </h3>
-                <span className="w-10 h-10 rounded-full bg-gray-100 flex items-center justify-center group-hover:bg-campher-blue/10 group-hover:text-campher-blue transition-colors">
-                  <ArrowUpRight size={18} />
-                </span>
               </div>
             </Link>
           ))}
