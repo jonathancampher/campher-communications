@@ -15,24 +15,23 @@ export const submitContactForm = async (data: ContactFormValues): Promise<void> 
     try {
       if (isModernBrowser) {
         // Modern browser implementation
-        const params = new URLSearchParams();
-        params.append('form-name', 'contact');
+        const formData = new FormData();
+        formData.append('form-name', 'contact');
         
-        // Add all form fields to URLSearchParams
+        // Add all form fields to FormData
         Object.entries(data).forEach(([key, value]) => {
-          params.append(key, value.toString());
+          formData.append(key, value.toString());
         });
         
         // Add honeypot field
-        params.append('bot-field', '');
+        formData.append('bot-field', '');
         
         const response = await fetch('/', {
           method: 'POST',
           headers: { 
-            'Content-Type': 'application/x-www-form-urlencoded',
             'Accept': 'application/json'
           },
-          body: params.toString(),
+          body: formData,
         });
         
         if (!response.ok) {
@@ -84,32 +83,7 @@ export const submitContactForm = async (data: ContactFormValues): Promise<void> 
       }
     } catch (error) {
       console.error('Netlify form submission error:', error);
-      
-      // Retry once with alternative method if primary method fails
-      try {
-        const formData = new FormData();
-        formData.append('form-name', 'contact');
-        
-        // Add form data fields
-        Object.entries(data).forEach(([key, value]) => {
-          formData.append(key, value.toString());
-        });
-        
-        // Add honeypot field
-        formData.append('bot-field', '');
-        
-        const response = await fetch('/', {
-          method: 'POST',
-          body: formData
-        });
-        
-        if (!response.ok) {
-          throw error; // Re-throw original error if retry also fails
-        }
-      } catch (retryError) {
-        console.error('Form submission retry failed:', retryError);
-        throw error; // Throw original error
-      }
+      throw error;
     }
   } else {
     // Development environment mock

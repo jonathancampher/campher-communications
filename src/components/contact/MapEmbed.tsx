@@ -64,7 +64,7 @@ const MapEmbed = () => {
       {!mapLoaded && (
         <div className="absolute inset-0 flex items-center justify-center bg-gray-100">
           <div className="text-center p-4">
-            <div className="loading mb-2 mx-auto"></div>
+            <div className="w-8 h-8 border-4 border-campher-blue border-t-transparent rounded-full animate-spin mx-auto mb-2"></div>
             <p className="text-sm text-gray-600">Laster kart...</p>
           </div>
         </div>
@@ -75,13 +75,13 @@ const MapEmbed = () => {
         <iframe 
           src={mapSrc}
           width="100%" 
-          height="450" 
+          height="100%" 
           style={{ border: 0, opacity: mapLoaded ? 1 : 0, transition: 'opacity 0.3s ease' }} 
           allowFullScreen 
           loading="lazy" 
           referrerPolicy="no-referrer-when-downgrade"
           title="Campher Communications lokasjon"
-          className="rounded-xl"
+          className="absolute inset-0 w-full h-full rounded-xl"
           onLoad={handleMapLoad}
           aria-hidden={!mapLoaded}
         />
