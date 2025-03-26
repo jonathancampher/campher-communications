@@ -11,6 +11,7 @@ import { navigateToBlogSection } from '@/utils/navigation';
 const Navbar = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const location = useLocation();
+  const [sheetOpen, setSheetOpen] = useState(false);
 
   // Handle scroll effect for navbar
   useEffect(() => {
@@ -33,6 +34,9 @@ const Navbar = () => {
 
   // Function to handle section navigation
   const handleSectionNavigation = (href: string) => {
+    // Close mobile menu
+    setSheetOpen(false);
+    
     if (location.pathname !== '/') {
       // Navigate to home page first, then to section
       window.location.href = `/${href}`;
@@ -102,7 +106,7 @@ const Navbar = () => {
         </div>
 
         {/* Mobile Navigation Sheet */}
-        <Sheet>
+        <Sheet open={sheetOpen} onOpenChange={setSheetOpen}>
           <SheetTrigger asChild className="md:hidden">
             <Button 
               variant="ghost" 
@@ -116,44 +120,28 @@ const Navbar = () => {
           <SheetContent side="right" className="bg-campher-dark border-campher-dark w-[250px] p-0">
             <div className="flex flex-col space-y-3 p-6 h-full">
               <div className="flex justify-end mb-4">
-                <SheetClose asChild>
-                  <Button variant="ghost" size="icon" className="text-white hover:bg-white/10 p-1 rounded-md">
-                    <X className="h-5 w-5" />
-                  </Button>
-                </SheetClose>
+                <Button 
+                  variant="ghost" 
+                  size="icon" 
+                  className="text-white hover:bg-white/10 p-1 rounded-md"
+                  onClick={() => setSheetOpen(false)}
+                >
+                  <X className="h-5 w-5" />
+                </Button>
               </div>
               {navLinks.map((link, index) => (
-                <SheetClose key={index} asChild>
-                  {location.pathname === '/' ? (
-                    <a
-                      href={link.href}
-                      className={cn(
-                        "px-4 py-4 rounded-md text-center text-base font-medium transition-colors",
-                        link.primary
-                          ? "bg-campher-blue hover:bg-blue-600 text-white shadow-md"
-                          : "bg-white/5 text-white hover:bg-white/10 border border-white/10"
-                      )}
-                      onClick={(e) => {
-                        e.preventDefault();
-                        handleSectionNavigation(link.href);
-                      }}
-                    >
-                      {link.name}
-                    </a>
-                  ) : (
-                    <Link
-                      to={`/${link.href}`}
-                      className={cn(
-                        "px-4 py-4 rounded-md text-center text-base font-medium transition-colors",
-                        link.primary
-                          ? "bg-campher-blue hover:bg-blue-600 text-white shadow-md"
-                          : "bg-white/5 text-white hover:bg-white/10 border border-white/10"
-                      )}
-                    >
-                      {link.name}
-                    </Link>
+                <Button
+                  key={index}
+                  className={cn(
+                    "px-4 py-4 rounded-md text-center text-base font-medium transition-colors",
+                    link.primary
+                      ? "bg-campher-blue hover:bg-blue-600 text-white shadow-md"
+                      : "bg-white/5 text-white hover:bg-white/10 border border-white/10"
                   )}
-                </SheetClose>
+                  onClick={() => handleSectionNavigation(link.href)}
+                >
+                  {link.name}
+                </Button>
               ))}
             </div>
           </SheetContent>
