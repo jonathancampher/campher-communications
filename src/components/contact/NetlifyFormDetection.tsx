@@ -11,7 +11,6 @@ export const NetlifyFormDetection = () => {
     <form 
       name="contact" 
       data-netlify="true" 
-      netlify-honeypot="bot-field" 
       hidden
     >
       <input type="text" name="name" />

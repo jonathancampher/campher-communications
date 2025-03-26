@@ -32,13 +32,21 @@
   from = "/*"
   to = "/index.html"
   status = 200
+  
+# Simplified forms configuration
+[build.environment]
+  NETLIFY_FORMS = "true"
 
-# Forms configuration
+# Enable form detection explicitly
 [build.processing]
   skip_processing = false
 
 [build.processing.html]
   pretty_urls = true
+
+# Form processing explicitly enabled
+[build.processing.forms]
+  enabled = true
 
 # Optimize images
 [build.processing.images]
@@ -60,12 +68,3 @@
 # Custom domain configuration
 [context.production]
   domain = "camphercommunications.no"
-
-# Forms configuration with explicit settings
-[build.environment]
-  NETLIFY_USE_YARN = "true"
-  NETLIFY_FORMS = "true"
-
-# Add a specific Forms processing section
-[build.processing.forms]
-  enabled = true
