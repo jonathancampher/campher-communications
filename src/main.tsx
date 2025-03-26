@@ -12,7 +12,8 @@ if (root) {
 
 // Preload important assets
 const preloadLinks = [
-  { rel: 'preload', href: '/lovable-uploads/af10b6f4-b4ab-4d4c-b1fa-a5c439dbb691.png', as: 'image' },
+  { rel: 'preload', href: '/lovable-uploads/25644d97-9c73-464b-a2b0-fe20bd636d08.png', as: 'image' },
+  { rel: 'preload', href: '/lovable-uploads/c5502322-5b49-4268-b427-a3e72c87d19b.png', as: 'image' },
   { rel: 'preload', href: '/lovable-uploads/prosjekt1.webp', as: 'image' }
 ];
 

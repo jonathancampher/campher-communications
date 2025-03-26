@@ -1,4 +1,10 @@
 
+/**
+ * NetlifyFormDetection Component
+ * 
+ * This component renders a hidden form that Netlify uses to detect form structure.
+ * It must include all fields that will be used in the actual form.
+ */
 export const NetlifyFormDetection = () => {
   return (
     <>
@@ -8,6 +14,7 @@ export const NetlifyFormDetection = () => {
         <input type="email" name="email" />
         <input type="text" name="subject" />
         <textarea name="message"></textarea>
+        <input type="hidden" name="form-name" value="contact" />
       </form>
     </>
   );

@@ -116,8 +116,10 @@ const Navbar = () => {
           <SheetContent side="right" className="bg-campher-dark border-campher-dark w-[250px] p-0">
             <div className="flex flex-col space-y-3 p-6 h-full">
               <div className="flex justify-end mb-4">
-                <SheetClose className="text-white hover:bg-white/10 p-1 rounded-md">
-                  <X className="h-5 w-5" />
+                <SheetClose asChild>
+                  <Button variant="ghost" size="icon" className="text-white hover:bg-white/10 p-1 rounded-md">
+                    <X className="h-5 w-5" />
+                  </Button>
                 </SheetClose>
               </div>
               {navLinks.map((link, index) => (
@@ -147,9 +149,6 @@ const Navbar = () => {
                           ? "bg-campher-blue hover:bg-blue-600 text-white shadow-md"
                           : "bg-white/5 text-white hover:bg-white/10 border border-white/10"
                       )}
-                      onClick={() => {
-                        // Close sheet automatically already provided by SheetClose
-                      }}
                     >
                       {link.name}
                     </Link>
