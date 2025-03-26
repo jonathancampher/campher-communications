@@ -16,9 +16,6 @@ const MapEmbed = () => {
   const mapSrc = "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2035.2077150140435!2d10.489216877112375!3d59.329457874614384!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x4646b34cb9ebf1e1%3A0xd7baba40d83270f8!2sCampher%20Communications!5e0!3m2!1sno!2sza!4v1742820270559!5m2!1sno!2sza";
   const address = "Campher Communications, Moss, Norge";
   
-  // Static map fallback image URL for better performance and as a placeholder
-  const staticMapUrl = "https://maps.googleapis.com/maps/api/staticmap?center=Campher+Communications,Moss,Norge&zoom=15&size=600x400&markers=color:red%7CCampher+Communications,Moss,Norge&key=";
-  
   useEffect(() => {
     // Only load map when component is visible in viewport for better performance
     if (!('IntersectionObserver' in window)) {

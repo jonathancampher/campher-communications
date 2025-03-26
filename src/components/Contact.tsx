@@ -17,7 +17,7 @@ const Contact = () => {
       <NetlifyFormDetection />
       
       <div className="container-custom">
-        <div className="text-center max-w-xl mx-auto mb-16">
+        <div className="text-center max-w-xl mx-auto mb-12">
           <span className="inline-block px-3 py-1 text-xs font-medium bg-blue-100 text-campher-blue rounded-full mb-4">
             Ta kontakt
           </span>
@@ -28,7 +28,7 @@ const Contact = () => {
           </p>
         </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-5 gap-8 lg:gap-12 mb-16">
+        <div className="grid grid-cols-1 lg:grid-cols-5 gap-8 lg:gap-12 mb-12">
           <ContactInfo />
           <ContactForm />
         </div>

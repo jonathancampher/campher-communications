@@ -18,14 +18,13 @@ const Logo = () => {
       loading="eager"
       fetchPriority="high"
       decoding="async"
+      elementtiming="logo-image"
       onLoad={(e) => {
         // Mark as contentful paint candidate for LCP optimization
         if (e.currentTarget) {
           e.currentTarget.setAttribute('elementtiming', 'logo-image');
-          e.currentTarget.style.visibility = 'visible';
         }
       }}
-      style={{ visibility: 'hidden' }} // Hide until loaded to prevent layout shift
     />
   );
 };

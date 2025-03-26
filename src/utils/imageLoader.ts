@@ -91,8 +91,8 @@ export const setupLazyLoading = (): void => {
       lazyLoadThrottleTimeout = setTimeout(lazyLoad, 200);
     };
 
-    // Explicitly type window as Window to fix the addEventListener errors
-    const win: Window = window;
+    // Explicitly type window as Window to fix the TypeScript errors
+    const win = window as Window;
     win.addEventListener('scroll', throttledLazyLoad, { passive: true });
     win.addEventListener('resize', throttledLazyLoad, { passive: true });
     win.addEventListener('orientationchange', throttledLazyLoad, { passive: true });

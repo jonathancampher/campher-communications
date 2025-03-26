@@ -24,8 +24,8 @@ export const NetlifyFormDetection = () => {
         <input name="bot-field" type="hidden" />
       </form>
 
-      {/* Fallback for older browsers and enhanced detection */}
-      <div hidden>
+      {/* Additional hidden fields to ensure form detection */}
+      <div hidden data-netlify-forms="contact">
         <div className="netlify-form-detection">
           Form: contact
           Fields: name,email,subject,message

@@ -79,8 +79,9 @@
 [context.production]
   domain = "camphercommunications.no"
 
-# Form notifications configuration
-[[forms.contact.notifications]]
-  to = "kontakt@camphercommunications.no"
-  from = "noreply@camphercommunications.no"
-  subject = "Ny melding fra camphercommunications.no"
+# Form notifications configuration - UPDATED
+[[forms]]
+  name = "contact"
+
+  [forms.notifications]
+    to = "kontakt@camphercommunications.no"

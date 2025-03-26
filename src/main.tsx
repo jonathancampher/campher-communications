@@ -3,6 +3,7 @@ import { createRoot } from 'react-dom/client';
 import App from './App.tsx';
 import './critical.css';
 import './index.css';
+import { optimizeImages } from './utils/imageLoader';
 
 // Perform critical initialization before rendering
 const initializePage = () => {
@@ -35,6 +36,9 @@ const initializePage = () => {
   if (supportsPassive) {
     document.documentElement.classList.add('has-passive-events');
   }
+
+  // Initialize image optimizations right away
+  optimizeImages();
 }
 
 // Initialize page optimizations
@@ -46,7 +50,7 @@ if (root) {
   createRoot(root).render(<App />);
 }
 
-// Preload important assets
+// Preload important assets with priority
 const preloadLinks = [
   { rel: 'preload', href: '/lovable-uploads/25644d97-9c73-464b-a2b0-fe20bd636d08.png', as: 'image' },
   { rel: 'preload', href: '/lovable-uploads/c5502322-5b49-4268-b427-a3e72c87d19b.png', as: 'image' },

@@ -89,6 +89,6 @@ export const submitContactForm = async (data: ContactFormValues): Promise<void> 
     // Development environment mock
     console.log('Form submission data (DEV MODE):', data);
     // Simulate network request delay
-    await new Promise(resolve => setTimeout(resolve, 1000));
+    await new Promise(resolve => setTimeout(resolve, 500)); // Reduced delay for faster testing
   }
 };
