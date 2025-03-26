@@ -4,7 +4,13 @@
   publish = "dist"
   command = "npm run build"
 
-# Set cache headers for better performance
+# Set cache headers for static assets
+[[headers]]
+  for = "/assets/*"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+# Set security and cache headers for all routes
 [[headers]]
   for = "/*"
   [headers.values]
@@ -14,6 +20,8 @@
     X-Content-Type-Options = "nosniff"
     Referrer-Policy = "strict-origin-when-cross-origin"
     Permissions-Policy = "camera=(), microphone=(), geolocation=()"
+    Strict-Transport-Security = "max-age=31536000; includeSubDomains"
+    Content-Security-Policy = "default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self'; connect-src 'self' https://*.netlify.app;"
 
 # Set cache headers for HTML files
 [[headers]]
@@ -27,12 +35,17 @@
   [headers.values]
     Cache-Control = "public, max-age=0, must-revalidate"
 
-# Set up redirects for SPA
+# Redirects for SPA and success page
+[[redirects]]
+  from = "/takk"
+  to = "/takk.html"
+  status = 200
+
 [[redirects]]
   from = "/*"
   to = "/index.html"
   status = 200
-  
+
 # Explicit forms configuration
 [build.environment]
   NETLIFY_FORMS = "true"
@@ -40,9 +53,6 @@
 # Enable form detection explicitly
 [build.processing]
   skip_processing = false
-
-[build.processing.html]
-  pretty_urls = true
 
 # Form processing explicitly enabled
 [build.processing.forms]
@@ -72,3 +82,5 @@
 # Form notifications configuration
 [[forms.contact.notifications]]
   to = "kontakt@camphercommunications.no"
+  from = "noreply@camphercommunications.no"
+  subject = "Ny melding fra camphercommunications.no"
