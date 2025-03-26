@@ -51,9 +51,10 @@ export const setupLazyLoading = (): void => {
     
     lazyImages.forEach(img => {
       // Add a low quality placeholder or blur-up effect
-      if (!img.classList.contains('loaded') && !img.src) {
+      const imgElement = img as HTMLImageElement;
+      if (!imgElement.classList.contains('loaded') && !imgElement.src) {
         // Set a lightweight placeholder or a tiny version of the actual image
-        img.src = 'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 4 3"%3E%3C/svg%3E';
+        imgElement.src = 'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 4 3"%3E%3C/svg%3E';
       }
       imageObserver.observe(img);
     });

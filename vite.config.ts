@@ -44,8 +44,7 @@ export default defineConfig(({ mode }) => ({
   },
   plugins: [
     react({
-      // Use babel plugin for older browser support
-      jsxRuntime: 'automatic',
+      // Remove jsxRuntime option as it's not supported in this version
       plugins: [],
     }),
     mode === 'development' &&
