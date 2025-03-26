@@ -7,7 +7,6 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { contactFormSchema, type ContactFormValues } from './schema';
 import { ContactFormFields } from './ContactFormFields';
 import { SubmitButton } from './SubmitButton';
-import { NetlifyFormDetection } from './NetlifyFormDetection';
 import { submitContactForm } from '@/utils/form-submission';
 
 /**
@@ -60,8 +59,6 @@ const ContactForm = () => {
     <div className="lg:col-span-3 bg-white p-8 rounded-xl shadow-sm opacity-0 animate-fade-in" style={{ animationDelay: '0.5s' }}>
       <h3 className="text-xl font-medium mb-6">Send oss en melding</h3>
       
-      <NetlifyFormDetection />
-      
       <Form {...form}>
         <form 
           onSubmit={form.handleSubmit(onSubmit)} 
@@ -71,6 +68,7 @@ const ContactForm = () => {
           data-netlify="true"
           netlify-honeypot="bot-field"
         >
+          {/* Important hidden fields for Netlify */}
           <input type="hidden" name="form-name" value="contact" />
           <div hidden>
             <label>

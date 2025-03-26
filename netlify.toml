@@ -33,7 +33,7 @@
   to = "/index.html"
   status = 200
 
-# Enable form submissions
+# Enable form submissions - explicitly enable forms
 [build.processing]
   skip_processing = false
 
@@ -57,6 +57,15 @@
 [[plugins]]
   package = "@netlify/plugin-lighthouse"
 
+# Forms configuration - explicitly enable forms
+[build.environment]
+  NETLIFY_USE_YARN = "true"
+
 # Custom domain configuration
 [context.production]
   domain = "camphercommunications.no"
+
+# Explicitly enable forms
+[build.environment.NETLIFY_FORMS]
+  enabled = "true"
+

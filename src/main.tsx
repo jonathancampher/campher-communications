@@ -14,14 +14,18 @@ if (root) {
 const preloadLinks = [
   { rel: 'preload', href: '/lovable-uploads/25644d97-9c73-464b-a2b0-fe20bd636d08.png', as: 'image' },
   { rel: 'preload', href: '/lovable-uploads/c5502322-5b49-4268-b427-a3e72c87d19b.png', as: 'image' },
-  { rel: 'preload', href: '/lovable-uploads/prosjekt1.webp', as: 'image' }
+  { rel: 'preload', href: '/lovable-uploads/prosjekt1.webp', as: 'image' },
+  // Add preconnect for Netlify forms
+  { rel: 'preconnect', href: 'https://api.netlify.com' }
 ];
 
 preloadLinks.forEach(link => {
   const linkEl = document.createElement('link');
   linkEl.rel = link.rel;
   linkEl.href = link.href;
-  linkEl.as = link.as;
+  if (link.as) {
+    linkEl.as = link.as;
+  }
   document.head.appendChild(linkEl);
 });
 

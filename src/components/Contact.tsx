@@ -2,6 +2,7 @@
 import ContactInfo from './contact/ContactInfo';
 import ContactForm from './contact/ContactForm';
 import ContactMap from './contact/ContactMap';
+import { NetlifyFormDetection } from './contact/NetlifyFormDetection';
 
 /**
  * Contact-komponent
@@ -23,6 +24,9 @@ const Contact = () => {
             Ta kontakt med oss og la oss starte en samtale.
           </p>
         </div>
+
+        {/* Add NetlifyFormDetection at the top level for better detection */}
+        <NetlifyFormDetection />
 
         <div className="grid grid-cols-1 lg:grid-cols-5 gap-8 lg:gap-12 mb-16">
           <ContactInfo />

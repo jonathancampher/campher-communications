@@ -2,32 +2,31 @@
 import { ContactFormValues } from "@/components/contact/schema";
 
 /**
- * Submits form data to Netlify Forms or handles development mode submissions
- * Optimized for better Netlify Forms integration
+ * Submits form data to Netlify Forms
+ * Optimized for the latest Netlify Forms implementation
  */
 export const submitContactForm = async (data: ContactFormValues): Promise<void> => {
-  // Prepare form data
+  // Create FormData object for submission
   const formData = new FormData();
+  
+  // Add form name field which is required by Netlify
+  formData.append('form-name', 'contact');
   
   // Add all form fields
   Object.entries(data).forEach(([key, value]) => {
-    formData.append(key, value);
+    formData.append(key, value.toString());
   });
   
-  // Add form-name field which is required by Netlify
-  formData.append('form-name', 'contact');
-  
-  if (window.location.hostname !== 'localhost') {
+  if (window.location.hostname !== 'localhost' && window.location.hostname !== '127.0.0.1') {
     // Production environment: submit to Netlify Forms
     try {
       const response = await fetch('/', {
         method: 'POST',
-        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-        body: new URLSearchParams(formData as any).toString(),
+        body: formData,
       });
       
       if (!response.ok) {
-        throw new Error(`Form submission failed: ${response.status}`);
+        throw new Error(`Form submission failed: ${response.statusText}`);
       }
     } catch (error) {
       console.error('Netlify form submission error:', error);
@@ -35,7 +34,7 @@ export const submitContactForm = async (data: ContactFormValues): Promise<void> 
     }
   } else {
     // Development environment mock
-    console.log('Form submission data (DEV MODE):', data);
+    console.log('Form submission data (DEV MODE):', Object.fromEntries(formData));
     // Simulate network request delay
     await new Promise(resolve => setTimeout(resolve, 1000));
   }
