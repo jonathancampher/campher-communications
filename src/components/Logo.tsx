@@ -18,11 +18,11 @@ const Logo = () => {
       loading="eager"
       fetchPriority="high"
       decoding="async"
-      elementtiming="logo-image"
       onLoad={(e) => {
         // Mark as contentful paint candidate for LCP optimization
-        if (e.currentTarget) {
-          e.currentTarget.setAttribute('elementtiming', 'logo-image');
+        if (e.currentTarget && 'PerformanceObserver' in window) {
+          // Use standard performance marking instead of custom attribute
+          performance.mark('logo-loaded');
         }
       }}
     />
