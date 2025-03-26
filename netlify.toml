@@ -33,7 +33,7 @@
   to = "/index.html"
   status = 200
   
-# Simplified forms configuration
+# Explicit forms configuration
 [build.environment]
   NETLIFY_FORMS = "true"
 
@@ -68,3 +68,7 @@
 # Custom domain configuration
 [context.production]
   domain = "camphercommunications.no"
+
+# Form notifications configuration
+[[forms.contact.notifications]]
+  to = "kontakt@camphercommunications.no"

@@ -11,6 +11,7 @@ export const NetlifyFormDetection = () => {
     <form 
       name="contact" 
       data-netlify="true" 
+      netlify-honeypot="bot-field"
       hidden
     >
       <input type="text" name="name" />
@@ -18,6 +19,7 @@ export const NetlifyFormDetection = () => {
       <input type="text" name="subject" />
       <textarea name="message"></textarea>
       <input type="hidden" name="form-name" value="contact" />
+      <input name="bot-field" type="hidden" />
     </form>
   );
 };

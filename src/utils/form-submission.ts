@@ -17,6 +17,9 @@ export const submitContactForm = async (data: ContactFormValues): Promise<void> 
     formData.append(key, value.toString());
   });
   
+  // Add honeypot field
+  formData.append('bot-field', '');
+  
   if (window.location.hostname !== 'localhost' && window.location.hostname !== '127.0.0.1') {
     // Production environment: submit to Netlify Forms
     try {
