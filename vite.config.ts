@@ -15,7 +15,7 @@ export default defineConfig(({ mode }) => ({
     }
   },
   build: {
-    sourcemap: true,
+    sourcemap: mode === 'development',
     rollupOptions: {
       output: {
         manualChunks: {
@@ -34,13 +34,20 @@ export default defineConfig(({ mode }) => ({
       }
     },
     cssCodeSplit: true,
-    // Add minification options but using esbuild by default
+    // Add minification options using esbuild by default
     minify: mode === 'production' ? 'esbuild' : false,
+    target: 'es2018', // Ensure wider browser compatibility
     // Improve chunk loading strategy
     assetsInlineLimit: 4096, // 4kb
+    reportCompressedSize: false, // Speeds up build
+    chunkSizeWarningLimit: 1000, // 1000kb
   },
   plugins: [
-    react(),
+    react({
+      // Use babel plugin for older browser support
+      jsxRuntime: 'automatic',
+      plugins: [],
+    }),
     mode === 'development' &&
     componentTagger(),
   ].filter(Boolean),
@@ -57,7 +64,10 @@ export default defineConfig(({ mode }) => ({
       'react-router-dom',
       '@tanstack/react-query',
       'lucide-react'
-    ]
+    ],
+    esbuildOptions: {
+      target: 'es2018', // Ensure wider browser compatibility
+    }
   },
   // Improve CSS handling
   css: {
@@ -65,5 +75,7 @@ export default defineConfig(({ mode }) => ({
     preprocessorOptions: {
       // Add any preprocessor options here if needed
     }
-  }
+  },
+  // Enable caching to improve build times
+  cacheDir: '.vite-cache',
 }));

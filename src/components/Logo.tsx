@@ -5,7 +5,7 @@ import React from 'react';
  * Logo-komponent
  * 
  * Viser firmaets logo med riktig størrelse og alt-tekst.
- * Brukes i navigasjonsmenyen og footer.
+ * Optimalisert for ytelse, tilgjengelighet og cross-browser støtte.
  */
 const Logo = () => {
   return (
@@ -18,6 +18,14 @@ const Logo = () => {
       loading="eager"
       fetchPriority="high"
       decoding="async"
+      onLoad={(e) => {
+        // Mark as contentful paint candidate for LCP optimization
+        if (e.currentTarget) {
+          e.currentTarget.setAttribute('elementtiming', 'logo-image');
+          e.currentTarget.style.visibility = 'visible';
+        }
+      }}
+      style={{ visibility: 'hidden' }} // Hide until loaded to prevent layout shift
     />
   );
 };
