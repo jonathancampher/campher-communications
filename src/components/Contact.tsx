@@ -13,6 +13,9 @@ import { NetlifyFormDetection } from './contact/NetlifyFormDetection';
 const Contact = () => {
   return (
     <section id="contact" className="section-padding">
+      {/* Add NetlifyFormDetection at the top level for better detection */}
+      <NetlifyFormDetection />
+      
       <div className="container-custom">
         <div className="text-center max-w-xl mx-auto mb-16">
           <span className="inline-block px-3 py-1 text-xs font-medium bg-blue-100 text-campher-blue rounded-full mb-4">
@@ -24,9 +27,6 @@ const Contact = () => {
             Ta kontakt med oss og la oss starte en samtale.
           </p>
         </div>
-
-        {/* Add NetlifyFormDetection at the top level for better detection */}
-        <NetlifyFormDetection />
 
         <div className="grid grid-cols-1 lg:grid-cols-5 gap-8 lg:gap-12 mb-16">
           <ContactInfo />

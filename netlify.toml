@@ -61,7 +61,11 @@
 [context.production]
   domain = "camphercommunications.no"
 
-# Forms configuration - properly configured
+# Forms configuration with explicit settings
 [build.environment]
   NETLIFY_USE_YARN = "true"
   NETLIFY_FORMS = "true"
+
+# Add a specific Forms processing section
+[build.processing.forms]
+  enabled = true
