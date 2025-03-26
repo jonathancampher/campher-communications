@@ -66,7 +66,6 @@ const ContactForm = () => {
           name="contact"
           method="POST"
           data-netlify="true"
-          netlify="true"
           netlify-honeypot="bot-field"
         >
           {/* Important hidden fields for Netlify */}
