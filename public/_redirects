@@ -2,9 +2,15 @@
 # These rules will change if you change your site's custom domains or HTTPS settings
 
 # Ensure assets are loaded correctly with proper MIME types
-/assets/*.js   /assets/:splat.js   200!
-/assets/*.css  /assets/:splat.css  200!
+/assets/*.js   /assets/:splat.js   200! Content-Type=application/javascript
+/assets/*.css  /assets/:splat.css  200! Content-Type=text/css
 /assets/*      /assets/:splat      200!
+
+# Handle direct requests to CSS files with correct MIME type
+/*.css         /:splat.css         200! Content-Type=text/css
+
+# Handle direct requests to JS files with correct MIME type  
+/*.js          /:splat.js          200! Content-Type=application/javascript
 
 # Redirect default Netlify subdomain to primary domain
 https://campher-communications.netlify.app/* https://camphercommunications.no/:splat 301!
