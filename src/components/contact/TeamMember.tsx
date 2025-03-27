@@ -20,10 +20,10 @@ const TeamMember = ({ name, role, imageSrc, initials }: TeamMemberProps) => {
         <AvatarImage 
           src={imageSrc} 
           alt={name} 
-          className="object-cover object-top" 
+          className="object-cover" 
           loading="lazy" 
-          width="100"
-          height="100"
+          width="645"
+          height="764"
         />
         <AvatarFallback>{initials}</AvatarFallback>
       </Avatar>

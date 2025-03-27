@@ -32,7 +32,7 @@ const BlogPostCard = ({ post, isFeatured = false, scrollToTop }: BlogPostCardPro
           <div className="relative overflow-hidden bg-blue-50">
             <AspectRatio ratio={16/9}>
               <div className="p-6 text-center flex items-center justify-center h-full">
-                <h3 className="text-2xl font-medium text-campher-blue">{post.title}</h3>
+                <h3 className="text-2xl font-medium text-blue-800">{post.title}</h3>
               </div>
             </AspectRatio>
           </div>
@@ -41,7 +41,7 @@ const BlogPostCard = ({ post, isFeatured = false, scrollToTop }: BlogPostCardPro
           <div className="relative overflow-hidden bg-blue-50">
             <AspectRatio ratio={16/9}>
               <div className="p-4 text-center flex items-center justify-center h-full">
-                <h3 className="text-xl font-medium text-campher-blue">{post.title}</h3>
+                <h3 className="text-xl font-medium text-blue-800">{post.title}</h3>
               </div>
             </AspectRatio>
           </div>
@@ -60,7 +60,7 @@ const BlogPostCard = ({ post, isFeatured = false, scrollToTop }: BlogPostCardPro
               0
             </span>
           </div>
-          <span className="text-campher-blue font-medium hover:text-blue-800 inline-flex items-center text-xs md:text-sm py-2 underline">
+          <span className="text-blue-800 font-medium hover:text-blue-900 inline-flex items-center text-xs md:text-sm py-2 underline underline-offset-2">
             Les mer
             <ArrowUpRight size={isMobile ? 14 : 16} className="ml-1" />
           </span>

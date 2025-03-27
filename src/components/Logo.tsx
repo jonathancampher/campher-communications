@@ -16,7 +16,6 @@ const Logo = () => {
       width="64"
       height="64"
       loading="eager"
-      fetchPriority="high"
       decoding="async"
       onLoad={(e) => {
         // Mark as contentful paint candidate for LCP optimization

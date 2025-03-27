@@ -70,6 +70,11 @@
       scroll-behavior: smooth;
     }
   }
+
+  /* Forbedret tilgjengelighet for lenker */
+  a:not([class]) {
+    @apply text-blue-700 underline underline-offset-2 hover:text-blue-900 focus:ring-2 focus:ring-blue-400 focus:outline-none rounded-sm focus:ring-offset-2;
+  }
 }
 
 @layer components {
@@ -103,6 +108,19 @@
   
   .text-gradient {
     @apply bg-clip-text text-transparent bg-gradient-to-r from-campher-blue to-blue-500;
+  }
+
+  /* Improved link accessibility */
+  .link-accessible {
+    @apply text-blue-700 hover:text-blue-900 underline underline-offset-2 transition-colors focus:ring-2 focus:ring-blue-400 focus:outline-none rounded-sm focus:ring-offset-2;
+  }
+
+  .link-contrast {
+    @apply text-blue-800 hover:text-blue-900 font-medium underline underline-offset-2;
+  }
+
+  .email-link {
+    @apply text-blue-800 hover:text-blue-900 font-medium underline underline-offset-2;
   }
 }
 

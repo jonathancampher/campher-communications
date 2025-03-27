@@ -1,3 +1,4 @@
+
 import { CheckCircle } from 'lucide-react';
 
 /**
@@ -67,14 +68,16 @@ const About = () => {
               Jeg hjelper bedrifter å vokse digitalt
             </h2>
             <div className="flex items-center gap-4 mb-6 opacity-0 animate-fade-in stagger-2">
-              <img 
-                src="/lovable-uploads/b7bb1f5a-cbd7-4885-9a85-2750d69cc2e7.png" 
-                alt="Jonathan Campher" 
-                className="w-20 h-20 rounded-full border-2 border-campher-blue object-cover object-top"
-                width="645"
-                height="764"
-                loading="eager"
-              />
+              <div className="w-20 h-20 rounded-full border-2 border-campher-blue overflow-hidden">
+                <img 
+                  src="/lovable-uploads/b7bb1f5a-cbd7-4885-9a85-2750d69cc2e7.png" 
+                  alt="Jonathan Campher" 
+                  className="w-full h-full object-cover object-top"
+                  width="645"
+                  height="764"
+                  loading="eager"
+                />
+              </div>
               <div>
                 <h3 className="text-xl font-medium">Jonathan Campher</h3>
                 <p className="text-campher-gray text-sm">Grunnlegger og Webutvikler</p>
