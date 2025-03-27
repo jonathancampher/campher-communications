@@ -1,5 +1,5 @@
 
-/* Font already included in index.html, no need to import here */
+/* Font importing is already done in index.html */
 
 @tailwind base;
 @tailwind components;

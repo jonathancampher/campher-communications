@@ -50,9 +50,6 @@ if (root) {
   createRoot(root).render(<App />);
 }
 
-// Only preconnect to essential domains - we've moved these to the HTML head
-// so no need to add them dynamically here
-
 // Register service worker for production
 if (import.meta.env.PROD && 'serviceWorker' in navigator) {
   window.addEventListener('load', () => {
