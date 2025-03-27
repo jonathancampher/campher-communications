@@ -1,5 +1,5 @@
 
-/* Importering av fonter skjer i index.html, ikke her */
+/* Font import happens in index.html */
 
 @tailwind base;
 @tailwind components;

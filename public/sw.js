@@ -1,12 +1,13 @@
 
 // Service Worker for caching assets and offline experience
-const CACHE_NAME = 'campher-communications-v3';
+const CACHE_NAME = 'campher-communications-v4';
 
 // Assets to cache immediately on service worker installation
 const PRECACHE_ASSETS = [
   '/',
   '/index.html',
-  '/critical.css'
+  '/src/critical.css',
+  '/src/index.css'
 ];
 
 // Skip external requests that might be blocked by CSP
@@ -92,6 +93,16 @@ self.addEventListener('fetch', event => {
     return;
   }
 
+  // Special handling for JS and CSS files
+  if (event.request.url.endsWith('.js') || event.request.url.endsWith('.css')) {
+    event.respondWith(
+      fetch(event.request).catch(() => {
+        return caches.match(event.request);
+      })
+    );
+    return;
+  }
+
   // Handle API calls and HTML pages with network-first strategy
   if (event.request.url.includes('api.netlify.com') || 
       event.request.headers.get('Accept')?.includes('text/html')) {
@@ -141,5 +152,3 @@ self.addEventListener('fetch', event => {
     })
   );
 });
-
-// Removed the duplicate fetch handler that was causing conflicts
