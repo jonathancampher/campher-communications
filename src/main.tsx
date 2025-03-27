@@ -63,14 +63,6 @@ if (import.meta.env.PROD && 'serviceWorker' in navigator) {
   });
 }
 
-// Handle browser back/forward cache for better performance
-window.addEventListener('pageshow', (event) => {
-  if (event.persisted) {
-    // Page was restored from the bfcache
-    window.location.reload();
-  }
-});
-
 // Optimize font loading
 if ('fonts' in document) {
   Promise.all([
