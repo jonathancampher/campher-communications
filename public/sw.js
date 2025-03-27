@@ -1,15 +1,12 @@
 
 // Service Worker for caching assets and offline experience
-const CACHE_NAME = 'campher-communications-v2';
+const CACHE_NAME = 'campher-communications-v3';
 
 // Assets to cache immediately on service worker installation
 const PRECACHE_ASSETS = [
   '/',
   '/index.html',
-  '/src/index.css',
-  '/src/critical.css',
-  '/lovable-uploads/c5502322-5b49-4268-b427-a3e72c87d19b.png',
-  '/lovable-uploads/prosjekt1.webp'
+  '/critical.css'
 ];
 
 // Skip external requests that might be blocked by CSP
@@ -19,7 +16,8 @@ const shouldHandleRequest = (url) => {
     'fonts.googleapis.com',
     'fonts.gstatic.com',
     'cdn.gpteng.co',
-    'placehold.co'
+    'placehold.co',
+    'api.netlify.com'
   ];
   
   // Check if URL contains any of the skip domains
@@ -30,6 +28,7 @@ const shouldHandleRequest = (url) => {
 const cacheFirst = async (request) => {
   // Skip handling requests that might be blocked by CSP
   if (!shouldHandleRequest(request.url)) {
+    // For excluded domains, just pass through to network without trying to cache
     return fetch(request);
   }
 
@@ -132,18 +131,15 @@ self.addEventListener('fetch', event => {
           cache.put(event.request, responseToCache);
         });
         return response;
+      }).catch(error => {
+        // If HTML, return offline page
+        if (event.request.headers.get('Accept')?.includes('text/html')) {
+          return caches.match('/index.html');
+        }
+        throw error;
       });
     })
   );
 });
 
-// Handle offline fallback
-self.addEventListener('fetch', event => {
-  if (event.request.mode === 'navigate' && !shouldHandleRequest(event.request.url)) {
-    event.respondWith(
-      fetch(event.request).catch(() => {
-        return caches.match('/index.html');
-      })
-    );
-  }
-});
+// Removed the duplicate fetch handler that was causing conflicts

@@ -50,11 +50,9 @@ if (root) {
   createRoot(root).render(<App />);
 }
 
-// Preload important assets with priority
+// Only preload essential resources
 const preloadLinks = [
   { rel: 'preload', href: '/lovable-uploads/25644d97-9c73-464b-a2b0-fe20bd636d08.png', as: 'image' },
-  { rel: 'preload', href: '/lovable-uploads/c5502322-5b49-4268-b427-a3e72c87d19b.png', as: 'image' },
-  { rel: 'preload', href: '/lovable-uploads/prosjekt1.webp', as: 'image' },
   // Add preconnect for Netlify forms - important for form submissions
   { rel: 'preconnect', href: 'https://api.netlify.com' },
   // Add preconnect for Google Fonts
@@ -62,17 +60,23 @@ const preloadLinks = [
   { rel: 'preconnect', href: 'https://fonts.gstatic.com', crossOrigin: 'anonymous' }
 ];
 
+// Only add preload links that don't already exist
+const addedLinks = new Set();
 preloadLinks.forEach(link => {
-  const linkEl = document.createElement('link');
-  linkEl.rel = link.rel;
-  linkEl.href = link.href;
-  if (link.as) {
-    linkEl.as = link.as;
+  const existingLink = document.querySelector(`link[rel="${link.rel}"][href="${link.href}"]`);
+  if (!existingLink && !addedLinks.has(link.href)) {
+    const linkEl = document.createElement('link');
+    linkEl.rel = link.rel;
+    linkEl.href = link.href;
+    if (link.as) {
+      linkEl.as = link.as;
+    }
+    if (link.crossOrigin) {
+      linkEl.crossOrigin = link.crossOrigin;
+    }
+    document.head.appendChild(linkEl);
+    addedLinks.add(link.href);
   }
-  if (link.crossOrigin) {
-    linkEl.crossOrigin = link.crossOrigin;
-  }
-  document.head.appendChild(linkEl);
 });
 
 // Register service worker for production
@@ -98,7 +102,7 @@ window.addEventListener('pageshow', (event) => {
 
 // Optimize font loading
 if ('fonts' in document) {
-  // Optimize font loading with font loading API
+  // Directly use the font without data: URIs
   Promise.all([
     document.fonts.load('1em Inter'),
     document.fonts.load('500 1em Inter'),

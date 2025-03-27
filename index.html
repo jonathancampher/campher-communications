@@ -13,7 +13,9 @@
     <link rel="preload" as="image" href="/lovable-uploads/b7bb1f5a-cbd7-4885-9a85-2750d69cc2e7.png" fetchpriority="high" />
     <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" as="style" crossorigin />
+    
+    <!-- Load font stylesheet directly instead of using data URI -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" crossorigin />
     
     <!-- Critical CSS inline -->
     <style>
@@ -22,7 +24,6 @@
     
     <!-- Load non-critical CSS -->
     <link rel="stylesheet" href="/src/index.css" />
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" crossorigin />
     
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website" />
