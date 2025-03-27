@@ -50,9 +50,9 @@ const About = () => {
                     </div>
                     <div>
                       <p className="text-campher-gray italic text-sm">
-                        "Campher Communications transformerte vår nettilstedeværelse. Teamet deres leverte en nettside som overgikk våre forventninger og virkelig representerer vårt merke."
+                        "Campher Communications transformerte vår nettilstedeværelse. Jonathan leverte en nettside som overgikk våre forventninger og virkelig representerer vårt merke."
                       </p>
-                      <p className="text-campher-dark font-medium text-sm mt-2">- Marcu, Prestige C</p>
+                      <p className="text-campher-dark font-medium text-sm mt-2">- Marcu, Prestige Coaching</p>
                     </div>
                   </div>
                 </div>

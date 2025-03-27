@@ -14,7 +14,7 @@ const Services = () => {
     {
       icon: <Code size={24} />,
       title: 'Webutvikling',
-      description: 'Vi bygger moderne, responsive nettsider med den nyeste teknologien for optimal ytelse.',
+      description: 'Jeg bygger moderne, responsive nettsider med den nyeste teknologien for optimal ytelse.',
     },
     {
       icon: <PaintBucket size={24} />,
@@ -46,7 +46,7 @@ const Services = () => {
       features: [
         "Moderne, responsiv nettside med kontaktskjema og brukervennlig design",
         "Eget domene (f.eks. deresnavn.no) som styrker merkevaren din",
-        "Profesjonell e-postadresse (f.eks. kontakt@camphercommunications.no)",
+        "Profesjonell e-postadresse (f.eks. kontakt@deresnavn.no)",
         "Google My Business-oppsett for lokal synlighet og kundeanmeldelser",
         "Grunnleggende SEO for å bli funnet i søkemotorer",
         "3 måneders support for å sikre at alt fungerer som det skal"
@@ -83,7 +83,7 @@ const Services = () => {
           </span>
           <h2 className="heading-lg mb-4">Våre tjenester</h2>
           <p className="text-campher-gray">
-            Vi leverer omfattende webutviklingstjenester skreddersydd for dine forretningsbehov. 
+            Jeg leverer omfattende webutviklingstjenester skreddersydd for dine forretningsbehov. 
             Fra konsept til lansering håndterer vi alle aspekter av den digitale opplevelsen.
           </p>
         </div>

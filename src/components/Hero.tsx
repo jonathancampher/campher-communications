@@ -15,11 +15,11 @@ const Hero = () => {
         <div className="flex flex-col items-center justify-between gap-12">
           <div className="w-full space-y-6 text-center">
             <span className="inline-block px-3 py-1 text-xs font-medium bg-blue-100 text-campher-blue rounded-full">
-              Webutviklingseksperter
+              Webutviklingsekspert
             </span>
             {/* This h1 is likely the LCP element - optimize it */}
             <h1 className="heading-xl" id="main-heading">
-              Vi bygger <span className="text-gradient">digitale opplevelser</span> som transformerer bedrifter
+              Jeg bygger <span className="text-gradient">digitale opplevelser</span> som transformerer bedrifter
             </h1>
             <p className="text-lg text-gray-700 max-w-2xl mx-auto">
               Campher Communications spesialiserer seg på å skape innovative webløsninger som hjelper bedrifter å skille seg ut og lykkes i det digitale landskapet.

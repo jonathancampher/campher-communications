@@ -59,7 +59,7 @@ const Footer = () => {
               <Logo />
             </div>
             <p className="text-gray-400 mb-4 md:mb-6 max-w-md text-sm md:text-base">
-              Vi bygger digitale opplevelser som hjelper bedrifter med å koble seg til sine kunder og oppnå sine mål.
+              Jeg bygger digitale opplevelser som hjelper bedrifter med å koble seg til sine kunder og oppnå sine mål.
             </p>
             <p className="text-gray-400 mb-4 md:mb-6 text-sm md:text-base">
               Org.nr: 932498413

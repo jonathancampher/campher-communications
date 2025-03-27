@@ -23,8 +23,8 @@ const Contact = () => {
           </span>
           <h2 className="heading-lg mb-4">Kontakt oss</h2>
           <p className="text-campher-gray">
-            Har du et prosjekt i tankene eller ønsker du å vite mer om våre tjenester? Vi vil gjerne høre fra deg. 
-            Ta kontakt med oss og la oss starte en samtale.
+            Har du et prosjekt i tankene eller ønsker du å vite mer om mine tjenester? Jeg vil gjerne høre fra deg. 
+            Ta kontakt med meg og la oss starte en samtale.
           </p>
         </div>
 

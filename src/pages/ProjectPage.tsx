@@ -25,7 +25,7 @@ const projectData: Project[] = [
     image: '/lovable-uploads/prosjekt1.webp',
     description: 'Responsiv hjemmeside for Myhre Montasje med fokus på SEO-optimalisering og brukervennlighet.',
     challenge: 'Myhre Montasje hadde ingen nettside og trengte en profesjonell digital tilstedeværelse for å vise frem sine tjenester, bygge tillit hos potensielle kunder og generere nye henvendelser.',
-    solution: 'Vi utviklet en komplett nettside fra bunnen av med fokus på SEO-optimalisering, rask lastetid og responsive design. Nettsiden presenterer bedriftens tjenester på en tydelig måte med profesjonelle bilder som viser kvaliteten i arbeidet deres. Vi implementerte også kontaktskjema og tydelige handlingsknapper for å gjøre det enkelt for besøkende å ta kontakt.',
+    solution: 'Jeg utviklet en komplett nettside fra bunnen av med fokus på SEO-optimalisering, rask lastetid og responsive design. Nettsiden presenterer bedriftens tjenester på en tydelig måte med profesjonelle bilder som viser kvaliteten i arbeidet deres. Jeg implementerte også kontaktskjema og tydelige handlingsknapper for å gjøre det enkelt for besøkende å ta kontakt.',
     results: 'Siden lanseringen har Myhre Montasje fått en betydelig økning i antall henvendelser, og nettsiden rangerer nå høyt på relevante søkeord som "montasjetjenester Vestfold" og "håndverker Telemark". Google Page Speed Insights gir nettsiden en høy score på både mobil og desktop, noe som bidrar til både bedre brukeropplevelse og bedre rangering i søkemotorer.',
     technologies: ['Responsivt design', 'SEO-optimalisering', 'Rask lastetid', 'Kontaktskjema', 'Bildegalleri', 'Google My Business integrasjon']
   },
@@ -33,8 +33,8 @@ const projectData: Project[] = [
     id: 2,
     title: 'Bedriftsside 2',
     image: 'https://placehold.co/1200x600/f5f7fa/0069e0?text=Prosjekt+På+Vei',
-    description: 'Prosjekt på vei – vi jobber med en spennende ny nettside for en kunde innen tjenestesektoren.',
-    challenge: 'Prosjektet er under utvikling. Vi ser frem til å dele mer informasjon når prosjektet er ferdigstilt.',
+    description: 'Prosjekt på vei – Jeg jobber med en spennende ny nettside for en kunde innen tjenestesektoren.',
+    challenge: 'Prosjektet er under utvikling. Jeg ser frem til å dele mer informasjon når prosjektet er ferdigstilt.',
     solution: 'Vårt team arbeider for tiden med å utvikle en skreddersydd løsning basert på kundens spesifikke behov og målsettinger.',
     results: 'Resultater vil bli delt når prosjektet er ferdigstilt og lansert.',
     technologies: ['Under utvikling']
@@ -44,8 +44,8 @@ const projectData: Project[] = [
     title: 'Bedriftsside 3',
     image: 'https://placehold.co/1200x600/f5f7fa/0069e0?text=Prosjekt+På+Vei',
     description: 'Prosjekt på vei – en ny moderne nettside for en håndverksbedrift er under utvikling.',
-    challenge: 'Prosjektet er under utvikling. Vi ser frem til å dele mer informasjon når prosjektet er ferdigstilt.',
-    solution: 'Vårt team arbeider for tiden med å utvikle en skreddersydd løsning basert på kundens spesifikke behov og målsettinger.',
+    challenge: 'Prosjektet er under utvikling. Jeg ser frem til å dele mer informasjon når prosjektet er ferdigstilt.',
+    solution: 'Jeg arbeider for tiden med å utvikle en skreddersydd løsning basert på kundens spesifikke behov og målsettinger.',
     results: 'Resultater vil bli delt når prosjektet er ferdigstilt og lansert.',
     technologies: ['Under utvikling']
   }
@@ -138,13 +138,13 @@ const ProjectPage = () => {
             
             <div className="text-center bg-gray-50 p-4 md:p-8 rounded-xl">
               <h2 className="text-lg md:text-xl font-medium mb-2 md:mb-3">Vil du ha en lignende løsning?</h2>
-              <p className="text-gray-700 mb-3 md:mb-4 text-sm md:text-base">Ta kontakt med oss for en uforpliktende prat om ditt prosjekt.</p>
+              <p className="text-gray-700 mb-3 md:mb-4 text-sm md:text-base">Ta kontakt med meg for en uforpliktende prat om ditt prosjekt.</p>
               <a 
                 href="/#contact" 
                 className="inline-flex items-center justify-center bg-campher-blue hover:bg-blue-600 text-white px-4 py-2 md:px-6 md:py-3 rounded-md font-medium transition-colors text-sm md:text-base min-h-10 min-w-32"
                 aria-label="Kontakt oss om ditt prosjekt"
               >
-                Kontakt oss
+                Kontakt meg
               </a>
             </div>
           </div>

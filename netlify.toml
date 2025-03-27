@@ -85,3 +85,5 @@
 
   [forms.notifications]
     to = "kontakt@camphercommunications.no"
+    from = "noreply@camphercommunications.no"
+   subject = "Ny melding fra camphercommunications.no"

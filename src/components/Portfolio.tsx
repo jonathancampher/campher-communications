@@ -26,7 +26,7 @@ const Portfolio = () => {
       title: 'Bedriftsside 2',
       category: ['web'],
       image: 'https://placehold.co/600x400/f5f7fa/0069e0?text=Prosjekt+På+Vei',
-      description: 'Prosjekt på vei – vi jobber med en spennende ny nettside for en kunde innen tjenestesektoren.',
+      description: 'Prosjekt på vei – jeg jobber med en spennende ny nettside for en kunde innen coaching.',
       link: '/project/2'
     },
     {
@@ -48,7 +48,7 @@ const Portfolio = () => {
           </span>
           <h2 className="heading-lg mb-4">Utvalgte prosjekter</h2>
           <p className="text-gray-700">
-            Ta en titt på noen av våre siste prosjekter. Hver nettside representerer vårt engasjement for kvalitet og oppmerksomhet på detaljer.
+            Ta en titt på noen av mine siste prosjekter. Hver nettside representerer mitt engasjement for kvalitet og oppmerksomhet på detaljer.
           </p>
         </div>
         
