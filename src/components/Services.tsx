@@ -78,11 +78,12 @@ const Services = () => {
     <section id="services" className="section-padding bg-secondary">
       <div className="container-custom">
         <div className="text-center max-w-xl mx-auto mb-16">
-          <span className="inline-block px-3 py-1 text-xs font-medium bg-blue-100 text-campher-blue rounded-full mb-4">
+          {/* Improved contrast by changing bg-blue-100 to bg-blue-200 and changing text color */}
+          <span className="inline-block px-3 py-1 text-xs font-medium bg-blue-200 text-blue-800 rounded-full mb-4" aria-label="Seksjonsetikett">
             Hva jeg tilbyr
           </span>
           <h2 className="heading-lg mb-4">Mine tjenester</h2>
-          <p className="text-campher-gray">
+          <p className="text-gray-700">
             Jeg leverer omfattende webutviklingstjenester skreddersydd for dine forretningsbehov. 
             Fra konsept til lansering håndterer jeg alle aspekter av den digitale opplevelsen.
           </p>
@@ -95,11 +96,12 @@ const Services = () => {
               className="bg-white p-6 rounded-xl shadow-sm card-hover opacity-0 animate-fade-in-up"
               style={{ animationDelay: `${0.1 + index * 0.1}s` }}
             >
-              <div className="w-12 h-12 bg-blue-100 text-campher-blue rounded-lg flex items-center justify-center mb-4">
+              {/* Improved contrast by using bg-blue-200 instead of bg-blue-100 */}
+              <div className="w-12 h-12 bg-blue-200 text-blue-800 rounded-lg flex items-center justify-center mb-4">
                 {service.icon}
               </div>
               <h3 className="text-xl font-medium mb-2">{service.title}</h3>
-              <p className="text-campher-gray">{service.description}</p>
+              <p className="text-gray-700">{service.description}</p>
             </div>
           ))}
         </div>
@@ -113,11 +115,12 @@ const Services = () => {
                   <CardTitle>{pkg.title}</CardTitle>
                 </CardHeader>
                 <CardContent>
-                  <p className="text-campher-gray mb-4">{pkg.description}</p>
+                  <p className="text-gray-700 mb-4">{pkg.description}</p>
                   <ul className="space-y-2">
                     {pkg.features.map((feature, fIndex) => (
                       <li key={fIndex} className="flex items-start gap-2">
-                        <span className="text-campher-blue font-medium">•</span>
+                        {/* Improved contrast by using text-blue-800 instead of text-campher-blue */}
+                        <span className="text-blue-800 font-medium">•</span>
                         <span className="text-sm">{feature}</span>
                       </li>
                     ))}
@@ -126,7 +129,8 @@ const Services = () => {
                 <CardFooter>
                   <a
                     href="#contact"
-                    className="w-full inline-flex items-center justify-center bg-campher-blue hover:bg-blue-600 text-white px-4 py-2 rounded-md font-medium transition-colors"
+                    className="w-full inline-flex items-center justify-center bg-blue-700 hover:bg-blue-800 text-white px-4 py-2 rounded-md font-medium transition-colors"
+                    aria-label="Ta kontakt om denne pakken"
                   >
                     Ta kontakt
                   </a>
@@ -139,7 +143,8 @@ const Services = () => {
         <div className="mt-16 text-center">
           <a 
             href="#contact" 
-            className="inline-flex items-center justify-center bg-campher-blue hover:bg-blue-600 text-white px-6 py-3 rounded-md font-medium transition-colors"
+            className="inline-flex items-center justify-center bg-blue-700 hover:bg-blue-800 text-white px-6 py-3 rounded-md font-medium transition-colors"
+            aria-label="Diskuter ditt prosjekt med oss"
           >
             Diskuter ditt prosjekt
           </a>

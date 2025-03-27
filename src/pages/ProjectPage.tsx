@@ -32,7 +32,8 @@ const projectData: Project[] = [
   {
     id: 2,
     title: 'Bedriftsside 2',
-    image: 'https://placehold.co/1200x600/f5f7fa/0069e0?text=Prosjekt+På+Vei',
+    // Using local placeholder instead of placehold.co to avoid CSP issues
+    image: '/placeholder.svg',
     description: 'Prosjekt på vei – Jeg jobber med en spennende ny nettside for en kunde innen tjenestesektoren.',
     challenge: 'Prosjektet er under utvikling. Jeg ser frem til å dele mer informasjon når prosjektet er ferdigstilt.',
     solution: 'Vårt team arbeider for tiden med å utvikle en skreddersydd løsning basert på kundens spesifikke behov og målsettinger.',
@@ -42,7 +43,8 @@ const projectData: Project[] = [
   {
     id: 3,
     title: 'Bedriftsside 3',
-    image: 'https://placehold.co/1200x600/f5f7fa/0069e0?text=Prosjekt+På+Vei',
+    // Using local placeholder instead of placehold.co to avoid CSP issues
+    image: '/placeholder.svg',
     description: 'Prosjekt på vei – en ny moderne nettside for en håndverksbedrift er under utvikling.',
     challenge: 'Prosjektet er under utvikling. Jeg ser frem til å dele mer informasjon når prosjektet er ferdigstilt.',
     solution: 'Jeg arbeider for tiden med å utvikle en skreddersydd løsning basert på kundens spesifikke behov og målsettinger.',
@@ -68,7 +70,7 @@ const ProjectPage = () => {
         <Navbar />
         <div className="container-custom py-20">
           <h1 className="text-2xl">Prosjektet ble ikke funnet</h1>
-          <Link to="/#portfolio" className="text-campher-blue hover:underline inline-flex items-center mt-4 text-lg py-2 px-4 min-h-12 min-w-40" aria-label="Tilbake til prosjekter">
+          <Link to="/#portfolio" className="text-blue-700 hover:underline inline-flex items-center mt-4 text-lg py-2 px-4 min-h-12 min-w-40" aria-label="Tilbake til prosjekter">
             <ArrowLeft size={16} className="mr-2" />
             Tilbake til prosjekter
           </Link>
@@ -83,7 +85,7 @@ const ProjectPage = () => {
       <Navbar />
       <main className={`pt-20 ${isMobile ? 'pb-8' : 'pt-24'}`}>
         <div className="container-custom py-5 md:py-10">
-          <Link to="/#portfolio" className="text-campher-blue hover:underline inline-flex items-center mb-4 md:mb-6 text-lg py-2 px-4 min-h-12 min-w-40" aria-label="Tilbake til prosjekter">
+          <Link to="/#portfolio" className="text-blue-700 hover:underline inline-flex items-center mb-4 md:mb-6 text-lg py-2 px-4 min-h-12 min-w-40" aria-label="Tilbake til prosjekter">
             <ArrowLeft size={16} className="mr-2" />
             Tilbake til prosjekter
           </Link>
@@ -129,7 +131,7 @@ const ProjectPage = () => {
               <h2 className="text-lg md:text-xl font-medium mb-2 md:mb-3">Teknologier</h2>
               <div className="flex flex-wrap gap-2">
                 {project.technologies.map((tech, index) => (
-                  <span key={index} className="px-3 py-1 bg-blue-50 text-campher-blue rounded-full text-xs md:text-sm">
+                  <span key={index} className="px-3 py-1 bg-blue-200 text-blue-800 rounded-full text-xs md:text-sm">
                     {tech}
                   </span>
                 ))}
@@ -141,7 +143,7 @@ const ProjectPage = () => {
               <p className="text-gray-700 mb-3 md:mb-4 text-sm md:text-base">Ta kontakt med meg for en uforpliktende prat om ditt prosjekt.</p>
               <a 
                 href="/#contact" 
-                className="inline-flex items-center justify-center bg-campher-blue hover:bg-blue-600 text-white px-4 py-2 md:px-6 md:py-3 rounded-md font-medium transition-colors text-sm md:text-base min-h-10 min-w-32"
+                className="inline-flex items-center justify-center bg-blue-700 hover:bg-blue-800 text-white px-4 py-2 md:px-6 md:py-3 rounded-md font-medium transition-colors text-sm md:text-base min-h-10 min-w-32"
                 aria-label="Kontakt oss om ditt prosjekt"
               >
                 Kontakt meg
