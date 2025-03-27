@@ -50,28 +50,8 @@ if (root) {
   createRoot(root).render(<App />);
 }
 
-// Only preconnect to essential domains
-const preconnects = [
-  { rel: 'preconnect', href: 'https://api.netlify.com' },
-  { rel: 'preconnect', href: 'https://fonts.googleapis.com', crossOrigin: '' },
-  { rel: 'preconnect', href: 'https://fonts.gstatic.com', crossOrigin: 'anonymous' }
-];
-
-// Only add preconnect links that don't already exist
-const addedLinks = new Set();
-preconnects.forEach(link => {
-  const existingLink = document.querySelector(`link[rel="${link.rel}"][href="${link.href}"]`);
-  if (!existingLink && !addedLinks.has(link.href)) {
-    const linkEl = document.createElement('link');
-    linkEl.rel = link.rel;
-    linkEl.href = link.href;
-    if (link.crossOrigin) {
-      linkEl.crossOrigin = link.crossOrigin;
-    }
-    document.head.appendChild(linkEl);
-    addedLinks.add(link.href);
-  }
-});
+// Only preconnect to essential domains - we've moved these to the HTML head
+// so no need to add them dynamically here
 
 // Register service worker for production
 if (import.meta.env.PROD && 'serviceWorker' in navigator) {

@@ -1,5 +1,7 @@
 
 /* Critical CSS for first render - only include what's needed for above-the-fold content */
+/* Font is already included in index.html, no need to import here */
+
 :root{
   --background: 210 33% 99%;
   --foreground: 214 32% 8%;

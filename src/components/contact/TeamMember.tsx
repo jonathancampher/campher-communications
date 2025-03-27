@@ -22,8 +22,8 @@ const TeamMember = ({ name, role, imageSrc, initials }: TeamMemberProps) => {
           alt={name} 
           className="object-cover" 
           loading="lazy" 
-          width="645"
-          height="764"
+          width="64"
+          height="64"
         />
         <AvatarFallback>{initials}</AvatarFallback>
       </Avatar>

@@ -1,6 +1,5 @@
 
-/* Import fonts directly instead of data URLs */
-/* Font er allerede inkludert i index.html, så vi trenger ikke importere den her */
+/* Font already included in index.html, no need to import here */
 
 @tailwind base;
 @tailwind components;
@@ -112,7 +111,7 @@
 
   /* Improved link accessibility */
   .link-accessible {
-    @apply text-blue-700 hover:text-blue-900 underline underline-offset-2 transition-colors focus:ring-2 focus:ring-blue-400 focus:outline-none rounded-sm focus:ring-offset-2;
+    @apply text-blue-800 hover:text-blue-900 underline underline-offset-2 transition-colors focus:ring-2 focus:ring-blue-400 focus:outline-none rounded-sm focus:ring-offset-2;
   }
 
   .link-contrast {
