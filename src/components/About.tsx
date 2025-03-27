@@ -1,4 +1,3 @@
-
 import { CheckCircle } from 'lucide-react';
 
 /**
@@ -61,7 +60,7 @@ const About = () => {
           </div>
           
           <div className="order-1 lg:order-2">
-            <span className="inline-block px-3 py-1 text-xs font-medium bg-blue-100 text-campher-blue rounded-full mb-4 opacity-0 animate-fade-in">
+            <span className="inline-block px-3 py-1 text-xs font-medium bg-blue-200 text-blue-800 rounded-full mb-4 opacity-0 animate-fade-in">
               Om meg
             </span>
             <h2 className="heading-lg mb-4 opacity-0 animate-fade-in stagger-1">
@@ -71,7 +70,10 @@ const About = () => {
               <img 
                 src="/lovable-uploads/b7bb1f5a-cbd7-4885-9a85-2750d69cc2e7.png" 
                 alt="Jonathan Campher" 
-                className="w-20 h-20 rounded-full border-2 border-campher-blue object-cover"
+                className="w-20 h-20 rounded-full border-2 border-campher-blue object-cover object-top"
+                width="645"
+                height="764"
+                loading="eager"
               />
               <div>
                 <h3 className="text-xl font-medium">Jonathan Campher</h3>

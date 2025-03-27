@@ -25,7 +25,6 @@ const Portfolio = () => {
       id: 2,
       title: 'Bedriftsside 2',
       category: ['web'],
-      // Using local placeholder instead of placehold.co to avoid CSP issues
       image: '/placeholder.svg',
       description: 'Prosjekt på vei – jeg jobber med en spennende ny nettside for en kunde innen coaching.',
       link: '/project/2'
@@ -34,7 +33,6 @@ const Portfolio = () => {
       id: 3,
       title: 'Bedriftsside 3',
       category: ['web', 'responsive'],
-      // Using local placeholder instead of placehold.co to avoid CSP issues
       image: '/placeholder.svg',
       description: 'Prosjekt på vei – en ny moderne nettside for en håndverksbedrift er under utvikling.',
       link: '/project/3'
@@ -45,7 +43,6 @@ const Portfolio = () => {
     <section id="portfolio" className="section-padding">
       <div className="container-custom">
         <div className="text-center max-w-xl mx-auto mb-8 md:mb-12">
-          {/* Improved contrast with darker background and text colors */}
           <span className="inline-block px-3 py-1 text-xs font-medium bg-blue-200 text-blue-800 rounded-full mb-4" aria-label="Prosjektseksjon">
             Våre prosjekter
           </span>

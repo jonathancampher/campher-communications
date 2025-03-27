@@ -1,4 +1,3 @@
-
 import { ArrowRight } from 'lucide-react';
 
 /**
@@ -14,11 +13,9 @@ const Hero = () => {
       <div className="container-custom">
         <div className="flex flex-col items-center justify-between gap-12">
           <div className="w-full space-y-6 text-center">
-            {/* Improved contrast with darker background and text colors */}
             <span className="inline-block px-3 py-1 text-xs font-medium bg-blue-200 text-blue-800 rounded-full" aria-label="Webutviklingsekspert">
               Webutviklingsekspert
             </span>
-            {/* This h1 is likely the LCP element - optimize it */}
             <h1 className="heading-xl" id="main-heading">
               Jeg bygger <span className="text-gradient">digitale opplevelser</span> som transformerer bedrifter
             </h1>
@@ -37,7 +34,6 @@ const Hero = () => {
             </div>
           </div>
           
-          {/* "Bygg din fremtid" seksjon med bedre mobil-layout og proper dimensions */}
           <div className="w-full">
             <div className="relative mx-auto max-w-4xl">
               <div className="absolute -top-12 -left-12 w-64 h-64 bg-blue-100 rounded-full filter blur-3xl opacity-30"></div>

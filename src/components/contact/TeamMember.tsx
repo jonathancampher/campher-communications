@@ -17,7 +17,14 @@ const TeamMember = ({ name, role, imageSrc, initials }: TeamMemberProps) => {
   return (
     <div className="flex gap-4 items-center">
       <Avatar className="h-16 w-16 border-2 border-campher-blue">
-        <AvatarImage src={imageSrc} alt={name} />
+        <AvatarImage 
+          src={imageSrc} 
+          alt={name} 
+          className="object-cover object-top" 
+          loading="lazy" 
+          width="100"
+          height="100"
+        />
         <AvatarFallback>{initials}</AvatarFallback>
       </Avatar>
       <div>
