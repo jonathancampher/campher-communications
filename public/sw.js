@@ -1,6 +1,6 @@
 
 // Service Worker for caching assets and offline experience
-const CACHE_NAME = 'campher-communications-v1';
+const CACHE_NAME = 'campher-communications-v2';
 
 // Assets to cache immediately on service worker installation
 const PRECACHE_ASSETS = [
@@ -12,8 +12,27 @@ const PRECACHE_ASSETS = [
   '/lovable-uploads/prosjekt1.webp'
 ];
 
+// Skip external requests that might be blocked by CSP
+const shouldHandleRequest = (url) => {
+  // Skip external domains that might be blocked by CSP
+  const skipDomains = [
+    'fonts.googleapis.com',
+    'fonts.gstatic.com',
+    'cdn.gpteng.co',
+    'placehold.co'
+  ];
+  
+  // Check if URL contains any of the skip domains
+  return !skipDomains.some(domain => url.includes(domain));
+};
+
 // Runtime caching strategy - Network first with cache fallback
 const cacheFirst = async (request) => {
+  // Skip handling requests that might be blocked by CSP
+  if (!shouldHandleRequest(request.url)) {
+    return fetch(request);
+  }
+
   const cache = await caches.open(CACHE_NAME);
   try {
     // Try to get fresh content from network
@@ -28,7 +47,7 @@ const cacheFirst = async (request) => {
       return cachedResponse;
     }
     // If request is not in cache and network is unavailable, return offline page
-    if (request.headers.get('Accept').includes('text/html')) {
+    if (request.headers.get('Accept')?.includes('text/html')) {
       return caches.match('/index.html');
     }
     // For other resources, simply fail
@@ -69,13 +88,14 @@ self.addEventListener('fetch', event => {
   if (event.request.method !== 'GET' || 
       event.request.url.startsWith('chrome-extension') ||
       event.request.url.includes('extension') ||
-      event.request.url.startsWith('http://localhost')) {
+      event.request.url.startsWith('http://localhost') ||
+      !shouldHandleRequest(event.request.url)) {
     return;
   }
 
   // Handle API calls and HTML pages with network-first strategy
   if (event.request.url.includes('api.netlify.com') || 
-      event.request.headers.get('Accept').includes('text/html')) {
+      event.request.headers.get('Accept')?.includes('text/html')) {
     event.respondWith(cacheFirst(event.request.clone()));
     return;
   }
@@ -119,7 +139,7 @@ self.addEventListener('fetch', event => {
 
 // Handle offline fallback
 self.addEventListener('fetch', event => {
-  if (event.request.mode === 'navigate') {
+  if (event.request.mode === 'navigate' && !shouldHandleRequest(event.request.url)) {
     event.respondWith(
       fetch(event.request).catch(() => {
         return caches.match('/index.html');
