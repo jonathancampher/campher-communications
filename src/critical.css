@@ -156,7 +156,6 @@ img {
   max-width: 100%;
   display: block;
   height: auto;
-  content-visibility: auto; /* Optimize rendering */
 }
 
 /* Add animations once fonts are loaded */
