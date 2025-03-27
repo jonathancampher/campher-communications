@@ -27,7 +27,7 @@ const BlogPostCard = ({ post, isFeatured = false, scrollToTop }: BlogPostCardPro
       onClick={scrollToTop}
       aria-label={`Les blogginnlegg: ${post.title}`}
     >
-      <Card className="h-full overflow-hidden shadow-md hover:shadow-lg transition-shadow">
+      <Card className="h-full overflow-hidden shadow-md hover:shadow-lg transition-shadow border-2 border-transparent hover:border-blue-200 focus:border-blue-300">
         {isFeatured && !isMobile && (
           <div className="relative overflow-hidden bg-blue-50">
             <AspectRatio ratio={16/9}>
@@ -60,7 +60,7 @@ const BlogPostCard = ({ post, isFeatured = false, scrollToTop }: BlogPostCardPro
               0
             </span>
           </div>
-          <span className="text-campher-blue hover:underline inline-flex items-center text-xs md:text-sm py-2">
+          <span className="text-campher-blue font-medium hover:text-blue-800 inline-flex items-center text-xs md:text-sm py-2 underline">
             Les mer
             <ArrowUpRight size={isMobile ? 14 : 16} className="ml-1" />
           </span>

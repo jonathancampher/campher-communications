@@ -50,27 +50,21 @@ if (root) {
   createRoot(root).render(<App />);
 }
 
-// Only preload essential resources
-const preloadLinks = [
-  { rel: 'preload', href: '/lovable-uploads/25644d97-9c73-464b-a2b0-fe20bd636d08.png', as: 'image' },
-  // Add preconnect for Netlify forms - important for form submissions
+// Only preconnect to essential domains
+const preconnects = [
   { rel: 'preconnect', href: 'https://api.netlify.com' },
-  // Add preconnect for Google Fonts
   { rel: 'preconnect', href: 'https://fonts.googleapis.com', crossOrigin: '' },
   { rel: 'preconnect', href: 'https://fonts.gstatic.com', crossOrigin: 'anonymous' }
 ];
 
-// Only add preload links that don't already exist
+// Only add preconnect links that don't already exist
 const addedLinks = new Set();
-preloadLinks.forEach(link => {
+preconnects.forEach(link => {
   const existingLink = document.querySelector(`link[rel="${link.rel}"][href="${link.href}"]`);
   if (!existingLink && !addedLinks.has(link.href)) {
     const linkEl = document.createElement('link');
     linkEl.rel = link.rel;
     linkEl.href = link.href;
-    if (link.as) {
-      linkEl.as = link.as;
-    }
     if (link.crossOrigin) {
       linkEl.crossOrigin = link.crossOrigin;
     }
@@ -102,7 +96,6 @@ window.addEventListener('pageshow', (event) => {
 
 // Optimize font loading
 if ('fonts' in document) {
-  // Directly use the font without data: URIs
   Promise.all([
     document.fonts.load('1em Inter'),
     document.fonts.load('500 1em Inter'),

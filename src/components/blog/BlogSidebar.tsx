@@ -52,7 +52,7 @@ const BlogSidebar = ({ recentPosts, scrollToTop }: BlogSidebarProps) => {
         <CardFooter className="bg-blue-50 border-t border-blue-100">
           <a 
             href="#contact" 
-            className="w-full inline-flex items-center justify-center bg-campher-blue hover:bg-blue-600 text-white px-4 py-3 rounded-md font-medium transition-colors"
+            className="w-full inline-flex items-center justify-center bg-campher-blue hover:bg-blue-700 text-white px-4 py-3 rounded-md font-medium transition-colors"
           >
             Start i dag
           </a>
@@ -65,9 +65,11 @@ const BlogSidebar = ({ recentPosts, scrollToTop }: BlogSidebarProps) => {
           {recentPosts.slice(0, 3).map((post) => (
             <Link key={post.id} to={`/blog/${post.id}`} onClick={scrollToTop} className="block group">
               <div>
-                <h4 className="font-medium group-hover:text-campher-blue transition-colors">{post.title}</h4>
+                <h4 className="font-medium text-campher-dark group-hover:text-campher-blue transition-colors underline">
+                  {post.title}
+                </h4>
                 <p className="text-sm text-campher-gray">{post.excerpt.substring(0, 80)}...</p>
-                <p className="text-xs text-gray-500 mt-1">{post.publishDate} | {post.readTime} lesetid</p>
+                <p className="text-xs text-gray-600 mt-1">{post.publishDate} | {post.readTime} lesetid</p>
               </div>
             </Link>
           ))}

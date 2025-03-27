@@ -80,7 +80,7 @@ const ContactForm = () => {
           <p>{formError}</p>
           <p className="text-sm mt-1">
             Du kan også ta kontakt med oss direkte på{' '}
-            <a href="mailto:kontakt@camphercommunications.no" className="underline">
+            <a href="mailto:kontakt@camphercommunications.no" className="underline font-medium text-red-800 hover:text-red-900">
               kontakt@camphercommunications.no
             </a>
           </p>
@@ -111,12 +111,13 @@ const ContactForm = () => {
         </form>
       </Form>
       
-      {/* Progressive enhancement - alternative contact method */}
-      <div className="mt-6 text-sm text-gray-500">
+      {/* Progressive enhancement - alternative contact method with improved contrast */}
+      <div className="mt-6 text-sm text-gray-700">
         Foretrekker du å sende e-post direkte?{' '}
         <a 
           href="mailto:kontakt@camphercommunications.no" 
-          className="text-blue-600 hover:text-blue-800 transition-colors"
+          className="text-campher-blue font-medium hover:text-blue-800 underline transition-colors"
+          aria-label="Send e-post til kontakt@camphercommunications.no"
         >
           kontakt@camphercommunications.no
         </a>
