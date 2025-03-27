@@ -4,19 +4,19 @@
   publish = "dist"
   command = "npm run build"
 
-# Set cache headers for static assets
+# Set correct content type for JavaScript files
 [[headers]]
-  for = "/assets/*"
+  for = "/assets/*.js"
   [headers.values]
     Cache-Control = "public, max-age=31536000, immutable"
-    # Fikse MIME-typene for JavaScript- og CSS-filer
     Content-Type = "application/javascript"
 
-# Legg til spesifikk header for CSS-filer
+# Set correct content type for CSS files
 [[headers]]
-  for = "/*.css"
+  for = "/assets/*.css"
   [headers.values]
     Content-Type = "text/css"
+    Cache-Control = "public, max-age=31536000, immutable"
 
 # Set security and cache headers for all routes
 [[headers]]
@@ -29,7 +29,7 @@
     Referrer-Policy = "strict-origin-when-cross-origin"
     Permissions-Policy = "camera=(), microphone=(), geolocation=()"
     Strict-Transport-Security = "max-age=31536000; includeSubDomains; preload"
-    # Fiks CSP for å tillate data-URL-er
+    # Fix CSP to allow data URLs
     Content-Security-Policy = "default-src 'self'; script-src 'self' https://cdn.gpteng.co 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com data:; connect-src 'self' https://*.netlify.app https://api.netlify.com https://fonts.googleapis.com https://fonts.gstatic.com https://cdn.gpteng.co; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https://www.google.com https://maps.googleapis.com; form-action 'self'; frame-src 'self' https://www.google.com; frame-ancestors 'none'; base-uri 'self'; object-src 'none';"
     Cross-Origin-Opener-Policy = "same-origin"
 
@@ -45,16 +45,20 @@
   [headers.values]
     Cache-Control = "public, max-age=0, must-revalidate"
 
-# Fikse rekkefølge på redirects - assets først, så spesifikke ruter, så fallback
+# Order redirects correctly - assets first, then specific routes, then fallback
 [[redirects]]
   from = "/assets/*"
   to = "/assets/:splat"
   status = 200
 
-# Legg til spesifikk redirect for CSS-filer
 [[redirects]]
   from = "/*.css"
   to = "/:splat.css"
+  status = 200
+
+[[redirects]]
+  from = "/*.js"
+  to = "/:splat.js"
   status = 200
 
 [[redirects]]

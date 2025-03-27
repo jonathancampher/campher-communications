@@ -20,23 +20,6 @@ const initializePage = () => {
     document.documentElement.classList.add('has-fetch');
   }
   
-  // Add passive event listener support detection
-  let supportsPassive = false;
-  try {
-    const opts = Object.defineProperty({}, 'passive', {
-      get: function() {
-        supportsPassive = true;
-        return true;
-      }
-    });
-    window.addEventListener('testPassive', null as any, opts);
-    window.removeEventListener('testPassive', null as any, opts);
-  } catch (e) {}
-  
-  if (supportsPassive) {
-    document.documentElement.classList.add('has-passive-events');
-  }
-
   // Initialize image optimizations right away
   optimizeImages();
 }

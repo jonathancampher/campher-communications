@@ -1,8 +1,10 @@
 
 # These rules will change if you change your site's custom domains or HTTPS settings
 
-# Ensure assets are loaded correctly
-/assets/* /assets/:splat 200
+# Ensure assets are loaded correctly with proper MIME types
+/assets/*.js   /assets/:splat.js   200
+/assets/*.css  /assets/:splat.css  200
+/assets/*      /assets/:splat      200
 
 # Redirect default Netlify subdomain to primary domain
 https://campher-communications.netlify.app/* https://camphercommunications.no/:splat 301!
