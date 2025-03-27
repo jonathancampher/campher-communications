@@ -79,12 +79,12 @@ const Services = () => {
       <div className="container-custom">
         <div className="text-center max-w-xl mx-auto mb-16">
           <span className="inline-block px-3 py-1 text-xs font-medium bg-blue-100 text-campher-blue rounded-full mb-4">
-            Hva vi tilbyr
+            Hva jeg tilbyr
           </span>
-          <h2 className="heading-lg mb-4">Våre tjenester</h2>
+          <h2 className="heading-lg mb-4">Mine tjenester</h2>
           <p className="text-campher-gray">
             Jeg leverer omfattende webutviklingstjenester skreddersydd for dine forretningsbehov. 
-            Fra konsept til lansering håndterer vi alle aspekter av den digitale opplevelsen.
+            Fra konsept til lansering håndterer jeg alle aspekter av den digitale opplevelsen.
           </p>
         </div>
 
@@ -105,7 +105,7 @@ const Services = () => {
         </div>
         
         <div className="mt-16">
-          <h3 className="heading-md text-center mb-12">Våre produktpakker</h3>
+          <h3 className="heading-md text-center mb-12">Mine produktpakker</h3>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {productPackages.map((pkg, index) => (
               <Card key={index} className="shadow-sm opacity-0 animate-fade-in-up" style={{ animationDelay: `${0.1 + index * 0.1}s` }}>
