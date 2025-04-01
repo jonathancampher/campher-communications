@@ -20,6 +20,7 @@ export const NetlifyFormDetection = () => {
         <input type="email" name="email" />
         <input type="text" name="subject" />
         <textarea name="message"></textarea>
+        <input type="checkbox" name="consent" />
         <input type="hidden" name="form-name" value="contact" />
         <input name="bot-field" type="hidden" />
       </form>
@@ -28,7 +29,7 @@ export const NetlifyFormDetection = () => {
       <div hidden data-netlify-forms="contact">
         <div className="netlify-form-detection">
           Form: contact
-          Fields: name,email,subject,message
+          Fields: name,email,subject,message,consent
         </div>
       </div>
     </>

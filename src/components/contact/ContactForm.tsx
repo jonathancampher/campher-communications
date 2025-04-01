@@ -28,7 +28,8 @@ const ContactForm = () => {
       name: "",
       email: "",
       subject: "",
-      message: ""
+      message: "",
+      consent: false
     }
   });
 
