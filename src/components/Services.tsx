@@ -65,8 +65,7 @@ const Services = () => {
         "Teknisk support med garantert responstid",
         "Overvåking av nettsidens ytelse og sikkerhet",
         "Tilpasninger for å møte nye mål eller markedsendringer",
-        "Sikkerhetskopier og oppdateringer av programvare",
-        "Månedlig gjennomgang av statistikk og besøkstall"
+        "Sikkerhetskopier og oppdateringer av programvare"
       ]
     },
     {
@@ -78,8 +77,7 @@ const Services = () => {
         "Teknisk support med garantert responstid",
         "Overvåking av nettsidens ytelse og sikkerhet",
         "Tilpasninger for å møte nye mål eller markedsendringer",
-        "Sikkerhetskopier og oppdateringer av programvare",
-        "Månedlig gjennomgang av statistikk og besøkstall"
+        "Sikkerhetskopier og oppdateringer av programvare"
       ]
     },
     {
