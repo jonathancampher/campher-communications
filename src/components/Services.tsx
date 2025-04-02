@@ -1,3 +1,4 @@
+
 import { Code, PaintBucket, ShoppingCart, Smartphone, Zap } from 'lucide-react';
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 
@@ -42,7 +43,7 @@ const Services = () => {
     {
       title: "Digital Startpakke",
       description: "En komplett løsning for å få bedriften din på nett",
-      price: "Fra kr 20.000,-",
+      price: "Fra kr 20.000,- eks. mva",
       features: [
         "Moderne, responsiv nettside med kontaktskjema og brukervennlig design",
         "Eget domene (f.eks. deresnavn.no) som styrker merkevaren din",
@@ -56,7 +57,7 @@ const Services = () => {
     {
       title: "12 måneders komplett pakke",
       description: "Alt fra Digital Startpakke + full support og vedlikehold i 12 måneder",
-      price: "kr 1.500,-/mnd",
+      price: "kr 1.500,- pr mnd eks. mva",
       features: [
         "Alt i Digital Startpakke +",
         "Ubegrenset support og vedlikehold gjennom hele perioden",
@@ -71,7 +72,7 @@ const Services = () => {
     {
       title: "Vedlikehold og support",
       description: "Løpende hjelp for å holde nettsiden din oppdatert og effektiv",
-      price: "Fra kr 1.500,-/mnd",
+      price: "Fra kr 1.500,- pr mnd eks. mva",
       features: [
         "Oppdateringer av innhold, bilder og design etter behov",
         "Teknisk support med garantert responstid",
@@ -84,7 +85,7 @@ const Services = () => {
     {
       title: "Ekstra tjenester",
       description: "Tilpassede løsninger for å ta din digitale tilstedeværelse videre",
-      price: "Tilpasset pris",
+      price: "Tilpasset pris eks. mva",
       features: [
         "Avansert SEO for høyere rangering i Google",
         "Integrasjoner som booking-systemer eller nettbutikk",
