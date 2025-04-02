@@ -1,4 +1,3 @@
-
 import { Code, PaintBucket, ShoppingCart, Smartphone, Zap } from 'lucide-react';
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 
@@ -43,7 +42,7 @@ const Services = () => {
     {
       title: "Digital Startpakke",
       description: "En komplett løsning for å få bedriften din på nett",
-      price: "Fra kr 15.000,-",
+      price: "Fra kr 20.000,-",
       features: [
         "Moderne, responsiv nettside med kontaktskjema og brukervennlig design",
         "Eget domene (f.eks. deresnavn.no) som styrker merkevaren din",
@@ -56,18 +55,17 @@ const Services = () => {
     },
     {
       title: "12 måneders komplett pakke",
-      description: "Optimal løsning for bedrifter som vil vokse på nett",
-      price: "Fra kr 36.000,- (eller kr 3.000,-/mnd)",
+      description: "Alt fra Digital Startpakke + full support og vedlikehold i 12 måneder",
+      price: "kr 1.500,-/mnd",
       features: [
         "Alt i Digital Startpakke +",
-        "Mer omfattende nettside med flere undersider",
-        "Premium design med tilpasset grafisk profil",
-        "Ubegrenset antall innholdsoppdateringer i perioden",
-        "Avansert SEO-optimalisering for bedre rangering",
-        "Google Analytics-oppsett med månedlige rapporter",
-        "12 måneders prioritert teknisk support",
-        "Optimalisering av ytelse og hastighet",
-        "Sikkerhetskopier og vedlikehold inkludert"
+        "Ubegrenset support og vedlikehold gjennom hele perioden",
+        "Oppdateringer av innhold, bilder og design etter behov",
+        "Teknisk support med garantert responstid",
+        "Overvåking av nettsidens ytelse og sikkerhet",
+        "Tilpasninger for å møte nye mål eller markedsendringer",
+        "Sikkerhetskopier og oppdateringer av programvare",
+        "Månedlig gjennomgang av statistikk og besøkstall"
       ]
     },
     {
@@ -102,7 +100,6 @@ const Services = () => {
     <section id="services" className="section-padding bg-secondary">
       <div className="container-custom">
         <div className="text-center max-w-xl mx-auto mb-16">
-          {/* Improved contrast by changing bg-blue-100 to bg-blue-200 and changing text color */}
           <span className="inline-block px-3 py-1 text-xs font-medium bg-blue-200 text-blue-800 rounded-full mb-4" aria-label="Seksjonsetikett">
             Hva jeg tilbyr
           </span>
@@ -120,7 +117,6 @@ const Services = () => {
               className="bg-white p-6 rounded-xl shadow-sm card-hover opacity-0 animate-fade-in-up"
               style={{ animationDelay: `${0.1 + index * 0.1}s` }}
             >
-              {/* Improved contrast by using bg-blue-200 instead of bg-blue-100 */}
               <div className="w-12 h-12 bg-blue-200 text-blue-800 rounded-lg flex items-center justify-center mb-4">
                 {service.icon}
               </div>
@@ -144,7 +140,6 @@ const Services = () => {
                   <ul className="space-y-2">
                     {pkg.features.map((feature, fIndex) => (
                       <li key={fIndex} className="flex items-start gap-2">
-                        {/* Improved contrast by using text-blue-800 instead of text-campher-blue */}
                         <span className="text-blue-800 font-medium">•</span>
                         <span className="text-sm">{feature}</span>
                       </li>
