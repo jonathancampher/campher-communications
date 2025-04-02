@@ -43,33 +43,57 @@ const Services = () => {
     {
       title: "Digital Startpakke",
       description: "En komplett løsning for å få bedriften din på nett",
+      price: "Fra kr 15.000,-",
       features: [
         "Moderne, responsiv nettside med kontaktskjema og brukervennlig design",
         "Eget domene (f.eks. deresnavn.no) som styrker merkevaren din",
         "Profesjonell e-postadresse (f.eks. kontakt@deresnavn.no)",
         "Google My Business-oppsett for lokal synlighet og kundeanmeldelser",
         "Grunnleggende SEO for å bli funnet i søkemotorer",
-        "3 måneders support for å sikre at alt fungerer som det skal"
+        "3 måneders support for å sikre at alt fungerer som det skal",
+        "Inkludert hosting på sikker og rask server"
+      ]
+    },
+    {
+      title: "12 måneders komplett pakke",
+      description: "Optimal løsning for bedrifter som vil vokse på nett",
+      price: "Fra kr 36.000,- (eller kr 3.000,-/mnd)",
+      features: [
+        "Alt i Digital Startpakke +",
+        "Mer omfattende nettside med flere undersider",
+        "Premium design med tilpasset grafisk profil",
+        "Ubegrenset antall innholdsoppdateringer i perioden",
+        "Avansert SEO-optimalisering for bedre rangering",
+        "Google Analytics-oppsett med månedlige rapporter",
+        "12 måneders prioritert teknisk support",
+        "Optimalisering av ytelse og hastighet",
+        "Sikkerhetskopier og vedlikehold inkludert"
       ]
     },
     {
       title: "Vedlikehold og support",
       description: "Løpende hjelp for å holde nettsiden din oppdatert og effektiv",
+      price: "Fra kr 1.500,-/mnd",
       features: [
         "Oppdateringer av innhold, bilder og design etter behov",
-        "Teknisk support for å løse problemer raskt",
+        "Teknisk support med garantert responstid",
         "Overvåking av nettsidens ytelse og sikkerhet",
-        "Tilpasninger for å møte nye mål eller markedsendringer"
+        "Tilpasninger for å møte nye mål eller markedsendringer",
+        "Sikkerhetskopier og oppdateringer av programvare",
+        "Månedlig gjennomgang av statistikk og besøkstall"
       ]
     },
     {
       title: "Ekstra tjenester",
       description: "Tilpassede løsninger for å ta din digitale tilstedeværelse videre",
+      price: "Tilpasset pris",
       features: [
         "Avansert SEO for høyere rangering i Google",
         "Integrasjoner som booking-systemer eller nettbutikk",
         "Opplæring i hvordan du selv kan oppdatere nettsiden",
-        "Rådgivning om digital markedsføring og AI-verktøy"
+        "Rådgivning om digital markedsføring og AI-verktøy",
+        "Innholdsproduksjon (tekst, bilder og video)",
+        "Sosiale medier-strategi og implementering"
       ]
     }
   ];
@@ -108,11 +132,12 @@ const Services = () => {
         
         <div className="mt-16">
           <h3 className="heading-md text-center mb-12">Mine produktpakker</h3>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
             {productPackages.map((pkg, index) => (
               <Card key={index} className="shadow-sm opacity-0 animate-fade-in-up" style={{ animationDelay: `${0.1 + index * 0.1}s` }}>
                 <CardHeader>
                   <CardTitle>{pkg.title}</CardTitle>
+                  <p className="text-blue-800 font-semibold mt-2">{pkg.price}</p>
                 </CardHeader>
                 <CardContent>
                   <p className="text-gray-700 mb-4">{pkg.description}</p>

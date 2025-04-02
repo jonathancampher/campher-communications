@@ -7,6 +7,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { useEffect, lazy, Suspense } from "react";
 import { optimizeImages } from "./utils/imageLoader";
 import { NetlifyFormDetection } from "./components/contact/NetlifyFormDetection";
+import Logo from "./components/Logo";
 
 // Lazy-loaded components for better code splitting
 const Index = lazy(() => import("./pages/Index"));
@@ -17,10 +18,11 @@ const NotFound = lazy(() => import("./pages/NotFound"));
 const BlogPost = lazy(() => import("./pages/BlogPost"));
 const ProjectPage = lazy(() => import("./pages/ProjectPage"));
 
-// Fallback loading component
+// Fallback loading component with logo
 const LoadingFallback = () => (
-  <div className="min-h-screen flex items-center justify-center">
-    <div className="animate-pulse text-campher-blue">Laster innhold...</div>
+  <div className="min-h-screen flex flex-col items-center justify-center gap-6">
+    <Logo />
+    <div className="animate-pulse text-campher-blue text-lg font-medium">Laster innhold...</div>
   </div>
 );
 
