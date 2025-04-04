@@ -4,9 +4,11 @@
  * This file re-exports all image optimization utilities from their respective modules
  */
 
-// Re-export all functions from the new modular structure
-export { isInViewport, createImageObserver } from './images/viewport';
+// Re-export all functions from the modular structure
+export { isInViewport } from './images/viewportDetection';
+export { createImageObserver } from './images/intersectionObserver';
 export { setupLazyLoading } from './images/lazyLoading';
+export { applyImagePlaceholders } from './images/imagePlaceholders';
 export { ensureImageDimensions } from './images/dimensions';
 export { detectImageFormats, applyModernFormats } from './images/formatDetection';
 export { createResponsiveImageSrcSet, optimizeImageAttributes } from './images/responsiveImages';

@@ -3,7 +3,9 @@
  * Utility for lazy loading images
  */
 
-import { isInViewport, createImageObserver } from './viewport';
+import { isInViewport } from './viewportDetection';
+import { createImageObserver } from './intersectionObserver';
+import { applyImagePlaceholders } from './imagePlaceholders';
 
 // Setup lazy loading for images
 export const setupLazyLoading = (): void => {
@@ -12,12 +14,8 @@ export const setupLazyLoading = (): void => {
     const lazyImages = document.querySelectorAll('img[data-src]');
     
     lazyImages.forEach(img => {
-      // Add a low quality placeholder or blur-up effect
-      const imgElement = img as HTMLImageElement;
-      if (!imgElement.classList.contains('loaded') && !imgElement.src) {
-        // Set a lightweight placeholder or a tiny version of the actual image
-        imgElement.src = 'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 4 3"%3E%3C/svg%3E';
-      }
+      // Apply placeholder
+      applyImagePlaceholders(img as HTMLImageElement);
       imageObserver.observe(img);
     });
   } else {
