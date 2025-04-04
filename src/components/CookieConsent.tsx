@@ -50,6 +50,25 @@ const CookieConsent = () => {
           marketing: Boolean(parsedConsent.marketing)
         });
         setIsVisible(false);
+
+        // Apply stored consent settings immediately
+        if (Boolean(parsedConsent.statistics)) {
+          enableStatisticsCookies();
+        } else {
+          disableStatisticsCookies();
+        }
+        
+        if (Boolean(parsedConsent.marketing)) {
+          enableMarketingCookies();
+        } else {
+          disableMarketingCookies();
+        }
+        
+        if (Boolean(parsedConsent.preferences)) {
+          enablePreferenceCookies();
+        } else {
+          disablePreferenceCookies();
+        }
       } catch (error) {
         console.error("Error parsing stored consent:", error);
         setIsVisible(true);
@@ -105,22 +124,42 @@ const CookieConsent = () => {
 
   const enableMarketingCookies = () => {
     // Marketing cookies logic would go here
-    // This is where you'd initialize marketing tools
+    if (window.dataLayer) {
+      window.dataLayer.push({ 'marketing_consent': 'granted' });
+    }
   };
 
   const disableMarketingCookies = () => {
     // Marketing cookies removal logic would go here
-    // This is where you'd remove marketing cookies
+    if (window.dataLayer) {
+      window.dataLayer.push({ 'marketing_consent': 'denied' });
+    }
+    
+    // Remove marketing cookies
+    const marketingCookies = ['_fbp', '_gcl_au', '_uetsid', '_uetvid'];
+    marketingCookies.forEach(cookieName => {
+      document.cookie = `${cookieName}=; Max-Age=0; path=/; domain=${window.location.hostname}`;
+    });
   };
 
   const enablePreferenceCookies = () => {
     // Preference cookies logic would go here
-    // This is where you'd enable preference cookies
+    if (window.dataLayer) {
+      window.dataLayer.push({ 'preference_consent': 'granted' });
+    }
   };
 
   const disablePreferenceCookies = () => {
     // Preference cookies removal logic would go here
-    // This is where you'd remove preference cookies
+    if (window.dataLayer) {
+      window.dataLayer.push({ 'preference_consent': 'denied' });
+    }
+    
+    // Remove preference cookies (examples)
+    const preferenceCookies = ['theme', 'language', 'view_mode'];
+    preferenceCookies.forEach(cookieName => {
+      document.cookie = `${cookieName}=; Max-Age=0; path=/; domain=${window.location.hostname}`;
+    });
   };
 
   // Handle opening settings panel

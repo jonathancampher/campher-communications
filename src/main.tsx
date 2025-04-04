@@ -25,6 +25,13 @@ const initializePage = () => {
 
   // Initialize Google Tag Manager dataLayer if not present
   window.dataLayer = window.dataLayer || [];
+  
+  // Initialize consent settings with declined state by default
+  window.dataLayer.push({
+    'gtag_consent': 'denied',
+    'marketing_consent': 'denied',
+    'preference_consent': 'denied'
+  });
 }
 
 // Initialize page optimizations
@@ -49,7 +56,25 @@ if (import.meta.env.PROD && 'serviceWorker' in navigator) {
   });
 }
 
-// Optimize font loading
+// Optimize font loading with priority loading
+const fontLinks = [
+  { href: 'https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap', rel: 'stylesheet' }
+];
+
+// Preload critical fonts
+fontLinks.forEach(font => {
+  const link = document.createElement('link');
+  link.rel = 'preload';
+  link.as = 'style';
+  link.href = font.href;
+  link.onload = function() {
+    this.onload = null;
+    this.rel = 'stylesheet';
+  };
+  document.head.appendChild(link);
+});
+
+// Load fonts when ready
 if ('fonts' in document) {
   Promise.all([
     document.fonts.load('1em Inter'),

@@ -129,7 +129,7 @@ const Services = () => {
           <h3 className="heading-md text-center mb-12">Mine produktpakker</h3>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
             {productPackages.map((pkg, index) => (
-              <Card key={index} className="shadow-sm opacity-0 animate-fade-in-up" style={{ animationDelay: `${0.1 + index * 0.1}s` }}>
+              <Card key={index} className="shadow-sm opacity-0 animate-fade-in-up" style={{ animationDelay: `${0.3 + index * 0.15}s` }}>
                 <CardHeader>
                   <CardTitle>{pkg.title}</CardTitle>
                   <p className="text-blue-800 font-semibold mt-2">{pkg.price}</p>
