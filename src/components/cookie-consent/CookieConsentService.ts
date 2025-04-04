@@ -11,10 +11,15 @@ export const saveConsentToStorage = (preferences: CookiePreferences): void => {
     // Set a long-lived cookie as backup (1 year)
     const expiryDate = new Date();
     expiryDate.setFullYear(expiryDate.getFullYear() + 1);
-    document.cookie = `${COOKIE_CONSENT_KEY}=${JSON.stringify(preferences)}; expires=${expiryDate.toUTCString()}; path=/; SameSite=Lax`;
+    
+    // Fix: Ensure cookie is properly formatted and encoded
+    const encodedValue = encodeURIComponent(JSON.stringify(preferences));
+    document.cookie = `${COOKIE_CONSENT_KEY}=${encodedValue}; expires=${expiryDate.toUTCString()}; path=/; SameSite=Lax`;
     
     // Apply the preferences immediately
     applyCookiePreferences(preferences);
+    
+    console.log('Cookie preferences saved successfully:', preferences);
   } catch (error) {
     console.error("Error saving cookie preferences:", error);
     toast({
@@ -31,41 +36,45 @@ export const loadConsentFromStorage = (): CookiePreferences | null => {
     const storedConsent = localStorage.getItem(COOKIE_CONSENT_KEY);
     
     if (storedConsent) {
-      const parsedConsent = JSON.parse(storedConsent);
-      const preferences = {
-        necessary: true, // Always true
-        preferences: Boolean(parsedConsent.preferences),
-        statistics: Boolean(parsedConsent.statistics),
-        marketing: Boolean(parsedConsent.marketing)
-      };
-      
-      // Apply stored consent settings immediately
-      applyCookiePreferences(preferences);
-      
-      return preferences;
-    } else {
-      // Fallback to cookies
-      const cookieMatch = document.cookie.match(new RegExp(`(^| )${COOKIE_CONSENT_KEY}=([^;]+)`));
-      if (cookieMatch) {
-        try {
-          const parsedCookie = JSON.parse(decodeURIComponent(cookieMatch[2]));
-          const preferences = {
-            necessary: true,
-            preferences: Boolean(parsedCookie.preferences),
-            statistics: Boolean(parsedCookie.statistics),
-            marketing: Boolean(parsedCookie.marketing)
-          };
-          
-          // Sync back to localStorage
-          localStorage.setItem(COOKIE_CONSENT_KEY, JSON.stringify(preferences));
-          
-          // Apply preferences
-          applyCookiePreferences(preferences);
-          
-          return preferences;
-        } catch (e) {
-          console.error("Error parsing cookie consent:", e);
-        }
+      try {
+        const parsedConsent = JSON.parse(storedConsent);
+        const preferences = {
+          necessary: true, // Always true
+          preferences: Boolean(parsedConsent.preferences),
+          statistics: Boolean(parsedConsent.statistics),
+          marketing: Boolean(parsedConsent.marketing)
+        };
+        
+        // Apply stored consent settings immediately
+        applyCookiePreferences(preferences);
+        
+        return preferences;
+      } catch (parseError) {
+        console.error("Error parsing localStorage consent:", parseError);
+      }
+    }
+    
+    // Fallback to cookies if localStorage failed
+    const cookieMatch = document.cookie.match(new RegExp(`(^| )${COOKIE_CONSENT_KEY}=([^;]+)`));
+    if (cookieMatch) {
+      try {
+        const parsedCookie = JSON.parse(decodeURIComponent(cookieMatch[2]));
+        const preferences = {
+          necessary: true,
+          preferences: Boolean(parsedCookie.preferences),
+          statistics: Boolean(parsedCookie.statistics),
+          marketing: Boolean(parsedCookie.marketing)
+        };
+        
+        // Sync back to localStorage
+        localStorage.setItem(COOKIE_CONSENT_KEY, JSON.stringify(preferences));
+        
+        // Apply preferences
+        applyCookiePreferences(preferences);
+        
+        return preferences;
+      } catch (e) {
+        console.error("Error parsing cookie consent:", e);
       }
     }
   } catch (error) {

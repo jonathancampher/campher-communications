@@ -63,11 +63,11 @@ const Navbar = () => {
       <div className="container-custom flex justify-between items-center">
         {/* Logo - links to home or root */}
         {location.pathname === '/' ? (
-          <a href="#home" className="flex items-center py-2">
+          <a href="#home" className="flex items-center py-2 bg-white rounded px-2">
             <Logo />
           </a>
         ) : (
-          <Link to="/" className="flex items-center py-2">
+          <Link to="/" className="flex items-center py-2 bg-white rounded px-2">
             <Logo />
           </Link>
         )}

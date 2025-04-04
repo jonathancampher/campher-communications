@@ -56,12 +56,11 @@ if (import.meta.env.PROD && 'serviceWorker' in navigator) {
   });
 }
 
-// Optimize font loading with priority loading
+// Improved font loading strategy with proper TypeScript typing
 const fontLinks = [
   { href: 'https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap', rel: 'stylesheet' }
 ];
 
-// Improved font loading strategy
 fontLinks.forEach(font => {
   // First, check if the font is already cached
   if ('caches' in window) {
@@ -78,10 +77,10 @@ fontLinks.forEach(font => {
         link.rel = 'preload';
         link.as = 'style';
         link.href = font.href;
-        link.onload = function(this: HTMLLinkElement) {
-          // Now TypeScript knows `this` is an HTMLLinkElement
-          this.onload = null;
-          this.rel = 'stylesheet';
+        link.onload = function() {
+          const self = this as HTMLLinkElement; // Properly type 'this'
+          self.onload = null;
+          self.rel = 'stylesheet';
         };
         document.head.appendChild(link);
       }
@@ -91,9 +90,10 @@ fontLinks.forEach(font => {
       link.rel = 'preload';
       link.as = 'style';
       link.href = font.href;
-      link.onload = function(this: HTMLLinkElement) {
-        this.onload = null;
-        this.rel = 'stylesheet';
+      link.onload = function() {
+        const self = this as HTMLLinkElement; // Properly type 'this'
+        self.onload = null;
+        self.rel = 'stylesheet';
       };
       document.head.appendChild(link);
     });
@@ -103,9 +103,10 @@ fontLinks.forEach(font => {
     link.rel = 'preload';
     link.as = 'style';
     link.href = font.href;
-    link.onload = function(this: HTMLLinkElement) {
-      this.onload = null;
-      this.rel = 'stylesheet';
+    link.onload = function() {
+      const self = this as HTMLLinkElement; // Properly type 'this'
+      self.onload = null;
+      self.rel = 'stylesheet';
     };
     document.head.appendChild(link);
   }
