@@ -3,6 +3,7 @@ import { useEffect, useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { Alert, AlertDescription } from '@/components/ui/alert';
 import { X } from 'lucide-react';
+import { toast } from '@/hooks/use-toast';
 
 declare global {
   interface Window {
@@ -44,14 +45,55 @@ const CookieConsent = () => {
   if (!isVisible) return null;
 
   const handleOpenSettings = () => {
-    if (window.Cookiebot) {
-      window.Cookiebot.show();
+    try {
+      if (window.Cookiebot) {
+        window.Cookiebot.show();
+        toast({
+          title: "Cookieinnstillinger",
+          description: "Cookiebot-innstillingspanelet er åpnet",
+        });
+      } else {
+        console.error("Cookiebot not available");
+        toast({
+          variant: "destructive",
+          title: "Feil",
+          description: "Kunne ikke åpne cookie-innstillinger. Vennligst prøv igjen senere.",
+        });
+      }
+    } catch (error) {
+      console.error("Error opening Cookiebot settings:", error);
+      toast({
+        variant: "destructive",
+        title: "Feil",
+        description: "En feil oppstod. Vennligst oppdater siden og prøv igjen.",
+      });
     }
   };
 
   const handleAcceptAll = () => {
-    if (window.Cookiebot) {
-      window.Cookiebot.submitCustomConsent(true, true, true);
+    try {
+      if (window.Cookiebot) {
+        window.Cookiebot.submitCustomConsent(true, true, true);
+        setIsVisible(false);
+        toast({
+          title: "Cookies akseptert",
+          description: "Du har godtatt alle cookies",
+        });
+      } else {
+        console.error("Cookiebot not available");
+        toast({
+          variant: "destructive",
+          title: "Feil",
+          description: "Kunne ikke registrere cookie-samtykke. Vennligst prøv igjen senere.",
+        });
+      }
+    } catch (error) {
+      console.error("Error accepting cookies:", error);
+      toast({
+        variant: "destructive",
+        title: "Feil",
+        description: "En feil oppstod. Vennligst oppdater siden og prøv igjen.",
+      });
     }
   };
 
