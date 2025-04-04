@@ -68,8 +68,10 @@ fontLinks.forEach(font => {
   link.as = 'style';
   link.href = font.href;
   link.onload = function() {
-    this.onload = null;
-    this.rel = 'stylesheet';
+    // Fix TypeScript error by using the link element directly
+    const linkElement = this as HTMLLinkElement;
+    linkElement.onload = null;
+    linkElement.rel = 'stylesheet';
   };
   document.head.appendChild(link);
 });

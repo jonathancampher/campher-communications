@@ -14,7 +14,7 @@ const ProjectPage = lazy(() => import('./pages/ProjectPage'));
 const BlogPost = lazy(() => import('./pages/BlogPost'));
 
 // Custom Cookie Consent
-import CookieConsent from './components/CookieConsent';
+import CookieConsent from './components/cookie-consent/CookieConsent';
 
 function App() {
   return (
