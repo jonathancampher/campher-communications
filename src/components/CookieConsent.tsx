@@ -80,7 +80,7 @@ const CookieConsent = () => {
               variant="outline" 
               size="sm" 
               onClick={handleOpenSettings}
-              className="text-gray-700 border-gray-300"
+              className="text-gray-700 border-gray-300 hover:bg-gray-100 active:bg-gray-200 active:scale-[0.98] transition-transform"
             >
               Tilpass innstillinger
             </Button>
@@ -88,7 +88,7 @@ const CookieConsent = () => {
               variant="default" 
               size="sm" 
               onClick={handleAcceptAll}
-              className="bg-campher-blue hover:bg-blue-700"
+              className="bg-campher-blue hover:bg-blue-700 active:bg-blue-800 active:scale-[0.98] transition-transform shadow-sm"
             >
               Godta alle
             </Button>
