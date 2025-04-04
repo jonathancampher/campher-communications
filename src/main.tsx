@@ -3,7 +3,7 @@ import { createRoot } from 'react-dom/client';
 import App from './App.tsx';
 import './critical.css';
 import './index.css';
-import { optimizeImages } from './utils/imageLoader';
+import { initImageOptimizations } from './utils/imageLoader';
 
 // Perform critical initialization before rendering
 const initializePage = () => {
@@ -21,7 +21,7 @@ const initializePage = () => {
   }
   
   // Initialize image optimizations right away
-  optimizeImages();
+  initImageOptimizations();
 }
 
 // Initialize page optimizations

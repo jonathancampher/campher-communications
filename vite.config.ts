@@ -77,4 +77,12 @@ export default defineConfig(({ mode }) => ({
   },
   // Enable caching to improve build times
   cacheDir: '.vite-cache',
+  // Improve build performance with additional options
+  esbuild: {
+    legalComments: 'none', // Remove license comments from output
+    minifyIdentifiers: true, 
+    minifySyntax: true,
+    minifyWhitespace: true,
+    target: ['es2018']
+  },
 }));

@@ -68,6 +68,8 @@ const Portfolio = () => {
                     alt={project.title}
                     className="w-full h-full object-cover object-top transition-transform duration-500 group-hover:scale-105"
                     loading={index === 0 ? "eager" : "lazy"}
+                    decoding={index === 0 ? "sync" : "async"}
+                    fetchpriority={index === 0 ? "high" : "auto"}
                     width="600"
                     height="400"
                   />

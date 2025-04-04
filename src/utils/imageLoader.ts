@@ -147,6 +147,21 @@ export const detectImageFormats = (): void => {
   });
 };
 
+// Create dynamically sized responsive images based on viewport
+export const createResponsiveImageSrcSet = (imagePath: string, formats: string[] = ['webp', 'jpg']): string => {
+  const widths = [320, 640, 960, 1280, 1920];
+  const baseUrl = imagePath.split('.').slice(0, -1).join('.');
+  const srcSetEntries: string[] = [];
+
+  formats.forEach(format => {
+    widths.forEach(width => {
+      srcSetEntries.push(`${baseUrl}-${width}.${format} ${width}w`);
+    });
+  });
+
+  return srcSetEntries.join(', ');
+};
+
 // Optimize image loading on page
 export const optimizeImages = (): void => {
   setupLazyLoading();
@@ -164,5 +179,88 @@ export const optimizeImages = (): void => {
     if (!img.hasAttribute('decoding')) {
       img.setAttribute('decoding', 'async');
     }
+    
+    // Add fetchpriority for key images
+    if (index < 3 && !img.hasAttribute('fetchpriority')) {
+      img.setAttribute('fetchpriority', 'high');
+    }
   });
+  
+  // Convert images to WebP/AVIF when supported
+  if (document.body.classList.contains('webp') || document.body.classList.contains('avif')) {
+    document.querySelectorAll('img[src$=".jpg"], img[src$=".png"], img[src$=".jpeg"]').forEach(img => {
+      const imgElement = img as HTMLImageElement;
+      if (document.body.classList.contains('avif')) {
+        // Try AVIF first if supported (better compression)
+        const avifSrc = imgElement.src.replace(/\.(jpg|png|jpeg)$/i, '.avif');
+        // Only set if not already using optimized format
+        if (!imgElement.src.endsWith('.avif') && !imgElement.src.endsWith('.webp')) {
+          imgElement.dataset.originalSrc = imgElement.src; // Store original for fallback
+          imgElement.src = avifSrc;
+        }
+      } else if (document.body.classList.contains('webp')) {
+        // Fallback to WebP
+        const webpSrc = imgElement.src.replace(/\.(jpg|png|jpeg)$/i, '.webp');
+        // Only set if not already using WebP
+        if (!imgElement.src.endsWith('.webp')) {
+          imgElement.dataset.originalSrc = imgElement.src; // Store original for fallback
+          imgElement.src = webpSrc;
+        }
+      }
+    });
+  }
+};
+
+// Apply preload to critical resources
+export const preloadCriticalAssets = (): void => {
+  // Preload critical fonts
+  const fontPreloads = [
+    { href: 'https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap', as: 'style' },
+  ];
+  
+  // Preload critical images
+  const imagePreloads = document.querySelectorAll('img[fetchpriority="high"]');
+  
+  // Create and append preload links
+  fontPreloads.forEach(font => {
+    const link = document.createElement('link');
+    link.rel = 'preload';
+    link.href = font.href;
+    link.as = font.as;
+    link.crossOrigin = 'anonymous';
+    document.head.appendChild(link);
+  });
+  
+  // Preload critical images (first 1-2 images)
+  imagePreloads.forEach((img, index) => {
+    if (index < 2) {
+      const imgElement = img as HTMLImageElement;
+      const link = document.createElement('link');
+      link.rel = 'preload';
+      link.href = imgElement.src;
+      link.as = 'image';
+      document.head.appendChild(link);
+    }
+  });
+};
+
+// Bundle all image optimization features
+export const initImageOptimizations = (): void => {
+  // Execute immediately
+  detectImageFormats();
+  preloadCriticalAssets();
+  
+  // Execute when DOM is ready
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', () => {
+      optimizeImages();
+    });
+  } else {
+    optimizeImages();
+  }
+  
+  // Execute when window has loaded (after images)
+  window.addEventListener('load', () => {
+    ensureImageDimensions();
+  }, { once: true });
 };
