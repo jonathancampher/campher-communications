@@ -15,6 +15,13 @@ import {
 } from '@/components/ui/sheet';
 import { Checkbox } from '@/components/ui/checkbox';
 
+// TypeScript declaration for window.dataLayer
+declare global {
+  interface Window {
+    dataLayer: any[];
+  }
+}
+
 // Cookie preference interface
 interface CookiePreferences {
   necessary: boolean;
