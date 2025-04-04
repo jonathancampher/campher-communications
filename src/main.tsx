@@ -1,4 +1,3 @@
-
 import { createRoot } from 'react-dom/client';
 import App from './App.tsx';
 import './critical.css';
@@ -67,11 +66,10 @@ fontLinks.forEach(font => {
   link.rel = 'preload';
   link.as = 'style';
   link.href = font.href;
-  link.onload = function() {
-    // Fix TypeScript error by using the link element directly
-    const linkElement = this as HTMLLinkElement;
-    linkElement.onload = null;
-    linkElement.rel = 'stylesheet';
+  link.onload = function(this: HTMLLinkElement) {
+    // Now TypeScript knows `this` is an HTMLLinkElement
+    this.onload = null;
+    this.rel = 'stylesheet';
   };
   document.head.appendChild(link);
 });
