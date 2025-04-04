@@ -17,7 +17,7 @@ const Logo = () => {
       height="64"
       loading="eager"
       decoding="async"
-      fetchpriority="high"
+      fetchPriority="high"
       onLoad={(e) => {
         // Mark as contentful paint candidate for LCP optimization
         if (e.currentTarget && 'PerformanceObserver' in window) {
