@@ -1,3 +1,4 @@
+
 import { createRoot } from 'react-dom/client';
 import App from './App.tsx';
 import './critical.css';
@@ -60,27 +61,73 @@ const fontLinks = [
   { href: 'https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap', rel: 'stylesheet' }
 ];
 
-// Preload critical fonts
+// Improved font loading strategy
 fontLinks.forEach(font => {
-  const link = document.createElement('link');
-  link.rel = 'preload';
-  link.as = 'style';
-  link.href = font.href;
-  link.onload = function(this: HTMLLinkElement) {
-    // Now TypeScript knows `this` is an HTMLLinkElement
-    this.onload = null;
-    this.rel = 'stylesheet';
-  };
-  document.head.appendChild(link);
+  // First, check if the font is already cached
+  if ('caches' in window) {
+    caches.match(font.href).then(cachedFont => {
+      if (cachedFont) {
+        // If cached, load it directly
+        const link = document.createElement('link');
+        link.rel = 'stylesheet';
+        link.href = font.href;
+        document.head.appendChild(link);
+      } else {
+        // If not cached, use preload strategy
+        const link = document.createElement('link');
+        link.rel = 'preload';
+        link.as = 'style';
+        link.href = font.href;
+        link.onload = function(this: HTMLLinkElement) {
+          // Now TypeScript knows `this` is an HTMLLinkElement
+          this.onload = null;
+          this.rel = 'stylesheet';
+        };
+        document.head.appendChild(link);
+      }
+    }).catch(() => {
+      // Fallback if cache API fails
+      const link = document.createElement('link');
+      link.rel = 'preload';
+      link.as = 'style';
+      link.href = font.href;
+      link.onload = function(this: HTMLLinkElement) {
+        this.onload = null;
+        this.rel = 'stylesheet';
+      };
+      document.head.appendChild(link);
+    });
+  } else {
+    // Fallback for browsers without cache API
+    const link = document.createElement('link');
+    link.rel = 'preload';
+    link.as = 'style';
+    link.href = font.href;
+    link.onload = function(this: HTMLLinkElement) {
+      this.onload = null;
+      this.rel = 'stylesheet';
+    };
+    document.head.appendChild(link);
+  }
 });
 
-// Load fonts when ready
+// Load fonts when ready - prioritize critical fonts first
 if ('fonts' in document) {
+  // Load critical weights first
   Promise.all([
-    document.fonts.load('1em Inter'),
     document.fonts.load('500 1em Inter'),
     document.fonts.load('600 1em Inter')
   ]).then(() => {
-    document.documentElement.classList.add('fonts-loaded');
+    // Mark when primary fonts are ready
+    document.documentElement.classList.add('primary-fonts-loaded');
+    
+    // Then load the rest
+    Promise.all([
+      document.fonts.load('1em Inter'),
+      document.fonts.load('300 1em Inter'),
+      document.fonts.load('700 1em Inter')
+    ]).then(() => {
+      document.documentElement.classList.add('fonts-loaded');
+    });
   });
 }
