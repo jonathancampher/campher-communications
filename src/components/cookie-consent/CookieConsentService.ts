@@ -14,12 +14,13 @@ export const saveConsentToStorage = (preferences: CookiePreferences): void => {
     
     // Fix: Ensure cookie is properly formatted and encoded
     const encodedValue = encodeURIComponent(JSON.stringify(preferences));
-    document.cookie = `${COOKIE_CONSENT_KEY}=${encodedValue}; expires=${expiryDate.toUTCString()}; path=/; SameSite=Lax`;
+    const cookieString = `${COOKIE_CONSENT_KEY}=${encodedValue}; expires=${expiryDate.toUTCString()}; path=/; SameSite=Lax`;
+    document.cookie = cookieString;
     
     // Apply the preferences immediately
     applyCookiePreferences(preferences);
     
-    console.log('Cookie preferences saved successfully:', preferences);
+    console.log('Cookie preferences saved successfully:', preferences, 'Cookie string:', cookieString);
   } catch (error) {
     console.error("Error saving cookie preferences:", error);
     toast({
@@ -55,32 +56,39 @@ export const loadConsentFromStorage = (): CookiePreferences | null => {
     }
     
     // Fallback to cookies if localStorage failed
-    const cookieMatch = document.cookie.match(new RegExp(`(^| )${COOKIE_CONSENT_KEY}=([^;]+)`));
-    if (cookieMatch) {
-      try {
-        const parsedCookie = JSON.parse(decodeURIComponent(cookieMatch[2]));
-        const preferences = {
-          necessary: true,
-          preferences: Boolean(parsedCookie.preferences),
-          statistics: Boolean(parsedCookie.statistics),
-          marketing: Boolean(parsedCookie.marketing)
-        };
-        
-        // Sync back to localStorage
-        localStorage.setItem(COOKIE_CONSENT_KEY, JSON.stringify(preferences));
-        
-        // Apply preferences
-        applyCookiePreferences(preferences);
-        
-        return preferences;
-      } catch (e) {
-        console.error("Error parsing cookie consent:", e);
+    const cookies = document.cookie.split(';');
+    for (let i = 0; i < cookies.length; i++) {
+      const cookie = cookies[i].trim();
+      if (cookie.indexOf(COOKIE_CONSENT_KEY + '=') === 0) {
+        try {
+          const cookieValue = cookie.substring(COOKIE_CONSENT_KEY.length + 1);
+          const decodedValue = decodeURIComponent(cookieValue);
+          const parsedCookie = JSON.parse(decodedValue);
+          const preferences = {
+            necessary: true,
+            preferences: Boolean(parsedCookie.preferences),
+            statistics: Boolean(parsedCookie.statistics),
+            marketing: Boolean(parsedCookie.marketing)
+          };
+          
+          // Sync back to localStorage
+          localStorage.setItem(COOKIE_CONSENT_KEY, JSON.stringify(preferences));
+          
+          // Apply preferences
+          applyCookiePreferences(preferences);
+          
+          console.log('Cookie preferences loaded from cookie:', preferences);
+          return preferences;
+        } catch (e) {
+          console.error("Error parsing cookie consent:", e);
+        }
       }
     }
   } catch (error) {
     console.error("Error parsing stored consent:", error);
   }
   
+  console.log('No cookie preferences found');
   return null;
 };
 

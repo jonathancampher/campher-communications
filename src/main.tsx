@@ -38,9 +38,10 @@ const initializePage = () => {
 initializePage();
 
 // Immediately start rendering with critical CSS
-const root = document.getElementById("root");
-if (root) {
-  createRoot(root).render(<App />);
+const rootElement = document.getElementById("root");
+if (rootElement) {
+  // Create root once and render immediately
+  createRoot(rootElement).render(<App />);
 }
 
 // Register service worker for production
@@ -57,62 +58,38 @@ if (import.meta.env.PROD && 'serviceWorker' in navigator) {
 }
 
 // Improved font loading strategy with proper TypeScript typing
-const fontLinks = [
-  { href: 'https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap', rel: 'stylesheet' }
-];
+const loadFonts = () => {
+  const fontLink = document.createElement('link');
+  fontLink.rel = 'stylesheet';
+  fontLink.href = 'https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap';
+  fontLink.setAttribute('media', 'print');
+  fontLink.setAttribute('onload', "this.media='all'");
+  document.head.appendChild(fontLink);
+};
 
-fontLinks.forEach(font => {
-  // First, check if the font is already cached
-  if ('caches' in window) {
-    caches.match(font.href).then(cachedFont => {
-      if (cachedFont) {
-        // If cached, load it directly
-        const link = document.createElement('link');
-        link.rel = 'stylesheet';
-        link.href = font.href;
-        document.head.appendChild(link);
-      } else {
-        // If not cached, use preload strategy
-        const link = document.createElement('link');
-        link.rel = 'preload';
-        link.as = 'style';
-        link.href = font.href;
-        link.onload = function() {
-          const self = this as HTMLLinkElement; // Properly type 'this'
-          self.onload = null;
-          self.rel = 'stylesheet';
-        };
-        document.head.appendChild(link);
-      }
-    }).catch(() => {
-      // Fallback if cache API fails
-      const link = document.createElement('link');
-      link.rel = 'preload';
-      link.as = 'style';
-      link.href = font.href;
-      link.onload = function() {
-        const self = this as HTMLLinkElement; // Properly type 'this'
-        self.onload = null;
-        self.rel = 'stylesheet';
-      };
-      document.head.appendChild(link);
-    });
-  } else {
-    // Fallback for browsers without cache API
+// Load fonts immediately
+loadFonts();
+
+// Prefetch important images
+const prefetchCriticalAssets = () => {
+  const criticalImages = [
+    '/lovable-uploads/c5502322-5b49-4268-b427-a3e72c87d19b.png', // Logo
+    '/lovable-uploads/prosjekt1.webp' // First project image
+  ];
+  
+  criticalImages.forEach(imageSrc => {
     const link = document.createElement('link');
     link.rel = 'preload';
-    link.as = 'style';
-    link.href = font.href;
-    link.onload = function() {
-      const self = this as HTMLLinkElement; // Properly type 'this'
-      self.onload = null;
-      self.rel = 'stylesheet';
-    };
+    link.as = 'image';
+    link.href = imageSrc;
     document.head.appendChild(link);
-  }
-});
+  });
+};
 
-// Load fonts when ready - prioritize critical fonts first
+// Prefetch critical assets
+prefetchCriticalAssets();
+
+// Load fonts when ready - prioritize critical weights first
 if ('fonts' in document) {
   // Load critical weights first
   Promise.all([

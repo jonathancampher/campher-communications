@@ -63,12 +63,16 @@ const Navbar = () => {
       <div className="container-custom flex justify-between items-center">
         {/* Logo - links to home or root */}
         {location.pathname === '/' ? (
-          <a href="#home" className="flex items-center py-2 bg-white rounded px-2">
-            <Logo />
+          <a href="#home" className="flex items-center py-2 px-2" style={{backgroundColor: "transparent"}}>
+            <div className="bg-white p-2 rounded">
+              <Logo />
+            </div>
           </a>
         ) : (
-          <Link to="/" className="flex items-center py-2 bg-white rounded px-2">
-            <Logo />
+          <Link to="/" className="flex items-center py-2 px-2" style={{backgroundColor: "transparent"}}>
+            <div className="bg-white p-2 rounded">
+              <Logo />
+            </div>
           </Link>
         )}
 

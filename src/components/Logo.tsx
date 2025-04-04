@@ -24,7 +24,7 @@ const Logo = () => {
       ref={imgRef}
       src="/lovable-uploads/c5502322-5b49-4268-b427-a3e72c87d19b.png" 
       alt="Campher Communications Logo" 
-      className="h-16 w-auto filter invert" // Added invert filter since logo is dark and may not be visible on dark backgrounds
+      className="h-16 w-auto" // Removed invert filter that was causing issues
       width="64"
       height="64"
       loading="eager"

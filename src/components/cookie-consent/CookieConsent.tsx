@@ -21,8 +21,8 @@ const CookieConsent = () => {
 
   // Check for existing consent on mount
   useEffect(() => {
-    // Short timeout to ensure DOM is fully loaded
-    const timer = setTimeout(() => {
+    // Ensure DOM is ready before checking cookies
+    const checkConsent = () => {
       const storedPreferences = loadConsentFromStorage();
       
       if (storedPreferences) {
@@ -33,8 +33,13 @@ const CookieConsent = () => {
         console.log('No stored cookie preferences found, showing banner');
         setIsVisible(true);
       }
-    }, 1000); // Small delay to ensure everything is loaded
+    };
+
+    // Check immediately for SSR/SSG compatibility
+    checkConsent();
     
+    // Double-check after a short delay to ensure everything is loaded
+    const timer = setTimeout(checkConsent, 500);
     return () => clearTimeout(timer);
   }, []);
 
@@ -85,7 +90,7 @@ const CookieConsent = () => {
         onSave={handleSavePreferences}
       />
       
-      {/* Testing button - remove in production */}
+      {/* Testing button - only shown in dev mode */}
       {import.meta.env.DEV && (
         <button 
           onClick={resetConsent}
@@ -100,7 +105,7 @@ const CookieConsent = () => {
             border: '1px solid #ccc',
             borderRadius: '3px',
             cursor: 'pointer',
-            display: 'none' // Hidden by default, enable for testing
+            opacity: 0.7,
           }}
         >
           Reset Cookies (Dev Only)
