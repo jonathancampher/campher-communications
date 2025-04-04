@@ -1,3 +1,4 @@
+
 import type { Config } from 'tailwindcss'
 
 const config: Config = {
@@ -54,6 +55,7 @@ const config: Config = {
         },
         'campher-blue': 'hsl(214, 100%, 44%)',
         'campher-gray': 'hsl(214, 10%, 45%)',
+        'campher-dark': '#1A1F2C', // Dark blue/purple for footer
       },
       borderRadius: {
         lg: "var(--radius)",

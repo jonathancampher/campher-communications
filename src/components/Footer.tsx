@@ -51,7 +51,7 @@ const Footer = () => {
   ];
 
   return (
-    <footer className="bg-campher-dark text-white pt-12 md:pt-16 pb-6 md:pb-8">
+    <footer className="bg-[#1A1F2C] text-white pt-12 md:pt-16 pb-6 md:pb-8">
       <div className="container-custom">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-8 pb-8 md:pb-12 border-b border-white/10">
           <div className="lg:col-span-2">

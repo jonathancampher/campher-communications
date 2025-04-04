@@ -22,6 +22,9 @@ const initializePage = () => {
   
   // Initialize image optimizations right away
   initImageOptimizations();
+
+  // Initialize Google Tag Manager dataLayer if not present
+  window.dataLayer = window.dataLayer || [];
 }
 
 // Initialize page optimizations
