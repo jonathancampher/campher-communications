@@ -9,17 +9,28 @@
     <meta name="author" content="Campher Communications" />
     <meta name="keywords" content="webutvikling, nettsider, seo, digital markedsføring, bedrifter, norge" />
 
-    <!-- Cookiebot Cookie Consent -->
-    <script id="Cookiebot" src="https://consent.cookiebot.com/uc.js" data-cbid="f73586c0-4e1f-45ac-8afe-9a939517b555" type="text/javascript" async></script>
-
-    <!-- Google tag (gtag.js) -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-BQTWZ9QQ2M"></script>
+    <!-- Google tag (gtag.js) - Conditional Loading -->
     <script>
+      // Initialize dataLayer array to collect events before GA loads
       window.dataLayer = window.dataLayer || [];
       function gtag(){dataLayer.push(arguments);}
+      
+      // Set default timestamp
       gtag('js', new Date());
-
-      gtag('config', 'G-BQTWZ9QQ2M');
+      
+      // Check for consent before loading full GA
+      const hasConsent = localStorage.getItem('campher-cookie-consent');
+      if (hasConsent && JSON.parse(hasConsent).statistics) {
+        // Load Google Analytics script if consent exists
+        const gaScript = document.createElement('script');
+        gaScript.async = true;
+        gaScript.src = "https://www.googletagmanager.com/gtag/js?id=G-BQTWZ9QQ2M";
+        document.head.appendChild(gaScript);
+        gtag('config', 'G-BQTWZ9QQ2M');
+      } else {
+        // Configure GA to respect user's current preference (will be updated if they change settings)
+        gtag('config', 'G-BQTWZ9QQ2M', { 'client_storage': 'none' });
+      }
     </script>
 
     <!-- Preconnect to external domains -->

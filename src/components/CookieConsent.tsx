@@ -15,18 +15,16 @@ import {
 } from '@/components/ui/sheet';
 import { Checkbox } from '@/components/ui/checkbox';
 
-declare global {
-  interface Window {
-    Cookiebot: any;
-  }
-}
-
+// Cookie preference interface
 interface CookiePreferences {
   necessary: boolean;
   preferences: boolean;
   statistics: boolean;
   marketing: boolean;
 }
+
+// Cookie consent storage key
+const COOKIE_CONSENT_KEY = 'campher-cookie-consent';
 
 const CookieConsent = () => {
   const [isVisible, setIsVisible] = useState(false);
@@ -38,49 +36,94 @@ const CookieConsent = () => {
     marketing: false,
   });
 
+  // Check for existing consent on mount
   useEffect(() => {
-    // Sjekk om Cookiebot er lastet og om samtykke ikke er gitt
-    const checkCookieConsent = () => {
-      if (window.Cookiebot) {
-        if (window.Cookiebot.consent.necessary) {
-          setPreferences({
-            necessary: true,
-            preferences: window.Cookiebot.consent.preferences,
-            statistics: window.Cookiebot.consent.statistics,
-            marketing: window.Cookiebot.consent.marketing,
-          });
-        }
-        
-        if (!window.Cookiebot.consented) {
-          setIsVisible(true);
-        } else {
-          setIsVisible(false);
-        }
-      } else {
+    const storedConsent = localStorage.getItem(COOKIE_CONSENT_KEY);
+    
+    if (storedConsent) {
+      try {
+        const parsedConsent = JSON.parse(storedConsent);
+        setPreferences({
+          necessary: true, // Always true
+          preferences: Boolean(parsedConsent.preferences),
+          statistics: Boolean(parsedConsent.statistics),
+          marketing: Boolean(parsedConsent.marketing)
+        });
+        setIsVisible(false);
+      } catch (error) {
+        console.error("Error parsing stored consent:", error);
         setIsVisible(true);
       }
-    };
-
-    // Første sjekk
-    if (document.readyState === "complete") {
-      checkCookieConsent();
     } else {
-      window.addEventListener('load', checkCookieConsent);
+      setIsVisible(true);
     }
-
-    // Lytt til Cookiebot hendelser
-    document.addEventListener('CookiebotOnAccept', () => setIsVisible(false));
-    document.addEventListener('CookiebotOnDecline', () => setIsVisible(true));
-
-    return () => {
-      window.removeEventListener('load', checkCookieConsent);
-      document.removeEventListener('CookiebotOnAccept', () => setIsVisible(false));
-      document.removeEventListener('CookiebotOnDecline', () => setIsVisible(true));
-    };
   }, []);
 
-  if (!isVisible && !isSettingsOpen) return null;
+  // Save consent to localStorage
+  const saveConsent = (newPreferences: CookiePreferences) => {
+    localStorage.setItem(COOKIE_CONSENT_KEY, JSON.stringify(newPreferences));
+    
+    // Apply cookie preferences
+    if (newPreferences.statistics) {
+      enableStatisticsCookies();
+    } else {
+      disableStatisticsCookies();
+    }
+    
+    if (newPreferences.marketing) {
+      enableMarketingCookies();
+    } else {
+      disableMarketingCookies();
+    }
+    
+    if (newPreferences.preferences) {
+      enablePreferenceCookies();
+    } else {
+      disablePreferenceCookies();
+    }
+  };
 
+  // Cookie type management functions
+  const enableStatisticsCookies = () => {
+    // Enable Google Analytics
+    if (window.dataLayer) {
+      window.dataLayer.push({ 'gtag_consent': 'granted' });
+    }
+  };
+
+  const disableStatisticsCookies = () => {
+    // Disable Google Analytics
+    if (window.dataLayer) {
+      window.dataLayer.push({ 'gtag_consent': 'denied' });
+    }
+    
+    // Remove Google Analytics cookies
+    document.cookie = '_ga=; Max-Age=0; path=/; domain=' + window.location.hostname;
+    document.cookie = '_gid=; Max-Age=0; path=/; domain=' + window.location.hostname;
+    document.cookie = '_gat=; Max-Age=0; path=/; domain=' + window.location.hostname;
+  };
+
+  const enableMarketingCookies = () => {
+    // Marketing cookies logic would go here
+    // This is where you'd initialize marketing tools
+  };
+
+  const disableMarketingCookies = () => {
+    // Marketing cookies removal logic would go here
+    // This is where you'd remove marketing cookies
+  };
+
+  const enablePreferenceCookies = () => {
+    // Preference cookies logic would go here
+    // This is where you'd enable preference cookies
+  };
+
+  const disablePreferenceCookies = () => {
+    // Preference cookies removal logic would go here
+    // This is where you'd remove preference cookies
+  };
+
+  // Handle opening settings panel
   const handleOpenSettings = () => {
     try {
       setIsSettingsOpen(true);
@@ -94,29 +137,24 @@ const CookieConsent = () => {
     }
   };
 
+  // Handle accepting all cookies
   const handleAcceptAll = () => {
     try {
-      if (window.Cookiebot) {
-        window.Cookiebot.submitCustomConsent(true, true, true);
-        setIsVisible(false);
-        toast({
-          title: "Cookies akseptert",
-          description: "Du har godtatt alle cookies",
-        });
-      } else {
-        console.error("Cookiebot not available");
-        setPreferences({
-          ...preferences,
-          preferences: true,
-          statistics: true,
-          marketing: true
-        });
-        setIsVisible(false);
-        toast({
-          title: "Cookies akseptert",
-          description: "Du har godtatt alle cookies",
-        });
-      }
+      const allConsentPreferences = {
+        necessary: true,
+        preferences: true,
+        statistics: true,
+        marketing: true
+      };
+      
+      setPreferences(allConsentPreferences);
+      saveConsent(allConsentPreferences);
+      setIsVisible(false);
+      
+      toast({
+        title: "Cookies akseptert",
+        description: "Du har godtatt alle cookies",
+      });
     } catch (error) {
       console.error("Error accepting cookies:", error);
       toast({
@@ -127,27 +165,17 @@ const CookieConsent = () => {
     }
   };
 
+  // Handle saving custom preferences
   const handleSavePreferences = () => {
     try {
-      if (window.Cookiebot) {
-        window.Cookiebot.submitCustomConsent(
-          preferences.preferences,
-          preferences.statistics,
-          preferences.marketing
-        );
-        toast({
-          title: "Innstillinger lagret",
-          description: "Dine cookie-preferanser er oppdatert",
-        });
-      } else {
-        console.error("Cookiebot not available");
-        toast({
-          title: "Innstillinger lagret",
-          description: "Dine cookie-preferanser er oppdatert",
-        });
-      }
+      saveConsent(preferences);
       setIsSettingsOpen(false);
       setIsVisible(false);
+      
+      toast({
+        title: "Innstillinger lagret",
+        description: "Dine cookie-preferanser er oppdatert",
+      });
     } catch (error) {
       console.error("Error saving cookie preferences:", error);
       toast({
@@ -158,6 +186,7 @@ const CookieConsent = () => {
     }
   };
 
+  // Handle checkbox changes
   const handleCheckboxChange = (cookieType: keyof CookiePreferences) => {
     if (cookieType === 'necessary') return; // Necessary cookies cannot be disabled
     setPreferences(prev => ({
@@ -165,6 +194,8 @@ const CookieConsent = () => {
       [cookieType]: !prev[cookieType]
     }));
   };
+
+  if (!isVisible && !isSettingsOpen) return null;
 
   return (
     <>

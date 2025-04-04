@@ -13,7 +13,7 @@ const Vilkar = lazy(() => import('./pages/Vilkar'));
 const ProjectPage = lazy(() => import('./pages/ProjectPage'));
 const BlogPost = lazy(() => import('./pages/BlogPost'));
 
-// Cookie Consent
+// Custom Cookie Consent
 import CookieConsent from './components/CookieConsent';
 
 function App() {
