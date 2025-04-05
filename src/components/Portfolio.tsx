@@ -2,7 +2,6 @@
 import { Link } from 'react-router-dom';
 import { useIsMobile } from '@/hooks/use-mobile';
 import { AspectRatio } from '@/components/ui/aspect-ratio';
-import { useMemo, useEffect, useState } from 'react';
 
 /**
  * Portfolio-komponent
@@ -13,9 +12,7 @@ import { useMemo, useEffect, useState } from 'react';
  */
 const Portfolio = () => {
   const isMobile = useIsMobile();
-  const [imagesLoaded, setImagesLoaded] = useState(false);
-  
-  const projects = useMemo(() => [
+  const projects = [
     {
       id: 1,
       title: 'Myhre Montasje',
@@ -40,30 +37,7 @@ const Portfolio = () => {
       description: 'Prosjekt på vei – en ny moderne nettside for en håndverksbedrift er under utvikling.',
       link: '/project/3'
     },
-  ], []);
-
-  // Implement a better prefetching strategy
-  useEffect(() => {
-    // Create an array of image promises
-    const imagePromises = projects.map(project => {
-      return new Promise((resolve) => {
-        const img = new Image();
-        img.onload = () => resolve(true);
-        img.onerror = () => resolve(false);
-        img.src = project.image;
-      });
-    });
-    
-    // Wait for first image to load before showing content
-    imagePromises[0].then(() => {
-      setImagesLoaded(true);
-    });
-    
-    // Prefetch remaining images in the background
-    Promise.all(imagePromises).then(() => {
-      console.log('All project images prefetched');
-    });
-  }, [projects]);
+  ];
 
   return (
     <section id="portfolio" className="section-padding">
@@ -83,32 +57,19 @@ const Portfolio = () => {
             <Link 
               key={project.id} 
               to={project.link}
-              className={`group bg-white rounded-xl overflow-hidden shadow-sm hover-scale min-h-[300px] min-w-[280px] ${
-                imagesLoaded ? 'animate-in fade-in-50' : 'opacity-0'
-              }`}
+              className="group bg-white rounded-xl overflow-hidden shadow-sm hover-scale min-h-[300px] min-w-[280px]"
               style={{ animationDelay: `${0.1 + index * 0.1}s` }}
               aria-label={`Se prosjekt: ${project.title}`}
             >
               <div className="relative h-48 md:h-64 overflow-hidden">
                 <AspectRatio ratio={4/3} className="bg-gray-100">
-                  {/* Add a low-resolution placeholder while loading */}
-                  {index === 0 && !imagesLoaded && (
-                    <div className="absolute inset-0 bg-gray-200 animate-pulse" />
-                  )}
                   <img 
                     src={project.image}
                     alt={project.title}
                     className="w-full h-full object-cover object-top transition-transform duration-500 group-hover:scale-105"
                     loading={index === 0 ? "eager" : "lazy"}
-                    decoding={index === 0 ? "sync" : "async"}
-                    fetchPriority={index === 0 ? "high" : "auto"}
                     width="600"
                     height="400"
-                    onLoad={() => {
-                      if (index === 0) {
-                        performance.mark(`first-project-loaded`);
-                      }
-                    }}
                   />
                 </AspectRatio>
               </div>

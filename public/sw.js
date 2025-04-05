@@ -1,6 +1,6 @@
 
 // Service Worker for caching assets and offline experience
-const CACHE_NAME = 'campher-communications-v5';
+const CACHE_NAME = 'campher-communications-v4';
 
 // Assets to cache immediately on service worker installation
 const PRECACHE_ASSETS = [
@@ -8,12 +8,6 @@ const PRECACHE_ASSETS = [
   '/index.html',
   '/src/critical.css',
   '/src/index.css'
-];
-
-// Critical assets to precache on activation
-const CRITICAL_ASSETS = [
-  '/lovable-uploads/c5502322-5b49-4268-b427-a3e72c87d19b.png', // Logo
-  '/lovable-uploads/prosjekt1.webp' // First project image
 ];
 
 // Skip external requests that might be blocked by CSP
@@ -61,37 +55,12 @@ const cacheFirst = async (request) => {
   }
 };
 
-// Optimized cache-first strategy for images and static assets
-const staticCacheFirst = async (request) => {
-  const cache = await caches.open(CACHE_NAME);
-  const cachedResponse = await cache.match(request);
-  
-  if (cachedResponse) {
-    // Return cached version immediately
-    return cachedResponse;
-  }
-  
-  // Not in cache, fetch from network
-  try {
-    const networkResponse = await fetch(request);
-    // Cache the response for future use if it's valid
-    if (networkResponse.ok) {
-      cache.put(request, networkResponse.clone());
-    }
-    return networkResponse;
-  } catch (error) {
-    // Network failed and no cache available
-    throw error;
-  }
-};
-
 // Install event - precache key resources
 self.addEventListener('install', event => {
   event.waitUntil(
     caches.open(CACHE_NAME)
       .then(cache => {
-        // Precache core app assets
-        return cache.addAll([...PRECACHE_ASSETS, ...CRITICAL_ASSETS]);
+        return cache.addAll(PRECACHE_ASSETS);
       })
       .then(() => self.skipWaiting())
   );
@@ -113,7 +82,7 @@ self.addEventListener('activate', event => {
   );
 });
 
-// Fetch event - implement improved caching strategies
+// Fetch event - implement stale-while-revalidate strategy for all requests
 self.addEventListener('fetch', event => {
   // Skip non-GET requests and browser extension requests
   if (event.request.method !== 'GET' || 
@@ -124,40 +93,39 @@ self.addEventListener('fetch', event => {
     return;
   }
 
-  // Static assets - use cache-first strategy
-  const url = new URL(event.request.url);
-  const isImage = /\.(jpe?g|png|gif|svg|webp|avif|ico)$/i.test(url.pathname);
-  const isFont = /\.(woff2?|ttf|otf|eot)$/i.test(url.pathname);
-  const isStaticAsset = isImage || isFont || /\.(css|js)$/i.test(url.pathname);
-  
-  if (isStaticAsset) {
-    event.respondWith(staticCacheFirst(event.request));
+  // Special handling for JS and CSS files
+  if (event.request.url.endsWith('.js') || event.request.url.endsWith('.css')) {
+    event.respondWith(
+      fetch(event.request).catch(() => {
+        return caches.match(event.request);
+      })
+    );
     return;
   }
 
-  // API calls and HTML pages - use network-first strategy
+  // Handle API calls and HTML pages with network-first strategy
   if (event.request.url.includes('api.netlify.com') || 
       event.request.headers.get('Accept')?.includes('text/html')) {
     event.respondWith(cacheFirst(event.request.clone()));
     return;
   }
 
-  // For all other assets, use stale-while-revalidate strategy
+  // For all other assets, use cache-first strategy
   event.respondWith(
     caches.match(event.request).then(cachedResponse => {
-      // Return cached response immediately if available
       if (cachedResponse) {
-        // Update cache in background
-        fetch(event.request)
-          .then(networkResponse => {
-            if (networkResponse.ok) {
-              caches.open(CACHE_NAME).then(cache => {
-                cache.put(event.request, networkResponse);
-              });
-            }
-          })
-          .catch(() => {/* Ignore network errors */});
-          
+        // Return cached version and update cache in background
+        const fetchPromise = fetch(event.request).then(networkResponse => {
+          const responseToCache = networkResponse.clone();
+          caches.open(CACHE_NAME).then(cache => {
+            cache.put(event.request, responseToCache);
+          });
+          return networkResponse;
+        }).catch(() => {
+          // Failed to update cache, but we already have the cached version
+          return cachedResponse;
+        });
+        // Return cached response immediately
         return cachedResponse;
       }
 
@@ -174,36 +142,13 @@ self.addEventListener('fetch', event => {
           cache.put(event.request, responseToCache);
         });
         return response;
-      }).catch(() => {
+      }).catch(error => {
         // If HTML, return offline page
         if (event.request.headers.get('Accept')?.includes('text/html')) {
           return caches.match('/index.html');
         }
-        throw new Error('Network and cache fetch failed');
+        throw error;
       });
     })
   );
-});
-
-// Handle resource prefetching
-self.addEventListener('message', event => {
-  // Check if message is requesting to prefetch resources
-  if (event.data && event.data.type === 'PREFETCH_ASSETS' && Array.isArray(event.data.urls)) {
-    // Get the list of URLs to prefetch
-    const urls = event.data.urls;
-    
-    // Open the cache
-    caches.open(CACHE_NAME).then(cache => {
-      // Fetch and cache each URL
-      urls.forEach(url => {
-        fetch(url)
-          .then(response => {
-            if (response.ok) {
-              cache.put(url, response);
-            }
-          })
-          .catch(() => {/* Ignore errors for prefetching */});
-      });
-    });
-  }
 });

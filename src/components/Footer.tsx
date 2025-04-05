@@ -55,10 +55,8 @@ const Footer = () => {
       <div className="container-custom">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-8 pb-8 md:pb-12 border-b border-white/10">
           <div className="lg:col-span-2">
-            <div className="mb-4 md:mb-6 inline-block bg-white p-2 rounded">
-              <div className="bg-white rounded">
-                <Logo />
-              </div>
+            <div className="mb-4 md:mb-6 inline-block">
+              <Logo />
             </div>
             <p className="text-gray-400 mb-4 md:mb-6 max-w-md text-sm md:text-base">
               Jeg bygger digitale opplevelser som hjelper bedrifter med å koble seg til sine kunder og oppnå sine mål.

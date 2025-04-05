@@ -9,28 +9,14 @@
     <meta name="author" content="Campher Communications" />
     <meta name="keywords" content="webutvikling, nettsider, seo, digital markedsføring, bedrifter, norge" />
 
-    <!-- Google tag (gtag.js) - Conditional Loading -->
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-BQTWZ9QQ2M"></script>
     <script>
-      // Initialize dataLayer array to collect events before GA loads
       window.dataLayer = window.dataLayer || [];
       function gtag(){dataLayer.push(arguments);}
-      
-      // Set default timestamp
       gtag('js', new Date());
-      
-      // Check for consent before loading full GA
-      const hasConsent = localStorage.getItem('campher-cookie-consent');
-      if (hasConsent && JSON.parse(hasConsent).statistics) {
-        // Load Google Analytics script if consent exists
-        const gaScript = document.createElement('script');
-        gaScript.async = true;
-        gaScript.src = "https://www.googletagmanager.com/gtag/js?id=G-BQTWZ9QQ2M";
-        document.head.appendChild(gaScript);
-        gtag('config', 'G-BQTWZ9QQ2M');
-      } else {
-        // Configure GA to respect user's current preference (will be updated if they change settings)
-        gtag('config', 'G-BQTWZ9QQ2M', { 'client_storage': 'none' });
-      }
+
+      gtag('config', 'G-BQTWZ9QQ2M');
     </script>
 
     <!-- Preconnect to external domains -->
