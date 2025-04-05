@@ -8,6 +8,7 @@ import { useEffect, lazy, Suspense } from "react";
 import { optimizeImages } from "./utils/imageLoader";
 import { NetlifyFormDetection } from "./components/contact/NetlifyFormDetection";
 import Logo from "./components/Logo";
+import CookieConsent from "./components/CookieConsent";
 
 // Lazy-loaded components for better code splitting
 const Index = lazy(() => import("./pages/Index"));
@@ -91,6 +92,7 @@ const App = () => {
         <Toaster />
         <Sonner />
         <BrowserRouter>
+          <CookieConsent />
           <Suspense fallback={<LoadingFallback />}>
             <Routes>
               <Route path="/" element={<Index />} />

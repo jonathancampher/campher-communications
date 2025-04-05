@@ -12,6 +12,8 @@ import {
 } from '@/components/ui/breadcrumb';
 import { ChevronRight, Home } from 'lucide-react';
 import { Link } from 'react-router-dom';
+import { Button } from '@/components/ui/button';
+import { resetCookieConsent } from '@/utils/cookieManager';
 
 /**
  * Cookies-komponent
@@ -102,6 +104,16 @@ const Cookies = () => {
               <p className="text-campher-gray mt-4">
                 Vær oppmerksom på at å blokkere eller slette informasjonskapsler kan påvirke brukeropplevelsen på vår nettside.
               </p>
+              
+              <div className="mt-6">
+                <Button
+                  onClick={resetCookieConsent}
+                  variant="outline"
+                  className="border-campher-blue text-campher-blue hover:bg-campher-blue/5"
+                >
+                  Nullstill cookie-innstillinger
+                </Button>
+              </div>
             </section>
             
             <section className="mb-8">
