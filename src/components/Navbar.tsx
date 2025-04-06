@@ -92,7 +92,7 @@ const Navbar = () => {
         )}
 
         {/* Desktop Navigation */}
-        <div className="hidden md:flex items-center space-x-2">
+        <div className="hidden md:flex items-center gap-3">
           {navLinks.map((link, index) => (
             location.pathname === '/' ? (
               <a
@@ -122,7 +122,9 @@ const Navbar = () => {
               </Link>
             )
           ))}
-          <LanguageSwitcher />
+          <div className="ml-2">
+            <LanguageSwitcher />
+          </div>
         </div>
 
         {/* Mobile Navigation Sheet */}

@@ -22,6 +22,9 @@ export const LanguageProvider: React.FC<{ children: React.ReactNode }> = ({ chil
     setLanguageState(newLanguage);
     localStorage.setItem('language', newLanguage);
     document.documentElement.lang = newLanguage;
+    
+    // Dispatch an event so other components can react to language changes
+    window.dispatchEvent(new CustomEvent('languageChange', { detail: { language: newLanguage } }));
   };
 
   // Set HTML lang attribute on initial load

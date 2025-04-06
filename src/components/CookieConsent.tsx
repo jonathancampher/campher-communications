@@ -52,20 +52,6 @@ const CookieConsent = () => {
     localStorage.setItem('cookieConsent', 'rejected');
     setOpen(false);
   };
-
-  const closeButton = (
-    <Button 
-      variant="ghost" 
-      size="icon" 
-      className="h-8 w-8 rounded-full hover:bg-gray-100 p-0 absolute right-4 top-4" 
-      onClick={() => setOpen(false)}
-    >
-      <X className="h-5 w-5" />
-      <span className="sr-only">
-        {language === 'no' ? 'Lukk' : 'Close'}
-      </span>
-    </Button>
-  );
   
   const texts = {
     no: {
@@ -76,7 +62,8 @@ const CookieConsent = () => {
       cookiePolicy: 'cookie-policy',
       necessary: 'Bare nødvendige',
       reject: 'Avvis alle',
-      accept: 'Godta alle'
+      accept: 'Godta alle',
+      close: 'Lukk'
     },
     en: {
       title: 'Cookies',
@@ -86,7 +73,8 @@ const CookieConsent = () => {
       cookiePolicy: 'cookie policy',
       necessary: 'Only necessary',
       reject: 'Reject all',
-      accept: 'Accept all'
+      accept: 'Accept all',
+      close: 'Close'
     }
   };
 
@@ -97,7 +85,15 @@ const CookieConsent = () => {
       <DialogContent className="sm:max-w-[500px] p-6">
         <DialogTitle className="flex justify-between items-center mb-2">
           <span>{t.title}</span>
-          {closeButton}
+          <Button 
+            variant="ghost" 
+            size="icon" 
+            className="h-8 w-8 rounded-full hover:bg-gray-100 p-0" 
+            onClick={() => setOpen(false)}
+          >
+            <X className="h-5 w-5" />
+            <span className="sr-only">{t.close}</span>
+          </Button>
         </DialogTitle>
         <DialogDescription className="text-base text-gray-700">
           <p className="mb-4">
