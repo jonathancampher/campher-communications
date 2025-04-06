@@ -3,6 +3,7 @@ import { ArrowUp } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import Logo from './Logo';
 import { useIsMobile } from '@/hooks/use-mobile';
+import { useLanguageContext } from '@/context/LanguageContext';
 
 /**
  * Footer-komponent
@@ -13,6 +14,7 @@ import { useIsMobile } from '@/hooks/use-mobile';
  */
 const Footer = () => {
   const isMobile = useIsMobile();
+  const { language } = useLanguageContext();
   
   const scrollToTop = () => {
     window.scrollTo({
@@ -21,7 +23,7 @@ const Footer = () => {
     });
   };
 
-  const footerLinks = [
+  const footerLinksNO = [
     {
       title: 'Selskap',
       links: [
@@ -50,6 +52,51 @@ const Footer = () => {
     }
   ];
 
+  const footerLinksEN = [
+    {
+      title: 'Company',
+      links: [
+        { name: 'About us', url: '#about' },
+        { name: 'Services', url: '#services' },
+        { name: 'Projects', url: '#portfolio' },
+        { name: 'Contact', url: '#contact' },
+      ]
+    },
+    {
+      title: 'Services',
+      links: [
+        { name: 'Web Development', url: '#services' },
+        { name: 'UI/UX Design', url: '#services' },
+        { name: 'E-commerce', url: '#services' },
+        { name: 'Performance Optimization', url: '#services' },
+      ]
+    },
+    {
+      title: 'Legal',
+      links: [
+        { name: 'Privacy Policy', url: '/personvern' },
+        { name: 'Terms of Use', url: '/vilkar' },
+        { name: 'Cookies', url: '/cookies' },
+      ]
+    }
+  ];
+
+  const footerLinks = language === 'no' ? footerLinksNO : footerLinksEN;
+
+  const companyDescription = language === 'no' 
+    ? 'Jeg bygger digitale opplevelser som hjelper bedrifter med å koble seg til sine kunder og oppnå sine mål.'
+    : 'I build digital experiences that help businesses connect with their customers and achieve their goals.';
+
+  const organizationNumber = language === 'no' 
+    ? 'Org.nr: 932498413'
+    : 'Org.no: 932498413';
+
+  const copyright = language === 'no'
+    ? `© ${new Date().getFullYear()} Campher Communications. Alle rettigheter reservert.`
+    : `© ${new Date().getFullYear()} Campher Communications. All rights reserved.`;
+
+  const scrollTopLabel = language === 'no' ? 'Scroll til toppen' : 'Scroll to top';
+
   return (
     <footer className="bg-campher-dark text-white pt-12 md:pt-16 pb-6 md:pb-8">
       <div className="container-custom">
@@ -59,10 +106,10 @@ const Footer = () => {
               <Logo />
             </div>
             <p className="text-gray-400 mb-4 md:mb-6 max-w-md text-sm md:text-base">
-              Jeg bygger digitale opplevelser som hjelper bedrifter med å koble seg til sine kunder og oppnå sine mål.
+              {companyDescription}
             </p>
             <p className="text-gray-400 mb-4 md:mb-6 text-sm md:text-base">
-              Org.nr: 932498413
+              {organizationNumber}
             </p>
           </div>
           
@@ -96,12 +143,12 @@ const Footer = () => {
         
         <div className="pt-6 md:pt-8 flex flex-col md:flex-row justify-between items-center">
           <p className="text-gray-400 text-xs md:text-sm mb-4 md:mb-0">
-            © {new Date().getFullYear()} Campher Communications. Alle rettigheter reservert.
+            {copyright}
           </p>
           <button 
             onClick={scrollToTop}
             className="flex items-center justify-center w-10 h-10 rounded-full bg-white/5 hover:bg-campher-blue transition-colors"
-            aria-label="Scroll to top"
+            aria-label={scrollTopLabel}
           >
             <ArrowUp size={isMobile ? 16 : 18} />
           </button>

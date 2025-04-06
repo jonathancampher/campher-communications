@@ -7,11 +7,14 @@ import { Menu, X } from 'lucide-react';
 import { Sheet, SheetContent, SheetTrigger, SheetClose } from '@/components/ui/sheet';
 import { Button } from '@/components/ui/button';
 import { navigateToBlogSection } from '@/utils/navigation';
+import LanguageSwitcher from './LanguageSwitcher';
+import { useLanguageContext } from '@/context/LanguageContext';
 
 const Navbar = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const location = useLocation();
   const [sheetOpen, setSheetOpen] = useState(false);
+  const { language } = useLanguageContext();
 
   // Handle scroll effect for navbar
   useEffect(() => {
@@ -25,11 +28,27 @@ const Navbar = () => {
   }, []);
 
   const navLinks = [
-    { name: 'Tjenester', href: '#services' },
-    { name: 'Prosjekter', href: '#portfolio' },
-    { name: 'Blogg', href: '#blog' },
-    { name: 'Om Oss', href: '#about' },
-    { name: 'Kontakt', href: '#contact', primary: true }
+    { 
+      name: language === 'no' ? 'Tjenester' : 'Services', 
+      href: '#services' 
+    },
+    { 
+      name: language === 'no' ? 'Prosjekter' : 'Projects', 
+      href: '#portfolio' 
+    },
+    { 
+      name: language === 'no' ? 'Blogg' : 'Blog', 
+      href: '#blog' 
+    },
+    { 
+      name: language === 'no' ? 'Om Oss' : 'About Us', 
+      href: '#about' 
+    },
+    { 
+      name: language === 'no' ? 'Kontakt' : 'Contact', 
+      href: '#contact', 
+      primary: true 
+    }
   ];
 
   // Function to handle section navigation
@@ -103,49 +122,55 @@ const Navbar = () => {
               </Link>
             )
           ))}
+          <LanguageSwitcher />
         </div>
 
         {/* Mobile Navigation Sheet */}
-        <Sheet open={sheetOpen} onOpenChange={setSheetOpen}>
-          <SheetTrigger asChild className="md:hidden">
-            <Button 
-              variant="ghost" 
-              size="icon"
-              className="p-2 text-white hover:bg-white/10 border border-white/10 rounded-md"
-            >
-              <Menu className="h-5 w-5" />
-              <span className="sr-only">Åpne meny</span>
-            </Button>
-          </SheetTrigger>
-          <SheetContent side="right" className="bg-campher-dark border-campher-dark w-[250px] p-0">
-            <div className="flex flex-col space-y-3 p-6 h-full">
-              <div className="flex justify-end mb-4">
-                <Button 
-                  variant="ghost" 
-                  size="icon" 
-                  className="text-white hover:bg-white/10 p-1 rounded-md"
-                  onClick={() => setSheetOpen(false)}
-                >
-                  <X className="h-5 w-5" />
-                </Button>
+        <div className="flex items-center md:hidden space-x-2">
+          <LanguageSwitcher />
+          <Sheet open={sheetOpen} onOpenChange={setSheetOpen}>
+            <SheetTrigger asChild>
+              <Button 
+                variant="ghost" 
+                size="icon"
+                className="p-2 text-white hover:bg-white/10 border border-white/10 rounded-md"
+              >
+                <Menu className="h-5 w-5" />
+                <span className="sr-only">
+                  {language === 'no' ? 'Åpne meny' : 'Open menu'}
+                </span>
+              </Button>
+            </SheetTrigger>
+            <SheetContent side="right" className="bg-campher-dark border-campher-dark w-[250px] p-0">
+              <div className="flex flex-col space-y-3 p-6 h-full">
+                <div className="flex justify-end mb-4">
+                  <Button 
+                    variant="ghost" 
+                    size="icon" 
+                    className="text-white hover:bg-white/10 p-1 rounded-md"
+                    onClick={() => setSheetOpen(false)}
+                  >
+                    <X className="h-5 w-5" />
+                  </Button>
+                </div>
+                {navLinks.map((link, index) => (
+                  <Button
+                    key={index}
+                    className={cn(
+                      "px-4 py-4 rounded-md text-center text-base font-medium transition-colors",
+                      link.primary
+                        ? "bg-campher-blue hover:bg-blue-600 text-white shadow-md"
+                        : "bg-white/5 text-white hover:bg-white/10 border border-white/10"
+                    )}
+                    onClick={() => handleSectionNavigation(link.href)}
+                  >
+                    {link.name}
+                  </Button>
+                ))}
               </div>
-              {navLinks.map((link, index) => (
-                <Button
-                  key={index}
-                  className={cn(
-                    "px-4 py-4 rounded-md text-center text-base font-medium transition-colors",
-                    link.primary
-                      ? "bg-campher-blue hover:bg-blue-600 text-white shadow-md"
-                      : "bg-white/5 text-white hover:bg-white/10 border border-white/10"
-                  )}
-                  onClick={() => handleSectionNavigation(link.href)}
-                >
-                  {link.name}
-                </Button>
-              ))}
-            </div>
-          </SheetContent>
-        </Sheet>
+            </SheetContent>
+          </Sheet>
+        </div>
       </div>
     </nav>
   );

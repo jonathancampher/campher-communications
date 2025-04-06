@@ -9,6 +9,7 @@ import { optimizeImages } from "./utils/imageLoader";
 import { NetlifyFormDetection } from "./components/contact/NetlifyFormDetection";
 import Logo from "./components/Logo";
 import CookieConsent from "./components/CookieConsent";
+import { LanguageProvider } from "./context/LanguageContext";
 
 // Lazy-loaded components for better code splitting
 const Index = lazy(() => import("./pages/Index"));
@@ -85,28 +86,30 @@ const App = () => {
   }, []);
 
   return (
-    <QueryClientProvider client={queryClient}>
-      <TooltipProvider>
-        {/* NetlifyFormDetection must be at the top level for form detection */}
-        <NetlifyFormDetection />
-        <Toaster />
-        <Sonner />
-        <BrowserRouter>
-          <CookieConsent />
-          <Suspense fallback={<LoadingFallback />}>
-            <Routes>
-              <Route path="/" element={<Index />} />
-              <Route path="/personvern" element={<Personvern />} />
-              <Route path="/vilkar" element={<Vilkar />} />
-              <Route path="/cookies" element={<Cookies />} />
-              <Route path="/blog/:id" element={<BlogPost />} />
-              <Route path="/project/:id" element={<ProjectPage />} />
-              <Route path="*" element={<NotFound />} />
-            </Routes>
-          </Suspense>
-        </BrowserRouter>
-      </TooltipProvider>
-    </QueryClientProvider>
+    <LanguageProvider>
+      <QueryClientProvider client={queryClient}>
+        <TooltipProvider>
+          {/* NetlifyFormDetection must be at the top level for form detection */}
+          <NetlifyFormDetection />
+          <Toaster />
+          <Sonner />
+          <BrowserRouter>
+            <CookieConsent />
+            <Suspense fallback={<LoadingFallback />}>
+              <Routes>
+                <Route path="/" element={<Index />} />
+                <Route path="/personvern" element={<Personvern />} />
+                <Route path="/vilkar" element={<Vilkar />} />
+                <Route path="/cookies" element={<Cookies />} />
+                <Route path="/blog/:id" element={<BlogPost />} />
+                <Route path="/project/:id" element={<ProjectPage />} />
+                <Route path="*" element={<NotFound />} />
+              </Routes>
+            </Suspense>
+          </BrowserRouter>
+        </TooltipProvider>
+      </QueryClientProvider>
+    </LanguageProvider>
   );
 };
 

@@ -10,6 +10,7 @@ import {
 import { Button } from '@/components/ui/button';
 import { Link } from 'react-router-dom';
 import { X } from 'lucide-react';
+import { useLanguageContext } from '@/context/LanguageContext';
 
 /**
  * CookieConsent komponent
@@ -19,6 +20,7 @@ import { X } from 'lucide-react';
  */
 const CookieConsent = () => {
   const [open, setOpen] = useState(false);
+  const { language } = useLanguageContext();
   
   useEffect(() => {
     // Sjekk om brukeren allerede har gitt samtykke
@@ -50,55 +52,86 @@ const CookieConsent = () => {
     localStorage.setItem('cookieConsent', 'rejected');
     setOpen(false);
   };
+
+  const closeButton = (
+    <Button 
+      variant="ghost" 
+      size="icon" 
+      className="h-8 w-8 rounded-full hover:bg-gray-100 p-0 absolute right-4 top-4" 
+      onClick={() => setOpen(false)}
+    >
+      <X className="h-5 w-5" />
+      <span className="sr-only">
+        {language === 'no' ? 'Lukk' : 'Close'}
+      </span>
+    </Button>
+  );
+  
+  const texts = {
+    no: {
+      title: 'Informasjonskapsler (cookies)',
+      description1: 'Vi bruker informasjonskapsler for å forbedre din brukeropplevelse, tilby tilpasset innhold og analysere trafikk på nettstedet vårt.',
+      description2: 'I henhold til norsk lov og personvernforordningen (GDPR) trenger vi ditt samtykke før vi lagrer cookies på enheten din.',
+      readMore: 'Du kan lese mer om hvordan vi bruker informasjonskapsler i vår',
+      cookiePolicy: 'cookie-policy',
+      necessary: 'Bare nødvendige',
+      reject: 'Avvis alle',
+      accept: 'Godta alle'
+    },
+    en: {
+      title: 'Cookies',
+      description1: 'We use cookies to improve your user experience, offer personalized content and analyze traffic on our website.',
+      description2: 'In accordance with Norwegian law and the General Data Protection Regulation (GDPR), we need your consent before storing cookies on your device.',
+      readMore: 'You can read more about how we use cookies in our',
+      cookiePolicy: 'cookie policy',
+      necessary: 'Only necessary',
+      reject: 'Reject all',
+      accept: 'Accept all'
+    }
+  };
+
+  const t = texts[language === 'no' ? 'no' : 'en'];
   
   return (
     <Dialog open={open} onOpenChange={setOpen}>
-      <DialogContent className="sm:max-w-[500px]">
-        <DialogTitle className="flex justify-between items-center">
-          <span>Informasjonskapsler (cookies)</span>
-          <Button 
-            variant="ghost" 
-            size="sm" 
-            className="h-8 w-8 rounded-full p-0" 
-            onClick={() => setOpen(false)}
-          >
-            <X className="h-4 w-4" />
-            <span className="sr-only">Lukk</span>
-          </Button>
+      <DialogContent className="sm:max-w-[500px] p-6">
+        <DialogTitle className="flex justify-between items-center mb-2">
+          <span>{t.title}</span>
+          {closeButton}
         </DialogTitle>
         <DialogDescription className="text-base text-gray-700">
           <p className="mb-4">
-            Vi bruker informasjonskapsler for å forbedre din brukeropplevelse, tilby tilpasset innhold og analysere trafikk på nettstedet vårt.
+            {t.description1}
           </p>
           <p className="mb-4">
-            I henhold til norsk lov og personvernforordningen (GDPR) trenger vi ditt samtykke før vi lagrer cookies på enheten din.
+            {t.description2}
           </p>
           <p>
-            Du kan lese mer om hvordan vi bruker informasjonskapsler i vår{' '}
+            {t.readMore}{' '}
             <Link to="/cookies" className="text-campher-blue hover:underline" onClick={() => setOpen(false)}>
-              cookie-policy
+              {t.cookiePolicy}
             </Link>.
           </p>
         </DialogDescription>
-        <DialogFooter className="sm:justify-between flex-col sm:flex-row gap-2">
+        <DialogFooter className="sm:justify-between flex-col sm:flex-row gap-2 mt-6">
           <Button 
             variant="outline" 
             onClick={handleAcceptNecessary}
           >
-            Bare nødvendige
+            {t.necessary}
           </Button>
           <div className="flex gap-2">
             <Button 
               variant="outline" 
               onClick={handleReject}
             >
-              Avvis alle
+              {t.reject}
             </Button>
             <Button 
               onClick={handleAcceptAll}
               className="bg-campher-blue hover:bg-blue-700"
             >
-              Godta alle
+              {t.accept}
             </Button>
           </div>
         </DialogFooter>
