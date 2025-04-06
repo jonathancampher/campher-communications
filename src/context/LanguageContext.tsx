@@ -26,8 +26,7 @@ export const LanguageProvider: React.FC<{ children: React.ReactNode }> = ({ chil
     // Dispatch an event so other components can react to language changes
     window.dispatchEvent(new CustomEvent('languageChange', { detail: { language: newLanguage } }));
     
-    // Force a re-render of the entire application 
-    // This ensures all components update their text based on the new language
+    // Force a re-render of the entire application
     console.log(`Language changed to: ${newLanguage}`);
   };
 
@@ -37,7 +36,7 @@ export const LanguageProvider: React.FC<{ children: React.ReactNode }> = ({ chil
     
     // Force initial language application
     window.dispatchEvent(new CustomEvent('languageChange', { detail: { language } }));
-  }, []);
+  }, [language]); // Added language dependency to ensure updates
 
   return (
     <LanguageContext.Provider value={{ language, setLanguage }}>

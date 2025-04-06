@@ -17,6 +17,7 @@ const LanguageSwitcher = () => {
       onClick={toggleLanguage}
       className="text-white hover:bg-white/20 hover:text-white border border-white/10 rounded-md" 
       aria-label={language === 'no' ? 'Bytt til engelsk' : 'Switch to Norwegian'}
+      style={{ color: 'white' }}
     >
       <Globe className="h-5 w-5" />
       <span className="sr-only">
