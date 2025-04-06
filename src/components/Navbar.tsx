@@ -122,7 +122,7 @@ const Navbar = () => {
               </Link>
             )
           ))}
-          <div className="ml-2">
+          <div className="ml-4">
             <LanguageSwitcher />
           </div>
         </div>
