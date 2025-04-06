@@ -15,6 +15,7 @@ const Navbar = () => {
   const location = useLocation();
   const [sheetOpen, setSheetOpen] = useState(false);
   const { language } = useLanguageContext();
+  const [forceUpdate, setForceUpdate] = useState(0);
 
   // Handle scroll effect for navbar
   useEffect(() => {
@@ -26,7 +27,19 @@ const Navbar = () => {
     handleScroll(); // Initial check
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
+  
+  // Listen for language changes
+  useEffect(() => {
+    const handleLanguageChange = () => {
+      // Force re-render of navbar when language changes
+      setForceUpdate(prev => prev + 1);
+    };
+    
+    window.addEventListener('languageChange', handleLanguageChange);
+    return () => window.removeEventListener('languageChange', handleLanguageChange);
+  }, []);
 
+  // Update nav links when language changes
   const navLinks = [
     { 
       name: language === 'no' ? 'Tjenester' : 'Services', 
@@ -92,11 +105,11 @@ const Navbar = () => {
         )}
 
         {/* Desktop Navigation */}
-        <div className="hidden md:flex items-center gap-3">
+        <div className="hidden md:flex items-center gap-4">
           {navLinks.map((link, index) => (
             location.pathname === '/' ? (
               <a
-                key={index}
+                key={`${index}-${language}`}
                 href={link.href}
                 className={cn(
                   "px-4 py-2 rounded-md text-sm font-medium transition-colors",
@@ -109,7 +122,7 @@ const Navbar = () => {
               </a>
             ) : (
               <Link
-                key={index}
+                key={`${index}-${language}`}
                 to={`/${link.href}`}
                 className={cn(
                   "px-4 py-2 rounded-md text-sm font-medium transition-colors",
@@ -122,20 +135,20 @@ const Navbar = () => {
               </Link>
             )
           ))}
-          <div className="ml-4">
+          <div className="ml-3">
             <LanguageSwitcher />
           </div>
         </div>
 
         {/* Mobile Navigation Sheet */}
-        <div className="flex items-center md:hidden space-x-2">
+        <div className="flex items-center md:hidden space-x-3">
           <LanguageSwitcher />
           <Sheet open={sheetOpen} onOpenChange={setSheetOpen}>
             <SheetTrigger asChild>
               <Button 
                 variant="ghost" 
                 size="icon"
-                className="p-2 text-white hover:bg-white/10 border border-white/10 rounded-md"
+                className="p-2 text-white hover:bg-white/20 hover:text-white border border-white/10 rounded-md"
               >
                 <Menu className="h-5 w-5" />
                 <span className="sr-only">
@@ -149,7 +162,7 @@ const Navbar = () => {
                   <Button 
                     variant="ghost" 
                     size="icon" 
-                    className="text-white hover:bg-white/10 p-1 rounded-md"
+                    className="text-white hover:bg-white/20 hover:text-white p-1 rounded-md"
                     onClick={() => setSheetOpen(false)}
                   >
                     <X className="h-5 w-5" />
@@ -157,12 +170,12 @@ const Navbar = () => {
                 </div>
                 {navLinks.map((link, index) => (
                   <Button
-                    key={index}
+                    key={`${index}-${language}-mobile`}
                     className={cn(
                       "px-4 py-4 rounded-md text-center text-base font-medium transition-colors",
                       link.primary
                         ? "bg-campher-blue hover:bg-blue-600 text-white shadow-md"
-                        : "bg-white/5 text-white hover:bg-white/10 border border-white/10"
+                        : "bg-white/5 text-white hover:bg-white/20 border border-white/10"
                     )}
                     onClick={() => handleSectionNavigation(link.href)}
                   >

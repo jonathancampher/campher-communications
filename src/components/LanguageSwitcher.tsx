@@ -15,7 +15,7 @@ const LanguageSwitcher = () => {
       variant="ghost" 
       size="icon" 
       onClick={toggleLanguage}
-      className="text-white hover:bg-white/10 border border-white/10 rounded-md" 
+      className="text-white hover:bg-white/20 hover:text-white border border-white/10 rounded-md" 
       aria-label={language === 'no' ? 'Bytt til engelsk' : 'Switch to Norwegian'}
     >
       <Globe className="h-5 w-5" />

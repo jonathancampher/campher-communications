@@ -20,6 +20,7 @@ import { useLanguageContext } from '@/context/LanguageContext';
 const CookieConsent = () => {
   const [open, setOpen] = useState(false);
   const { language } = useLanguageContext();
+  const [forceUpdate, setForceUpdate] = useState(0);
   
   useEffect(() => {
     // Sjekk om brukeren allerede har gitt samtykke
@@ -32,6 +33,17 @@ const CookieConsent = () => {
       
       return () => clearTimeout(timer);
     }
+  }, []);
+  
+  // Listen for language changes
+  useEffect(() => {
+    const handleLanguageChange = () => {
+      // Force re-render of component when language changes
+      setForceUpdate(prev => prev + 1);
+    };
+    
+    window.addEventListener('languageChange', handleLanguageChange);
+    return () => window.removeEventListener('languageChange', handleLanguageChange);
   }, []);
   
   // Håndter aksept av alle cookies
