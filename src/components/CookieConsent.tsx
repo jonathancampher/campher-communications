@@ -9,7 +9,6 @@ import {
 } from '@/components/ui/dialog';
 import { Button } from '@/components/ui/button';
 import { Link } from 'react-router-dom';
-import { X } from 'lucide-react';
 import { useLanguageContext } from '@/context/LanguageContext';
 
 /**
@@ -83,17 +82,8 @@ const CookieConsent = () => {
   return (
     <Dialog open={open} onOpenChange={setOpen}>
       <DialogContent className="sm:max-w-[500px] p-6">
-        <DialogTitle className="flex justify-between items-center mb-2">
-          <span>{t.title}</span>
-          <Button 
-            variant="ghost" 
-            size="icon" 
-            className="h-8 w-8 rounded-full hover:bg-gray-100 p-0" 
-            onClick={() => setOpen(false)}
-          >
-            <X className="h-5 w-5" />
-            <span className="sr-only">{t.close}</span>
-          </Button>
+        <DialogTitle className="mb-2">
+          {t.title}
         </DialogTitle>
         <DialogDescription className="text-base text-gray-700">
           <p className="mb-4">
