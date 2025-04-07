@@ -32,6 +32,15 @@ const Blog = () => {
   };
 
   const t = texts[language === 'no' ? 'no' : 'en'];
+  
+  // Format blog posts with the correct language
+  const localizedPosts = blogPostPreviews.map(post => ({
+    ...post,
+    title: post.title[language === 'no' ? 'no' : 'en'],
+    excerpt: post.excerpt[language === 'no' ? 'no' : 'en'],
+    publishDate: post.publishDate[language === 'no' ? 'no' : 'en'],
+    readTime: post.readTime[language === 'no' ? 'no' : 'en']
+  }));
 
   return (
     <section id="blog" className="section-padding">
@@ -41,7 +50,7 @@ const Blog = () => {
           description={t.description}
         />
 
-        <BlogCarousel posts={blogPostPreviews} scrollToTop={scrollToTop} />
+        <BlogCarousel posts={localizedPosts} scrollToTop={scrollToTop} />
       </div>
     </section>
   );
