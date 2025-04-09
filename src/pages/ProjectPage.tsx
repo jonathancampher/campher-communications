@@ -22,34 +22,42 @@ const projectData: Project[] = [
   {
     id: 1,
     title: 'Global Transportservice AS',
-    image: 'public/lovable-uploads/globaltransport.png',
+    image: '/lovable-uploads/globaltransport.png',
     description: 'Responsiv hjemmeside for Global Transportservice AS med fokus på SEO-optimalisering og brukervennlighet.',
     challenge: 'Global Transportservice AS hadde ingen nettside og trengte en profesjonell digital tilstedeværelse for å vise frem sine tjenester, bygge tillit hos potensielle kunder og generere nye henvendelser.',
     solution: 'Jeg utviklet en komplett nettside fra bunnen av med fokus på SEO-optimalisering, rask lastetid og responsive design. Nettsiden presenterer bedriftens tjenester på en tydelig måte med profesjonelle bilder som viser kvaliteten i arbeidet deres. Jeg implementerte også kontaktskjema og tydelige handlingsknapper for å gjøre det enkelt for besøkende å ta kontakt.',
-    results: 'Siden lanseringen harGlobal Transportservice AS fått en betydelig økning i antall henvendelser, og nettsiden rangerer nå høyt på relevante søkeord som "Transport Østfold" og "Varelevering Norge". Google Page Speed Insights gir nettsiden en høy score på både mobil og desktop, noe som bidrar til både bedre brukeropplevelse og bedre rangering i søkemotorer.',
+    results: 'Siden lanseringen har Global Transportservice AS fått en betydelig økning i antall henvendelser, og nettsiden rangerer nå høyt på relevante søkeord som "Transport Østfold" og "Varelevering Norge". Google Page Speed Insights gir nettsiden en høy score på både mobil og desktop, noe som bidrar til både bedre brukeropplevelse og bedre rangering i søkemotorer.',
     technologies: ['Responsivt design', 'SEO-optimalisering', 'Rask lastetid', 'Kontaktskjema', 'Bildegalleri', 'Google My Business integrasjon']
   },
   {
     id: 2,
-    title: 'Bedriftsside 2',
-    // Using local placeholder instead of placehold.co to avoid CSP issues
-    image: '/placeholder.svg',
-    description: 'Prosjekt på vei – Jeg jobber med en spennende ny nettside for en kunde innen tjenestesektoren.',
-    challenge: 'Prosjektet er under utvikling. Jeg ser frem til å dele mer informasjon når prosjektet er ferdigstilt.',
-    solution: 'Vårt team arbeider for tiden med å utvikle en skreddersydd løsning basert på kundens spesifikke behov og målsettinger.',
-    results: 'Resultater vil bli delt når prosjektet er ferdigstilt og lansert.',
-    technologies: ['Under utvikling']
+    title: 'Våtromstjeneste AS',
+    image: '/lovable-uploads/vatromtjeneste.webp',
+    description: 'Moderne nettside for håndverksbedrift med fokus på våtromstjenester og renovering.',
+    challenge: 'Våtromstjeneste AS trengte en profesjonell nettside som tydelig presenterte deres spesialkompetanse innen våtromsarbeid og som kunne generere seriøse henvendelser fra potensielle kunder.',
+    solution: 'Vi designet en bruker- og søkevennlig nettside med fokus på deres tjenester, tidligere prosjekter og sertifiseringer. Nettsiden inkluderer en portefølje av tidligere arbeid med før- og etterbilder, samt kundevurderinger for å bygge tillit.',
+    results: 'Nettsiden har resultert i en jevn strøm av kvalifiserte leads, og bedriften rapporterer om høyere konverteringsrate fra nettsidebesøk til faktiske oppdrag. Våtromstjeneste AS fremstår nå som en mer profesjonell aktør i markedet.',
+    technologies: ['Responsivt design', 'Bildegalleri', 'SEO-optimalisering', 'Kontaktskjema', 'Testimonials']
   },
   {
     id: 3,
-    title: 'Bedriftsside 3',
-    // Using local placeholder instead of placehold.co to avoid CSP issues
-    image: '/placeholder.svg',
-    description: 'Prosjekt på vei – en ny moderne nettside for en håndverksbedrift er under utvikling.',
-    challenge: 'Prosjektet er under utvikling. Jeg ser frem til å dele mer informasjon når prosjektet er ferdigstilt.',
-    solution: 'Jeg arbeider for tiden med å utvikle en skreddersydd løsning basert på kundens spesifikke behov og målsettinger.',
-    results: 'Resultater vil bli delt når prosjektet er ferdigstilt og lansert.',
-    technologies: ['Under utvikling']
+    title: 'Magnus Photography',
+    image: '/lovable-uploads/prosjektmagnus.webp',
+    description: 'Portfolionettside med bildegallerier og kontaktmuligheter for profesjonell fotograf.',
+    challenge: 'Magnus trengte en visuelt tiltalende porteføljenettside som kunne fremheve hans fotografier på best mulig måte, samtidig som den skulle være enkel å navigere for potensielle kunder.',
+    solution: 'Vi utviklet en minimalistisk og elegant nettside med fokus på bildene. Designet inkluderer et responsivt bildegalleri med kategorier for ulike typer fotografering, samt en bookingløsning for enkelt å kunne bestille fotosessions.',
+    results: 'Den nye nettsiden har økt Magnus sin synlighet på nett betraktelig, og han har sett en økning i antall henvendelser, spesielt innen bryllupsfotografering og portrettfotografering. Nettsiden har også fått positiv omtale i lokale medier.',
+    technologies: ['Bildegallerier', 'Optimalisert bildelasting', 'Bookingløsning', 'Portfoliovisning', 'Bloggfunksjonalitet']
+  },
+  {
+    id: 4,
+    title: 'Myhre Montasje',
+    image: '/lovable-uploads/prosjektmyhre.webp',
+    description: 'Responsiv hjemmeside for håndverksbedrift med fokus på deres tjenester og tidligere prosjekter.',
+    challenge: 'Myhre Montasje hadde behov for en profesjonell nettside som kunne vise frem deres kompetanse innen montasjetjenester, og som kunne hjelpe dem med å nå ut til både privatpersoner og bedrifter.',
+    solution: 'Vi utviklet en informativ og brukervennlig nettside med tydelig presentasjon av alle tjenestene de tilbyr. Nettsiden inkluderer referanseprosjekter med bilder og beskrivelser, samt kundevurderinger for å bygge troverdighet.',
+    results: 'Etter lanseringen av den nye nettsiden har Myhre Montasje opplevd en betydelig økning i antall henvendelser, særlig fra bedriftskunder. De rapporterer også om at potensielle kunder er bedre informert om tjenestene deres når de tar kontakt.',
+    technologies: ['Responsivt design', 'Prosjektgalleri', 'Kontaktskjema', 'SEO-optimalisering', 'Google Maps integrasjon']
   }
 ];
 

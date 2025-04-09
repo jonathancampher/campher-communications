@@ -23,27 +23,35 @@ const Portfolio = () => {
       projectsData: [
         {
           id: 1,
-          title: 'Myhre MontasjeGlobal Transportservice AS',
+          title: 'Global Transportservice AS',
           category: ['web', 'responsive'],
-          image: '/public/lovable-uploads/globaltransport.png',
+          image: '/lovable-uploads/globaltransport.png',
           description: 'Responsiv hjemmeside med fokus på SEO-optimalisering og brukervennlighet for varetransport.',
           link: '/project/1'
         },
         {
           id: 2,
-          title: 'Bedriftsside 2',
-          category: ['web'],
-          image: '/placeholder.svg',
-          description: 'Prosjekt på vei – jeg jobber med en spennende ny nettside for en kunde innen coaching.',
+          title: 'Våtromstjeneste AS',
+          category: ['web', 'responsive'],
+          image: '/lovable-uploads/vatromtjeneste.webp',
+          description: 'Moderne nettside for håndverksbedrift med fokus på våtromstjenester og renovering.',
           link: '/project/2'
         },
         {
           id: 3,
-          title: 'Bedriftsside 3',
-          category: ['web', 'responsive'],
-          image: '/placeholder.svg',
-          description: 'Prosjekt på vei – en ny moderne nettside for en håndverksbedrift er under utvikling.',
+          title: 'Magnus Photography',
+          category: ['web', 'portfolio'],
+          image: '/lovable-uploads/prosjektmagnus.webp',
+          description: 'Portfolionettside med bildegallerier og kontaktmuligheter for profesjonell fotograf.',
           link: '/project/3'
+        },
+        {
+          id: 4,
+          title: 'Myhre Montasje',
+          category: ['web', 'responsive'],
+          image: '/lovable-uploads/prosjektmyhre.webp',
+          description: 'Responsiv hjemmeside for håndverksbedrift med fokus på deres tjenester og tidligere prosjekter.',
+          link: '/project/4'
         },
       ]
     },
@@ -54,27 +62,35 @@ const Portfolio = () => {
       projectsData: [
         {
           id: 1,
-          title: 'Myhre Montasje',
+          title: 'Global Transportservice AS',
           category: ['web', 'responsive'],
-          image: '/lovable-uploads/prosjekt1.webp',
-          description: 'Responsive homepage focusing on SEO optimization and user-friendliness for a craft business.',
+          image: '/lovable-uploads/globaltransport.png',
+          description: 'Responsive homepage focusing on SEO optimization and user-friendliness for transport services.',
           link: '/project/1'
         },
         {
           id: 2,
-          title: 'Business site 2',
-          category: ['web'],
-          image: '/placeholder.svg',
-          description: 'Project in progress – I am working on an exciting new website for a coaching client.',
+          title: 'Våtromstjeneste AS',
+          category: ['web', 'responsive'],
+          image: '/lovable-uploads/vatromtjeneste.webp',
+          description: 'Modern website for a craft business focusing on bathroom services and renovation.',
           link: '/project/2'
         },
         {
           id: 3,
-          title: 'Business site 3',
-          category: ['web', 'responsive'],
-          image: '/placeholder.svg',
-          description: 'Project in progress – a new modern website for a craft business is under development.',
+          title: 'Magnus Photography',
+          category: ['web', 'portfolio'],
+          image: '/lovable-uploads/prosjektmagnus.webp',
+          description: 'Portfolio website with photo galleries and contact options for a professional photographer.',
           link: '/project/3'
+        },
+        {
+          id: 4,
+          title: 'Myhre Montasje',
+          category: ['web', 'responsive'],
+          image: '/lovable-uploads/prosjektmyhre.webp',
+          description: 'Responsive homepage for a craft business focusing on their services and previous projects.',
+          link: '/project/4'
         },
       ]
     }
