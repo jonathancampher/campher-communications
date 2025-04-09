@@ -41,13 +41,13 @@ const projectData: Project[] = [
   },
   {
     id: 3,
-    title: 'Magnus Photography',
+    title: 'Magnus Henriksen AS',
     image: '/lovable-uploads/prosjektmagnus.webp',
-    description: 'Portfolionettside med bildegallerier og kontaktmuligheter for profesjonell fotograf.',
-    challenge: 'Magnus trengte en visuelt tiltalende porteføljenettside som kunne fremheve hans fotografier på best mulig måte, samtidig som den skulle være enkel å navigere for potensielle kunder.',
-    solution: 'Vi utviklet en minimalistisk og elegant nettside med fokus på bildene. Designet inkluderer et responsivt bildegalleri med kategorier for ulike typer fotografering, samt en bookingløsning for enkelt å kunne bestille fotosessions.',
-    results: 'Den nye nettsiden har økt Magnus sin synlighet på nett betraktelig, og han har sett en økning i antall henvendelser, spesielt innen bryllupsfotografering og portrettfotografering. Nettsiden har også fått positiv omtale i lokale medier.',
-    technologies: ['Bildegallerier', 'Optimalisert bildelasting', 'Bookingløsning', 'Portfoliovisning', 'Bloggfunksjonalitet']
+    description: 'Profesjonell nettside for maskinentreprenør med fokus på tjenester og prosjekter.',
+    challenge: 'Magnus Henriksen AS trengte en moderne nettside som kunne presentere deres maskinentreprenørtjenester og tidligere prosjekter på en oversiktlig og profesjonell måte.',
+    solution: 'Jeg utviklet en nettside med tydelig struktur som fremhever deres kompetanse innen maskinentreprenørarbeid. Nettsiden inkluderer en oversikt over maskinparken, prosjektreferanser og kontaktinformasjon for enkel tilgjengelighet.',
+    results: 'Nettsiden har hjulpet Magnus Henriksen AS med å etablere sterkere digital tilstedeværelse og tiltrekke seg større prosjekter. Besøkende får raskt oversikt over firmaets kapasitet og spesialkompetanse, noe som har resultert i flere relevante henvendelser.',
+    technologies: ['Responsivt design', 'Prosjektgalleri', 'Maskinoversikt', 'SEO-optimalisering', 'Kontaktskjema']
   },
   {
     id: 4,
@@ -106,7 +106,7 @@ const ProjectPage = () => {
                 <img 
                   src={project.image} 
                   alt={project.title} 
-                  className="w-full h-full object-cover object-top"
+                  className="w-full h-full object-cover"
                   loading="eager"
                   width="1200"
                   height="600"

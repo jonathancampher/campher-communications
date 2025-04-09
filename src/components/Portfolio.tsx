@@ -39,10 +39,10 @@ const Portfolio = () => {
         },
         {
           id: 3,
-          title: 'Magnus Photography',
-          category: ['web', 'portfolio'],
+          title: 'Magnus Henriksen AS',
+          category: ['web', 'responsive'],
           image: '/lovable-uploads/prosjektmagnus.webp',
-          description: 'Portfolionettside med bildegallerier og kontaktmuligheter for profesjonell fotograf.',
+          description: 'Profesjonell nettside for maskinentreprenør med fokus på tjenester og prosjekter.',
           link: '/project/3'
         },
         {
@@ -78,10 +78,10 @@ const Portfolio = () => {
         },
         {
           id: 3,
-          title: 'Magnus Photography',
-          category: ['web', 'portfolio'],
+          title: 'Magnus Henriksen AS',
+          category: ['web', 'responsive'],
           image: '/lovable-uploads/prosjektmagnus.webp',
-          description: 'Portfolio website with photo galleries and contact options for a professional photographer.',
+          description: 'Professional website for a machine contractor company showcasing services and projects.',
           link: '/project/3'
         },
         {
@@ -123,11 +123,11 @@ const Portfolio = () => {
               aria-label={`${projectLabel}${project.title}`}
             >
               <div className="relative h-48 md:h-64 overflow-hidden">
-                <AspectRatio ratio={4/3} className="bg-gray-100">
+                <AspectRatio ratio={16/9} className="bg-gray-100">
                   <img 
                     src={project.image}
                     alt={project.title}
-                    className="w-full h-full object-cover object-top transition-transform duration-500 group-hover:scale-105"
+                    className="w-full h-full object-cover"
                     loading={index === 0 ? "eager" : "lazy"}
                     width="600"
                     height="400"
