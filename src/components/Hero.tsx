@@ -119,9 +119,15 @@ const Hero = () => {
         <div className="mt-16 md:mt-24">
           <div className="flex flex-col items-center justify-center gap-6 md:gap-8">
             <p className="text-base md:text-lg font-medium text-gray-700 text-center">{t.proudToWorkWith}</p>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-16">
-              {['Myhre Montasje', 'Prestige Coaching'].map((company, index) => (
-                <div key={index} className="text-lg md:text-xl font-display font-medium text-gray-700 text-center">
+            <div className="grid grid-cols-1 md:grid-cols-5 gap-6 md:gap-8">
+              {[
+                'Global Transportservice AS', 
+                'Våtromstjeneste AS', 
+                'Magnus Henriksen AS', 
+                'Myhre Montasje', 
+                'Prestige Coaching'
+              ].map((company, index) => (
+                <div key={index} className="text-lg md:text-base font-display font-medium text-gray-700 text-center">
                   {company}
                 </div>
               ))}

@@ -77,11 +77,11 @@ const About = () => {
                   <div className="text-sm text-campher-gray">{t.experience}</div>
                 </div>
                 <div className="bg-blue-50 p-4 rounded-lg opacity-0 animate-fade-in stagger-2">
-                  <div className="text-3xl font-semibold text-campher-blue">3+</div>
+                  <div className="text-3xl font-semibold text-campher-blue">5+</div>
                   <div className="text-sm text-campher-gray">{t.projects}</div>
                 </div>
                 <div className="bg-blue-50 p-4 rounded-lg opacity-0 animate-fade-in stagger-3">
-                  <div className="text-3xl font-semibold text-campher-blue">3+</div>
+                  <div className="text-3xl font-semibold text-campher-blue">5+</div>
                   <div className="text-sm text-campher-gray">{t.clients}</div>
                 </div>
                 <div className="bg-blue-50 p-4 rounded-lg opacity-0 animate-fade-in stagger-4">
