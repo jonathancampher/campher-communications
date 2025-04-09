@@ -23,10 +23,10 @@ const Portfolio = () => {
       projectsData: [
         {
           id: 1,
-          title: 'Myhre Montasje',
+          title: 'Myhre MontasjeGlobal Transportservice AS',
           category: ['web', 'responsive'],
-          image: '/lovable-uploads/prosjekt1.webp',
-          description: 'Responsiv hjemmeside med fokus på SEO-optimalisering og brukervennlighet for håndverksbedrift.',
+          image: '/public/lovable-uploads/globaltransport.png',
+          description: 'Responsiv hjemmeside med fokus på SEO-optimalisering og brukervennlighet for varetransport.',
           link: '/project/1'
         },
         {

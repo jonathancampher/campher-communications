@@ -21,12 +21,12 @@ interface Project {
 const projectData: Project[] = [
   {
     id: 1,
-    title: 'Myhre Montasje',
-    image: '/lovable-uploads/prosjekt1.webp',
-    description: 'Responsiv hjemmeside for Myhre Montasje med fokus på SEO-optimalisering og brukervennlighet.',
-    challenge: 'Myhre Montasje hadde ingen nettside og trengte en profesjonell digital tilstedeværelse for å vise frem sine tjenester, bygge tillit hos potensielle kunder og generere nye henvendelser.',
+    title: 'Global Transportservice AS',
+    image: 'public/lovable-uploads/globaltransport.png',
+    description: 'Responsiv hjemmeside for Global Transportservice AS med fokus på SEO-optimalisering og brukervennlighet.',
+    challenge: 'Global Transportservice AS hadde ingen nettside og trengte en profesjonell digital tilstedeværelse for å vise frem sine tjenester, bygge tillit hos potensielle kunder og generere nye henvendelser.',
     solution: 'Jeg utviklet en komplett nettside fra bunnen av med fokus på SEO-optimalisering, rask lastetid og responsive design. Nettsiden presenterer bedriftens tjenester på en tydelig måte med profesjonelle bilder som viser kvaliteten i arbeidet deres. Jeg implementerte også kontaktskjema og tydelige handlingsknapper for å gjøre det enkelt for besøkende å ta kontakt.',
-    results: 'Siden lanseringen har Myhre Montasje fått en betydelig økning i antall henvendelser, og nettsiden rangerer nå høyt på relevante søkeord som "montasjetjenester Vestfold" og "håndverker Telemark". Google Page Speed Insights gir nettsiden en høy score på både mobil og desktop, noe som bidrar til både bedre brukeropplevelse og bedre rangering i søkemotorer.',
+    results: 'Siden lanseringen harGlobal Transportservice AS fått en betydelig økning i antall henvendelser, og nettsiden rangerer nå høyt på relevante søkeord som "Transport Østfold" og "Varelevering Norge". Google Page Speed Insights gir nettsiden en høy score på både mobil og desktop, noe som bidrar til både bedre brukeropplevelse og bedre rangering i søkemotorer.',
     technologies: ['Responsivt design', 'SEO-optimalisering', 'Rask lastetid', 'Kontaktskjema', 'Bildegalleri', 'Google My Business integrasjon']
   },
   {
