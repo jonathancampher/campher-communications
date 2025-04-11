@@ -123,7 +123,7 @@ const Services = () => {
       {
         title: "Vedlikehold og support",
         description: "Løpende hjelp for å holde nettsiden din oppdatert og effektiv",
-        price: "Fra kr 1.500,- pr mnd eks. mva",
+        price: "Fra kr 350,- pr mnd eks. mva",
         features: [
           "Oppdateringer av innhold, bilder og design etter behov",
           "Teknisk support med garantert responstid",
@@ -178,7 +178,7 @@ const Services = () => {
       {
         title: "Maintenance and support",
         description: "Ongoing help to keep your website updated and efficient",
-        price: "From NOK 1,500,- per month excl. VAT",
+        price: "From NOK 350,- per month excl. VAT",
         features: [
           "Updates of content, images, and design as needed",
           "Technical support with guaranteed response time",
