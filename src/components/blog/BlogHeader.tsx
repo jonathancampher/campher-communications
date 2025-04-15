@@ -14,6 +14,10 @@ const BlogHeader = ({ title, description }: BlogHeaderProps) => {
         alt="Blog Banner" 
         className="absolute inset-0 w-full h-full object-cover brightness-95"
         loading="lazy"
+        decoding="async"
+        fetchPriority="high"
+        width="1920"
+        height="1080"
       />
       <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent" />
       <div className="relative h-full flex items-center justify-center z-10">
@@ -32,4 +36,3 @@ const BlogHeader = ({ title, description }: BlogHeaderProps) => {
 };
 
 export default BlogHeader;
-
