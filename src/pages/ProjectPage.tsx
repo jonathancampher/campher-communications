@@ -5,6 +5,7 @@ import Footer from '@/components/Footer';
 import { ArrowLeft } from 'lucide-react';
 import { useIsMobile } from '@/hooks/use-mobile';
 import { AspectRatio } from '@/components/ui/aspect-ratio';
+import { navigateToSection } from '@/utils/navigation';
 
 interface Project {
   id: number;
@@ -74,7 +75,7 @@ const ProjectPage = () => {
 
   const handleContactClick = (e: React.MouseEvent) => {
     e.preventDefault();
-    navigate('/#contact');
+    navigateToSection(navigate, location.pathname, 'contact');
   };
   
   if (!project) {
