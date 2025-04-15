@@ -28,7 +28,7 @@ const Portfolio = () => {
           id: 1,
           title: 'Global Transportservice AS',
           category: ['web', 'responsive'],
-          image: '/lovable-uploads/globaltransport.png',
+          image: '/lovable-uploads/globaltransport.webp',
           description: 'Responsiv hjemmeside med fokus på SEO-optimalisering og brukervennlighet for varetransport.',
           link: '/project/1'
         },
@@ -67,7 +67,7 @@ const Portfolio = () => {
           id: 1,
           title: 'Global Transportservice AS',
           category: ['web', 'responsive'],
-          image: '/lovable-uploads/globaltransport.png',
+          image: '/lovable-uploads/globaltransport.webp',
           description: 'Responsive homepage focusing on SEO optimization and user-friendliness for transport services.',
           link: '/project/1'
         },

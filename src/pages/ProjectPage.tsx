@@ -23,7 +23,7 @@ const projectData: Project[] = [
   {
     id: 1,
     title: 'Global Transportservice AS',
-    image: '/lovable-uploads/globaltransport.png',
+    image: '/lovable-uploads/globaltransport.webp',
     description: 'Responsiv hjemmeside for Global Transportservice AS med fokus på SEO-optimalisering og brukervennlighet.',
     challenge: 'Global Transportservice AS hadde ingen nettside og trengte en profesjonell digital tilstedeværelse for å vise frem sine tjenester, bygge tillit hos potensielle kunder og generere nye henvendelser.',
     solution: 'Jeg utviklet en komplett nettside fra bunnen av med fokus på SEO-optimalisering, rask lastetid og responsive design. Nettsiden presenterer bedriftens tjenester på en tydelig måte med profesjonelle bilder som viser kvaliteten i arbeidet deres. Jeg implementerte også kontaktskjema og tydelige handlingsknapper for å gjøre det enkelt for besøkende å ta kontakt.',
