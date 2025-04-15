@@ -1,4 +1,3 @@
-
 export interface BlogPost {
   id: number;
   title: string;
@@ -11,6 +10,66 @@ export interface BlogPost {
 }
 
 export const blogPosts: BlogPost[] = [
+  {
+    id: 6,
+    title: "Hvordan en moderne nettside øker salget for små bedrifter i Norge",
+    content: `En moderne nettside er ikke lenger en luksus – det er en nødvendighet for små bedrifter i Norge som ønsker å konkurrere i 2025. I denne guiden viser vi hvordan en nettside kan øke salget ditt, med praktiske tips og eksempler fra Campher Communications.
+
+Hvorfor trenger små bedrifter en nettside?
+
+Ifølge Statistisk Sentralbyrå (SSB) søker over 80 % av nordmenn etter produkter og tjenester online før de kjøper. Uten en nettside går glipp av disse kundene. En nettside:
+
+Bygger troverdighet: En profesjonell nettside, som våre prosjekter hos Magnus Henriksen AS, viser at du er seriøs.
+
+Øker synligheten: Med lokal SEO kan du rangere for søk som "frisør Oslo" eller "håndverker Bergen".
+
+Gir tilgjengelighet: Kunder kan finne deg 24/7, selv når kontoret er stengt.
+
+5 måter en nettside øker salget på
+
+1. Forbedret førsteinntrykk
+
+En moderne nettside med responsiv design (som tilpasser seg mobil, nettbrett og PC) gir et sterkt førsteinntrykk. For eksempel har vi hjulpet kunder som MyHR Entreprenør med nettsider som laster raskt og ser bra ut på alle enheter.
+
+2. Lokal SEO for flere kunder
+
+Ved å optimalisere for lokale søkeord, som "webdesign Oslo", kan du tiltrekke kunder i nærområdet. Vi implementerer schema-markup og Google My Business-integrasjon for å sikre at du blir funnet.
+
+3. Enkel kontakt og bestilling
+
+En nettside med klare "Ta kontakt"-knapper eller et bestillingssystem (som vi kan bygge med verktøy som Lovable AI) gjør det enkelt for kunder å handle. Se hvordan vi integrerte et bestillingssystem for en lokal restaurant her.
+
+4. Innhold som konverterer
+
+Blogginnlegg og casestudier, som dette, viser ekspertisen din og bygger tillit. Vi anbefaler å publisere innhold som svarer på kundenes spørsmål, f.eks. "Hvordan velge en nettsideleverandør".
+
+5. Målrettet markedsføring
+
+En nettside lar deg samle e-poster via lead magnets (f.eks. en gratis PDF som "10 tips til din nettside"). Dette hjelper deg å pleie leads og øke salget over tid.
+
+Hvordan komme i gang?
+
+Fokuser på design: Velg et rent, responsivt design som reflekterer merkevaren din.
+
+Optimaliser for SEO: Bruk nøkkelord, rask lasting, og mobilvennlighet.
+
+Legg til en CTA: Sørg for at kunder enkelt kan kontakte deg.
+
+Mål resultatene: Bruk Google Analytics for å spore trafikk og konverteringer.
+
+Klar for å ta salget til neste nivå? Last ned vår gratis sjekkliste for nettsider eller kontakt oss for en uforpliktende prat!
+
+Hvorfor velge Campher Communications?
+
+Vi har hjulpet små bedrifter i Norge med nettsider som gir resultater. Fra håndverkere til restauranter – vi skreddersyr løsninger som passer dine behov. Besøk vår portefølje for å se eksempler som Magnus Henriksen AS og MyHR Entreprenør.
+
+Bestill en gratis konsultasjon i dag!`,
+    publishDate: "15. april 2025",
+    readTime: "8 minutter",
+    keywords: "nettside salg, små bedrifter, digital markedsføring, SEO, konvertering",
+    image: "/lovable-uploads/prosjektmagnus.webp",
+    excerpt: "En moderne nettside er ikke lenger en luksus – det er en nødvendighet for små bedrifter i Norge som ønsker å konkurrere i 2025. I denne guiden viser vi hvordan en nettside kan øke salget ditt."
+  },
   {
     id: 1,
     title: "Hvorfor en nettside er avgjørende for bedriften din i 2025",
@@ -28,7 +87,7 @@ export const blogPosts: BlogPost[] = [
     id: 2,
     title: "Hvordan en nettside booster synligheten din i søkemotorer i 2025",
     content: `Å ha en nettside i 2025 er nøkkelen til å bli funnet på Google og andre søkemotorer. 
-            Med SEO-optimalisering kan du rangere høyere på søkeord som er relevante for din bransje. 
+            Med SEO-optimalisering kan du rangere høyere på søkord som er relevante for din bransje. 
             Dette betyr mer organisk trafikk til din nettside, noe som igjen kan føre til flere kunder og økt salg. 
             En nettside gir deg også muligheten til å målrette spesifikke målgrupper gjennom innhold og annonsering. 
             Sørg for at din nettside er optimalisert for søkemotorer for å maksimere din digitale synlighet.`,
