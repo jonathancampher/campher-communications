@@ -1,3 +1,4 @@
+
 import { useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import Navbar from '@/components/Navbar';
@@ -72,7 +73,7 @@ const BlogPost = () => {
             readTime={post.readTime}
             content={post.content}
           />
-          <BlogPostActions initialLikes={0} />
+          <BlogPostActions initialLikes={0} title={post.title} />
         </div>
       </div>
       <Footer />
