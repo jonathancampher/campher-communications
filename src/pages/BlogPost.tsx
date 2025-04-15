@@ -11,6 +11,7 @@ import BlogMobileDrawer from '@/components/blog/BlogMobileDrawer';
 import { blogPosts } from '@/data/blogPosts';
 import { navigateToBlogSection } from '@/utils/navigation';
 import { useLanguageContext } from '@/context/LanguageContext';
+import { applySelectorSafety } from '@/utils/selectorSafety';
 
 const BlogPost = () => {
   const { id } = useParams();
@@ -21,6 +22,9 @@ const BlogPost = () => {
   const post = blogPosts.find(post => post.id === Number(id));
   
   useEffect(() => {
+    // Apply selector safety to prevent third-party script errors
+    applySelectorSafety();
+    
     window.scrollTo(0, 0);
     
     if (post) {
