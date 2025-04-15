@@ -17,6 +17,9 @@ const Navbar = () => {
   const { language } = useLanguageContext();
   const [forceUpdate, setForceUpdate] = useState(0);
 
+  // Check if current route is blog related
+  const isBlogRoute = location.pathname.startsWith('/blog');
+
   // Handle scroll effect for navbar
   useEffect(() => {
     const handleScroll = () => {
@@ -31,7 +34,6 @@ const Navbar = () => {
   // Listen for language changes
   useEffect(() => {
     const handleLanguageChange = () => {
-      // Force re-render of navbar when language changes
       setForceUpdate(prev => prev + 1);
     };
     
@@ -52,7 +54,8 @@ const Navbar = () => {
     { 
       name: language === 'no' ? 'Blogg' : 'Blog', 
       href: '/blog',
-      isPage: true 
+      isPage: true,
+      isActive: isBlogRoute
     },
     { 
       name: language === 'no' ? 'Om Oss' : 'About Us', 
@@ -71,7 +74,9 @@ const Navbar = () => {
     setSheetOpen(false);
     
     if (isPage) {
-      window.location.href = href;
+      if (location.pathname !== href) {
+        window.location.href = href;
+      }
       return;
     }
     
@@ -96,15 +101,9 @@ const Navbar = () => {
     )}>
       <div className="container-custom flex justify-between items-center">
         {/* Logo - links to home or root */}
-        {location.pathname === '/' ? (
-          <a href="#home" className="flex items-center py-2">
-            <Logo />
-          </a>
-        ) : (
-          <Link to="/" className="flex items-center py-2">
-            <Logo />
-          </Link>
-        )}
+        <Link to="/" className="flex items-center py-2">
+          <Logo />
+        </Link>
 
         {/* Desktop Navigation */}
         <div className="hidden md:flex items-center gap-4">
@@ -117,7 +116,9 @@ const Navbar = () => {
                   "px-4 py-2 rounded-md text-sm font-medium transition-colors",
                   link.primary
                     ? "bg-campher-blue hover:bg-blue-600 text-white"
-                    : "text-white hover:bg-white/10"
+                    : link.isActive
+                      ? "bg-white/10 text-white"
+                      : "text-white hover:bg-white/10"
                 )}
               >
                 {link.name}
@@ -181,7 +182,9 @@ const Navbar = () => {
                       "px-4 py-4 rounded-md text-center text-base font-medium transition-colors",
                       link.primary
                         ? "bg-campher-blue hover:bg-blue-600 text-white shadow-md"
-                        : "bg-white/5 text-white hover:bg-white/20 border border-white/10"
+                        : link.isActive
+                          ? "bg-white/20 text-white"
+                          : "bg-white/5 text-white hover:bg-white/20 border border-white/10"
                     )}
                     onClick={() => handleSectionNavigation(link.href, link.isPage)}
                   >
