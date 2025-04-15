@@ -8,21 +8,24 @@ interface BlogHeaderProps {
 
 const BlogHeader = ({ title, description }: BlogHeaderProps) => {
   return (
-    <div className="relative text-center mb-8 md:mb-16 pt-16">
+    <div className="relative h-[60vh] mb-8 md:mb-16">
       <img 
         src="/lovable-uploads/bannerblogg.webp" 
         alt="Blog Banner" 
-        className="absolute inset-0 w-full h-full object-cover"
+        className="absolute inset-0 w-full h-full object-cover brightness-95"
         loading="lazy"
       />
-      <div className="relative z-10 max-w-xl mx-auto px-4 py-16 bg-white/80 backdrop-blur-sm rounded-lg">
-        <span className="inline-block px-3 py-1 text-xs font-medium bg-blue-100 text-campher-blue rounded-full mb-3 md:mb-4">
-          Blogg
-        </span>
-        <h2 className="text-2xl md:text-4xl font-medium mb-3 md:mb-4">{title}</h2>
-        <p className="text-campher-gray text-sm md:text-base">
-          {description}
-        </p>
+      <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent" />
+      <div className="relative h-full flex items-center justify-center z-10">
+        <div className="max-w-xl mx-auto px-4 py-8 text-center">
+          <span className="inline-block px-3 py-1 text-xs font-medium bg-white text-campher-blue rounded-full mb-3 md:mb-4">
+            Blogg
+          </span>
+          <h2 className="text-3xl md:text-5xl font-medium mb-3 md:mb-4 text-white">{title}</h2>
+          <p className="text-white/90 text-sm md:text-base max-w-lg mx-auto">
+            {description}
+          </p>
+        </div>
       </div>
     </div>
   );
