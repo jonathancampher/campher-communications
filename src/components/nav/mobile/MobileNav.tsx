@@ -3,8 +3,8 @@ import { Menu, X } from 'lucide-react';
 import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet';
 import { Button } from '@/components/ui/button';
 import { cn } from '@/lib/utils';
-import { NavItem } from './types';
-import LanguageSwitcher from '../LanguageSwitcher';
+import { NavItem } from '../types';
+import LanguageSwitcher from '../../LanguageSwitcher';
 
 interface MobileNavProps {
   links: NavItem[];
@@ -73,4 +73,3 @@ const MobileNav = ({
 };
 
 export default MobileNav;
-

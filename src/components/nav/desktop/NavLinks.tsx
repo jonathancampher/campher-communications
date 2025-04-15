@@ -1,7 +1,7 @@
 
 import { Link } from 'react-router-dom';
 import { cn } from '@/lib/utils';
-import { NavItem } from './types';
+import { NavItem } from '../types';
 
 interface NavLinksProps {
   links: NavItem[];
@@ -51,4 +51,3 @@ const NavLinks = ({ links, handleSectionNavigation }: NavLinksProps) => {
 };
 
 export default NavLinks;
-

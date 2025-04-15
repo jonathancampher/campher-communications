@@ -1,9 +1,8 @@
-
 import { cn } from '@/lib/utils';
 import Logo from './Logo';
 import { Link } from 'react-router-dom';
-import NavLinks from './nav/NavLinks';
-import MobileNav from './nav/MobileNav';
+import NavLinks from './nav/desktop/NavLinks';
+import MobileNav from './nav/mobile/MobileNav';
 import LanguageSwitcher from './LanguageSwitcher';
 import { useNavigation } from '@/hooks/useNavigation';
 
@@ -51,4 +50,3 @@ const Navbar = () => {
 };
 
 export default Navbar;
-
