@@ -1,15 +1,17 @@
 
 import { ArrowLeft } from 'lucide-react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 interface BlogBackNavigationProps {
   navigateToBlogSection: () => void;
 }
 
 const BlogBackNavigation = ({ navigateToBlogSection }: BlogBackNavigationProps) => {
+  const navigate = useNavigate();
+  
   const handleClick = (e: React.MouseEvent) => {
     e.preventDefault();
-    window.location.href = '/blog';
+    navigate('/blog');
   };
 
   return (

@@ -1,6 +1,6 @@
 
 import { ArrowLeft } from 'lucide-react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import { Drawer, DrawerContent, DrawerTrigger } from '@/components/ui/drawer';
 
@@ -9,14 +9,16 @@ interface BlogMobileDrawerProps {
 }
 
 const BlogMobileDrawer = ({ navigateToBlogSection }: BlogMobileDrawerProps) => {
+  const navigate = useNavigate();
+  
   const handleClick = (e: React.MouseEvent) => {
     e.preventDefault();
-    window.location.href = '/blog';
+    navigate('/blog');
   };
 
   const handleHomeClick = (e: React.MouseEvent) => {
     e.preventDefault();
-    window.location.href = '/';
+    navigate('/');
   };
 
   return (

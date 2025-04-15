@@ -1,3 +1,4 @@
+
 import { useEffect } from 'react';
 import Navbar from '@/components/Navbar';
 import Hero from '@/components/Hero';
@@ -7,6 +8,8 @@ import About from '@/components/About';
 import Contact from '@/components/Contact';
 import Footer from '@/components/Footer';
 import { useLanguageContext } from '@/context/LanguageContext';
+import { useLocation } from 'react-router-dom';
+import { handleScrollToSection } from '@/utils/navigation';
 
 /**
  * Index-komponent
@@ -17,6 +20,7 @@ import { useLanguageContext } from '@/context/LanguageContext';
  */
 const Index = () => {
   const { language } = useLanguageContext();
+  const location = useLocation();
   
   useEffect(() => {
     // Set document title, language, and meta description based on selected language
@@ -46,6 +50,13 @@ const Index = () => {
         'Campher Communications delivers tailored websites, SEO optimization, and digital marketing for businesses that want to succeed online. Org. no. 932498413.');
     }
   }, [language]);
+  
+  useEffect(() => {
+    // Handle scroll to section if coming from another page
+    if (location.state && location.state.scrollToSection) {
+      handleScrollToSection(location.state.scrollToSection);
+    }
+  }, [location.state]);
   
   return (
     <div className="min-h-screen">

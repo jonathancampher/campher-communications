@@ -1,6 +1,6 @@
 
 import { useState, useEffect } from 'react';
-import { useLocation } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { useLanguageContext } from '@/context/LanguageContext';
 import { NavItem } from '@/components/nav/types';
 
@@ -8,6 +8,7 @@ export const useNavigation = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [sheetOpen, setSheetOpen] = useState(false);
   const location = useLocation();
+  const navigate = useNavigate();
   const { language } = useLanguageContext();
   const [forceUpdate, setForceUpdate] = useState(0);
   
@@ -61,27 +62,26 @@ export const useNavigation = () => {
   const handleSectionNavigation = (href: string, isPage?: boolean) => {
     setSheetOpen(false);
     
-    // For sections like #services, #portfolio, #about, #contact
+    // Handle navigation to sections on the homepage
     if (href.startsWith('#')) {
-      // If we're not on the homepage, navigate to homepage with anchor
-      if (location.pathname !== '/') {
-        window.location.href = `/${href}`;
-        return;
-      }
+      const sectionId = href.substring(1); // Remove the # character
       
-      // If on homepage, scroll to section
-      const sectionElement = document.querySelector(href);
-      if (sectionElement) {
-        sectionElement.scrollIntoView({ behavior: 'smooth' });
+      // If we're not on the homepage, navigate to homepage first
+      if (location.pathname !== '/') {
+        navigate('/', { state: { scrollToSection: sectionId } });
+      } else {
+        // If already on homepage, just scroll to the section
+        const sectionElement = document.querySelector(href);
+        if (sectionElement) {
+          sectionElement.scrollIntoView({ behavior: 'smooth' });
+        }
       }
       return;
     }
     
     // For page navigation (like /blog)
     if (isPage) {
-      if (location.pathname !== href) {
-        window.location.href = href;
-      }
+      navigate(href);
     }
   };
 
