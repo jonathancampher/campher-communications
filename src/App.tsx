@@ -11,6 +11,9 @@ import Logo from "./components/Logo";
 import CookieConsent from "./components/CookieConsent";
 import { LanguageProvider } from "./context/LanguageContext";
 
+// Import BlogPage directly to avoid lazy loading issues
+import BlogPage from "./pages/BlogPage";
+
 // Lazy-loaded components for better code splitting
 const Index = lazy(() => import("./pages/Index"));
 const Personvern = lazy(() => import("./pages/Personvern"));
@@ -18,7 +21,6 @@ const Vilkar = lazy(() => import("./pages/Vilkar"));
 const Cookies = lazy(() => import("./pages/Cookies"));
 const NotFound = lazy(() => import("./pages/NotFound"));
 const BlogPost = lazy(() => import("./pages/BlogPost"));
-const BlogPage = lazy(() => import("./pages/BlogPage"));
 const ProjectPage = lazy(() => import("./pages/ProjectPage"));
 
 // Fallback loading component with logo

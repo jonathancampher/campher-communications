@@ -62,6 +62,7 @@ export const useNavigation = () => {
     setSheetOpen(false);
     
     if (isPage) {
+      // For page navigation, use window.location to ensure full page load
       if (location.pathname !== href) {
         window.location.href = href;
       }
@@ -69,8 +70,10 @@ export const useNavigation = () => {
     }
     
     if (location.pathname !== '/') {
+      // If not on home page, navigate to home with anchor
       window.location.href = `/${href}`;
     } else {
+      // If on home page, smooth scroll to section
       const sectionElement = document.querySelector(href);
       if (sectionElement) {
         sectionElement.scrollIntoView({ behavior: 'smooth' });
@@ -88,4 +91,3 @@ export const useNavigation = () => {
     forceUpdate
   };
 };
-
