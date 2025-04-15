@@ -1,5 +1,6 @@
+
 import { useEffect } from 'react';
-import { useParams, Link, useNavigate } from 'react-router-dom';
+import { useParams, Link, useNavigate, useLocation } from 'react-router-dom';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import { ArrowLeft } from 'lucide-react';
@@ -66,6 +67,7 @@ const ProjectPage = () => {
   const projectId = Number(id);
   const isMobile = useIsMobile();
   const navigate = useNavigate();
+  const location = useLocation();
   
   const project = projectData.find(p => p.id === projectId);
   
@@ -73,9 +75,16 @@ const ProjectPage = () => {
     window.scrollTo(0, 0);
   }, []);
 
+  // Function to handle clicking on "Contact me" button
   const handleContactClick = (e: React.MouseEvent) => {
     e.preventDefault();
     navigateToSection(navigate, location.pathname, 'contact');
+  };
+  
+  // Function to handle clicking on "Back to projects" button
+  const handleBackToProjects = (e: React.MouseEvent) => {
+    e.preventDefault();
+    navigateToSection(navigate, location.pathname, 'portfolio');
   };
   
   if (!project) {
@@ -84,7 +93,12 @@ const ProjectPage = () => {
         <Navbar />
         <div className="container-custom py-20">
           <h1 className="text-2xl">Prosjektet ble ikke funnet</h1>
-          <Link to="/#portfolio" className="text-blue-700 hover:underline inline-flex items-center mt-4 text-lg py-2 px-4 min-h-12 min-w-40" aria-label="Tilbake til prosjekter">
+          <Link 
+            to="/#portfolio" 
+            className="text-blue-700 hover:underline inline-flex items-center mt-4 text-lg py-2 px-4 min-h-12 min-w-40" 
+            aria-label="Tilbake til prosjekter"
+            onClick={handleBackToProjects}
+          >
             <ArrowLeft size={16} className="mr-2" />
             Tilbake til prosjekter
           </Link>
@@ -99,7 +113,12 @@ const ProjectPage = () => {
       <Navbar />
       <main className={`pt-20 ${isMobile ? 'pb-8' : 'pt-24'}`}>
         <div className="container-custom py-5 md:py-10">
-          <Link to="/#portfolio" className="text-blue-700 hover:underline inline-flex items-center mb-4 md:mb-6 text-lg py-2 px-4 min-h-12 min-w-40" aria-label="Tilbake til prosjekter">
+          <Link 
+            to="/#portfolio" 
+            className="text-blue-700 hover:underline inline-flex items-center mb-4 md:mb-6 text-lg py-2 px-4 min-h-12 min-w-40" 
+            aria-label="Tilbake til prosjekter"
+            onClick={handleBackToProjects}
+          >
             <ArrowLeft size={16} className="mr-2" />
             Tilbake til prosjekter
           </Link>
@@ -114,8 +133,10 @@ const ProjectPage = () => {
                   alt={project.title} 
                   className="w-full h-full object-cover"
                   loading="eager"
+                  fetchPriority="high"
                   width="1200"
                   height="600"
+                  decoding="async"
                 />
               </AspectRatio>
             </div>

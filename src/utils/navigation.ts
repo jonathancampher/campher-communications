@@ -1,4 +1,5 @@
 
+
 import { NavigateOptions } from "react-router-dom";
 
 export const navigateToSection = (navigate: any, pathname: string, sectionId: string) => {
@@ -11,7 +12,7 @@ export const navigateToSection = (navigate: any, pathname: string, sectionId: st
       }
     }, 100);
   } else {
-    // If we're on another page, navigate to homepage with state
+    // If we're on another page, navigate to homepage with section hash
     navigate('/', { state: { scrollToSection: sectionId } });
   }
 };
@@ -32,4 +33,22 @@ export const handleScrollToSection = (sectionId: string) => {
       section.scrollIntoView({ behavior: 'smooth' });
     }
   }, 100);
+};
+
+// Preload project images to improve loading performance
+export const preloadProjectImages = (projectIds: number[]) => {
+  const imageUrls = [
+    '/lovable-uploads/globaltransport.png',
+    '/lovable-uploads/vatromtjeneste.webp',
+    '/lovable-uploads/prosjektmagnus.webp',
+    '/lovable-uploads/prosjektmyhre.webp'
+  ];
+  
+  // Create image objects to preload
+  projectIds.forEach(id => {
+    if (id > 0 && id <= imageUrls.length) {
+      const img = new Image();
+      img.src = imageUrls[id - 1];
+    }
+  });
 };

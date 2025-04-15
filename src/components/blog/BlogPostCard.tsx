@@ -1,7 +1,7 @@
 
 import { useState } from 'react';
 import { ArrowUpRight, Heart, Share2, MessageCircle } from 'lucide-react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { useToast } from "@/hooks/use-toast";
@@ -23,6 +23,7 @@ const BlogPostCard = ({ post, layout = 'grid', scrollToTop }: BlogPostCardProps)
   const { toast } = useToast();
   const [likes, setLikes] = useState(0);
   const [hasLiked, setHasLiked] = useState(false);
+  const navigate = useNavigate();
   
   const handleLike = (e: React.MouseEvent) => {
     e.preventDefault();
@@ -51,12 +52,18 @@ const BlogPostCard = ({ post, layout = 'grid', scrollToTop }: BlogPostCardProps)
       });
     }
   };
+  
+  const handleCardClick = (e: React.MouseEvent) => {
+    e.preventDefault();
+    scrollToTop();
+    navigate(`/blog/${post.id}`);
+  };
 
   return (
     <Link 
       to={`/blog/${post.id}`} 
       className="block transition-transform hover:-translate-y-1"
-      onClick={scrollToTop}
+      onClick={handleCardClick}
     >
       <Card className={`h-full overflow-hidden hover:shadow-lg transition-shadow border-2 border-transparent hover:border-blue-200 ${
         layout === 'list' ? 'flex md:flex-row' : ''

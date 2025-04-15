@@ -23,6 +23,8 @@ const BlogPostContent = ({ title, publishDate, readTime, content, image }: BlogP
               loading="eager"
               decoding="async"
               fetchPriority="high"
+              width="1200"
+              height="675"
             />
           </AspectRatio>
         </div>

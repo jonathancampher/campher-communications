@@ -13,7 +13,7 @@ const BlogHeader = ({ title, description }: BlogHeaderProps) => {
         src="/lovable-uploads/bannerblogg.webp" 
         alt="Blog Banner" 
         className="absolute inset-0 w-full h-full object-cover brightness-95"
-        loading="lazy"
+        loading="eager"
         decoding="async"
         fetchPriority="high"
         width="1920"

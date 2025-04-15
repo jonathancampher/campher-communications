@@ -3,6 +3,8 @@ import { Link } from 'react-router-dom';
 import { useIsMobile } from '@/hooks/use-mobile';
 import { AspectRatio } from '@/components/ui/aspect-ratio';
 import { useLanguageContext } from '@/context/LanguageContext';
+import { navigateToSection } from '@/utils/navigation';
+import { useNavigate } from 'react-router-dom';
 
 /**
  * Portfolio-komponent
@@ -14,6 +16,7 @@ import { useLanguageContext } from '@/context/LanguageContext';
 const Portfolio = () => {
   const isMobile = useIsMobile();
   const { language } = useLanguageContext();
+  const navigate = useNavigate();
   
   const texts = {
     no: {
@@ -100,6 +103,12 @@ const Portfolio = () => {
   const projects = t.projectsData;
   const projectLabel = language === 'no' ? 'Se prosjekt: ' : 'View project: ';
 
+  // Handle project link click to avoid full page reload
+  const handleProjectClick = (e: React.MouseEvent<HTMLAnchorElement>, projectLink: string) => {
+    e.preventDefault();
+    navigate(projectLink);
+  };
+
   return (
     <section id="portfolio" className="section-padding">
       <div className="container-custom">
@@ -121,6 +130,7 @@ const Portfolio = () => {
               className="group bg-white rounded-xl overflow-hidden shadow-sm hover-scale min-h-[300px] min-w-[280px]"
               style={{ animationDelay: `${0.1 + index * 0.1}s` }}
               aria-label={`${projectLabel}${project.title}`}
+              onClick={(e) => handleProjectClick(e, project.link)}
             >
               <div className="relative h-48 md:h-64 overflow-hidden">
                 <AspectRatio ratio={16/9} className="bg-gray-100">
@@ -128,9 +138,11 @@ const Portfolio = () => {
                     src={project.image}
                     alt={project.title}
                     className="w-full h-full object-cover"
-                    loading={index === 0 ? "eager" : "lazy"}
+                    loading={index < 2 ? "eager" : "lazy"}
+                    fetchPriority={index < 2 ? "high" : "auto"}
                     width="600"
                     height="400"
+                    decoding="async"
                   />
                 </AspectRatio>
               </div>
