@@ -1,4 +1,3 @@
-
 export interface BlogPostPreview {
   id: number;
   title: {
@@ -22,6 +21,27 @@ export interface BlogPostPreview {
 }
 
 export const blogPostPreviews: BlogPostPreview[] = [
+  {
+    id: 6,
+    title: {
+      no: "Hvordan en moderne nettside øker salget for små bedrifter i Norge",
+      en: "How a modern website increases sales for small businesses in Norway"
+    },
+    excerpt: {
+      no: "En moderne nettside er ikke lenger en luksus – det er en nødvendighet for små bedrifter i Norge som ønsker å konkurrere i 2025. I denne guiden viser vi hvordan en nettside kan øke salget ditt.",
+      en: "A modern website is no longer a luxury - it's a necessity for small businesses in Norway wanting to compete in 2025. In this guide, we show you how a website can increase your sales."
+    },
+    publishDate: {
+      no: "15. april 2025",
+      en: "April 15, 2025"
+    },
+    readTime: {
+      no: "8 minutter",
+      en: "8 minutes"
+    },
+    keywords: "nettside salg, små bedrifter, digital markedsføring, SEO, konvertering",
+    featured: true
+  },
   {
     id: 1,
     title: {
