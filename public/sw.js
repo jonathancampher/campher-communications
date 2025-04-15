@@ -1,16 +1,16 @@
-
 // Service Worker for caching assets and offline experience
-const CACHE_NAME = 'campher-communications-v4';
+const CACHE_NAME = 'campher-communications-v5';
 
 // Assets to cache immediately on service worker installation
 const PRECACHE_ASSETS = [
   '/',
   '/index.html',
   '/src/critical.css',
-  '/src/index.css'
+  '/src/index.css',
+  '/lovable-uploads/c5502322-5b49-4268-b427-a3e72c87d19b.png' // Logo
 ];
 
-// Skip external requests that might be blocked by CSP
+// Only process requests from our origin or allowed domains
 const shouldHandleRequest = (url) => {
   // Skip external domains that might be blocked by CSP
   const skipDomains = [
@@ -36,9 +36,14 @@ const cacheFirst = async (request) => {
   const cache = await caches.open(CACHE_NAME);
   try {
     // Try to get fresh content from network
-    const networkResponse = await fetch(request);
-    // Cache a copy of the response for future use
-    cache.put(request, networkResponse.clone());
+    const networkResponse = await fetch(request, {
+      // Add cache busting for non-HTML requests to avoid cached responses
+      cache: request.mode === 'navigate' ? 'default' : 'no-store'
+    });
+    // Cache a copy of the response for future use if it's valid
+    if (networkResponse.ok) {
+      cache.put(request, networkResponse.clone());
+    }
     return networkResponse;
   } catch (error) {
     // Network failed, try to return from cache
@@ -93,62 +98,103 @@ self.addEventListener('fetch', event => {
     return;
   }
 
-  // Special handling for JS and CSS files
+  // Special handling for JS and CSS files - network first for freshness
   if (event.request.url.endsWith('.js') || event.request.url.endsWith('.css')) {
     event.respondWith(
-      fetch(event.request).catch(() => {
-        return caches.match(event.request);
+      cacheFirst(event.request.clone())
+    );
+    return;
+  }
+
+  // Handle image files with cache-first strategy for better performance
+  if (event.request.destination === 'image') {
+    event.respondWith(
+      caches.match(event.request).then(cachedResponse => {
+        if (cachedResponse) {
+          // Return cached version and update cache in background
+          fetch(event.request).then(networkResponse => {
+            if (networkResponse.ok) {
+              caches.open(CACHE_NAME).then(cache => {
+                cache.put(event.request, networkResponse);
+              });
+            }
+          }).catch(() => {});
+          return cachedResponse;
+        }
+        
+        // Not in cache, fetch from network
+        return fetch(event.request).then(response => {
+          // Don't cache if not a successful response
+          if (!response || response.status !== 200) {
+            return response;
+          }
+
+          // Cache the fetched resource
+          const responseToCache = response.clone();
+          caches.open(CACHE_NAME).then(cache => {
+            cache.put(event.request, responseToCache);
+          });
+          return response;
+        });
       })
     );
     return;
   }
 
-  // Handle API calls and HTML pages with network-first strategy
-  if (event.request.url.includes('api.netlify.com') || 
+  // For HTML pages, use network-first strategy to ensure freshness
+  if (event.request.destination === 'document' || 
       event.request.headers.get('Accept')?.includes('text/html')) {
     event.respondWith(cacheFirst(event.request.clone()));
     return;
   }
 
-  // For all other assets, use cache-first strategy
+  // Default strategy for other assets - stale-while-revalidate
   event.respondWith(
     caches.match(event.request).then(cachedResponse => {
-      if (cachedResponse) {
-        // Return cached version and update cache in background
-        const fetchPromise = fetch(event.request).then(networkResponse => {
-          const responseToCache = networkResponse.clone();
+      const fetchPromise = fetch(event.request)
+        .then(networkResponse => {
+          // Cache the updated version
           caches.open(CACHE_NAME).then(cache => {
-            cache.put(event.request, responseToCache);
+            cache.put(event.request, networkResponse.clone());
           });
           return networkResponse;
-        }).catch(() => {
-          // Failed to update cache, but we already have the cached version
-          return cachedResponse;
+        })
+        .catch(() => {
+          // If network fails and we have no cached response, return offline fallback
+          if (!cachedResponse && event.request.destination === 'document') {
+            return caches.match('/index.html');
+          }
         });
-        // Return cached response immediately
-        return cachedResponse;
-      }
-
-      // Not in cache, fetch from network
-      return fetch(event.request).then(response => {
-        // Don't cache if not a successful response
-        if (!response || response.status !== 200 || response.type !== 'basic') {
-          return response;
-        }
-
-        // Cache the fetched resource
-        const responseToCache = response.clone();
-        caches.open(CACHE_NAME).then(cache => {
-          cache.put(event.request, responseToCache);
-        });
-        return response;
-      }).catch(error => {
-        // If HTML, return offline page
-        if (event.request.headers.get('Accept')?.includes('text/html')) {
-          return caches.match('/index.html');
-        }
-        throw error;
-      });
+      
+      // Return the cached version or wait for network
+      return cachedResponse || fetchPromise;
     })
   );
 });
+
+// Handle offline analytics by storing and resending when online
+self.addEventListener('sync', event => {
+  if (event.tag === 'sync-analytics') {
+    event.waitUntil(syncAnalytics());
+  }
+});
+
+// Function to resend stored analytics data
+async function syncAnalytics() {
+  try {
+    const cache = await caches.open('analytics-cache');
+    const requests = await cache.keys();
+    
+    await Promise.all(requests.map(async (request) => {
+      try {
+        await fetch(request);
+        return cache.delete(request);
+      } catch (error) {
+        // Keep failed requests in cache to retry later
+        console.error('Failed to resend analytics:', error);
+      }
+    }));
+  } catch (error) {
+    console.error('Error syncing analytics:', error);
+  }
+}

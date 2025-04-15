@@ -24,8 +24,54 @@ const initializePage = () => {
   optimizeImages();
 }
 
+// Optimize resource hints for faster page loads
+const addResourceHints = () => {
+  // Add preload for critical resources
+  const preloadLinks = [
+    { href: '/src/critical.css', as: 'style' },
+    { href: '/lovable-uploads/c5502322-5b49-4268-b427-a3e72c87d19b.png', as: 'image' }
+  ];
+  
+  preloadLinks.forEach(({ href, as }) => {
+    const link = document.createElement('link');
+    link.rel = 'preload';
+    link.href = href;
+    link.as = as;
+    document.head.appendChild(link);
+  });
+}
+
+// Optimize LCP (Largest Contentful Paint)
+const optimizeLCP = () => {
+  // Create new PerformanceObserver to monitor LCP
+  if ('PerformanceObserver' in window) {
+    new PerformanceObserver((entryList) => {
+      const entries = entryList.getEntries();
+      if (entries.length > 0) {
+        const lastEntry = entries[entries.length - 1];
+        console.log('LCP:', lastEntry.startTime / 1000, 'seconds');
+      }
+    }).observe({ type: 'largest-contentful-paint', buffered: true });
+
+    // Monitor CLS (Cumulative Layout Shift)
+    new PerformanceObserver((entryList) => {
+      let cumulativeScore = 0;
+      for (const entry of entryList.getEntries()) {
+        // @ts-ignore: LayoutShiftAttribution is not in the TypeScript types yet
+        if (!entry.hadRecentInput) {
+          // @ts-ignore: value is available but not typed
+          cumulativeScore += entry.value;
+        }
+      }
+      console.log('Total CLS:', cumulativeScore);
+    }).observe({ type: 'layout-shift', buffered: true });
+  }
+}
+
 // Initialize page optimizations
 initializePage();
+addResourceHints();
+optimizeLCP();
 
 // Immediately start rendering with critical CSS
 const root = document.getElementById("root");

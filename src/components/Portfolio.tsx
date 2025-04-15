@@ -139,7 +139,7 @@ const Portfolio = () => {
                     alt={project.title}
                     className="w-full h-full object-cover"
                     loading={index < 2 ? "eager" : "lazy"}
-                    fetchPriority={index < 2 ? "high" : "auto"}
+                    importance={index < 2 ? "high" : "auto"}
                     width="600"
                     height="400"
                     decoding="async"
