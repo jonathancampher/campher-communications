@@ -18,6 +18,7 @@ const Vilkar = lazy(() => import("./pages/Vilkar"));
 const Cookies = lazy(() => import("./pages/Cookies"));
 const NotFound = lazy(() => import("./pages/NotFound"));
 const BlogPost = lazy(() => import("./pages/BlogPost"));
+const BlogPage = lazy(() => import("./pages/BlogPage"));
 const ProjectPage = lazy(() => import("./pages/ProjectPage"));
 
 // Fallback loading component with logo
@@ -89,7 +90,6 @@ const App = () => {
     <LanguageProvider>
       <QueryClientProvider client={queryClient}>
         <TooltipProvider>
-          {/* NetlifyFormDetection must be at the top level for form detection */}
           <NetlifyFormDetection />
           <Toaster />
           <Sonner />
@@ -101,6 +101,7 @@ const App = () => {
                 <Route path="/personvern" element={<Personvern />} />
                 <Route path="/vilkar" element={<Vilkar />} />
                 <Route path="/cookies" element={<Cookies />} />
+                <Route path="/blog" element={<BlogPage />} />
                 <Route path="/blog/:id" element={<BlogPost />} />
                 <Route path="/project/:id" element={<ProjectPage />} />
                 <Route path="*" element={<NotFound />} />

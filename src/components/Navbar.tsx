@@ -51,7 +51,8 @@ const Navbar = () => {
     },
     { 
       name: language === 'no' ? 'Blogg' : 'Blog', 
-      href: '#blog' 
+      href: '/blog',
+      isPage: true 
     },
     { 
       name: language === 'no' ? 'Om Oss' : 'About Us', 
@@ -65,9 +66,14 @@ const Navbar = () => {
   ];
 
   // Function to handle section navigation
-  const handleSectionNavigation = (href: string) => {
+  const handleSectionNavigation = (href: string, isPage?: boolean) => {
     // Close mobile menu
     setSheetOpen(false);
+    
+    if (isPage) {
+      window.location.href = href;
+      return;
+    }
     
     if (location.pathname !== '/') {
       // Navigate to home page first, then to section
@@ -77,21 +83,17 @@ const Navbar = () => {
       const sectionElement = document.querySelector(href);
       if (sectionElement) {
         sectionElement.scrollIntoView({ behavior: 'smooth' });
-      } else if (href === '#blog') {
-        navigateToBlogSection();
       }
     }
   };
   
   return (
-    <nav 
-      className={cn(
-        "fixed top-0 left-0 right-0 z-50 transition-all duration-300",
-        isScrolled 
-          ? 'py-1 shadow-md bg-campher-dark/95 backdrop-blur-md' 
-          : 'py-2 bg-campher-dark'
-      )}
-    >
+    <nav className={cn(
+      "fixed top-0 left-0 right-0 z-50 transition-all duration-300",
+      isScrolled 
+        ? 'py-1 shadow-md bg-campher-dark/95 backdrop-blur-md' 
+        : 'py-2 bg-campher-dark'
+    )}>
       <div className="container-custom flex justify-between items-center">
         {/* Logo - links to home or root */}
         {location.pathname === '/' ? (
@@ -107,23 +109,10 @@ const Navbar = () => {
         {/* Desktop Navigation */}
         <div className="hidden md:flex items-center gap-4">
           {navLinks.map((link, index) => (
-            location.pathname === '/' ? (
-              <a
-                key={`${index}-${language}`}
-                href={link.href}
-                className={cn(
-                  "px-4 py-2 rounded-md text-sm font-medium transition-colors",
-                  link.primary
-                    ? "bg-campher-blue hover:bg-blue-600 text-white"
-                    : "text-white hover:bg-white/10"
-                )}
-              >
-                {link.name}
-              </a>
-            ) : (
+            link.isPage ? (
               <Link
                 key={`${index}-${language}`}
-                to={`/${link.href}`}
+                to={link.href}
                 className={cn(
                   "px-4 py-2 rounded-md text-sm font-medium transition-colors",
                   link.primary
@@ -133,6 +122,23 @@ const Navbar = () => {
               >
                 {link.name}
               </Link>
+            ) : (
+              <a
+                key={`${index}-${language}`}
+                href={link.href}
+                className={cn(
+                  "px-4 py-2 rounded-md text-sm font-medium transition-colors",
+                  link.primary
+                    ? "bg-campher-blue hover:bg-blue-600 text-white"
+                    : "text-white hover:bg-white/10"
+                )}
+                onClick={(e) => {
+                  e.preventDefault();
+                  handleSectionNavigation(link.href);
+                }}
+              >
+                {link.name}
+              </a>
             )
           ))}
           <div className="ml-3">
@@ -140,7 +146,7 @@ const Navbar = () => {
           </div>
         </div>
 
-        {/* Mobile Navigation Sheet */}
+        {/* Mobile Navigation */}
         <div className="flex items-center md:hidden space-x-3">
           <LanguageSwitcher />
           <Sheet open={sheetOpen} onOpenChange={setSheetOpen}>
@@ -177,7 +183,7 @@ const Navbar = () => {
                         ? "bg-campher-blue hover:bg-blue-600 text-white shadow-md"
                         : "bg-white/5 text-white hover:bg-white/20 border border-white/10"
                     )}
-                    onClick={() => handleSectionNavigation(link.href)}
+                    onClick={() => handleSectionNavigation(link.href, link.isPage)}
                   >
                     {link.name}
                   </Button>
