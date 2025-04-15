@@ -1,18 +1,22 @@
 
 import { useState } from 'react';
-import { Heart, Share } from 'lucide-react';
+import { Heart, Share2, Facebook, Twitter, Linkedin } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { useToast } from '@/hooks/use-toast';
 
 interface BlogPostActionsProps {
   initialLikes?: number;
+  title: string;
 }
 
-const BlogPostActions = ({ initialLikes = 0 }: BlogPostActionsProps) => {
+const BlogPostActions = ({ initialLikes = 0, title }: BlogPostActionsProps) => {
   const { toast } = useToast();
   const [likes, setLikes] = useState(initialLikes);
   const [hasLiked, setHasLiked] = useState(false);
-  const isMobile = window.innerWidth < 768;
+
+  const currentUrl = window.location.href;
+  const encodedUrl = encodeURIComponent(currentUrl);
+  const encodedTitle = encodeURIComponent(title);
 
   const handleLike = () => {
     if (!hasLiked) {
@@ -28,39 +32,72 @@ const BlogPostActions = ({ initialLikes = 0 }: BlogPostActionsProps) => {
   const handleShare = async () => {
     try {
       await navigator.share({
-        title: document.title,
+        title: title,
         text: "Sjekk ut dette innlegget!",
-        url: window.location.href
+        url: currentUrl
       });
     } catch (err) {
       toast({
         title: "Del innlegget",
-        description: "Kopier linken: " + window.location.href,
+        description: "Kopier linken: " + currentUrl,
       });
     }
   };
 
+  const socialLinks = {
+    facebook: `https://www.facebook.com/sharer/sharer.php?u=${encodedUrl}`,
+    twitter: `https://twitter.com/intent/tweet?url=${encodedUrl}&text=${encodedTitle}`,
+    linkedin: `https://www.linkedin.com/sharing/share-offsite/?url=${encodedUrl}`
+  };
+
   return (
-    <div className="flex gap-3 md:gap-4 items-center border-t pt-4 md:pt-6">
-      <Button 
-        variant="outline" 
-        size={isMobile ? "sm" : "default"}
-        onClick={handleLike}
-        className={`gap-2 ${hasLiked ? 'text-red-500' : ''}`}
-      >
-        <Heart className={`w-4 h-4 ${hasLiked ? 'fill-current' : ''}`} />
-        {likes} likes
-      </Button>
-      
-      <Button 
-        variant="outline" 
-        size={isMobile ? "sm" : "default"}
-        onClick={handleShare}
-        className="gap-2"
-      >
-        <Share className="w-4 h-4" />
-        Del
-      </Button>
+    <div className="border-t pt-6 space-y-4">
+      <div className="flex gap-4 items-center">
+        <Button 
+          variant="outline" 
+          onClick={handleLike}
+          className={`gap-2 ${hasLiked ? 'text-red-500' : ''}`}
+        >
+          <Heart className={`w-4 h-4 ${hasLiked ? 'fill-current' : ''}`} />
+          {likes} likes
+        </Button>
+        
+        <Button 
+          variant="outline" 
+          onClick={handleShare}
+          className="gap-2"
+        >
+          <Share2 className="w-4 h-4" />
+          Del
+        </Button>
+      </div>
+
+      <div className="flex gap-4 items-center pt-2">
+        <a 
+          href={socialLinks.facebook}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="text-gray-600 hover:text-blue-600"
+        >
+          <Facebook className="w-5 h-5" />
+        </a>
+        <a 
+          href={socialLinks.twitter}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="text-gray-600 hover:text-blue-400"
+        >
+          <Twitter className="w-5 h-5" />
+        </a>
+        <a 
+          href={socialLinks.linkedin}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="text-gray-600 hover:text-blue-700"
+        >
+          <Linkedin className="w-5 h-5" />
+        </a>
+      </div>
     </div>
   );
 };

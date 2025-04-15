@@ -1,8 +1,10 @@
 
-import { ArrowUpRight, Heart } from 'lucide-react';
+import { useState } from 'react';
+import { ArrowUpRight, Heart, Share2, MessageCircle } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
-import { useIsMobile } from '@/hooks/use-mobile';
+import { Button } from "@/components/ui/button";
+import { useToast } from "@/hooks/use-toast";
 import { AspectRatio } from '@/components/ui/aspect-ratio';
 
 interface BlogPostCardProps {
@@ -13,58 +15,101 @@ interface BlogPostCardProps {
     publishDate: string;
     readTime: string;
   };
-  isFeatured?: boolean;
+  layout?: 'grid' | 'list';
   scrollToTop: () => void;
 }
 
-const BlogPostCard = ({ post, isFeatured = false, scrollToTop }: BlogPostCardProps) => {
-  const isMobile = useIsMobile();
+const BlogPostCard = ({ post, layout = 'grid', scrollToTop }: BlogPostCardProps) => {
+  const { toast } = useToast();
+  const [likes, setLikes] = useState(0);
+  const [hasLiked, setHasLiked] = useState(false);
   
+  const handleLike = (e: React.MouseEvent) => {
+    e.preventDefault();
+    if (!hasLiked) {
+      setLikes(prev => prev + 1);
+      setHasLiked(true);
+      toast({
+        title: "Takk for likes!",
+        description: "Du likte dette innlegget",
+      });
+    }
+  };
+
+  const handleShare = async (e: React.MouseEvent) => {
+    e.preventDefault();
+    try {
+      await navigator.share({
+        title: post.title,
+        text: post.excerpt,
+        url: window.location.origin + '/blog/' + post.id
+      });
+    } catch (err) {
+      toast({
+        title: "Del innlegget",
+        description: "Kopier linken: " + window.location.origin + '/blog/' + post.id,
+      });
+    }
+  };
+
   return (
     <Link 
       to={`/blog/${post.id}`} 
-      className="block transition-transform hover:-translate-y-1 min-h-[200px] min-w-[280px]"
+      className="block transition-transform hover:-translate-y-1"
       onClick={scrollToTop}
-      aria-label={`Les blogginnlegg: ${post.title}`}
     >
-      <Card className="h-full overflow-hidden shadow-md hover:shadow-lg transition-shadow border-2 border-transparent hover:border-blue-200 focus:border-blue-300">
-        {isFeatured && !isMobile && (
+      <Card className={`h-full overflow-hidden hover:shadow-lg transition-shadow border-2 border-transparent hover:border-blue-200 ${
+        layout === 'list' ? 'flex md:flex-row' : ''
+      }`}>
+        <div className={layout === 'list' ? 'w-full md:w-1/3' : ''}>
           <div className="relative overflow-hidden bg-blue-50">
             <AspectRatio ratio={16/9}>
               <div className="p-6 text-center flex items-center justify-center h-full">
-                <h3 className="text-2xl font-medium text-blue-800">{post.title}</h3>
-              </div>
-            </AspectRatio>
-          </div>
-        )}
-        {isFeatured && isMobile && (
-          <div className="relative overflow-hidden bg-blue-50">
-            <AspectRatio ratio={16/9}>
-              <div className="p-4 text-center flex items-center justify-center h-full">
                 <h3 className="text-xl font-medium text-blue-800">{post.title}</h3>
               </div>
             </AspectRatio>
           </div>
-        )}
-        <CardHeader className={isMobile ? "p-3" : "p-6"}>
-          <CardTitle className={isMobile ? "text-lg" : "text-2xl"}>{post.title}</CardTitle>
-          <CardDescription className="text-xs md:text-sm">Publisert {post.publishDate} | {post.readTime} lesetid</CardDescription>
-        </CardHeader>
-        <CardContent className={isMobile ? "p-3 pt-0" : "p-6 pt-0"}>
-          <p className="text-gray-700 text-sm md:text-base line-clamp-3">{post.excerpt}</p>
-        </CardContent>
-        <CardFooter className={`flex justify-between items-center ${isMobile ? "p-3 pt-0" : "p-6 pt-0"}`}>
-          <div className="flex gap-2 md:gap-4 text-gray-500 text-xs md:text-sm">
-            <span className="flex items-center gap-1">
-              <Heart className="w-3 h-3 md:w-4 md:h-4" />
-              0
+        </div>
+
+        <div className={layout === 'list' ? 'w-full md:w-2/3' : ''}>
+          <CardHeader>
+            <CardTitle className="text-xl line-clamp-2">{post.title}</CardTitle>
+            <CardDescription>{post.publishDate} | {post.readTime} lesetid</CardDescription>
+          </CardHeader>
+          
+          <CardContent>
+            <p className="text-gray-700 line-clamp-3">{post.excerpt}</p>
+          </CardContent>
+
+          <CardFooter className="flex justify-between items-center">
+            <div className="flex gap-4">
+              <Button 
+                variant="ghost" 
+                size="sm" 
+                className={`gap-2 ${hasLiked ? 'text-red-500' : ''}`}
+                onClick={handleLike}
+              >
+                <Heart className={`w-4 h-4 ${hasLiked ? 'fill-current' : ''}`} />
+                {likes}
+              </Button>
+
+              <Button
+                variant="ghost"
+                size="sm"
+                className="gap-2"
+                onClick={handleShare}
+              >
+                <Share2 className="w-4 h-4" />
+                Del
+              </Button>
+            </div>
+
+            <span className="text-blue-800 font-medium hover:text-blue-900 inline-flex items-center">
+              Les mer
+              <ArrowUpRight size={16} className="ml-1" />
             </span>
-          </div>
-          <span className="text-blue-800 font-medium hover:text-blue-900 inline-flex items-center text-xs md:text-sm py-2 underline underline-offset-2">
-            Les mer
-            <ArrowUpRight size={isMobile ? 14 : 16} className="ml-1" />
-          </span>
-        </CardFooter>
+          </CardFooter>
+        </div>
       </Card>
     </Link>
   );

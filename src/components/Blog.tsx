@@ -1,15 +1,9 @@
 
 import BlogHeader from './blog/BlogHeader';
-import BlogCarousel from './blog/BlogCarousel';
+import BlogList from './blog/BlogList';
 import { blogPostPreviews } from '@/data/blogData';
 import { useLanguageContext } from '@/context/LanguageContext';
 
-/**
- * Blog-komponent
- * 
- * Denne komponenten inneholder bloggseksjonen med artikler om viktigheten av nettsider
- * og andre relevante temaer for bedrifter som ønsker å etablere digital tilstedeværelse.
- */
 const Blog = () => {
   const { language } = useLanguageContext();
   
@@ -33,7 +27,6 @@ const Blog = () => {
 
   const t = texts[language === 'no' ? 'no' : 'en'];
   
-  // Format blog posts with the correct language
   const localizedPosts = blogPostPreviews.map(post => ({
     ...post,
     title: post.title[language === 'no' ? 'no' : 'en'],
@@ -43,14 +36,13 @@ const Blog = () => {
   }));
 
   return (
-    <section id="blog" className="section-padding">
+    <section id="blog" className="section-padding bg-gray-50">
       <div className="container-custom">
         <BlogHeader 
           title={t.title} 
           description={t.description}
         />
-
-        <BlogCarousel posts={localizedPosts} scrollToTop={scrollToTop} />
+        <BlogList posts={localizedPosts} scrollToTop={scrollToTop} />
       </div>
     </section>
   );
