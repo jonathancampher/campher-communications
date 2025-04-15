@@ -1,6 +1,7 @@
 
 import { ReactNode } from 'react';
 import { LucideIcon } from 'lucide-react';
+import { useLanguageContext } from '@/context/LanguageContext';
 
 interface IconData {
   type: LucideIcon;
@@ -12,7 +13,10 @@ interface IconData {
 
 interface ContactItemProps {
   icon: IconData;
-  title: string;
+  title: {
+    no: string;
+    en: string;
+  };
   info: string;
   link: string;
   index: number;
@@ -25,6 +29,10 @@ interface ContactItemProps {
  */
 const ContactItem = ({ icon, title, info, link, index }: ContactItemProps) => {
   const IconComponent = icon.type;
+  const { language } = useLanguageContext();
+  
+  // Display title according to selected language
+  const displayTitle = title[language === 'no' ? 'no' : 'en'];
   
   return (
     <div 
@@ -35,7 +43,7 @@ const ContactItem = ({ icon, title, info, link, index }: ContactItemProps) => {
         <IconComponent {...icon.props} />
       </div>
       <div>
-        <h3 className="text-lg font-medium mb-1">{title}</h3>
+        <h3 className="text-lg font-medium mb-1">{displayTitle}</h3>
         <a href={link} className="text-campher-gray hover:text-campher-blue transition-colors">
           {info}
         </a>
