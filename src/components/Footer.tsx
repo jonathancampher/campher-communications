@@ -1,9 +1,10 @@
 
 import { ArrowUp } from 'lucide-react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate, useLocation } from 'react-router-dom';
 import Logo from './Logo';
 import { useIsMobile } from '@/hooks/use-mobile';
 import { useLanguageContext } from '@/context/LanguageContext';
+import { navigateToSection } from '@/utils/navigation';
 
 /**
  * Footer-komponent
@@ -15,12 +16,25 @@ import { useLanguageContext } from '@/context/LanguageContext';
 const Footer = () => {
   const isMobile = useIsMobile();
   const { language } = useLanguageContext();
+  const navigate = useNavigate();
+  const { pathname } = useLocation();
   
   const scrollToTop = () => {
     window.scrollTo({
       top: 0,
       behavior: 'smooth'
     });
+  };
+
+  const handleLinkClick = (e: React.MouseEvent, url: string) => {
+    e.preventDefault();
+    
+    if (url.startsWith('#')) {
+      const sectionId = url.substring(1); // Remove the # character
+      navigateToSection(navigate, pathname, sectionId);
+    } else {
+      navigate(url);
+    }
   };
 
   const footerLinksNO = [
@@ -130,6 +144,7 @@ const Footer = () => {
                       <a 
                         href={link.url} 
                         className="text-gray-400 hover:text-white hover:underline transition-colors text-sm md:text-base"
+                        onClick={(e) => handleLinkClick(e, link.url)}
                       >
                         {link.name}
                       </a>
