@@ -9,6 +9,16 @@ interface BlogMobileDrawerProps {
 }
 
 const BlogMobileDrawer = ({ navigateToBlogSection }: BlogMobileDrawerProps) => {
+  const handleClick = (e: React.MouseEvent) => {
+    e.preventDefault();
+    window.location.href = '/blog';
+  };
+
+  const handleHomeClick = (e: React.MouseEvent) => {
+    e.preventDefault();
+    window.location.href = '/';
+  };
+
   return (
     <div className="fixed bottom-4 right-4 z-40">
       <Drawer>
@@ -26,6 +36,7 @@ const BlogMobileDrawer = ({ navigateToBlogSection }: BlogMobileDrawerProps) => {
             <h3 className="font-medium text-lg">Navigasjon</h3>
             <Link 
               to="/blog" 
+              onClick={handleClick}
               className="flex items-center gap-2 p-3 bg-blue-50 text-campher-blue rounded-md w-full"
             >
               <ArrowLeft size={18} />
@@ -33,6 +44,7 @@ const BlogMobileDrawer = ({ navigateToBlogSection }: BlogMobileDrawerProps) => {
             </Link>
             <Link 
               to="/" 
+              onClick={handleHomeClick}
               className="flex items-center gap-2 p-3 bg-gray-50 text-gray-700 rounded-md w-full"
             >
               <span className="font-medium">Til forsiden</span>

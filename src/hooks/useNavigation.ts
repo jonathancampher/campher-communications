@@ -62,22 +62,24 @@ export const useNavigation = () => {
     setSheetOpen(false);
     
     if (isPage) {
-      // For page navigation, use window.location to ensure full page load
+      // For page navigation, use regular navigation
       if (location.pathname !== href) {
         window.location.href = href;
       }
       return;
     }
     
+    // If trying to navigate to a homepage section from another page
     if (location.pathname !== '/') {
-      // If not on home page, navigate to home with anchor
+      // Navigate to homepage with the section anchor
       window.location.href = `/${href}`;
-    } else {
-      // If on home page, smooth scroll to section
-      const sectionElement = document.querySelector(href);
-      if (sectionElement) {
-        sectionElement.scrollIntoView({ behavior: 'smooth' });
-      }
+      return;
+    }
+    
+    // If already on homepage, use smooth scroll
+    const sectionElement = document.querySelector(href);
+    if (sectionElement) {
+      sectionElement.scrollIntoView({ behavior: 'smooth' });
     }
   };
 
