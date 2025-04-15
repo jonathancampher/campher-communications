@@ -8,20 +8,14 @@ import { contactFormSchema, type ContactFormValues } from './schema';
 import { ContactFormFields } from './ContactFormFields';
 import { SubmitButton } from './SubmitButton';
 import { submitContactForm } from '@/utils/form-submission';
+import { useLanguageContext } from '@/context/LanguageContext';
 
-/**
- * ContactForm-komponent
- * 
- * Håndterer kontaktskjemaet i kontaktseksjonen.
- * Integrert med Netlify Forms for å håndtere form submissions.
- * Optimalisert for ytelse, cross-browser støtte og tilgjengelighet.
- */
 const ContactForm = () => {
   const { toast } = useToast();
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [formError, setFormError] = useState<string | null>(null);
+  const { language } = useLanguageContext();
   
-  // Initialize form with validation
   const form = useForm<ContactFormValues>({
     resolver: zodResolver(contactFormSchema),
     defaultValues: {
@@ -33,7 +27,31 @@ const ContactForm = () => {
     }
   });
 
-  // Handle form submission
+  const texts = {
+    no: {
+      heading: "Send oss en melding",
+      successTitle: "Melding sendt",
+      successDesc: "Takk for din henvendelse. Vi vil ta kontakt med deg snart!",
+      errorTitle: "Noe gikk galt",
+      errorDesc: "Vi kunne ikke sende meldingen din. Vennligst prøv igjen senere.",
+      noScriptMessage: "Dette skjemaet krever JavaScript for å fungere. Vennligst aktiver JavaScript eller kontakt oss direkte via e-post.",
+      alternativeContact: "Foretrekker du å sende e-post direkte?",
+      errorAlternative: "Du kan også ta kontakt med oss direkte på"
+    },
+    en: {
+      heading: "Send us a message",
+      successTitle: "Message sent",
+      successDesc: "Thank you for your inquiry. We will contact you soon!",
+      errorTitle: "Something went wrong",
+      errorDesc: "We could not send your message. Please try again later.",
+      noScriptMessage: "This form requires JavaScript to function. Please enable JavaScript or contact us directly via email.",
+      alternativeContact: "Prefer to send email directly?",
+      errorAlternative: "You can also contact us directly at"
+    }
+  };
+
+  const t = texts[language === 'no' ? 'no' : 'en'];
+
   const onSubmit = async (data: ContactFormValues) => {
     setIsSubmitting(true);
     setFormError(null);
@@ -42,18 +60,17 @@ const ContactForm = () => {
       await submitContactForm(data);
       
       toast({
-        title: "Melding sendt",
-        description: "Takk for din henvendelse. Vi vil ta kontakt med deg snart!",
+        title: t.successTitle,
+        description: t.successDesc,
       });
       
-      // Reset form
       form.reset();
     } catch (error) {
       console.error("Form submission error:", error);
-      setFormError("Vi kunne ikke sende meldingen din. Vennligst prøv igjen senere.");
+      setFormError(t.errorDesc);
       toast({
-        title: "Noe gikk galt",
-        description: "Vi kunne ikke sende meldingen din. Vennligst prøv igjen senere.",
+        title: t.errorTitle,
+        description: t.errorDesc,
         variant: "destructive",
       });
     } finally {
@@ -61,26 +78,24 @@ const ContactForm = () => {
     }
   };
 
-  // Fallback for browsers with JavaScript disabled
   const noScriptMessage = 
     <noscript>
       <div className="p-4 bg-yellow-50 border border-yellow-200 rounded-md text-yellow-800 mb-4">
-        Dette skjemaet krever JavaScript for å fungere. Vennligst aktiver JavaScript eller kontakt oss direkte via e-post.
+        {t.noScriptMessage}
       </div>
     </noscript>;
 
   return (
     <div className="lg:col-span-3 bg-white p-8 rounded-xl shadow-sm" role="region" aria-labelledby="contact-form-heading">
-      <h3 className="text-xl font-medium mb-6" id="contact-form-heading">Send oss en melding</h3>
+      <h3 className="text-xl font-medium mb-6" id="contact-form-heading">{t.heading}</h3>
       
       {noScriptMessage}
       
-      {/* Display error message if form submission failed */}
       {formError && (
         <div className="p-4 mb-4 bg-red-50 border border-red-200 rounded-md text-red-700" role="alert">
           <p>{formError}</p>
           <p className="text-sm mt-1">
-            Du kan også ta kontakt med oss direkte på{' '}
+            {t.errorAlternative}{' '}
             <a href="mailto:kontakt@camphercommunications.no" className="underline font-medium text-red-800 hover:text-red-900">
               kontakt@camphercommunications.no
             </a>
@@ -98,7 +113,6 @@ const ContactForm = () => {
           netlify-honeypot="bot-field"
           encType="application/x-www-form-urlencoded"
         >
-          {/* Important hidden fields for Netlify */}
           <input type="hidden" name="form-name" value="contact" />
           <div hidden>
             <label>
@@ -112,13 +126,12 @@ const ContactForm = () => {
         </form>
       </Form>
       
-      {/* Progressive enhancement - alternative contact method with improved contrast */}
       <div className="mt-6 text-sm text-gray-700">
-        Foretrekker du å sende e-post direkte?{' '}
+        {t.alternativeContact}{' '}
         <a 
           href="mailto:kontakt@camphercommunications.no" 
           className="text-campher-blue font-medium hover:text-blue-800 underline transition-colors"
-          aria-label="Send e-post til kontakt@camphercommunications.no"
+          aria-label={language === 'no' ? "Send e-post til kontakt@camphercommunications.no" : "Send email to kontakt@camphercommunications.no"}
         >
           kontakt@camphercommunications.no
         </a>
