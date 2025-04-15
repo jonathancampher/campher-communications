@@ -25,9 +25,8 @@ const BlogMobileDrawer = ({ navigateToBlogSection }: BlogMobileDrawerProps) => {
           <div className="space-y-4">
             <h3 className="font-medium text-lg">Navigasjon</h3>
             <Link 
-              to="/#blog" 
+              to="/blog" 
               className="flex items-center gap-2 p-3 bg-blue-50 text-campher-blue rounded-md w-full"
-              onClick={navigateToBlogSection}
             >
               <ArrowLeft size={18} />
               <span className="font-medium">Tilbake til blogg</span>
