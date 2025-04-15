@@ -1,6 +1,7 @@
 
 import { Card } from '@/components/ui/card';
 import { AspectRatio } from '@/components/ui/aspect-ratio';
+import { useEffect, useRef } from 'react';
 
 interface BlogPostContentProps {
   title: string;
@@ -11,6 +12,22 @@ interface BlogPostContentProps {
 }
 
 const BlogPostContent = ({ title, publishDate, readTime, content, image }: BlogPostContentProps) => {
+  const contentRef = useRef<HTMLDivElement>(null);
+  
+  // Ensure content is properly rendered across browsers
+  useEffect(() => {
+    if (contentRef.current) {
+      // Force layout recalculation to ensure content is visible
+      contentRef.current.style.display = 'none';
+      // Using setTimeout to ensure browser has time to process
+      setTimeout(() => {
+        if (contentRef.current) {
+          contentRef.current.style.display = 'block';
+        }
+      }, 0);
+    }
+  }, [content]);
+
   return (
     <Card className="p-4 md:p-8">
       {image && (
@@ -35,7 +52,7 @@ const BlogPostContent = ({ title, publishDate, readTime, content, image }: BlogP
         <span>{readTime}</span>
       </div>
       
-      <div className="prose max-w-none mb-6 md:mb-8 text-sm md:text-base">
+      <div ref={contentRef} className="prose max-w-none mb-6 md:mb-8 text-sm md:text-base">
         {content.split('\n\n').map((paragraph, index) => (
           <p key={index} className="mb-3 md:mb-4">{paragraph.trim()}</p>
         ))}

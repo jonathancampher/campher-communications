@@ -1,6 +1,6 @@
 
 import { useState } from 'react';
-import { ArrowUpRight, Heart, Share2, MessageCircle } from 'lucide-react';
+import { ArrowUpRight, Heart, Share2 } from 'lucide-react';
 import { Link, useNavigate } from 'react-router-dom';
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
@@ -27,6 +27,7 @@ const BlogPostCard = ({ post, layout = 'grid', scrollToTop }: BlogPostCardProps)
   
   const handleLike = (e: React.MouseEvent) => {
     e.preventDefault();
+    e.stopPropagation(); // Prevent navigation when clicking like button
     if (!hasLiked) {
       setLikes(prev => prev + 1);
       setHasLiked(true);
@@ -39,6 +40,7 @@ const BlogPostCard = ({ post, layout = 'grid', scrollToTop }: BlogPostCardProps)
 
   const handleShare = async (e: React.MouseEvent) => {
     e.preventDefault();
+    e.stopPropagation(); // Prevent navigation when clicking share button
     try {
       await navigator.share({
         title: post.title,

@@ -1,5 +1,5 @@
 
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
@@ -16,6 +16,7 @@ const BlogPost = () => {
   const { id } = useParams();
   const isMobile = useIsMobile();
   const { language } = useLanguageContext();
+  const [isLoaded, setIsLoaded] = useState(false);
   
   const post = blogPosts.find(post => post.id === Number(id));
   
@@ -33,6 +34,9 @@ const BlogPost = () => {
       }
       const description = post.excerpt ? post.excerpt[language] : post.content[language].slice(0, 160) + '...';
       metaDescription.setAttribute('content', description);
+      
+      // Signal that content is loaded
+      setIsLoaded(true);
     }
   }, [post, language]);
 
@@ -58,7 +62,9 @@ const BlogPost = () => {
         {isMobile && <BlogMobileDrawer navigateToBlogSection={navigateToBlogSection} />}
         
         <div className="space-y-4">
+          {/* Add key with isLoaded to force re-render when content is ready */}
           <BlogPostContent 
+            key={`${post.id}-${language}-${isLoaded}`}
             title={post.title[language]}
             publishDate={post.publishDate[language]}
             readTime={post.readTime[language]}
