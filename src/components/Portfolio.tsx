@@ -1,4 +1,3 @@
-
 import { Link } from 'react-router-dom';
 import { useIsMobile } from '@/hooks/use-mobile';
 import { AspectRatio } from '@/components/ui/aspect-ratio';
@@ -139,7 +138,6 @@ const Portfolio = () => {
                     alt={project.title}
                     className="w-full h-full object-cover"
                     loading={index < 2 ? "eager" : "lazy"}
-                    importance={index < 2 ? "high" : "auto"}
                     width="600"
                     height="400"
                     decoding="async"

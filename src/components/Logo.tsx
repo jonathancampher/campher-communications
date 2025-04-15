@@ -1,12 +1,6 @@
 
 import React from 'react';
 
-/**
- * Logo-komponent
- * 
- * Viser firmaets logo med riktig størrelse og alt-tekst.
- * Optimalisert for ytelse, tilgjengelighet og cross-browser støtte.
- */
 const Logo = () => {
   return (
     <img 
@@ -16,12 +10,11 @@ const Logo = () => {
       width="64"
       height="64"
       loading="eager"
-      fetchpriority="high"
+      fetchPriority="high"
       decoding="async"
       onLoad={(e) => {
         // Mark as contentful paint candidate for LCP optimization
         if (e.currentTarget && 'PerformanceObserver' in window) {
-          // Use standard performance marking instead of custom attribute
           performance.mark('logo-loaded');
         }
       }}
