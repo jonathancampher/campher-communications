@@ -33,8 +33,104 @@ export const blogPosts: BlogPost[] = [
       en: "How a Modern Website Increases Sales for Small Businesses in Norway"
     },
     content: {
-      no: "En moderne nettside er ikke lenger en luksus – det er en nødvendighet for små bedrifter i Norge som ønsker å konkurrere i 2025. I denne guiden viser vi hvordan en nettside kan øke salget ditt...",
-      en: "A modern website is no longer a luxury - it's a necessity for small businesses in Norway looking to compete in 2025. In this guide, we show you how a website can increase your sales...\n\nWhy do small businesses need a website?\n\nAccording to Statistics Norway (SSB), over 80% of Norwegians search for products and services online before making a purchase. Without a website, you miss out on these customers. A website:\n\nBuilds credibility: A professional website, like our projects at Magnus Henriksen AS, shows that you are serious.\n\nIncreases visibility: With local SEO, you can rank for searches like 'hairdresser Oslo' or 'craftsman Bergen'.\n\nProvides accessibility: Customers can find you 24/7, even when the office is closed."
+      no: `En moderne nettside er ikke lenger en luksus – det er en nødvendighet for små bedrifter i Norge som ønsker å konkurrere i 2025. I denne guiden viser vi hvordan en nettside kan øke salget ditt, med praktiske tips og eksempler fra Campher Communications.
+
+Hvorfor trenger små bedrifter en nettside?
+
+Ifølge Statistisk Sentralbyrå (SSB) søker over 80 % av nordmenn etter produkter og tjenester online før de kjøper. Uten en nettside går du glipp av disse kundene. En nettside:
+
+Bygger troverdighet: En profesjonell nettside, som våre prosjekter hos Magnus Henriksen AS, viser at du er seriøs.
+
+Øker synligheten: Med lokal SEO kan du rangere for søk som "frisør Oslo" eller "håndverker Bergen".
+
+Gir tilgjengelighet: Kunder kan finne deg 24/7, selv når kontoret er stengt.
+
+5 måter en nettside øker salget på
+
+1. Forbedret førsteinntrykk
+
+En moderne nettside med responsiv design (som tilpasser seg mobil, nettbrett og PC) gir et sterkt førsteinntrykk. For eksempel har vi hjulpet kunder som MyHR Entreprenør med nettsider som laster raskt og ser bra ut på alle enheter.
+
+2. Lokal SEO for flere kunder
+
+Ved å optimalisere for lokale søkeord, som "webdesign Oslo", kan du tiltrekke kunder i nærområdet. Vi implementerer schema-markup og Google My Business-integrasjon for å sikre at du blir funnet.
+
+3. Enkel kontakt og bestilling
+
+En nettside med klare "Ta kontakt"-knapper eller et bestillingssystem (som vi kan bygge med verktøy som Lovable AI) gjør det enkelt for kunder å handle. Se hvordan vi integrerte et bestillingssystem for en lokal restaurant her.
+
+4. Innhold som konverterer
+
+Blogginnlegg og casestudier, som dette, viser ekspertisen din og bygger tillit. Vi anbefaler å publisere innhold som svarer på kundenes spørsmål, f.eks. "Hvordan velge en nettsideleverandør".
+
+5. Målrettet markedsføring
+
+En nettside lar deg samle e-poster via lead magnets (f.eks. en gratis PDF som "10 tips til din nettside"). Dette hjelper deg å pleie leads og øke salget over tid.
+
+Hvordan komme i gang?
+
+Fokuser på design: Velg et rent, responsivt design som reflekterer merkevaren din.
+
+Optimaliser for SEO: Bruk nøkkelord, rask lasting, og mobilvennlighet.
+
+Legg til en CTA: Sørg for at kunder enkelt kan kontakte deg.
+
+Mål resultatene: Bruk Google Analytics for å spore trafikk og konverteringer.
+
+Klar for å ta salget til neste nivå? Last ned vår gratis sjekkliste for nettsider eller kontakt oss for en uforpliktende prat!
+
+Hvorfor velge Campher Communications?
+
+Vi har hjulpet små bedrifter i Norge med nettsider som gir resultater. Fra håndverkere til restauranter – vi skreddersyr løsninger som passer dine behov. Besøk vår portefølje for å se eksempler som Magnus Henriksen AS og Global Transportservice AS.`,
+      en: `A modern website is no longer a luxury - it's a necessity for small businesses in Norway looking to compete in 2025. In this guide, we show you how a website can increase your sales, with practical tips and examples from Campher Communications.
+
+Why do small businesses need a website?
+
+According to Statistics Norway (SSB), over 80% of Norwegians search for products and services online before making a purchase. Without a website, you miss out on these customers. A website:
+
+Builds credibility: A professional website, like our projects at Magnus Henriksen AS, shows that you're serious.
+
+Increases visibility: With local SEO, you can rank for searches like "hairdresser Oslo" or "craftsman Bergen".
+
+Provides accessibility: Customers can find you 24/7, even when the office is closed.
+
+5 Ways a Website Increases Sales
+
+1. Improved First Impression
+
+A modern website with responsive design (adapting to mobile, tablet, and PC) creates a strong first impression. For example, we've helped clients like MyHR Entreprenør with websites that load fast and look great on all devices.
+
+2. Local SEO for More Customers
+
+By optimizing for local keywords, like "web design Oslo", you can attract customers in your area. We implement schema markup and Google My Business integration to ensure you're found.
+
+3. Easy Contact and Ordering
+
+A website with clear "Contact Us" buttons or an ordering system (which we can build with tools like Lovable AI) makes it easy for customers to do business. See how we integrated an ordering system for a local restaurant here.
+
+4. Content that Converts
+
+Blog posts and case studies, like this one, showcase your expertise and build trust. We recommend publishing content that answers customer questions, e.g., "How to choose a website provider".
+
+5. Targeted Marketing
+
+A website lets you collect emails through lead magnets (e.g., a free PDF like "10 tips for your website"). This helps you nurture leads and increase sales over time.
+
+How to Get Started?
+
+Focus on design: Choose a clean, responsive design that reflects your brand.
+
+Optimize for SEO: Use keywords, fast loading, and mobile-friendliness.
+
+Add a CTA: Make sure customers can easily contact you.
+
+Measure results: Use Google Analytics to track traffic and conversions.
+
+Ready to take your sales to the next level? Download our free website checklist or contact us for a no-obligation chat!
+
+Why Choose Campher Communications?
+
+We've helped small businesses in Norway with websites that deliver results. From craftsmen to restaurants - we tailor solutions to fit your needs. Visit our portfolio to see examples like Magnus Henriksen AS and Global Transportservice AS.`
     },
     publishDate: {
       no: "15. april 2025",
