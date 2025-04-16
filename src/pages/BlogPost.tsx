@@ -18,8 +18,20 @@ const BlogPost = () => {
   const isMobile = useIsMobile();
   const { language } = useLanguageContext();
   const [isLoaded, setIsLoaded] = useState(false);
+  const [forceUpdate, setForceUpdate] = useState(0);
   
   const post = blogPosts.find(post => post.id === Number(id));
+  
+  // Force re-render when language changes to ensure content updates
+  useEffect(() => {
+    setForceUpdate(prev => prev + 1);
+    setIsLoaded(false);
+    
+    // Short timeout to ensure DOM has time to update
+    setTimeout(() => {
+      setIsLoaded(true);
+    }, 50);
+  }, [language]);
   
   useEffect(() => {
     // Apply selector safety to prevent third-party script errors
@@ -66,9 +78,9 @@ const BlogPost = () => {
         {isMobile && <BlogMobileDrawer navigateToBlogSection={navigateToBlogSection} />}
         
         <div className="space-y-4">
-          {/* Add key with isLoaded to force re-render when content is ready */}
+          {/* Add key with isLoaded and forceUpdate to force re-render when content is ready or language changes */}
           <BlogPostContent 
-            key={`${post.id}-${language}-${isLoaded}`}
+            key={`${post.id}-${language}-${isLoaded}-${forceUpdate}`}
             title={post.title[language]}
             publishDate={post.publishDate[language]}
             readTime={post.readTime[language]}

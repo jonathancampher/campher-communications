@@ -1,7 +1,7 @@
 
 import { Card } from '@/components/ui/card';
 import { AspectRatio } from '@/components/ui/aspect-ratio';
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 
 interface BlogPostContentProps {
   title: string;
@@ -13,21 +13,33 @@ interface BlogPostContentProps {
 
 const BlogPostContent = ({ title, publishDate, readTime, content, image }: BlogPostContentProps) => {
   const contentRef = useRef<HTMLDivElement>(null);
+  const [isVisible, setIsVisible] = useState(false);
   
   // Ensure content is properly rendered across browsers
   useEffect(() => {
     if (contentRef.current) {
       // Force layout recalculation to ensure content is visible
-      contentRef.current.style.display = 'none';
+      contentRef.current.style.opacity = '0';
+      
       // Using setTimeout to ensure browser has time to process
-      setTimeout(() => {
+      const timer = setTimeout(() => {
         if (contentRef.current) {
           contentRef.current.style.display = 'block';
+          contentRef.current.style.opacity = '1';
+          setIsVisible(true);
         }
-      }, 0);
+      }, 50);
+      
+      return () => clearTimeout(timer);
     }
   }, [content]);
-
+  
+  // Split paragraphs correctly and remove empty ones
+  const paragraphs = content
+    .split(/\n\n+/) // Split on multiple line breaks
+    .filter(p => p.trim().length > 0) // Remove empty paragraphs
+    .map(p => p.trim());
+  
   return (
     <Card className="p-4 md:p-8">
       {image && (
@@ -52,9 +64,14 @@ const BlogPostContent = ({ title, publishDate, readTime, content, image }: BlogP
         <span>{readTime}</span>
       </div>
       
-      <div ref={contentRef} className="prose max-w-none mb-6 md:mb-8 text-sm md:text-base">
-        {content.split('\n\n').map((paragraph, index) => (
-          <p key={index} className="mb-3 md:mb-4">{paragraph.trim()}</p>
+      <div 
+        ref={contentRef} 
+        className={`prose max-w-none mb-6 md:mb-8 text-sm md:text-base transition-opacity duration-300 ${isVisible ? 'opacity-100' : 'opacity-0'}`}
+      >
+        {paragraphs.map((paragraph, index) => (
+          <p key={index} className="mb-3 md:mb-4">
+            {paragraph}
+          </p>
         ))}
       </div>
     </Card>
