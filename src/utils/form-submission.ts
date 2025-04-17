@@ -37,6 +37,8 @@ export const submitContactForm = async (data: ContactFormValues): Promise<void> 
         if (!response.ok) {
           throw new Error(`Form submission failed: ${response.status} ${response.statusText}`);
         }
+        
+        console.log('Form submitted successfully to Netlify Forms');
       } else {
         // Fallback for older browsers
         // Create a hidden form element and submit it

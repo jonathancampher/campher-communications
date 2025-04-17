@@ -31,7 +31,7 @@ const ContactForm = () => {
     no: {
       heading: "Send oss en melding",
       successTitle: "Melding sendt",
-      successDesc: "Takk for din henvendelse. Vi vil ta kontakt med deg snart!",
+      successDesc: "Takk for din henvendelse. Vi vil ta kontakt med deg snart! Sjekk spam-mappen om du ikke ser svaret vårt innen kort tid.",
       errorTitle: "Noe gikk galt",
       errorDesc: "Vi kunne ikke sende meldingen din. Vennligst prøv igjen senere.",
       noScriptMessage: "Dette skjemaet krever JavaScript for å fungere. Vennligst aktiver JavaScript eller kontakt oss direkte via e-post.",
@@ -41,7 +41,7 @@ const ContactForm = () => {
     en: {
       heading: "Send us a message",
       successTitle: "Message sent",
-      successDesc: "Thank you for your inquiry. We will contact you soon!",
+      successDesc: "Thank you for your inquiry. We will contact you soon! Please check your spam folder if you don't see our response shortly.",
       errorTitle: "Something went wrong",
       errorDesc: "We could not send your message. Please try again later.",
       noScriptMessage: "This form requires JavaScript to function. Please enable JavaScript or contact us directly via email.",
