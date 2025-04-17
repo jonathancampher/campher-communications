@@ -1,3 +1,4 @@
+
 import React, { createContext, useState, useContext, useEffect } from 'react';
 
 type Language = 'no' | 'en';
@@ -18,8 +19,8 @@ export const LanguageProvider: React.FC<{ children: React.ReactNode }> = ({ chil
       return storedLanguage as Language;
     }
     
-    // Default to Norwegian until we can determine location
-    return 'no' as Language;
+    // Default to English until we can determine location
+    return 'en' as Language;
   });
   
   const [isLocationChecked, setIsLocationChecked] = useState(false);
@@ -42,19 +43,17 @@ export const LanguageProvider: React.FC<{ children: React.ReactNode }> = ({ chil
         if (data && data.country) {
           console.log('Detected country:', data.country);
           
-          // English for countries where English is commonly used
-          const englishCountries = ['US', 'GB', 'CA', 'AU', 'NZ'];
           // Norwegian for Norway and nearby Nordic countries
           const norwegianCountries = ['NO', 'SE', 'DK'];
           
-          if (englishCountries.includes(data.country)) {
-            setLanguageState('en');
-            localStorage.setItem('language', 'en');
-          } else if (norwegianCountries.includes(data.country)) {
+          if (norwegianCountries.includes(data.country)) {
             setLanguageState('no');
             localStorage.setItem('language', 'no');
+          } else {
+            // For all other countries, use English as default
+            setLanguageState('en');
+            localStorage.setItem('language', 'en');
           }
-          // For all other countries, keep the default (Norwegian)
         }
       } catch (error) {
         console.error('Error detecting user location:', error);

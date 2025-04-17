@@ -27,12 +27,12 @@ const LanguageSwitcher = () => {
       size="icon" 
       onClick={toggleLanguage}
       className={`text-white hover:bg-white/20 hover:text-white border border-white/10 rounded-md ${isLoading ? 'opacity-70' : ''}`}
-      aria-label={language === 'no' ? 'Bytt til engelsk' : 'Switch to Norwegian'}
+      aria-label={language === 'no' ? 'Switch to English' : 'Bytt til norsk'}
       disabled={isLoading}
     >
       <Globe className={`h-5 w-5 ${isLoading ? 'animate-pulse' : ''}`} />
       <span className="sr-only">
-        {language === 'no' ? 'Bytt til engelsk' : 'Switch to Norwegian'}
+        {language === 'no' ? 'Switch to English' : 'Bytt til norsk'}
       </span>
       <span className="ml-2 hidden md:inline">
         {isLoading ? '...' : language === 'no' ? 'EN' : 'NO'}
