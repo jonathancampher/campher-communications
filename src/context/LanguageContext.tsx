@@ -1,4 +1,3 @@
-
 import React, { createContext, useState, useContext, useEffect } from 'react';
 
 type Language = 'no' | 'en';
@@ -11,11 +10,61 @@ interface LanguageContextType {
 const LanguageContext = createContext<LanguageContextType | undefined>(undefined);
 
 export const LanguageProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
-  // Try to get stored language preference, default to Norwegian
+  // Try to get stored language preference or determine from location
   const [language, setLanguageState] = useState<Language>(() => {
+    // First check if user has a stored preference
     const storedLanguage = localStorage.getItem('language');
-    return (storedLanguage === 'en' ? 'en' : 'no') as Language;
+    if (storedLanguage === 'en' || storedLanguage === 'no') {
+      return storedLanguage as Language;
+    }
+    
+    // Default to Norwegian until we can determine location
+    return 'no' as Language;
   });
+  
+  const [isLocationChecked, setIsLocationChecked] = useState(false);
+
+  // Detect user's country on initial load (if no preference is stored)
+  useEffect(() => {
+    const detectUserLocation = async () => {
+      // Skip if user has already set a language preference
+      if (localStorage.getItem('language')) {
+        setIsLocationChecked(true);
+        return;
+      }
+      
+      try {
+        // Use ipinfo.io to get user's country (works well with Netlify)
+        const response = await fetch('https://ipinfo.io/json?token=6433e7fc9b2925');
+        const data = await response.json();
+        
+        // Set language based on country
+        if (data && data.country) {
+          console.log('Detected country:', data.country);
+          
+          // English for countries where English is commonly used
+          const englishCountries = ['US', 'GB', 'CA', 'AU', 'NZ'];
+          // Norwegian for Norway and nearby Nordic countries
+          const norwegianCountries = ['NO', 'SE', 'DK'];
+          
+          if (englishCountries.includes(data.country)) {
+            setLanguageState('en');
+            localStorage.setItem('language', 'en');
+          } else if (norwegianCountries.includes(data.country)) {
+            setLanguageState('no');
+            localStorage.setItem('language', 'no');
+          }
+          // For all other countries, keep the default (Norwegian)
+        }
+      } catch (error) {
+        console.error('Error detecting user location:', error);
+      } finally {
+        setIsLocationChecked(true);
+      }
+    };
+    
+    detectUserLocation();
+  }, []);
 
   // Store language preference when it changes
   const setLanguage = (newLanguage: Language) => {
