@@ -1,3 +1,4 @@
+
 import { ArrowRight } from 'lucide-react';
 import { useLanguageContext } from '@/context/LanguageContext';
 import { AspectRatio } from '@/components/ui/aspect-ratio';

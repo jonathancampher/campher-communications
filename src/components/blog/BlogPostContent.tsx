@@ -51,7 +51,6 @@ const BlogPostContent = ({ title, publishDate, readTime, content, image }: BlogP
               className="object-cover w-full h-full"
               loading="eager"
               decoding="async"
-              fetchPriority="high"
               width="1200"
               height="675"
             />
