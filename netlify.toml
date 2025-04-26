@@ -117,16 +117,13 @@
 [[plugins]]
   package = "@netlify/plugin-lighthouse"
 
-# Add optimization plugins - Fixed image-optim configuration with proper options
+# Add optimization plugins - Fixed image-optim configuration
 [[plugins]]
   package = "netlify-plugin-inline-critical-css"
 
 [[plugins]]
   package = "netlify-plugin-image-optim"
-  [plugins.inputs]
-    # Add explicit configuration to avoid undefined errors
-    extensions = ["jpg", "jpeg", "png", "webp"]
-    qualityOption = 85
+  # Remove the inputs section as the plugin doesn't accept inputs
 
 # Custom domain configuration
 [context.production]
