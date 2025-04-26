@@ -117,12 +117,16 @@
 [[plugins]]
   package = "@netlify/plugin-lighthouse"
 
-# Add optimization plugins
+# Add optimization plugins - Fixed image-optim configuration with proper options
 [[plugins]]
   package = "netlify-plugin-inline-critical-css"
 
 [[plugins]]
   package = "netlify-plugin-image-optim"
+  [plugins.inputs]
+    # Add explicit configuration to avoid undefined errors
+    extensions = ["jpg", "jpeg", "png", "webp"]
+    qualityOption = 85
 
 # Custom domain configuration
 [context.production]
@@ -136,4 +140,3 @@
     to = "kontakt@camphercommunications.no"
     from = "noreply@camphercommunications.no"
     subject = "Ny melding fra camphercommunications.no"
-
