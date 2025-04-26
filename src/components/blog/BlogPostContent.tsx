@@ -58,7 +58,7 @@ const BlogPostContent = ({ title, publishDate, readTime, content, image }: BlogP
               className={`object-cover w-full h-full transition-opacity duration-300 ${imageLoaded ? 'opacity-100' : 'opacity-0'}`}
               loading="eager"
               decoding="async"
-              fetchpriority="high"
+              fetchPriority="high"
               width="1200"
               height="675"
               onLoad={() => setImageLoaded(true)}

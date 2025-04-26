@@ -29,7 +29,7 @@ const BlogHeader = ({ title, description }: BlogHeaderProps) => {
         className={`absolute inset-0 w-full h-full object-cover brightness-95 transition-opacity duration-300 ${imageLoaded ? 'opacity-100' : 'opacity-0'}`}
         loading="eager"
         decoding="async"
-        fetchpriority="high"
+        fetchPriority="high"
         width="1920"
         height="1080"
         onLoad={() => setImageLoaded(true)}
