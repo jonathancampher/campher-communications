@@ -1,6 +1,6 @@
-
 import { ArrowRight } from 'lucide-react';
 import { useLanguageContext } from '@/context/LanguageContext';
+import { AspectRatio } from '@/components/ui/aspect-ratio';
 
 /**
  * Hero-komponent
@@ -59,9 +59,24 @@ const Hero = () => {
             <span className="inline-block px-3 py-1 text-xs font-medium bg-blue-200 text-blue-800 rounded-full" aria-label={t.badge}>
               {t.badge}
             </span>
-            <h1 className="heading-xl" id="main-heading">
-              {t.title} <span className="text-gradient">{t.titleHighlight}</span> {t.titleEnd}
-            </h1>
+            <div className="relative">
+              <h1 
+                className="heading-xl relative z-10 bg-clip-text text-transparent bg-[url('/lovable-uploads/bannerblogg.webp')] bg-cover bg-center" 
+                style={{ WebkitBackgroundClip: 'text' }}
+                id="main-heading"
+              >
+                {t.title} <span className="font-semibold">{t.titleHighlight}</span> {t.titleEnd}
+              </h1>
+              <div 
+                className="absolute inset-0 -z-10 opacity-10"
+                style={{
+                  backgroundImage: 'url(/lovable-uploads/bannerblogg.webp)',
+                  backgroundSize: 'cover',
+                  backgroundPosition: 'center',
+                  filter: 'blur(8px)'
+                }}
+              />
+            </div>
             <p className="text-lg text-gray-700 max-w-2xl mx-auto">
               {t.description}
             </p>
