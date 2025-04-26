@@ -35,6 +35,7 @@ body, html {
   color: hsl(var(--foreground));
   text-rendering: optimizeSpeed;
   box-sizing: border-box;
+  content-visibility: auto;
 }
 
 /* Prevent CLS */
@@ -47,11 +48,21 @@ body, html {
   font-family: 'Inter', sans-serif;
 }
 
+/* Apply font-display: swap to improve CLS */
+@font-face {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: local('Inter Regular'), local('Inter-Regular');
+}
+
 .heading-xl {
   font-size: 2.25rem;
   line-height: 1.2;
   font-weight: 500;
   letter-spacing: -0.025em;
+  text-rendering: optimizeLegibility;
 }
 
 /* Responsive typography */
@@ -73,6 +84,7 @@ body, html {
   margin-right: auto;
   padding-left: 1rem;
   padding-right: 1rem;
+  contain: layout style;
 }
 
 @media (min-width: 640px) {
@@ -96,10 +108,11 @@ nav {
   left: 0;
   right: 0;
   z-index: 50;
-  transition: all 0.3s ease;
+  transition: transform 0.3s ease;
   background-color: #0e141b;
   padding: 0.5rem 0;
   will-change: transform;
+  contain: layout style;
 }
 
 nav a, nav button {
@@ -125,4 +138,22 @@ img {
   max-width: 100%;
   display: block;
   height: auto;
+  content-visibility: auto;
+  contain: layout style;
+}
+
+/* Add smooth image transitions to prevent CLS */
+img.loaded {
+  animation: fadeIn 0.5s ease-in;
+}
+
+/* Fade-in animation for images */
+@keyframes fadeIn {
+  0% { opacity: 0; }
+  100% { opacity: 1; }
+}
+
+/* Placeholder for images */
+.img-placeholder {
+  background-color: #f0f0f0;
 }

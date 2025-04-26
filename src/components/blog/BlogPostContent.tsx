@@ -14,6 +14,7 @@ interface BlogPostContentProps {
 const BlogPostContent = ({ title, publishDate, readTime, content, image }: BlogPostContentProps) => {
   const contentRef = useRef<HTMLDivElement>(null);
   const [isVisible, setIsVisible] = useState(false);
+  const [imageLoaded, setImageLoaded] = useState(!image);
   
   // Ensure content is properly rendered across browsers
   useEffect(() => {
@@ -21,16 +22,18 @@ const BlogPostContent = ({ title, publishDate, readTime, content, image }: BlogP
       // Force layout recalculation to ensure content is visible
       contentRef.current.style.opacity = '0';
       
-      // Using setTimeout to ensure browser has time to process
-      const timer = setTimeout(() => {
+      // Using requestAnimationFrame for better performance
+      requestAnimationFrame(() => {
         if (contentRef.current) {
           contentRef.current.style.display = 'block';
-          contentRef.current.style.opacity = '1';
-          setIsVisible(true);
+          requestAnimationFrame(() => {
+            if (contentRef.current) {
+              contentRef.current.style.opacity = '1';
+              setIsVisible(true);
+            }
+          });
         }
-      }, 50);
-      
-      return () => clearTimeout(timer);
+      });
     }
   }, [content]);
   
@@ -44,15 +47,21 @@ const BlogPostContent = ({ title, publishDate, readTime, content, image }: BlogP
     <Card className="p-4 md:p-8">
       {image && (
         <div className="mb-6 -mx-4 md:-mx-8 overflow-hidden">
+          {/* Show placeholder while image loads */}
+          {!imageLoaded && (
+            <div className="aspect-w-16 aspect-h-9 bg-gray-200 animate-pulse"></div>
+          )}
           <AspectRatio ratio={16/9} className="bg-muted">
             <img
               src={image}
               alt={title}
-              className="object-cover w-full h-full"
+              className={`object-cover w-full h-full transition-opacity duration-300 ${imageLoaded ? 'opacity-100' : 'opacity-0'}`}
               loading="eager"
               decoding="async"
+              fetchpriority="high"
               width="1200"
               height="675"
+              onLoad={() => setImageLoaded(true)}
             />
           </AspectRatio>
         </div>

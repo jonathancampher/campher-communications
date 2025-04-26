@@ -24,23 +24,6 @@ const initializePage = () => {
   optimizeImages();
 }
 
-// Optimize resource hints for faster page loads
-const addResourceHints = () => {
-  // Add preload for critical resources
-  const preloadLinks = [
-    { href: '/src/critical.css', as: 'style' },
-    { href: '/lovable-uploads/c5502322-5b49-4268-b427-a3e72c87d19b.png', as: 'image' }
-  ];
-  
-  preloadLinks.forEach(({ href, as }) => {
-    const link = document.createElement('link');
-    link.rel = 'preload';
-    link.href = href;
-    link.as = as;
-    document.head.appendChild(link);
-  });
-}
-
 // Optimize LCP (Largest Contentful Paint)
 const optimizeLCP = () => {
   // Create new PerformanceObserver to monitor LCP
@@ -70,35 +53,38 @@ const optimizeLCP = () => {
 
 // Initialize page optimizations
 initializePage();
-addResourceHints();
 optimizeLCP();
 
-// Immediately start rendering with critical CSS
+// Use requestIdleCallback to initialize non-critical tasks
+const scheduleNonCriticalTasks = () => {
+  const idleCallback = window.requestIdleCallback || ((cb) => setTimeout(cb, 50));
+  
+  idleCallback(() => {
+    // Register service worker for production
+    if (import.meta.env.PROD && 'serviceWorker' in navigator) {
+      navigator.serviceWorker.register('/sw.js')
+        .then(registration => {
+          console.log('SW registered: ', registration.scope);
+        })
+        .catch(error => {
+          console.error('SW registration failed:', error);
+        });
+    }
+  });
+};
+
+// Start rendering immediately with critical CSS
 const root = document.getElementById("root");
 if (root) {
   createRoot(root).render(<App />);
+  // Schedule non-critical tasks after render
+  scheduleNonCriticalTasks();
 }
 
-// Register service worker for production
-if (import.meta.env.PROD && 'serviceWorker' in navigator) {
-  window.addEventListener('load', () => {
-    navigator.serviceWorker.register('/sw.js')
-      .then(registration => {
-        console.log('SW registered: ', registration.scope);
-      })
-      .catch(error => {
-        console.error('SW registration failed:', error);
-      });
-  });
-}
-
-// Optimize font loading
+// Optimize font loading on page ready
 if ('fonts' in document) {
-  Promise.all([
-    document.fonts.load('1em Inter'),
-    document.fonts.load('500 1em Inter'),
-    document.fonts.load('600 1em Inter')
-  ]).then(() => {
+  document.fonts.ready.then(() => {
     document.documentElement.classList.add('fonts-loaded');
+    console.log('Fonts loaded and ready');
   });
 }

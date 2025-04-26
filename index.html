@@ -10,22 +10,63 @@
     <meta name="keywords" content="webutvikling, nettsider, seo, digital markedsføring, bedrifter, norge" />
     <meta name="google-site-verification" content="XCy0bg2rTEPt-CNgVBJUpJJXmqc3ikz24BWH9Zmh2us" />
 
-    <!-- Google tag (gtag.js) -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-BQTWZ9QQ2M"></script>
+    <!-- Preload critical assets -->
+    <link rel="preload" href="/lovable-uploads/c5502322-5b49-4268-b427-a3e72c87d19b.png" as="image" fetchpriority="high" />
+    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" as="style" />
+    <link rel="preload" href="/src/critical.css" as="style" />
+    
+    <!-- Preconnect to critical domains -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="preconnect" href="https://cdn.gpteng.co" crossorigin />
+    
+    <!-- Google tag (gtag.js) - Load with lower priority -->
+    <script defer src="https://www.googletagmanager.com/gtag/js?id=G-BQTWZ9QQ2M"></script>
     <script>
       window.dataLayer = window.dataLayer || [];
       function gtag(){dataLayer.push(arguments);}
       gtag('js', new Date());
-
-      gtag('config', 'G-BQTWZ9QQ2M');
+      gtag('config', 'G-BQTWZ9QQ2M', { 'anonymize_ip': true, 'send_page_view': false });
+      // Delay sending pageview to improve initial load performance
+      window.addEventListener('load', function() {
+        gtag('event', 'page_view');
+      });
     </script>
-
-    <!-- Preconnect to external domains -->
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     
-    <!-- Import font directly -->
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+    <!-- Preload and apply font asynchronously -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" media="print" onload="this.media='all'" />
+    <noscript>
+      <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" />
+    </noscript>
+    
+    <!-- Font loading optimization -->
+    <style>
+      /* Font loading optimization */
+      @font-face {
+        font-family: 'Inter';
+        font-style: normal;
+        font-weight: 400;
+        font-display: swap;
+        src: local('Inter Regular'), local('Inter-Regular'), url(https://fonts.gstatic.com/s/inter/v12/UcC73FwrK3iLTeHuS_fvQtMwCp50KnMa1ZL7.woff2) format('woff2');
+        unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+      }
+      @font-face {
+        font-family: 'Inter';
+        font-style: normal;
+        font-weight: 500;
+        font-display: swap;
+        src: local('Inter Medium'), local('Inter-Medium'), url(https://fonts.gstatic.com/s/inter/v12/UcC73FwrK3iLTeHuS_fvQtMwCp50KnMa1ZL7.woff2) format('woff2');
+        unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+      }
+      @font-face {
+        font-family: 'Inter';
+        font-style: normal;
+        font-weight: 600;
+        font-display: swap;
+        src: local('Inter SemiBold'), local('Inter-SemiBold'), url(https://fonts.gstatic.com/s/inter/v12/UcC73FwrK3iLTeHuS_fvQtMwCp50KnMa1ZL7.woff2) format('woff2');
+        unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+      }
+    </style>
     
     <!-- Standard favicon (ICO format for better search engine compatibility) -->
     <link rel="icon" href="/favicon.ico" type="image/x-icon" />
@@ -83,6 +124,29 @@
           "contactType": "customer service"
         },
         "vatID": "932498413"
+      }
+    </script>
+    <!-- Performance monitoring -->
+    <script>
+      // Minimal inline performance monitoring script
+      const perfData = {
+        metrics: {}
+      };
+      // Observe Core Web Vitals
+      try {
+        if ('PerformanceObserver' in window) {
+          const observer = new PerformanceObserver((list) => {
+            const entries = list.getEntries();
+            entries.forEach(entry => {
+              perfData.metrics[entry.name] = entry.startTime || entry.value;
+            });
+          });
+          observer.observe({ type: 'largest-contentful-paint', buffered: true });
+          observer.observe({ type: 'layout-shift', buffered: true });
+          observer.observe({ type: 'first-input', buffered: true });
+        }
+      } catch (e) {
+        console.error('Performance monitoring error:', e);
       }
     </script>
   </head>

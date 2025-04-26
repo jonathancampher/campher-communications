@@ -14,7 +14,40 @@ export const isInViewport = (element: Element, margin: number = 200): boolean =>
   );
 };
 
-// IntersectionObserver factory with configuration options
+// Create image observer with higher priority for LCP images
+const createPriorityImageObserver = (
+  rootMargin = '200px 0px',
+  threshold = 0.01
+): IntersectionObserver => {
+  return new IntersectionObserver(
+    (entries, observer) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          const img = entry.target as HTMLImageElement;
+          // Handle both data-src and srcset attributes
+          if (img.dataset.src) {
+            img.src = img.dataset.src;
+            if (img.dataset.srcset) {
+              img.srcset = img.dataset.srcset;
+            }
+            // Add fetchpriority for important images
+            if (img.dataset.priority === 'high') {
+              img.setAttribute('fetchpriority', 'high');
+            }
+            // Remove data attributes to prevent re-processing
+            img.removeAttribute('data-src');
+            img.removeAttribute('data-srcset');
+            img.classList.add('loaded');
+          }
+          observer.unobserve(img);
+        }
+      });
+    },
+    { rootMargin, threshold }
+  );
+};
+
+// Standard IntersectionObserver for lazy loading
 const createImageObserver = (
   rootMargin = '200px 0px',
   threshold = 0.01
@@ -46,10 +79,21 @@ const createImageObserver = (
 // Setup lazy loading for images
 export const setupLazyLoading = (): void => {
   if ('IntersectionObserver' in window) {
+    const priorityImageObserver = createPriorityImageObserver('400px 0px', 0.01);
     const imageObserver = createImageObserver();
-    const lazyImages = document.querySelectorAll('img[data-src]');
     
-    lazyImages.forEach(img => {
+    // Process priority images first
+    document.querySelectorAll('img[data-src][data-priority="high"]').forEach(img => {
+      // Set lightweight placeholder and add to priority observer
+      const imgElement = img as HTMLImageElement;
+      if (!imgElement.classList.contains('loaded') && !imgElement.src) {
+        imgElement.src = 'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 4 3"%3E%3C/svg%3E';
+      }
+      priorityImageObserver.observe(img);
+    });
+    
+    // Process regular images
+    document.querySelectorAll('img[data-src]:not([data-priority="high"])').forEach(img => {
       // Add a low quality placeholder or blur-up effect
       const imgElement = img as HTMLImageElement;
       if (!imgElement.classList.contains('loaded') && !imgElement.src) {
@@ -117,6 +161,23 @@ export const ensureImageDimensions = (): void => {
   });
 };
 
+// Generate responsive srcset for images
+export const generateSrcSet = (src: string, sizes: number[] = [640, 768, 1024, 1280, 1536]): string => {
+  if (!src) return '';
+  
+  // Skip srcset for SVGs and GIFs
+  const extension = src.split('.').pop()?.toLowerCase();
+  if (extension === 'svg' || extension === 'gif') return '';
+  
+  // Generate srcset string for responsive images
+  const basePath = src.substring(0, src.lastIndexOf('.'));
+  const extension2 = src.substring(src.lastIndexOf('.'));
+  
+  return sizes
+    .map(size => `${basePath}-${size}${extension2} ${size}w`)
+    .join(', ');
+};
+
 // Apply modern image format detection
 export const detectImageFormats = (): void => {
   // Feature detection for WebP support
@@ -163,6 +224,20 @@ export const optimizeImages = (): void => {
     // Add decoding attribute for better performance
     if (!img.hasAttribute('decoding')) {
       img.setAttribute('decoding', 'async');
+    }
+    
+    // Add fetchpriority for important images
+    if (index < 3 && !img.hasAttribute('fetchpriority')) {
+      img.setAttribute('fetchpriority', 'high');
+    }
+    
+    // Add srcset attribute for responsive images if not present
+    if (!img.hasAttribute('srcset') && img.src && !img.src.includes('data:')) {
+      const srcset = generateSrcSet(img.src);
+      if (srcset) {
+        img.setAttribute('srcset', srcset);
+        img.setAttribute('sizes', '(max-width: 768px) 100vw, 50vw');
+      }
     }
   });
 };
